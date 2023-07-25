@@ -1,13 +1,13 @@
-package org.sciencematch.demo;
+package com.sciencematch.sciencematch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class ScienceMatchApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(ScienceMatchApplication.class, args);
 	}
 
 }
