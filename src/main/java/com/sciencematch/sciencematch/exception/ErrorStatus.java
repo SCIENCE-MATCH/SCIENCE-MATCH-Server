@@ -10,7 +10,8 @@ public enum ErrorStatus {
     /*
      * 400 BAD_REQUEST
      */
-    VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다.")
+    VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
+    INVALID_TOKEN_INFO_EXCEPTION(HttpStatus.BAD_REQUEST, "토큰 혹은 만료시간 설정이 잘못되었습니다."),
     ;
 
     private final HttpStatus httpStatus;

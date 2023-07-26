@@ -16,6 +16,6 @@ public class AuthService {
                 .password(requestDto.getPassword())
                 .build();
         memberRepository.save(member);
-        return "아이디: " + requestDto.getEmail() + "비밀번호: " + requestDto.getPassword();
+        return "아이디: " + requestDto.getEmail() + "${\n}" + "비밀번호: " + requestDto.getPassword();
     }
 }
