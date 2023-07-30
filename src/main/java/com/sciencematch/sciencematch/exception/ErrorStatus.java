@@ -25,6 +25,16 @@ public enum ErrorStatus {
      */
 
     FORBIDDEN_USER_EXCEPTION(HttpStatus.FORBIDDEN, "접근 권한이 없습니다."),
+
+    /**
+     * 404 NOT FOUND
+     */
+    NOT_FOUND_USER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다"),
+
+    /**
+     * 409 CONFLICT
+     */
+    ALREADY_EXIST_USER_EXCEPTION(HttpStatus.CONFLICT, "이미 존재하는 유저입니다"),
     ;
 
     private final HttpStatus httpStatus;
