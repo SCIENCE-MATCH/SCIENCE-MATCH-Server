@@ -32,8 +32,8 @@ public class TokenProvider {
     private static final String BEARER_TYPE = "Bearer";
     public static final String REFRESH_HEADER = "Refresh";
 
-    private static Long ACCESS_TOKEN_EXPIRE_TIME = 300*1000L;
-    private static Long REFRESH_TOKEN_EXPIRE_TIME = 1800*1000L;
+    private static final Long ACCESS_TOKEN_EXPIRE_TIME = 300*1000L;
+    private static final Long REFRESH_TOKEN_EXPIRE_TIME = 1800*1000L;
     private final Key key;
 
     //빈 생성 때 key 값 세팅
