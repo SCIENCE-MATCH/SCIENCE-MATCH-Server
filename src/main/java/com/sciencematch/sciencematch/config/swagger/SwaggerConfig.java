@@ -30,8 +30,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         Info info = new Info()
-            .title("Sophy")
-            .description("Sophy Server API 문서")
+            .title("Science Match")
+            .description("Science Match Server API 문서")
             .version("1.0.0");
 
         return new OpenAPI()
