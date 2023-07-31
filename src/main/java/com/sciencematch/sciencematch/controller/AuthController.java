@@ -42,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    @Operation(summary = "로그인")
+    @Operation(summary = "로그인") //추후 DTO 변경 필요
     public ApiResponseDto<TokenDto> login(
         @RequestBody MemberLoginRequestDto memberLoginRequestDto) {
         return ApiResponseDto.success(SuccessStatus.LOGIN_SUCCESS,
