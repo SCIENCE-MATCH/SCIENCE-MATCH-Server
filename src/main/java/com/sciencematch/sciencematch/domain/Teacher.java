@@ -8,7 +8,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -20,19 +19,23 @@ import org.hibernate.annotations.Where;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SQLDelete(sql = "UPDATE member SET deleted = true WHERE member_id=?")
+@SQLDelete(sql = "UPDATE teacher SET deleted = true WHERE member_id=?")
 @Where(clause = "deleted=false")
-public class Member {
+public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "teacher_id")
     private Long id;
 
     private String email;
     private String password;
     private String name;
-    @NotNull
+
+    private String academy;
+
+    private String logo;
+
     @Pattern(regexp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$", message = "10 ~ 11 자리의 숫자만 입력 가능합니다.")
     private String phoneNum;
     @Enumerated(EnumType.STRING)
@@ -41,12 +44,16 @@ public class Member {
     private Boolean deleted = Boolean.FALSE;
 
     @Builder
-    public Member(String name, String email, String password, String phoneNum,
+    public Teacher(String name, String email, String password, String phoneNum,
         Authority authority) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNum = phoneNum;
         this.authority = authority;
+    }
+
+    public void changeLogo(String logoURL) {
+        this.logo = logoURL;
     }
 }

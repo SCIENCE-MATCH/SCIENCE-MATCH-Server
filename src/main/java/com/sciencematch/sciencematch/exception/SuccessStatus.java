@@ -15,6 +15,8 @@ public enum SuccessStatus {
     WITHDRAWAL_SUCCESS(HttpStatus.OK, "회원 탈퇴에 성공했습니다."),
     REISSUE_SUCCESS(HttpStatus.OK, "토큰 재발행에 성공했습니다."),
     CHECK_DUPL_EMAIL_SUCCESS(HttpStatus.OK, "사용 가능한 이메일 주소입니다."),
+    CHANGE_LOGO_SUCCESS(HttpStatus.OK, "로고 이미지를 성공적으로 교체하였습니다."),
+    GET_MYPAGE_SUCCESS(HttpStatus.OK, "마이 페이지를 성공적으로 불러왔습니다."),
 
     /*
      * 201 created

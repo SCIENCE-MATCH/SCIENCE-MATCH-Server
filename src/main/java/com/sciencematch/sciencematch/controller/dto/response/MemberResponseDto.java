@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.controller.dto.response;
 
-import com.sciencematch.sciencematch.domain.Member;
+import com.sciencematch.sciencematch.domain.Teacher;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ public class MemberResponseDto {
     private String email;
     private String name;
 
-    public static MemberResponseDto of(Member member) {
-        return new MemberResponseDto(member.getEmail(), member.getName());
+    public static MemberResponseDto of(Teacher teacher) {
+        return new MemberResponseDto(teacher.getEmail(), teacher.getName());
     }
 }

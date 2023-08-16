@@ -5,12 +5,12 @@ import com.sciencematch.sciencematch.controller.dto.request.MemberLoginRequestDt
 import com.sciencematch.sciencematch.controller.dto.request.MemberRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.MemberResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TokenDto;
-import com.sciencematch.sciencematch.domain.Member;
+import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.ExistEmailException;
 import com.sciencematch.sciencematch.exception.model.LogoutRefreshtokenException;
-import com.sciencematch.sciencematch.infrastructure.MemberRepository;
+import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.jwt.TokenProvider;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
@@ -27,26 +27,26 @@ import org.springframework.util.ObjectUtils;
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private final MemberRepository memberRepository;
+    private final TeacherRepository teacherRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
     private final RedisTemplate redisTemplate;
 
     @Transactional
     public MemberResponseDto signup(MemberRequestDto memberRequestDto) {
-        if (memberRepository.existsByEmail(memberRequestDto.getEmail())) {
+        if (teacherRepository.existsByEmail(memberRequestDto.getEmail())) {
             throw new ExistEmailException(ErrorStatus.ALREADY_EXIST_USER_EXCEPTION,
                 ErrorStatus.ALREADY_EXIST_USER_EXCEPTION.getMessage());
         }
 
-        Member member = memberRequestDto.toMember(passwordEncoder);
-        return MemberResponseDto.of(memberRepository.save(member));
+        Teacher teacher = memberRequestDto.toTeacher(passwordEncoder);
+        return MemberResponseDto.of(teacherRepository.save(teacher));
     }
 
     @Transactional
     public String duplCheck(DuplCheckDto email) {
 
-        if (memberRepository.existsByEmail(email.getEmail())) {
+        if (teacherRepository.existsByEmail(email.getEmail())) {
             throw new ExistEmailException(ErrorStatus.ALREADY_EXIST_USER_EXCEPTION,
                 ErrorStatus.ALREADY_EXIST_USER_EXCEPTION.getMessage());
         }
@@ -141,7 +141,7 @@ public class AuthService {
 
     @Transactional
     public String withdrawal(String email) {
-        memberRepository.delete(memberRepository.getMemberByEmail(email));
+        teacherRepository.delete(teacherRepository.getTeacherByEmail(email));
         return "회원 탈퇴에 성공하였습니다";
     }
 }

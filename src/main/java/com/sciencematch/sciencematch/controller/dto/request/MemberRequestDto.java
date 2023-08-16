@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.controller.dto.request;
 
-import com.sciencematch.sciencematch.domain.Member;
+import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Email;
@@ -42,8 +42,8 @@ public class MemberRequestDto {
     private String phoneNum;
 
 
-    public Member toMember(PasswordEncoder passwordEncoder) {
-        return Member.builder()
+    public Teacher toTeacher(PasswordEncoder passwordEncoder) {
+        return Teacher.builder()
             .email(email)
             .name(name)
             .password(passwordEncoder.encode(password))

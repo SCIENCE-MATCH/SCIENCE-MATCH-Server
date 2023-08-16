@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
+@Tag(name = "회원 관리", description = "Auth 관련 API docs")
 public class AuthController {
     private final AuthService authService;
     private final TokenProvider tokenProvider;
@@ -49,14 +51,14 @@ public class AuthController {
             authService.login(memberLoginRequestDto));
     }
 
+    /**
+     * HttpServletRequest나 HttpServletResponse 객체가 Service 계층으로 넘어가는 것은 좋지 않다.
+     * request, response는 컨트롤러 계층에서 사용되는 객체이며, Service 계층이 request와 response를 알 필요가 없다.
+     */
     @PostMapping("/logout")
     @Operation(summary = "로그아웃")
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<String> logout(@Parameter(hidden = true) HttpServletRequest request) {
-        /**
-         * HttpServletRequest나 HttpServletResponse 객체가 Service 계층으로 넘어가는 것은 좋지 않다.
-         * request, response는 컨트롤러 계층에서 사용되는 객체이며, Service 계층이 request와 response를 알 필요가 없다.
-         */
         String accessToken = tokenProvider.resolveAccessToken(request);
         return ApiResponseDto.success(SuccessStatus.LOGOUT_SUCCESS,
             authService.logout(accessToken));
