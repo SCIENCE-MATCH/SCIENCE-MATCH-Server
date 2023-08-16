@@ -5,7 +5,6 @@ import com.sciencematch.sciencematch.controller.dto.request.MemberLoginRequestDt
 import com.sciencematch.sciencematch.controller.dto.request.MemberRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.MemberResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TokenDto;
-import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.ExistEmailException;
@@ -39,8 +38,7 @@ public class AuthService {
                 ErrorStatus.ALREADY_EXIST_USER_EXCEPTION.getMessage());
         }
 
-        Teacher teacher = memberRequestDto.toTeacher(passwordEncoder);
-        return MemberResponseDto.of(teacherRepository.save(teacher));
+        return MemberResponseDto.of(teacherRepository.save(memberRequestDto.toTeacher(passwordEncoder)));
     }
 
     @Transactional

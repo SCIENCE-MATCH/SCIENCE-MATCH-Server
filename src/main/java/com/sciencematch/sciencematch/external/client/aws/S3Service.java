@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.external.client.aws;
 
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
@@ -8,9 +9,11 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.NotFoundException;
+import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class S3Service {
 
     private final AmazonS3 amazonS3;
+    private final TeacherRepository teacherRepository;
 
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
@@ -48,7 +52,7 @@ public class S3Service {
             .build();
     }
 
-    public String uploadImage(MultipartFile multipartFile, String folder) {
+    public String uploadImage(MultipartFile multipartFile, String folder) throws IOException {
         String fileName = createFileName(multipartFile.getOriginalFilename());
         //inputStream 통해 Byte로 파일이 전달되기 때문에 파일에 대한 정보가 없어서 objectMetadata 같이 넘겨야 함
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -90,5 +94,15 @@ public class S3Service {
                 ErrorStatus.INVALID_MULTIPART_EXTENSION_EXCEPTION.getMessage());
         }
         return fileName.substring(fileName.lastIndexOf("."));
+    }
+
+    public void deleteFile(String email) throws IOException {
+        Teacher teacher = teacherRepository.getTeacherByEmail(email);
+        String url = teacher.getLogo();
+        try {
+            amazonS3Client().deleteObject(bucket, url.split("/")[3]);
+        } catch (SdkClientException e) {
+            throw new IOException("S3 파일 삭제 오류", e);
+        }
     }
 }

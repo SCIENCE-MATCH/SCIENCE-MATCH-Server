@@ -19,7 +19,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SQLDelete(sql = "UPDATE teacher SET deleted = true WHERE member_id=?")
+@SQLDelete(sql = "UPDATE teacher SET deleted = true WHERE teacher_id=?")
 @Where(clause = "deleted=false")
 public class Teacher {
 
@@ -41,7 +41,7 @@ public class Teacher {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    private Boolean deleted = Boolean.FALSE;
+    private final Boolean deleted = Boolean.FALSE;
 
     @Builder
     public Teacher(String name, String email, String password, String phoneNum,
