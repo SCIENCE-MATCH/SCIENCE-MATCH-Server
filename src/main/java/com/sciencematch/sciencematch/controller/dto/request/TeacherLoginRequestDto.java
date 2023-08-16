@@ -13,7 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MemberLoginRequestDto {
+public class TeacherLoginRequestDto {
     @Email(message = "이메일 형식이 맞지 않습니다.")
     @NotBlank
     @Schema(description = "유저 아이디(이메일 주소)", example = "science@gmail.com")

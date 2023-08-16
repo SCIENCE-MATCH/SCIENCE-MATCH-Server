@@ -44,13 +44,12 @@ public class Teacher {
     private final Boolean deleted = Boolean.FALSE;
 
     @Builder
-    public Teacher(String name, String email, String password, String phoneNum,
-        Authority authority) {
+    public Teacher(String name, String email, String password, String phoneNum) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNum = phoneNum;
-        this.authority = authority;
+        this.authority = Authority.ROLE_TEACHER;
     }
 
     public void changeLogo(String logoURL) {

@@ -2,9 +2,10 @@ package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.controller.dto.request.DuplCheckDto;
-import com.sciencematch.sciencematch.controller.dto.request.MemberLoginRequestDto;
-import com.sciencematch.sciencematch.controller.dto.request.MemberRequestDto;
-import com.sciencematch.sciencematch.controller.dto.response.MemberResponseDto;
+import com.sciencematch.sciencematch.controller.dto.request.TeacherRequestDto;
+import com.sciencematch.sciencematch.controller.dto.request.StudentLoginRequestDto;
+import com.sciencematch.sciencematch.controller.dto.request.TeacherLoginRequestDto;
+import com.sciencematch.sciencematch.controller.dto.response.TeacherResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TokenDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.jwt.TokenProvider;
@@ -37,18 +38,26 @@ public class AuthController {
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "회원가입")
-    public ApiResponseDto<MemberResponseDto> signup(
-        @RequestBody @Valid MemberRequestDto memberRequestDto) {
+    public ApiResponseDto<TeacherResponseDto> signup(
+        @RequestBody @Valid TeacherRequestDto teacherRequestDto) {
         return ApiResponseDto.success(SuccessStatus.SIGNUP_SUCCESS,
-            authService.signup(memberRequestDto));
+            authService.signup(teacherRequestDto));
     }
 
     @PostMapping("/login")
     @Operation(summary = "로그인") //추후 DTO 변경 필요
     public ApiResponseDto<TokenDto> login(
-        @RequestBody MemberLoginRequestDto memberLoginRequestDto) {
+        @RequestBody TeacherLoginRequestDto teacherLoginRequestDto) {
         return ApiResponseDto.success(SuccessStatus.LOGIN_SUCCESS,
-            authService.login(memberLoginRequestDto));
+            authService.login(teacherLoginRequestDto));
+    }
+
+    @PostMapping("/login/student")
+    @Operation(summary = "학생 로그인") //추후 DTO 변경 필요
+    public ApiResponseDto<TokenDto> studentLogin(
+        @RequestBody StudentLoginRequestDto studentLoginRequestDto) {
+        return ApiResponseDto.success(SuccessStatus.LOGIN_SUCCESS,
+            authService.studentLogin(studentLoginRequestDto));
     }
 
     /**

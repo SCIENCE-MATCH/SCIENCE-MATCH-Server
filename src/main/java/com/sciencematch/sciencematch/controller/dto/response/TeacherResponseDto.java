@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor
-public class MemberResponseDto {
+public class TeacherResponseDto {
     private String email;
     private String name;
 
-    public static MemberResponseDto of(Teacher teacher) {
-        return new MemberResponseDto(teacher.getEmail(), teacher.getName());
+    public static TeacherResponseDto of(Teacher teacher) {
+        return new TeacherResponseDto(teacher.getEmail(), teacher.getName());
     }
 }

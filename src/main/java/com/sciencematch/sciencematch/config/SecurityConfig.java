@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,7 +42,7 @@ public class SecurityConfig {
         //CSRF 설정 Disable
         http.csrf().disable()
 
-            .cors(cors -> cors.disable())
+            .cors(AbstractHttpConfigurer::disable)
 
             //exception handling 할 때 우리가 만든 클래스를 추가
             .exceptionHandling()
@@ -62,6 +63,7 @@ public class SecurityConfig {
             //로그인, 회원가입 API는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정
             .and()
             .authorizeRequests()
+            .antMatchers("/teacher/**").hasRole("TEACHER")
             .antMatchers("/auth/**").permitAll()
             .antMatchers("/profile/**", "/actuator/**", "/health/**").permitAll()
             .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api-docs/**", "/swagger-ui.html")

@@ -1,7 +1,6 @@
 package com.sciencematch.sciencematch.controller.dto.request;
 
 import com.sciencematch.sciencematch.domain.Teacher;
-import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "회원가입 DTO")
-public class MemberRequestDto {
+public class TeacherRequestDto {
     @Email(message = "이메일 형식에 맞지 않습니다.")
     @NotNull
     @Schema(description = "유저 아이디(이메일 주소)", example = "science@gmail.com")
@@ -48,7 +47,6 @@ public class MemberRequestDto {
             .name(name)
             .password(passwordEncoder.encode(password))
             .phoneNum(phoneNum)
-            .authority(Authority.ROLE_USER)
             .build();
     }
 
