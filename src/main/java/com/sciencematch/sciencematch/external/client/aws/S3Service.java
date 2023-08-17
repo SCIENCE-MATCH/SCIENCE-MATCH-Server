@@ -9,7 +9,6 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.NotFoundException;
@@ -96,11 +95,9 @@ public class S3Service {
         return fileName.substring(fileName.lastIndexOf("."));
     }
 
-    public void deleteFile(String email) throws IOException {
-        Teacher teacher = teacherRepository.getTeacherByEmail(email);
-        String url = teacher.getLogo();
+    public void deleteFile(String url) throws IOException {
         try {
-            amazonS3Client().deleteObject(bucket, url.split("/")[3]);
+            amazonS3Client().deleteObject(bucket, url.substring(56));
         } catch (SdkClientException e) {
             throw new IOException("S3 파일 삭제 오류", e);
         }
