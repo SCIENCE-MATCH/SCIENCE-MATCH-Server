@@ -12,7 +12,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Optional<Student> findByPhoneNum(String PhoneNum);
 
-    default Student getStudentsByPhoneNum(String phoneNum) {
+    default Student getStudentByPhoneNum(String phoneNum) {
         return this.findByPhoneNum(phoneNum)
             .orElseThrow(() -> new NotFoundException(ErrorStatus.NOT_FOUND_USER_EXCEPTION, ErrorStatus.NOT_FOUND_USER_EXCEPTION.getMessage()));
     }
