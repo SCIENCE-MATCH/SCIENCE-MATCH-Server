@@ -1,13 +1,14 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.controller.dto.request.DuplCheckDto;
-import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
-import com.sciencematch.sciencematch.controller.dto.request.TeacherRequestDto;
 import com.sciencematch.sciencematch.controller.dto.request.StudentLoginRequestDto;
+import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.controller.dto.request.TeacherLoginRequestDto;
+import com.sciencematch.sciencematch.controller.dto.request.TeacherRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TeacherResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TokenDto;
+import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.ExistEmailException;
@@ -33,6 +34,7 @@ import org.springframework.util.ObjectUtils;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
+
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
@@ -47,7 +49,8 @@ public class AuthService {
                 ErrorStatus.ALREADY_EXIST_USER_EXCEPTION.getMessage());
         }
 
-        return TeacherResponseDto.of(teacherRepository.save(teacherRequestDto.toTeacher(passwordEncoder)));
+        return TeacherResponseDto.of(
+            teacherRepository.save(teacherRequestDto.toTeacher(passwordEncoder)));
     }
 
     @Transactional
@@ -58,6 +61,22 @@ public class AuthService {
         }
 
         return StudentResponseDto.of(studentRepository.save(studentRequestDto.toStudent()));
+    }
+
+    @Transactional
+    public StudentResponseDto updateStudent(StudentRequestDto studentRequestDto) {
+        Student student = studentRepository.getStudentByPhoneNum(
+            studentRequestDto.getPhoneNum());
+
+        return StudentResponseDto.of(student.changeInfo(studentRequestDto));
+    }
+
+    @Transactional
+    public StudentResponseDto deleteStudent(String phoneNum) {
+        Student student = studentRepository.getStudentByPhoneNum(phoneNum);
+        StudentResponseDto of = StudentResponseDto.of(student);
+        studentRepository.delete(student);
+        return of;
     }
 
     @Transactional
@@ -97,14 +116,15 @@ public class AuthService {
     //학생 로그인
     @Transactional
     public TokenDto studentLogin(StudentLoginRequestDto studentLoginRequestDto) {
-        studentRepository.getStudentsByPhoneNum(studentLoginRequestDto.getPhoneNum());
+        studentRepository.getStudentByPhoneNum(studentLoginRequestDto.getPhoneNum());
 
         //권한 부여
         List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
         list.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
 
         //수동으로 user, password 토큰 생성 -> 인증 구현
-        Authentication authentication = new UsernamePasswordAuthenticationToken(studentLoginRequestDto.getPhoneNum(), null, list);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+            studentLoginRequestDto.getPhoneNum(), null, list);
 
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);

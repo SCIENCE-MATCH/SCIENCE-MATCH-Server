@@ -8,6 +8,7 @@ import com.sciencematch.sciencematch.service.AuthService;
 import com.sciencematch.sciencematch.service.TeacherService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
@@ -15,11 +16,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,12 +53,27 @@ public class TeacherController {
             teacherService.getMypage(user.getUsername()));
     }
 
-    @PostMapping("/create/student")
+    @PostMapping("/student/create")
     @Operation(summary = "학생 생성")
     public ApiResponseDto<StudentResponseDto> createStudent(
-        @Parameter(hidden = true) @AuthenticationPrincipal User user,
         @RequestBody StudentRequestDto studentRequestDto) {
         return ApiResponseDto.success(SuccessStatus.CREATE_STUDENT_SUCCESS,
             authService.signupStudent(studentRequestDto));
+    }
+
+    @PostMapping("/student/update")
+    @Operation(summary = "학생 정보 업데이트")
+    public ApiResponseDto<StudentResponseDto> updateStudent(
+        @RequestBody StudentRequestDto studentRequestDto) {
+        return ApiResponseDto.success(SuccessStatus.STUDENT_INFO_UPDATE_SUCCESS,
+            authService.updateStudent(studentRequestDto));
+    }
+
+    @DeleteMapping("/student/delete")
+    @Operation(summary = "학생 삭제")
+    public ApiResponseDto<StudentResponseDto> deleteStudent(
+        @Schema(example = "01087654321") @RequestParam("phoneNum") String phoneNum) {
+        return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
+            authService.deleteStudent(phoneNum));
     }
 }
