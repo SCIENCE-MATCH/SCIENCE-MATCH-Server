@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.controller.dto.request;
 
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -19,12 +20,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class TeacherRequestDto {
     @Email(message = "이메일 형식에 맞지 않습니다.")
     @NotNull
-    @Schema(description = "유저 아이디(이메일 주소)", example = "science@gmail.com")
+    @Schema(description = "유저 아이디(이메일 주소)", example = "history@gmail.com")
     private String email;
 
     @NotBlank
     @Pattern(regexp = "^[가-힣a-zA-Z]{2,10}$", message = "이름 형식에 맞지 않습니다.")
-    @Schema(description = "이름", example = "김사매")
+    @Schema(description = "이름", example = "단군")
     private String name;
 
     @NotBlank
@@ -32,12 +33,12 @@ public class TeacherRequestDto {
         regexp = "(?=.*[0-9])(?=.*[a-zA-Z]).{8,16}",
         message = "비밀번호는 영문과 숫자가 포함된 8자 ~ 16자의 비밀번호여야 합니다."
     )
-    @Schema(description = "비밀번호", example = "test1234")
+    @Schema(description = "비밀번호", example = "test12354")
     private String password;
 
     @NotBlank
     @Pattern(regexp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$", message = "10 ~ 11 자리의 숫자만 입력 가능합니다.")
-    @Schema(description = "핸드폰 번호", example = "01012345678")
+    @Schema(description = "핸드폰 번호", example = "01012232478")
     private String phoneNum;
 
 
@@ -47,6 +48,7 @@ public class TeacherRequestDto {
             .name(name)
             .password(passwordEncoder.encode(password))
             .phoneNum(phoneNum)
+            .authority(Authority.ROLE_TEACHER)
             .build();
     }
 

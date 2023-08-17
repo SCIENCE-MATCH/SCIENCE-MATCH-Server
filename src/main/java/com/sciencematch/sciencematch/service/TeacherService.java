@@ -20,7 +20,7 @@ public class TeacherService {
     @Transactional
     public void changeLogo(MultipartFile logo, String email) throws IOException {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
-        if (teacher.getLogo() != null) s3Service.deleteFile(email);
+        if (teacher.getLogo() != null) s3Service.deleteFile(teacher.getLogo());
         String logoURL = s3Service.uploadImage(logo, "logo");
         teacher.changeLogo(logoURL);
     }

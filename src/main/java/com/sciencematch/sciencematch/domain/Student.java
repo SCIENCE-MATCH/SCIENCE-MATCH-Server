@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain;
 
+import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Column;
@@ -36,18 +37,24 @@ public class Student {
     @Column(unique = true)
     private String phoneNum;
 
-    private String birth;
     private Authority authority;
 
     private final Boolean deleted = Boolean.FALSE;
 
     @Builder
-    public Student(String grade, String name, String parentNum, String phoneNum, String birth) {
+    public Student(String grade, String name, String parentNum, String phoneNum, Authority authority) {
         this.grade = grade;
         this.name = name;
         this.parentNum = parentNum;
         this.phoneNum = phoneNum;
-        this.birth = birth;
-        this.authority = Authority.ROLE_STUDENT;
+        this.authority = authority;
+    }
+
+    public Student changeInfo(StudentRequestDto studentRequestDto) {
+        this.grade = studentRequestDto.getGrade();
+        this.name = studentRequestDto.getName();
+        this.parentNum = studentRequestDto.getParentNum();
+        this.phoneNum = studentRequestDto.getPhoneNum();
+        return this;
     }
 }
