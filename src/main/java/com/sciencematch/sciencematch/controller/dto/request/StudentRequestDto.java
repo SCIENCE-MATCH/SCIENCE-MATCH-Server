@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.controller.dto.request;
 
 import com.sciencematch.sciencematch.domain.Student;
+import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
@@ -31,13 +32,14 @@ public class StudentRequestDto {
     @Schema(description = "학생 핸드폰 번호", example = "01087654321")
     private String phoneNum;
 
-    public Student toStudent() {
+    public Student toStudent(Teacher teacher) {
         return Student.builder()
             .grade(grade)
             .name(name)
             .phoneNum(phoneNum)
             .parentNum(parentNum)
             .authority(Authority.ROLE_STUDENT)
+            .teacher(teacher)
             .build();
     }
 

@@ -1,13 +1,17 @@
 package com.sciencematch.sciencematch.domain;
 
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -35,6 +39,9 @@ public class Teacher {
     private String academy;
 
     private String logo;
+
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
+    private final List<Student> students = new ArrayList<>();
 
     @Pattern(regexp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$", message = "10 ~ 11 자리의 숫자만 입력 가능합니다.")
     private String phoneNum;

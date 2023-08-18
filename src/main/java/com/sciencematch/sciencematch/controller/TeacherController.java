@@ -56,9 +56,10 @@ public class TeacherController {
     @PostMapping("/student/create")
     @Operation(summary = "학생 생성")
     public ApiResponseDto<StudentResponseDto> createStudent(
+        @AuthenticationPrincipal User user,
         @RequestBody StudentRequestDto studentRequestDto) {
         return ApiResponseDto.success(SuccessStatus.CREATE_STUDENT_SUCCESS,
-            authService.signupStudent(studentRequestDto));
+            authService.signupStudent(studentRequestDto, user.getUsername()));
     }
 
     @PostMapping("/student/update")

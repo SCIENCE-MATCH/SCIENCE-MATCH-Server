@@ -9,6 +9,7 @@ import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TeacherResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TokenDto;
 import com.sciencematch.sciencematch.domain.Student;
+import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.ExistEmailException;
@@ -54,13 +55,13 @@ public class AuthService {
     }
 
     @Transactional
-    public StudentResponseDto signupStudent(StudentRequestDto studentRequestDto) {
+    public StudentResponseDto signupStudent(StudentRequestDto studentRequestDto, String email) {
         if (studentRepository.existsByPhoneNum(studentRequestDto.getPhoneNum())) {
             throw new ExistEmailException(ErrorStatus.ALREADY_EXIST_USER_EXCEPTION,
                 ErrorStatus.ALREADY_EXIST_USER_EXCEPTION.getMessage());
         }
-
-        return StudentResponseDto.of(studentRepository.save(studentRequestDto.toStudent()));
+        Teacher teacher = teacherRepository.getTeacherByEmail(email);
+        return StudentResponseDto.of(studentRepository.save(studentRequestDto.toStudent(teacher)));
     }
 
     @Transactional

@@ -45,6 +45,7 @@ public class InitDb {
                 .parentNum("01013467946")
                 .phoneNum("01087654321")
                 .authority(Authority.ROLE_STUDENT)
+                .teacher(teacher)
                 .build();
             em.persist(student);
         }
