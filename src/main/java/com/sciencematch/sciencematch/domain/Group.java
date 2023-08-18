@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,6 +30,8 @@ public class Group {
     @Column(name = "group_id")
     private Long id;
 
+    private String name;
+
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
@@ -38,9 +41,21 @@ public class Group {
 
     private final Boolean deleted = Boolean.FALSE;
 
+    //반 생성시 선택한 학생들의 id로 조회해 리스트로 넘겨서 그룹 생성
     @Builder
-    public Group(Teacher teacher) {
+    public Group(String name, Teacher teacher, List<Student> students) {
+        this.name = name;
         this.teacher = teacher;
+        this.groupStudents = students.stream()
+            .map(student -> setGroupStudents(this, student))
+            .collect(Collectors.toList()); //groupstudent 생성 및 연관관계 세팅
+    }
+
+    private GroupStudent setGroupStudents(Group group, Student student) {
+        return GroupStudent.builder()
+            .student(student)
+            .group(group)
+            .build();
     }
 
 }
