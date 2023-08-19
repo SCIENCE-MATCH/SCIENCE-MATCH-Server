@@ -47,7 +47,16 @@ public class InitDb {
                 .authority(Authority.ROLE_STUDENT)
                 .teacher(teacher)
                 .build();
+            Student student2 = Student.builder()
+                .grade("중3")
+                .name("김중삼")
+                .parentNum("01099482216")
+                .phoneNum("01084611579")
+                .authority(Authority.ROLE_STUDENT)
+                .teacher(teacher)
+                .build();
             em.persist(student);
+            em.persist(student2);
         }
     }
 }
