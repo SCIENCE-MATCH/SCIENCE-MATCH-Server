@@ -25,6 +25,7 @@ public class TeacherService {
     private final TeacherRepository teacherRepository;
     private final S3Service s3Service;
 
+    //로고 변경
     @Transactional
     public void changeLogo(MultipartFile logo, String email) throws IOException {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
@@ -35,21 +36,25 @@ public class TeacherService {
         teacher.changeLogo(logoURL);
     }
 
+    //학생 관리 조회
     public List<MyStudentsResponseDto> getMyStudents(String email) {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
         return teacher.getStudents().stream().map(MyStudentsResponseDto::of)
             .collect(Collectors.toList());
     }
 
+    //마이페이지 조회
     public MyPageDto getMypage(String email) {
         return MyPageDto.of(teacherRepository.getTeacherByEmail(email));
     }
 
+    //전체 학생 조회 (반 생성, 퀴즈 등)
     public List<AllStudentsResponseDto> findAllStudents() {
         return studentRepository.findAll().stream().map(AllStudentsResponseDto::of)
             .collect(Collectors.toList());
     }
 
+    //나의 반 목록 조회
     public List<GroupResponseDto> getMyGroups(String email) {
         return teacherRepository.getTeacherByEmail(email).getGroups().stream()
             .map(GroupResponseDto::of)
