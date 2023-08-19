@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.controller.dto.response.MyPageDto;
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.dto.group.GroupResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.AllStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
@@ -46,6 +47,12 @@ public class TeacherService {
 
     public List<AllStudentsResponseDto> findAllStudents() {
         return studentRepository.findAll().stream().map(AllStudentsResponseDto::of)
+            .collect(Collectors.toList());
+    }
+
+    public List<GroupResponseDto> getMyGroups(String email) {
+        return teacherRepository.getTeacherByEmail(email).getGroups().stream()
+            .map(GroupResponseDto::of)
             .collect(Collectors.toList());
     }
 }

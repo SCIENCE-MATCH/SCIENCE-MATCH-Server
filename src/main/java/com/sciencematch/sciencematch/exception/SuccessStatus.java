@@ -19,6 +19,7 @@ public enum SuccessStatus {
     GET_MYPAGE_SUCCESS(HttpStatus.OK, "마이 페이지를 성공적으로 불러왔습니다."),
     STUDENT_INFO_UPDATE_SUCCESS(HttpStatus.OK, "학생 정보를 성공적으로 교체하였습니다."),
     DELETE_STUDENT_SUCCESS(HttpStatus.OK, "학생을 성공적으로 삭제하였습니다."),
+    GET_MY_GROUPS_SUCCESS(HttpStatus.OK, "반 목록을 성공적으로 조회했습니다."),
 
     /*
      * 201 created
