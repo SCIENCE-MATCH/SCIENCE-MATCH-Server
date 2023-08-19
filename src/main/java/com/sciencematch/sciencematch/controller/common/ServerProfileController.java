@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.controller;
+package com.sciencematch.sciencematch.controller.common;
 
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;

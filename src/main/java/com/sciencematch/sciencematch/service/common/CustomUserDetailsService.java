@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.service;
+package com.sciencematch.sciencematch.service.common;
 
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;

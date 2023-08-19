@@ -3,8 +3,9 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
-import com.sciencematch.sciencematch.service.AuthService;
+import com.sciencematch.sciencematch.service.common.AuthService;
 import com.sciencematch.sciencematch.service.TeacherService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -56,7 +58,7 @@ public class TeacherController {
     @PostMapping("/student/create")
     @Operation(summary = "학생 생성")
     public ApiResponseDto<StudentResponseDto> createStudent(
-        @AuthenticationPrincipal User user,
+        @Parameter(hidden = true) @AuthenticationPrincipal User user,
         @RequestBody StudentRequestDto studentRequestDto) {
         return ApiResponseDto.success(SuccessStatus.CREATE_STUDENT_SUCCESS,
             authService.signupStudent(studentRequestDto, user.getUsername()));
@@ -76,5 +78,13 @@ public class TeacherController {
         @Schema(example = "01087654321") @RequestParam("phoneNum") String phoneNum) {
         return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
             authService.deleteStudent(phoneNum));
+    }
+
+    @GetMapping("/students")
+    @Operation(summary = "나의 학생들 조회")
+    public ApiResponseDto<List<MyStudentsResponseDto>> getStudents(
+        @Parameter(hidden = true) @AuthenticationPrincipal User user) {
+        return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
+            teacherService.getMyStudents(user.getUsername()));
     }
 }

@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.service;
+package com.sciencematch.sciencematch.service.common;
 
 import com.sciencematch.sciencematch.controller.dto.request.DuplCheckDto;
 import com.sciencematch.sciencematch.controller.dto.request.StudentLoginRequestDto;

@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.controller;
+package com.sciencematch.sciencematch.controller.common;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.controller.dto.request.DuplCheckDto;
@@ -9,7 +9,7 @@ import com.sciencematch.sciencematch.controller.dto.response.TeacherResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TokenDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.jwt.TokenProvider;
-import com.sciencematch.sciencematch.service.AuthService;
+import com.sciencematch.sciencematch.service.common.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
