@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.AllStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.common.AuthService;
@@ -86,5 +87,12 @@ public class TeacherController {
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
             teacherService.getMyStudents(user.getUsername()));
+    }
+
+    @GetMapping("/students/all")
+    @Operation(summary = "전체 학생들 조회")
+    public ApiResponseDto<List<AllStudentsResponseDto>> findAllStudents() {
+        return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENT_SUCCESS,
+            teacherService.findAllStudents());
     }
 }
