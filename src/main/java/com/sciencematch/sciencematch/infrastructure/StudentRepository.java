@@ -1,8 +1,10 @@
 package com.sciencematch.sciencematch.infrastructure;
 
 import com.sciencematch.sciencematch.domain.Student;
+import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.NotFoundException;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -16,5 +18,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
         return this.findByPhoneNum(phoneNum)
             .orElseThrow(() -> new NotFoundException(ErrorStatus.NOT_FOUND_USER_EXCEPTION, ErrorStatus.NOT_FOUND_USER_EXCEPTION.getMessage()));
     }
+
+    List<Student> findAllByTeacher(Teacher teacher);
 
 }
