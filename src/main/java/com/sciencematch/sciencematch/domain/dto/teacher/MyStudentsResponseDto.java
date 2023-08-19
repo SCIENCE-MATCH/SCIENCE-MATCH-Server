@@ -4,11 +4,9 @@ import com.sciencematch.sciencematch.domain.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class MyStudentsResponseDto {
 

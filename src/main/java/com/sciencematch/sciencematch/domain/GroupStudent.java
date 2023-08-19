@@ -24,17 +24,17 @@ public class GroupStudent {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group group;
+    private Groups groups;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
 
     // 연관 관계 편의 메서드
-    public void setGroup(Group group) {
-        this.group = group;
-        if (!group.getGroupStudents().contains(this)) {
-            group.getGroupStudents().add(this);
+    public void setGroups(Groups groups) {
+        this.groups = groups;
+        if (!groups.getGroupStudents().contains(this)) {
+            groups.getGroupStudents().add(this);
         }
     }
 
@@ -46,8 +46,8 @@ public class GroupStudent {
     }
 
     @Builder
-    public GroupStudent(Group group, Student student) {
-        setGroup(group);
+    public GroupStudent(Groups groups, Student student) {
+        setGroups(groups);
         setStudent(student);
     }
 }

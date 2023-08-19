@@ -2,7 +2,6 @@ package com.sciencematch.sciencematch.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,13 +20,13 @@ import org.hibernate.annotations.Where;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SQLDelete(sql = "UPDATE group SET deleted = true WHERE group_id=?")
+@SQLDelete(sql = "UPDATE groups SET deleted = true WHERE groups_id=?")
 @Where(clause = "deleted=false")
-public class Group {
+public class Groups {
 
     @Id
     @GeneratedValue
-    @Column(name = "group_id")
+    @Column(name = "groups_id")
     private Long id;
 
     private String name;
@@ -36,26 +35,21 @@ public class Group {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
-    private List<GroupStudent> groupStudents = new ArrayList<>();
+    @OneToMany(mappedBy = "groups", fetch = FetchType.LAZY)
+    private final List<GroupStudent> groupStudents = new ArrayList<>();
 
     private final Boolean deleted = Boolean.FALSE;
 
     //반 생성시 선택한 학생들의 id로 조회해 리스트로 넘겨서 그룹 생성
     @Builder
-    public Group(String name, Teacher teacher, List<Student> students) {
+    public Groups(String name, Teacher teacher) {
         this.name = name;
-        this.teacher = teacher;
-        this.groupStudents = students.stream()
-            .map(student -> setGroupStudents(this, student))
-            .collect(Collectors.toList()); //groupstudent 생성 및 연관관계 세팅
+        setTeacher(teacher);
     }
 
-    private GroupStudent setGroupStudents(Group group, Student student) {
-        return GroupStudent.builder()
-            .student(student)
-            .group(group)
-            .build();
+    private void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+        teacher.getGroups().add(this);
     }
 
 }
