@@ -36,7 +36,7 @@ public class Groups {
     private Teacher teacher;
 
     @OneToMany(mappedBy = "groups", fetch = FetchType.LAZY)
-    private final List<GroupStudent> groupStudents = new ArrayList<>();
+    private List<GroupStudent> groupStudents = new ArrayList<>();
 
     private final Boolean deleted = Boolean.FALSE;
 
@@ -50,6 +50,11 @@ public class Groups {
     private void setTeacher(Teacher teacher) {
         this.teacher = teacher;
         teacher.getGroups().add(this);
+    }
+
+    public void updateGroupDetail(String name) {
+        this.name = name;
+        this.groupStudents = new ArrayList<>();
     }
 
 }

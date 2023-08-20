@@ -90,7 +90,7 @@ public class TeacherController {
     }
 
     @GetMapping("/students/all")
-    @Operation(summary = "전체 학생들 조회")
+    @Operation(summary = "전체 학생들 조회") //이게 필요한가? 원장 하나가 아이디 쓰는거면 전체 학생 = 나의 학생인데
     public ApiResponseDto<List<AllStudentsResponseDto>> findAllStudents() {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENT_SUCCESS,
             teacherService.findAllStudents());

@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,15 @@ public class GroupController {
         @Schema(example = "3") @RequestParam Long groupId) {
         return ApiResponseDto.success(SuccessStatus.GET_GROUP_DETAIL_SUCCESS,
             groupService.getGroupDetail(groupId));
+    }
+
+    @PatchMapping("/group/update")
+    @Operation(summary = "반 상세 정보 업데이트")
+    public ApiResponseDto<GroupDetailDto> updateGroupDetail(
+        @Schema(example = "3") @RequestParam Long groupId,
+        @RequestBody GroupRequestDto groupRequestDto) {
+        return ApiResponseDto.success(SuccessStatus.GET_GROUP_DETAIL_SUCCESS,
+            groupService.updateGroupDetail(groupId, groupRequestDto));
     }
 
     @PostMapping("/group")

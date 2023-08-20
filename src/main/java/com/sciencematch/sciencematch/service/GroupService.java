@@ -31,26 +31,43 @@ public class GroupService {
         return GroupDetailDto.of(groupRepository.getGroupById(groupId));
     }
 
+    //반 상세정보 업데이트
+    @Transactional
+    public GroupDetailDto updateGroupDetail(Long groupId, GroupRequestDto groupRequestDto) {
+        Groups groups = groupRepository.getGroupById(groupId);
+
+        groupStudentRepository.deleteAll(groups.getGroupStudents()); //기존 반 학생 연관관계 삭제
+        groups.updateGroupDetail(groupRequestDto.getGroupName());
+
+        createGroupStudents(groupRequestDto, groups);
+
+        return GroupDetailDto.of(groups);
+    }
+
     //반 생성
     @Transactional
     public GroupResponseDto createGroup(String email, GroupRequestDto groupRequestDto) {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
-
-        List<Student> students = groupRequestDto.getStudentIds().stream()
-            .map(studentRepository::getStudentById)
-            .collect(Collectors.toList());
 
         Groups groups = groupRepository.save(Groups.builder()
             .name(groupRequestDto.getGroupName())
             .teacher(teacher)
             .build());
 
+        createGroupStudents(groupRequestDto, groups);
+
+        return GroupResponseDto.of(groups);
+    }
+
+    private void createGroupStudents(GroupRequestDto groupRequestDto, Groups groups) {
+        List<Student> students = groupRequestDto.getStudentIds().stream()
+            .map(studentRepository::getStudentById)
+            .collect(Collectors.toList());
+
         //groupstudent 생성 및 연관관계 세팅
         for (Student student : students) {
             setGroupStudents(groups, student);
         }
-
-        return GroupResponseDto.of(groups);
     }
 
     private void setGroupStudents(Groups groups, Student student) {

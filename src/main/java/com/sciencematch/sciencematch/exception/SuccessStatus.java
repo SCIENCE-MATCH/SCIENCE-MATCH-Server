@@ -21,6 +21,7 @@ public enum SuccessStatus {
     DELETE_STUDENT_SUCCESS(HttpStatus.OK, "학생을 성공적으로 삭제하였습니다."),
     GET_MY_GROUPS_SUCCESS(HttpStatus.OK, "반 목록을 성공적으로 조회했습니다."),
     GET_GROUP_DETAIL_SUCCESS(HttpStatus.OK, "반 상세정보를 성공적으로 조회했습니다."),
+    UPDATE_GROUP_DETAIL_SUCCESS(HttpStatus.OK, "반 상세정보를 성공적으로 수정했습니다."),
     GET_ALL_STUDENT_SUCCESS(HttpStatus.OK, "전체 학생 정보를 성공적으로 조회했습니다."),
 
     /*
