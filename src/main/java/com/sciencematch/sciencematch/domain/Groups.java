@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,7 @@ public class Groups {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "groups", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "groups", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<GroupStudent> groupStudents = new ArrayList<>();
 
     private final Boolean deleted = Boolean.FALSE;

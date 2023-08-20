@@ -1,5 +1,7 @@
 package com.sciencematch.sciencematch;
 
+import com.sciencematch.sciencematch.domain.GroupStudent;
+import com.sciencematch.sciencematch.domain.Groups;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
@@ -38,7 +40,7 @@ public class InitDb {
                 .authority(Authority.ROLE_TEACHER)
                 .build();
 
-            Student.builder()
+            Student student1 = Student.builder()
                 .grade("고1")
                 .name("김사피")
                 .parentNum("01013467946")
@@ -46,13 +48,28 @@ public class InitDb {
                 .authority(Authority.ROLE_STUDENT)
                 .teacher(teacher)
                 .build();
-            Student.builder()
+            Student student2 = Student.builder()
                 .grade("중3")
                 .name("김중삼")
                 .parentNum("01099482216")
                 .phoneNum("01084611579")
                 .authority(Authority.ROLE_STUDENT)
                 .teacher(teacher)
+                .build();
+
+            Groups groups = Groups.builder()
+                .name("예시 반")
+                .teacher(teacher)
+                .build();
+
+            GroupStudent.builder()
+                .student(student1)
+                .groups(groups)
+                .build();
+
+            GroupStudent.builder()
+                .student(student2)
+                .groups(groups)
                 .build();
 
             em.persist(teacher);

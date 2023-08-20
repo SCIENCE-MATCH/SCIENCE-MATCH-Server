@@ -46,7 +46,7 @@ public class GroupController {
     @GetMapping("/group/detail")
     @Operation(summary = "반 상세 정보 조회")
     public ApiResponseDto<GroupDetailDto> getGroupDetail(
-        @Schema(example = "3") @RequestParam Long groupId) {
+        @Schema(example = "1") @RequestParam Long groupId) {
         return ApiResponseDto.success(SuccessStatus.GET_GROUP_DETAIL_SUCCESS,
             groupService.getGroupDetail(groupId));
     }
