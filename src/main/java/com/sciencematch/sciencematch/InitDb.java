@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch;
 
+import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.GroupStudent;
 import com.sciencematch.sciencematch.domain.Groups;
 import com.sciencematch.sciencematch.domain.Student;
@@ -32,6 +33,13 @@ public class InitDb {
 
         @Transactional
         public void dbInit() {
+            Admin admin = Admin.builder()
+                .email("hyh12100863@gmail.com")
+                .password(passwordEncoder.encode("hyh12100863@"))
+                .authority(Authority.ROLE_ADMIN)
+                .build();
+            em.persist(admin);
+
             Teacher teacher = Teacher.builder()
                 .email("science@gmail.com")
                 .name("김사매")
