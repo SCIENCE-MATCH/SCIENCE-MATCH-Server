@@ -23,6 +23,8 @@ public enum SuccessStatus {
     GET_GROUP_DETAIL_SUCCESS(HttpStatus.OK, "반 상세정보를 성공적으로 조회했습니다."),
     UPDATE_GROUP_DETAIL_SUCCESS(HttpStatus.OK, "반 상세정보를 성공적으로 수정했습니다."),
     GET_ALL_STUDENT_SUCCESS(HttpStatus.OK, "전체 학생 정보를 성공적으로 조회했습니다."),
+    GET_ALL_WAITING_TEACHERS_SUCCESS(HttpStatus.OK, "가입 대기중인 선생 리스트를 성공적으로 조회했습니다."),
+    ASSIGN_TEACHER_SUCCESS(HttpStatus.OK, "회원가입을 승인하였습니다."),
 
     /*
      * 201 created

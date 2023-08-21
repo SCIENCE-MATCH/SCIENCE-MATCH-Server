@@ -17,5 +17,11 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
             .orElseThrow(() -> new CustomException(ErrorStatus.NOT_FOUND_USER_EXCEPTION, ErrorStatus.NOT_FOUND_USER_EXCEPTION.getMessage()));
     }
 
+    default Teacher getTeacherById(Long id) {
+        return this.findById(id).orElseThrow(
+            () -> new CustomException(ErrorStatus.NOT_FOUND_USER_EXCEPTION,
+                ErrorStatus.NOT_FOUND_USER_EXCEPTION.getMessage()));
+    }
+
     Optional<Teacher> findByEmail(String email);
 }
