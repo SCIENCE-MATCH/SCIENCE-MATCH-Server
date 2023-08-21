@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.domain;
 
 import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE student SET deleted = true WHERE student_id=?")
 @Where(clause = "deleted=false")
-public class Student {
+public class Student extends AuditingTimeEntity {
 
     private final Boolean deleted = Boolean.FALSE;
     @Id

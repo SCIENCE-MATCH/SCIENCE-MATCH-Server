@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain;
 
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Pattern;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +26,7 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE teacher SET deleted = true WHERE teacher_id=?")
 @Where(clause = "deleted=false")
-public class Teacher {
+public class Teacher extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,7 +47,6 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private final List<Groups> groups = new ArrayList<>();
 
-    @Pattern(regexp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$", message = "10 ~ 11 자리의 숫자만 입력 가능합니다.")
     private String phoneNum;
     @Enumerated(EnumType.STRING)
     private Authority authority;
@@ -66,4 +65,6 @@ public class Teacher {
     public void changeLogo(String logoURL) {
         this.logo = logoURL;
     }
+
+    public void assignTeacher() {this.authority = Authority.ROLE_TEACHER;}
 }

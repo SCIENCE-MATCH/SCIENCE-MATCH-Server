@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain;
 
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -23,7 +24,7 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE groups SET deleted = true WHERE groups_id=?")
 @Where(clause = "deleted=false")
-public class Groups {
+public class Groups extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue
