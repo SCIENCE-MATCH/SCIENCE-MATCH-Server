@@ -64,10 +64,10 @@ public class SecurityConfig {
             .and()
             .authorizeRequests()
             .antMatchers("/teacher/**").hasRole("TEACHER")
+            .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers("/auth/**").permitAll()
             .antMatchers("/profile/**", "/actuator/**", "/health/**").permitAll()
-            .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api-docs/**", "/swagger-ui.html")
-            .permitAll()
+            .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api-docs/**", "/swagger-ui.html").permitAll()
             .anyRequest().authenticated() //나머지 API는 전부 인증 필요
 
             //JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
