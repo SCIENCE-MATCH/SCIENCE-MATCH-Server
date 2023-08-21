@@ -8,12 +8,14 @@ import com.sciencematch.sciencematch.controller.dto.request.TeacherRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TeacherResponseDto;
 import com.sciencematch.sciencematch.controller.dto.response.TokenDto;
+import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.ExistEmailException;
 import com.sciencematch.sciencematch.exception.model.LogoutRefreshtokenException;
+import com.sciencematch.sciencematch.infrastructure.AdminRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.jwt.TokenProvider;
@@ -39,6 +41,7 @@ public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
+    private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
     private final RedisTemplate redisTemplate;
@@ -50,8 +53,11 @@ public class AuthService {
                 ErrorStatus.ALREADY_EXIST_USER_EXCEPTION.getMessage());
         }
 
-        return TeacherResponseDto.of(
-            teacherRepository.save(teacherRequestDto.toTeacher(passwordEncoder)));
+        Teacher saveTeacher = teacherRepository.save(teacherRequestDto.toTeacher(passwordEncoder));
+        Admin admin = adminRepository.getAdminById(1L);
+        admin.getWaitingTeacher().add(saveTeacher); //권한은 Guest인 상태로 Teacher를 만들어 admin에 저장
+
+        return TeacherResponseDto.of(saveTeacher);
     }
 
     @Transactional

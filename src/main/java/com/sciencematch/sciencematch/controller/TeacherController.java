@@ -82,7 +82,7 @@ public class TeacherController {
     }
 
     @GetMapping("/students")
-    @Operation(summary = "나의 학생들 조회")
+    @Operation(summary = "나의 학생들 조회") //학생 관리 뷰에서 필요한 api
     public ApiResponseDto<List<MyStudentsResponseDto>> getStudents(
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
@@ -90,7 +90,7 @@ public class TeacherController {
     }
 
     @GetMapping("/students/all")
-    @Operation(summary = "전체 학생들 조회") //이게 필요한가? 원장 하나가 아이디 쓰는거면 전체 학생 = 나의 학생인데
+    @Operation(summary = "전체 학생들 조회") //학습지 등 간략하게 학생 리스트를 살펴볼 때 필요한 api
     public ApiResponseDto<List<AllStudentsResponseDto>> findAllStudents() {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENT_SUCCESS,
             teacherService.findAllStudents());

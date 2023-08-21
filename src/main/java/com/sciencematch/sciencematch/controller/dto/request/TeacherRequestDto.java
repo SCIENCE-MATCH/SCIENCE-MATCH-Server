@@ -48,7 +48,7 @@ public class TeacherRequestDto {
             .name(name)
             .password(passwordEncoder.encode(password))
             .phoneNum(phoneNum)
-            .authority(Authority.ROLE_TEACHER)
+            .authority(Authority.ROLE_GUEST)
             .build();
     }
 
