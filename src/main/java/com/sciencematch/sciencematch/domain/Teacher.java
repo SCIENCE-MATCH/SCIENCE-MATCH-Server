@@ -45,7 +45,7 @@ public class Teacher extends AuditingTimeEntity {
     private final List<Student> students = new ArrayList<>();
 
     @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private final List<Groups> groups = new ArrayList<>();
+    private final List<Team> team = new ArrayList<>();
 
     private String phoneNum;
     @Enumerated(EnumType.STRING)

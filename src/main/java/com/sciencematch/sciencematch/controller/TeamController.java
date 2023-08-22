@@ -1,11 +1,11 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
-import com.sciencematch.sciencematch.domain.dto.groups.GroupDetailDto;
-import com.sciencematch.sciencematch.domain.dto.groups.GroupResponseDto;
-import com.sciencematch.sciencematch.domain.dto.groups.request.GroupRequestDto;
+import com.sciencematch.sciencematch.domain.dto.team.TeamDetailDto;
+import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
+import com.sciencematch.sciencematch.domain.dto.team.request.TeamRequestDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
-import com.sciencematch.sciencematch.service.GroupService;
+import com.sciencematch.sciencematch.service.TeamService;
 import com.sciencematch.sciencematch.service.TeacherService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -29,15 +29,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/teacher")
 @Tag(name = "반", description = "반 관리 API")
 @SecurityRequirement(name = "JWT Auth")
-public class GroupController {
+public class TeamController {
 
     private final TeacherService teacherService;
-    private final GroupService groupService;
+    private final TeamService teamService;
 
     //나의
     @GetMapping("/group")
     @Operation(summary = "나의 반 목록 조회")
-    public ApiResponseDto<List<GroupResponseDto>> getMyGroups(
+    public ApiResponseDto<List<TeamResponseDto>> getMyGroups(
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_MY_GROUPS_SUCCESS,
             teacherService.getMyGroups(user.getUsername()));
@@ -45,27 +45,27 @@ public class GroupController {
 
     @GetMapping("/group/detail")
     @Operation(summary = "반 상세 정보 조회")
-    public ApiResponseDto<GroupDetailDto> getGroupDetail(
+    public ApiResponseDto<TeamDetailDto> getGroupDetail(
         @Schema(example = "1") @RequestParam Long groupId) {
         return ApiResponseDto.success(SuccessStatus.GET_GROUP_DETAIL_SUCCESS,
-            groupService.getGroupDetail(groupId));
+            teamService.getGroupDetail(groupId));
     }
 
     @PatchMapping("/group/update")
     @Operation(summary = "반 상세 정보 업데이트")
-    public ApiResponseDto<GroupDetailDto> updateGroupDetail(
+    public ApiResponseDto<TeamDetailDto> updateGroupDetail(
         @Schema(example = "3") @RequestParam Long groupId,
-        @RequestBody GroupRequestDto groupRequestDto) {
+        @RequestBody TeamRequestDto teamRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_GROUP_DETAIL_SUCCESS,
-            groupService.updateGroupDetail(groupId, groupRequestDto));
+            teamService.updateGroupDetail(groupId, teamRequestDto));
     }
 
     @PostMapping("/group")
     @Operation(summary = "반 생성")
-    public ApiResponseDto<GroupResponseDto> createGroup(
+    public ApiResponseDto<TeamResponseDto> createGroup(
         @Parameter(hidden = true) @AuthenticationPrincipal User user,
-        @RequestBody GroupRequestDto groupRequestDto) {
+        @RequestBody TeamRequestDto teamRequestDto) {
         return ApiResponseDto.success(SuccessStatus.CREATE_GROUP_SUCCESS,
-            groupService.createGroup(user.getUsername(), groupRequestDto));
+            teamService.createGroup(user.getUsername(), teamRequestDto));
     }
 }

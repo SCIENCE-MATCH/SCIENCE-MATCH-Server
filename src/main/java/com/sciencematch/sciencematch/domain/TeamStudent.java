@@ -16,39 +16,39 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GroupStudent extends AuditingTimeEntity {
+public class TeamStudent extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "group_student_id")
+    @Column(name = "team_student_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Groups groups;
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
 
     // 연관 관계 편의 메서드
-    public void setGroups(Groups groups) {
-        this.groups = groups;
-        if (!groups.getGroupStudents().contains(this)) {
-            groups.getGroupStudents().add(this);
+    public void setTeam(Team team) {
+        this.team = team;
+        if (!team.getTeamStudents().contains(this)) {
+            team.getTeamStudents().add(this);
         }
     }
 
     public void setStudent(Student student) {
         this.student = student;
-        if (!student.getGroupStudents().contains(this)) {
-            student.getGroupStudents().add(this);
+        if (!student.getTeamStudents().contains(this)) {
+            student.getTeamStudents().add(this);
         }
     }
 
     @Builder
-    public GroupStudent(Groups groups, Student student) {
-        setGroups(groups);
+    public TeamStudent(Team team, Student student) {
+        setTeam(team);
         setStudent(student);
     }
 }

@@ -45,7 +45,7 @@ public class Student extends AuditingTimeEntity {
     private Teacher teacher;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
-    private final List<GroupStudent> groupStudents = new ArrayList<>();
+    private final List<TeamStudent> teamStudents = new ArrayList<>();
     private Authority authority;
 
     @Builder

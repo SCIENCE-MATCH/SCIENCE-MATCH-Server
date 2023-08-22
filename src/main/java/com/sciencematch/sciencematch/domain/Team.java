@@ -22,13 +22,13 @@ import org.hibernate.annotations.Where;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SQLDelete(sql = "UPDATE groups SET deleted = true WHERE groups_id=?")
+@SQLDelete(sql = "UPDATE team SET deleted = true WHERE team_id=?")
 @Where(clause = "deleted=false")
-public class Groups extends AuditingTimeEntity {
+public class Team extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "groups_id")
+    @Column(name = "team_id")
     private Long id;
 
     private String name;
@@ -37,26 +37,27 @@ public class Groups extends AuditingTimeEntity {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "groups", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<GroupStudent> groupStudents = new ArrayList<>();
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<TeamStudent> teamStudents;
 
     private final Boolean deleted = Boolean.FALSE;
 
     //반 생성시 선택한 학생들의 id로 조회해 리스트로 넘겨서 그룹 생성
     @Builder
-    public Groups(String name, Teacher teacher) {
+    public Team(String name, Teacher teacher) {
         this.name = name;
         setTeacher(teacher);
+        this.teamStudents = new ArrayList<>();
     }
 
     private void setTeacher(Teacher teacher) {
         this.teacher = teacher;
-        teacher.getGroups().add(this);
+        teacher.getTeam().add(this);
     }
 
     public void updateGroupDetail(String name) {
         this.name = name;
-        this.groupStudents = new ArrayList<>();
+        this.teamStudents = new ArrayList<>();
     }
 
 }

@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch;
 
 import com.sciencematch.sciencematch.domain.Admin;
-import com.sciencematch.sciencematch.domain.GroupStudent;
-import com.sciencematch.sciencematch.domain.Groups;
+import com.sciencematch.sciencematch.domain.Team;
+import com.sciencematch.sciencematch.domain.TeamStudent;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
@@ -65,19 +65,19 @@ public class InitDb {
                 .teacher(teacher)
                 .build();
 
-            Groups groups = Groups.builder()
+            Team team = Team.builder()
                 .name("예시 반")
                 .teacher(teacher)
                 .build();
 
-            GroupStudent.builder()
+            TeamStudent.builder()
                 .student(student1)
-                .groups(groups)
+                .team(team)
                 .build();
 
-            GroupStudent.builder()
+            TeamStudent.builder()
                 .student(student2)
-                .groups(groups)
+                .team(team)
                 .build();
 
             em.persist(teacher);

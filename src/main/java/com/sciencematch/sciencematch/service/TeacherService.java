@@ -2,7 +2,7 @@ package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.controller.dto.response.MyPageDto;
 import com.sciencematch.sciencematch.domain.Teacher;
-import com.sciencematch.sciencematch.domain.dto.groups.GroupResponseDto;
+import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.AllStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
@@ -55,9 +55,9 @@ public class TeacherService {
     }
 
     //나의 반 목록 조회
-    public List<GroupResponseDto> getMyGroups(String email) {
-            return teacherRepository.getTeacherByEmail(email).getGroups().stream()
-                .map(GroupResponseDto::of)
+    public List<TeamResponseDto> getMyGroups(String email) {
+            return teacherRepository.getTeacherByEmail(email).getTeam().stream()
+                .map(TeamResponseDto::of)
                 .collect(Collectors.toList());
     }
 }
