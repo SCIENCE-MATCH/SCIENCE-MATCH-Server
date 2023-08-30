@@ -3,7 +3,6 @@ package com.sciencematch.sciencematch.service;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
-import com.sciencematch.sciencematch.infrastructure.AdminRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,11 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AdminService {
 
-    private final AdminRepository adminRepository;
     private final TeacherRepository teacherRepository;
 
     public List<WaitingTeacherResponseDto> getAllWaitingTeachers() {
-        return adminRepository.getAdminById(1L).getWaitingTeacher().stream()
+        return teacherRepository.findAllByAuthority(Authority.ROLE_GUEST).stream()
             .map(WaitingTeacherResponseDto::of).collect(
                 Collectors.toList());
     }
