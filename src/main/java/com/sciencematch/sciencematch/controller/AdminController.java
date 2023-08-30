@@ -24,7 +24,7 @@ public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping("/teachers")
+    @GetMapping("/teachers/waiting")
     @Operation(summary = "승인 대기 선생 조회")
     public ApiResponseDto<List<WaitingTeacherResponseDto>> getAllWaitingTeachers() {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_WAITING_TEACHERS_SUCCESS,
@@ -37,5 +37,12 @@ public class AdminController {
         @PathVariable(name = "id") Long id) {
         return ApiResponseDto.success(SuccessStatus.ASSIGN_TEACHER_SUCCESS,
             adminService.assignTeacher(id));
+    }
+
+    @GetMapping("/teachers")
+    @Operation(summary = "선생 리스트 조회")
+    public ApiResponseDto<List<WaitingTeacherResponseDto>> getAllTeachers() {
+        return ApiResponseDto.success(SuccessStatus.GET_ALL_TEACHERS_SUCCESS,
+            adminService.getAllTeachers());
     }
 }

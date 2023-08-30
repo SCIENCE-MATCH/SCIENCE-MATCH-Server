@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
+import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import com.sciencematch.sciencematch.infrastructure.AdminRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.util.List;
@@ -28,5 +29,10 @@ public class AdminService {
         Teacher teacher = teacherRepository.getTeacherById(id);
         teacher.assignTeacher();
         return WaitingTeacherResponseDto.of(teacher);
+    }
+
+    public List<WaitingTeacherResponseDto> getAllTeachers() {
+        return teacherRepository.findAllByAuthority(Authority.ROLE_TEACHER)
+            .stream().map(WaitingTeacherResponseDto::of).collect(Collectors.toList());
     }
 }

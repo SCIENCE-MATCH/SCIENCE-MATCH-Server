@@ -1,8 +1,10 @@
 package com.sciencematch.sciencematch.infrastructure;
 
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -24,4 +26,6 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
     }
 
     Optional<Teacher> findByEmail(String email);
+
+    List<Teacher> findAllByAuthority(Authority authority);
 }

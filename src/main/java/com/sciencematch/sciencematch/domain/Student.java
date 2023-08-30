@@ -28,7 +28,6 @@ import org.hibernate.annotations.Where;
 @Where(clause = "deleted=false")
 public class Student extends AuditingTimeEntity {
 
-    private final Boolean deleted = Boolean.FALSE;
     @Id
     @GeneratedValue
     @Column(name = "student_id")
@@ -47,6 +46,8 @@ public class Student extends AuditingTimeEntity {
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private final List<TeamStudent> teamStudents = new ArrayList<>();
     private Authority authority;
+
+    private final Boolean deleted = Boolean.FALSE;
 
     @Builder
     public Student(String grade, String name, String parentNum, String phoneNum,
