@@ -1,8 +1,10 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
+import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdminService {
 
     private final TeacherRepository teacherRepository;
+    private final StudentRepository studentRepository;
 
     public List<WaitingTeacherResponseDto> getAllWaitingTeachers() {
         return teacherRepository.findAllByAuthority(Authority.ROLE_GUEST).stream()
@@ -39,5 +42,10 @@ public class AdminService {
         Teacher teacher = teacherRepository.getTeacherById(id);
         teacherRepository.delete(teacher);
         return WaitingTeacherResponseDto.of(teacher);
+    }
+
+    public List<AdminStudentResponseDto> getAllStudents() {
+        return studentRepository.findAll().stream().map(AdminStudentResponseDto::of)
+            .collect(Collectors.toList());
     }
 }

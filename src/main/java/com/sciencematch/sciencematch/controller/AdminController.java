@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
+import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
@@ -52,5 +53,12 @@ public class AdminController {
     public ApiResponseDto<WaitingTeacherResponseDto> getAllTeachers(@PathVariable(name = "id") Long id) {
         return ApiResponseDto.success(SuccessStatus.DELETE_TEACHER_SUCCESS,
             adminService.deleteTeacher(id));
+    }
+
+    @GetMapping("/students")
+    @Operation(summary = "학생 리스트 조회")
+    public ApiResponseDto<List<AdminStudentResponseDto>> getAllStudents() {
+        return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENTS_SUCCESS,
+            adminService.getAllStudents());
     }
 }
