@@ -50,7 +50,7 @@ public class AdminController {
 
     @DeleteMapping("/teachers/{id}")
     @Operation(summary = "선생 삭제")
-    public ApiResponseDto<WaitingTeacherResponseDto> getAllTeachers(@PathVariable(name = "id") Long id) {
+    public ApiResponseDto<WaitingTeacherResponseDto> getAllTeacher(@PathVariable(name = "id") Long id) {
         return ApiResponseDto.success(SuccessStatus.DELETE_TEACHER_SUCCESS,
             adminService.deleteTeacher(id));
     }
@@ -60,5 +60,12 @@ public class AdminController {
     public ApiResponseDto<List<AdminStudentResponseDto>> getAllStudents() {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENTS_SUCCESS,
             adminService.getAllStudents());
+    }
+
+    @DeleteMapping("/students/{id}")
+    @Operation(summary = "학생 삭제")
+    public ApiResponseDto<AdminStudentResponseDto> deleteStudent(@PathVariable(name = "id") Long id) {
+        return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
+            adminService.deleteStudent(id));
     }
 }

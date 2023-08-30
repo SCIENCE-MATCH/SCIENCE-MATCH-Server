@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
@@ -47,5 +48,12 @@ public class AdminService {
     public List<AdminStudentResponseDto> getAllStudents() {
         return studentRepository.findAll().stream().map(AdminStudentResponseDto::of)
             .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public AdminStudentResponseDto deleteStudent(Long id) {
+        Student student = studentRepository.getStudentById(id);
+        studentRepository.delete(student);
+        return AdminStudentResponseDto.of(student);
     }
 }
