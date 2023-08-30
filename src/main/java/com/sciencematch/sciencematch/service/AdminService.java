@@ -33,4 +33,11 @@ public class AdminService {
         return teacherRepository.findAllByAuthority(Authority.ROLE_TEACHER)
             .stream().map(WaitingTeacherResponseDto::of).collect(Collectors.toList());
     }
+
+    @Transactional
+    public WaitingTeacherResponseDto deleteTeacher(Long id) {
+        Teacher teacher = teacherRepository.getTeacherById(id);
+        teacherRepository.delete(teacher);
+        return WaitingTeacherResponseDto.of(teacher);
+    }
 }

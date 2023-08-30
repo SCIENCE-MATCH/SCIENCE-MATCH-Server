@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +45,12 @@ public class AdminController {
     public ApiResponseDto<List<WaitingTeacherResponseDto>> getAllTeachers() {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_TEACHERS_SUCCESS,
             adminService.getAllTeachers());
+    }
+
+    @DeleteMapping("/teachers/{id}")
+    @Operation(summary = "선생 삭제")
+    public ApiResponseDto<WaitingTeacherResponseDto> getAllTeachers(@PathVariable(name = "id") Long id) {
+        return ApiResponseDto.success(SuccessStatus.DELETE_TEACHER_SUCCESS,
+            adminService.deleteTeacher(id));
     }
 }
