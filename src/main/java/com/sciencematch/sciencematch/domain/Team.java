@@ -37,8 +37,10 @@ public class Team extends AuditingTimeEntity {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<TeamStudent> teamStudents;
+
+    private Integer studentsNum;
 
     private final Boolean deleted = Boolean.FALSE;
 
@@ -48,6 +50,7 @@ public class Team extends AuditingTimeEntity {
         this.name = name;
         setTeacher(teacher);
         this.teamStudents = new ArrayList<>();
+        this.studentsNum = 0;
     }
 
     private void setTeacher(Teacher teacher) {
@@ -58,6 +61,10 @@ public class Team extends AuditingTimeEntity {
     public void updateGroupDetail(String name) {
         this.name = name;
         this.teamStudents = new ArrayList<>();
+    }
+
+    public void plusStudentsNum() {
+        this.studentsNum += 1;
     }
 
 }
