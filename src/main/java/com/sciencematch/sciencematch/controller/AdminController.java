@@ -76,4 +76,11 @@ public class AdminController {
         return ApiResponseDto.success(SuccessStatus.GET_TEAMS_SUCCESS,
             adminService.getAllTeams());
     }
+
+    @DeleteMapping("/teams/{id}")
+    @Operation(summary = "반 삭제")
+    public ApiResponseDto<AdminTeamResponseDto> deleteTeam(@PathVariable(name = "id") Long id) {
+        return ApiResponseDto.success(SuccessStatus.DELETE_TEAM_SUCCESS,
+            adminService.deleteTeam(id));
+    }
 }

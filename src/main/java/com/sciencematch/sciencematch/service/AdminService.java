@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.Team;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
@@ -63,5 +64,12 @@ public class AdminService {
 
     public List<AdminTeamResponseDto> getAllTeams() {
         return teamRepository.findAll().stream().map(AdminTeamResponseDto::of).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public AdminTeamResponseDto deleteTeam(Long id) {
+        Team team = teamRepository.getTeamById(id);
+        teamRepository.delete(team);
+        return AdminTeamResponseDto.of(team);
     }
 }
