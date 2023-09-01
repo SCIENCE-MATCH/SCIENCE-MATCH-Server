@@ -35,7 +35,7 @@ public class TeamController {
     private final TeamService teamService;
 
     //나의
-    @GetMapping("/group")
+    @GetMapping("/team")
     @Operation(summary = "나의 반 목록 조회")
     public ApiResponseDto<List<TeamResponseDto>> getMyGroups(
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
@@ -43,7 +43,7 @@ public class TeamController {
             teacherService.getMyGroups(user.getUsername()));
     }
 
-    @GetMapping("/group/detail")
+    @GetMapping("/team/detail")
     @Operation(summary = "반 상세 정보 조회")
     public ApiResponseDto<TeamDetailDto> getGroupDetail(
         @Schema(example = "1") @RequestParam Long groupId) {
@@ -51,7 +51,7 @@ public class TeamController {
             teamService.getGroupDetail(groupId));
     }
 
-    @PatchMapping("/group/update")
+    @PatchMapping("/team/update")
     @Operation(summary = "반 상세 정보 업데이트")
     public ApiResponseDto<TeamDetailDto> updateGroupDetail(
         @Schema(example = "3") @RequestParam Long groupId,

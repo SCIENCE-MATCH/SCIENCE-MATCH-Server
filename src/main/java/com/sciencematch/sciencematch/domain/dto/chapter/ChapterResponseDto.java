@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.domain.dto;
+package com.sciencematch.sciencematch.domain.dto.chapter;
 
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.enumerate.Grade;

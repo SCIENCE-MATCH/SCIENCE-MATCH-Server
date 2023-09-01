@@ -14,18 +14,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SQLDelete(sql = "UPDATE chapter SET deleted = true WHERE chapter_id=?")
-@Where(clause = "deleted=false")
 public class Chapter {
 
     @Id
@@ -45,6 +42,7 @@ public class Chapter {
 
     private Integer listOrder;
 
+    @OrderBy("listOrder asc")
     @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private final List<Chapter> children = new ArrayList<>();
 

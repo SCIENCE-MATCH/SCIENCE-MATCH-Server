@@ -1,7 +1,8 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
-import com.sciencematch.sciencematch.domain.dto.ChapterResponseDto;
+import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPatchDto;
+import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
@@ -16,6 +17,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -96,5 +98,12 @@ public class AdminController {
     public ApiResponseDto<List<ChapterResponseDto>> getChapter(@RequestBody ChapterRequestDto chapterRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_CHAPTER_SUCCESS,
             chapterService.getChapter(chapterRequestDto));
+    }
+
+    @PatchMapping("/chapter")
+    @Operation(summary = "단원 수정")
+    public ApiResponseDto<String> getChapter(@RequestBody ChapterPatchDto chapterPatchDto) {
+        return ApiResponseDto.success(SuccessStatus.PATCH_CHAPTER_SUCCESS,
+            chapterService.patchChapter(chapterPatchDto));
     }
 }
