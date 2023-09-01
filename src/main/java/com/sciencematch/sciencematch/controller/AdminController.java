@@ -1,11 +1,14 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
+import com.sciencematch.sciencematch.domain.dto.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
+import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
+import com.sciencematch.sciencematch.service.ChapterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     private final AdminService adminService;
+    private final ChapterService chapterService;
 
     @GetMapping("/teachers/waiting")
     @Operation(summary = "승인 대기 선생 조회")
@@ -51,7 +56,8 @@ public class AdminController {
 
     @DeleteMapping("/teachers/{id}")
     @Operation(summary = "선생 삭제")
-    public ApiResponseDto<WaitingTeacherResponseDto> getAllTeacher(@PathVariable(name = "id") Long id) {
+    public ApiResponseDto<WaitingTeacherResponseDto> getAllTeacher(
+        @PathVariable(name = "id") Long id) {
         return ApiResponseDto.success(SuccessStatus.DELETE_TEACHER_SUCCESS,
             adminService.deleteTeacher(id));
     }
@@ -65,7 +71,8 @@ public class AdminController {
 
     @DeleteMapping("/students/{id}")
     @Operation(summary = "학생 삭제")
-    public ApiResponseDto<AdminStudentResponseDto> deleteStudent(@PathVariable(name = "id") Long id) {
+    public ApiResponseDto<AdminStudentResponseDto> deleteStudent(
+        @PathVariable(name = "id") Long id) {
         return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
             adminService.deleteStudent(id));
     }
@@ -82,5 +89,12 @@ public class AdminController {
     public ApiResponseDto<AdminTeamResponseDto> deleteTeam(@PathVariable(name = "id") Long id) {
         return ApiResponseDto.success(SuccessStatus.DELETE_TEAM_SUCCESS,
             adminService.deleteTeam(id));
+    }
+
+    @PostMapping("/chapter")
+    @Operation(summary = "단원 조회")
+    public ApiResponseDto<List<ChapterResponseDto>> getChapter(@RequestBody ChapterRequestDto chapterRequestDto) {
+        return ApiResponseDto.success(SuccessStatus.GET_CHAPTER_SUCCESS,
+            chapterService.getChapter(chapterRequestDto));
     }
 }

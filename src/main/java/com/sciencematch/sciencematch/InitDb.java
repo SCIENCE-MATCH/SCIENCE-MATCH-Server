@@ -1,11 +1,15 @@
 package com.sciencematch.sciencematch;
 
 import com.sciencematch.sciencematch.domain.Admin;
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Team;
 import com.sciencematch.sciencematch.domain.TeamStudent;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
+import com.sciencematch.sciencematch.domain.enumerate.Grade;
+import com.sciencematch.sciencematch.domain.enumerate.School;
+import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -81,6 +85,63 @@ public class InitDb {
                 .build();
 
             em.persist(teacher);
+
+            Chapter chapter1 = Chapter.builder()
+                .school(School.HIGH)
+                .grade(Grade.SECOND)
+                .subject(Subject.BIOLOGY)
+                .description("1단원")
+                .build();
+
+            Chapter chapter2 = Chapter.builder()
+                .school(School.HIGH)
+                .grade(Grade.SECOND)
+                .subject(Subject.BIOLOGY)
+                .description("2단원")
+                .build();
+
+            Chapter chapter2_1 = Chapter.builder()
+                .school(School.HIGH)
+                .grade(Grade.SECOND)
+                .subject(Subject.BIOLOGY)
+                .parent(chapter2)
+                .description("소단원")
+                .build();
+
+            Chapter chapter2_1_1 = Chapter.builder()
+                .school(School.HIGH)
+                .grade(Grade.SECOND)
+                .subject(Subject.BIOLOGY)
+                .parent(chapter2_1)
+                .description("개념1")
+                .build();
+
+            Chapter chapter2_1_2 = Chapter.builder()
+                .school(School.HIGH)
+                .grade(Grade.SECOND)
+                .subject(Subject.BIOLOGY)
+                .parent(chapter2_1)
+                .description("개념2")
+                .build();
+
+            Chapter chapter3 = Chapter.builder()
+                .school(School.HIGH)
+                .grade(Grade.SECOND)
+                .subject(Subject.BIOLOGY)
+                .description("3단원")
+                .build();
+
+            Chapter chapter4 = Chapter.builder()
+                .school(School.HIGH)
+                .grade(Grade.SECOND)
+                .subject(Subject.PHYSICS)
+                .description("1단원")
+                .build();
+
+            em.persist(chapter1);
+            em.persist(chapter2);
+            em.persist(chapter3);
+            em.persist(chapter4);
         }
     }
 }

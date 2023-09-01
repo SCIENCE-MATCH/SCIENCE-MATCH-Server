@@ -30,6 +30,7 @@ public enum SuccessStatus {
     DELETE_TEACHER_SUCCESS(HttpStatus.OK, "선생을 성공적으로 삭제하였습니다."),
     DELETE_TEAM_SUCCESS(HttpStatus.OK, "반을 성공적으로 삭제하였습니다."),
     ASSIGN_TEACHER_SUCCESS(HttpStatus.OK, "회원가입을 승인하였습니다."),
+    GET_CHAPTER_SUCCESS(HttpStatus.OK, "단원 목록을 성공적으로 조회하였습니다."),
 
     /*
      * 201 created
