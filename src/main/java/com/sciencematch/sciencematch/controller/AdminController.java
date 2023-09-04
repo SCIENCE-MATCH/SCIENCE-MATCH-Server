@@ -7,6 +7,7 @@ import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
+import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
 import com.sciencematch.sciencematch.service.ChapterService;
@@ -15,6 +16,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -95,7 +97,8 @@ public class AdminController {
 
     @PostMapping("/chapter")
     @Operation(summary = "단원 조회")
-    public ApiResponseDto<List<ChapterResponseDto>> getChapter(@RequestBody ChapterRequestDto chapterRequestDto) {
+    public ApiResponseDto<List<ChapterResponseDto>> getChapter(
+        @RequestBody ChapterRequestDto chapterRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_CHAPTER_SUCCESS,
             chapterService.getChapter(chapterRequestDto));
     }
@@ -105,5 +108,11 @@ public class AdminController {
     public ApiResponseDto<String> getChapter(@RequestBody ChapterPatchDto chapterPatchDto) {
         return ApiResponseDto.success(SuccessStatus.PATCH_CHAPTER_SUCCESS,
             chapterService.patchChapter(chapterPatchDto));
+    }
+
+    @PostMapping(value = "/question", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "문제 추가")
+    public ApiResponseDto<?> postQuestion(@RequestBody QuestionPostDto questionPostDto) {
+        return ApiResponseDto.success(SuccessStatus.POST_QUESTION_SUCCESS);
     }
 }

@@ -32,6 +32,7 @@ public enum SuccessStatus {
     ASSIGN_TEACHER_SUCCESS(HttpStatus.OK, "회원가입을 승인하였습니다."),
     GET_CHAPTER_SUCCESS(HttpStatus.OK, "단원 목록을 성공적으로 조회하였습니다."),
     PATCH_CHAPTER_SUCCESS(HttpStatus.OK, "단원 목록을 성공적으로 수정하였습니다."),
+    POST_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 추가하였습니다."),
 
     /*
      * 201 created
