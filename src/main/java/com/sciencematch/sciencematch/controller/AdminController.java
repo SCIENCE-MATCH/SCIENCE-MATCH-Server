@@ -11,14 +11,17 @@ import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
 import com.sciencematch.sciencematch.service.ChapterService;
+import com.sciencematch.sciencematch.service.QuestionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +38,8 @@ public class AdminController {
 
     private final AdminService adminService;
     private final ChapterService chapterService;
+
+    private final QuestionService questionService;
 
     @GetMapping("/teachers/waiting")
     @Operation(summary = "승인 대기 선생 조회")
@@ -112,7 +117,9 @@ public class AdminController {
 
     @PostMapping(value = "/question", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "문제 추가")
-    public ApiResponseDto<?> postQuestion(@RequestBody QuestionPostDto questionPostDto) {
+    public ApiResponseDto<?> postQuestion(@ModelAttribute QuestionPostDto questionPostDto)
+        throws IOException {
+        questionService.postQuestion(questionPostDto);
         return ApiResponseDto.success(SuccessStatus.POST_QUESTION_SUCCESS);
     }
 }
