@@ -157,7 +157,43 @@ public class InitDb {
                 .chapter(chapter2_1_1)
                 .build();
 
+            Question question1 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.HARD)
+                .category(Category.SUBJECTIVE)
+                .answer("주관식")
+                .solution("이게 답")
+                .bookName("비상비상")
+                .page(11)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question2 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.LOW)
+                .category(Category.DESCRIPTIVE)
+                .answer("서술형")
+                .solution("이게 답??")
+                .bookName("비상비상")
+                .page(12)
+                .chapter(chapter2_1_2)
+                .build();
+
+            Question question3 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .chapter(chapter2_1_1)
+                .build();
+
             em.persist(question);
+            em.persist(question1);
+            em.persist(question2);
+            em.persist(question3);
         }
     }
 }
