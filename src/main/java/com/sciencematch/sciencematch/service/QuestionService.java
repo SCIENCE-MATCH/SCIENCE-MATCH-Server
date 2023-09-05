@@ -1,10 +1,16 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Question;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
+import com.sciencematch.sciencematch.domain.dto.question.QuestionResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
+import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.QuestionRepository;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+    private final ChapterRepository chapterRepository;
+
     private final S3Service s3Service;
 
     @Transactional
     public void postQuestion(QuestionPostDto questionPostDto) throws IOException {
         String image = s3Service.uploadImage(questionPostDto.getImage(), "question");
+        Chapter chapter = chapterRepository.getChapterById(questionPostDto.getChapterId());
         Question question = Question.builder()
             .image(image)
             .level(questionPostDto.getLevel())
@@ -27,7 +36,29 @@ public class QuestionService {
             .solution(questionPostDto.getSolution())
             .bookName(questionPostDto.getBookName())
             .page(questionPostDto.getPage())
+            .chapter(chapter)
             .build();
         questionRepository.save(question);
+    }
+
+    public List<QuestionResponseDto> getQuestions(Long chapterId) {
+        Chapter chapter = chapterRepository.getChapterById(chapterId);
+        List<Chapter> chapterList = new ArrayList<>();
+        chapterList.add(chapter);
+        findChapterList(chapter, chapterList);
+        return questionRepository.findAllByChapters(chapterList).stream().map(QuestionResponseDto::of)
+            .collect(Collectors.toList());
+    }
+
+    private void findChapterList(Chapter chapter, List<Chapter> chapterList) {
+        List<Chapter> children = chapter.getChildren();
+        if (children.size() == 0) { //자식이 없는 경우엔 자신을 리스트에 추가
+            chapterList.add(chapter);
+            return;
+        }
+        for (Chapter targetChapter : children) {
+            findChapterList(targetChapter, chapterList);
+        }
+        chapterList.add(chapter); //빠져 나오며 자기 자신을 리스트에 추가
     }
 }

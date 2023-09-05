@@ -8,11 +8,13 @@ import com.sciencematch.sciencematch.domain.dto.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
+import com.sciencematch.sciencematch.domain.dto.question.QuestionResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
 import com.sciencematch.sciencematch.service.ChapterService;
 import com.sciencematch.sciencematch.service.QuestionService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -121,5 +124,12 @@ public class AdminController {
         throws IOException {
         questionService.postQuestion(questionPostDto);
         return ApiResponseDto.success(SuccessStatus.POST_QUESTION_SUCCESS);
+    }
+
+    @GetMapping(value = "/question")
+    @Operation(summary = "문제 조회")
+    public ApiResponseDto<List<QuestionResponseDto>> getQuestions(@RequestParam @Schema(example = "9") Long chapterId){
+        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_SUCCESS,
+            questionService.getQuestions(chapterId));
     }
 }

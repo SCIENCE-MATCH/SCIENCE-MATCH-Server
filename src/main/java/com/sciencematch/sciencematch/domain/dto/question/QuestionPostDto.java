@@ -29,4 +29,7 @@ public class QuestionPostDto {
     @Schema(example = "17")
     private Integer page;
 
+    @Schema
+    private Long chapterId;
+
 }

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,9 +36,12 @@ public class Question {
 
     private Integer page;
 
+    @OneToOne
+    private Chapter chapter;
+
     @Builder
     private Question(String image, Level level, Category category, String answer, String solution,
-        String bookName, Integer page) {
+        String bookName, Integer page, Chapter chapter) {
         this.image = image;
         this.level = level;
         this.category = category;
@@ -45,6 +49,7 @@ public class Question {
         this.solution = solution;
         this.bookName = bookName;
         this.page = page;
+        this.chapter = chapter;
     }
 
 }
