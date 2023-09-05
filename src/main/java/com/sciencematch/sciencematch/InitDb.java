@@ -2,12 +2,15 @@ package com.sciencematch.sciencematch;
 
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Chapter;
+import com.sciencematch.sciencematch.domain.Question;
 import com.sciencematch.sciencematch.domain.Team;
 import com.sciencematch.sciencematch.domain.TeamStudent;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
+import com.sciencematch.sciencematch.domain.enumerate.Category;
 import com.sciencematch.sciencematch.domain.enumerate.Grade;
+import com.sciencematch.sciencematch.domain.enumerate.Level;
 import com.sciencematch.sciencematch.domain.enumerate.School;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import lombok.RequiredArgsConstructor;
@@ -142,6 +145,19 @@ public class InitDb {
             em.persist(chapter2);
             em.persist(chapter3);
             em.persist(chapter4);
+
+            Question question = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM)
+                .category(Category.MULTIPLE)
+                .answer("1")
+                .solution("1이 답")
+                .bookName("비상비상")
+                .page(10)
+                .chapter(chapter2_1_1)
+                .build();
+
+            em.persist(question);
         }
     }
 }
