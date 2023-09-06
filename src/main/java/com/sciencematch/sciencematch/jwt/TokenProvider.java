@@ -96,7 +96,7 @@ public class TokenProvider {
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
     }
 
-    private Claims parseClaims(String accessToken) {
+    public Claims parseClaims(String accessToken) {
         try {
             //parser builder를 만들고 accesstoken을 넣어 claim(본문 내용) 획득
             return Jwts.parserBuilder()

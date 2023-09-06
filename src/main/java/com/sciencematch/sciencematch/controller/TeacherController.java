@@ -85,7 +85,7 @@ public class TeacherController {
     @Operation(summary = "나의 학생들 조회") //학생 관리 뷰에서 필요한 api
     public ApiResponseDto<List<MyStudentsResponseDto>> getStudents(
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
-        return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
+        return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENTS_SUCCESS,
             teacherService.getMyStudents(user.getUsername()));
     }
 
