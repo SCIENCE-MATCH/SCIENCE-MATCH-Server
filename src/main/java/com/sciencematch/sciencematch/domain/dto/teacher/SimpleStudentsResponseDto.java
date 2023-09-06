@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AllStudentsResponseDto {
+public class SimpleStudentsResponseDto {
 
     private Long id;
     private String grade;
     private String name;
 
-    public static AllStudentsResponseDto of(Student student) {
-        return new AllStudentsResponseDto(student.getId(), student.getGrade(), student.getName());
+    public static SimpleStudentsResponseDto of(Student student) {
+        return new SimpleStudentsResponseDto(student.getId(), student.getGrade(), student.getName());
     }
 }

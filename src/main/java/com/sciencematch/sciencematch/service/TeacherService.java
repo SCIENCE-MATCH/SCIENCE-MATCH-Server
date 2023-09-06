@@ -3,10 +3,9 @@ package com.sciencematch.sciencematch.service;
 import com.sciencematch.sciencematch.controller.dto.response.MyPageDto;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.AllStudentsResponseDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
-import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.io.IOException;
 import java.util.List;
@@ -19,9 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @RequiredArgsConstructor
 public class TeacherService {
-
-    private final StudentRepository studentRepository;
-
     private final TeacherRepository teacherRepository;
     private final S3Service s3Service;
 
@@ -48,9 +44,10 @@ public class TeacherService {
         return MyPageDto.of(teacherRepository.getTeacherByEmail(email));
     }
 
-    //전체 학생 조회 (반 생성, 퀴즈 등)
-    public List<AllStudentsResponseDto> findAllStudents() {
-        return studentRepository.findAll().stream().map(AllStudentsResponseDto::of)
+    //간단 학생 조회 (반 생성, 퀴즈 등)
+    public List<SimpleStudentsResponseDto> findAllStudents(String email) {
+        return teacherRepository.getTeacherByEmail(email).getStudents().stream().map(
+                SimpleStudentsResponseDto::of)
             .collect(Collectors.toList());
     }
 
