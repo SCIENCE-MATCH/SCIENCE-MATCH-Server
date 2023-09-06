@@ -1,12 +1,12 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
-import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPatchDto;
-import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
+import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPatchDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
+import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionRequestDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionResponseDto;
@@ -127,7 +127,8 @@ public class AdminController {
 
     @PostMapping(value = "/question")
     @Operation(summary = "문제 조회")
-    public ApiResponseDto<List<QuestionResponseDto>> getQuestions(@RequestBody QuestionRequestDto questionRequestDto){
+    public ApiResponseDto<List<QuestionResponseDto>> getQuestions(
+        @RequestBody QuestionRequestDto questionRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_SUCCESS,
             questionService.getQuestions(questionRequestDto));
     }
