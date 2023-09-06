@@ -51,7 +51,7 @@ public class AdminService {
 
     //현재는 teacher의 name을 가져오도록 했지만, 나중엔 teacher의 academy를 가져와야 할 수도
     public List<AdminStudentResponseDto> getAllStudents() {
-        return studentRepository.findAll().stream().map(AdminStudentResponseDto::of)
+        return studentRepository.findAllByDeleted(false).stream().map(AdminStudentResponseDto::of)
             .collect(Collectors.toList());
     }
 

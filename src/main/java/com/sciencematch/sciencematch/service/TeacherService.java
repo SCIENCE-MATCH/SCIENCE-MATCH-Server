@@ -6,6 +6,7 @@ import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
+import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class TeacherService {
     private final TeacherRepository teacherRepository;
+    private final StudentRepository studentRepository;
     private final S3Service s3Service;
 
     //로고 변경
@@ -35,7 +37,7 @@ public class TeacherService {
     //학생 관리 조회
     public List<MyStudentsResponseDto> getMyStudents(String email) {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
-        return teacher.getStudents().stream().map(MyStudentsResponseDto::of)
+        return studentRepository.findAllByTeacher(teacher).stream().map(MyStudentsResponseDto::of)
             .collect(Collectors.toList());
     }
 
