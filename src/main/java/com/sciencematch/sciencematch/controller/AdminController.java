@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -132,4 +133,13 @@ public class AdminController {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_SUCCESS,
             questionService.getQuestions(questionRequestDto));
     }
+
+    @DeleteMapping(value = "/question")
+    @Operation(summary = "문제 삭제")
+    public ApiResponseDto<?> deleteQuestion(
+        @RequestParam Long questionId) throws IOException {
+        questionService.deleteQuestion(questionId);
+        return ApiResponseDto.success(SuccessStatus.DELETe_QUESTION_SUCCESS);
+    }
+
 }

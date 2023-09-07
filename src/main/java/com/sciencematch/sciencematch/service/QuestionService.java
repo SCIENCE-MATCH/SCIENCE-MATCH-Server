@@ -52,6 +52,12 @@ public class QuestionService {
             .collect(Collectors.toList());
     }
 
+    public void deleteQuestion(Long questionId) throws IOException {
+        Question question = questionRepository.getQuestionById(questionId);
+        s3Service.deleteFile(question.getImage());
+        questionRepository.delete(question);
+    }
+
     private void findChapterList(Chapter chapter, List<Chapter> chapterList) {
         List<Chapter> children = chapter.getChildren();
         if (children.size() == 0) { //자식이 없는 경우엔 자신을 리스트에 추가
