@@ -2,7 +2,9 @@ package com.sciencematch.sciencematch;
 
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Chapter;
+import com.sciencematch.sciencematch.domain.ConnectQuestion;
 import com.sciencematch.sciencematch.domain.Question;
+import com.sciencematch.sciencematch.domain.QuestionPaper;
 import com.sciencematch.sciencematch.domain.Team;
 import com.sciencematch.sciencematch.domain.TeamStudent;
 import com.sciencematch.sciencematch.domain.Student;
@@ -11,8 +13,11 @@ import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import com.sciencematch.sciencematch.domain.enumerate.Category;
 import com.sciencematch.sciencematch.domain.enumerate.Grade;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
+import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
 import com.sciencematch.sciencematch.domain.enumerate.School;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
+import java.util.Arrays;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -194,6 +199,46 @@ public class InitDb {
             em.persist(question1);
             em.persist(question2);
             em.persist(question3);
+
+            List<Question> questionList = Arrays.asList(question, question1, question2, question3);
+
+            QuestionPaper questionPaper = QuestionPaper.builder()
+                .school(School.HIGH)
+                .level(Level.MEDIUM)
+                .category(Category.MULTIPLE)
+                .questionTag(QuestionTag.NORMAL)
+                .title("테스트")
+                .makerName("선생님")
+                .build();
+            em.persist(questionPaper);
+
+            QuestionPaper questionPaper2 = QuestionPaper.builder()
+                .school(School.HIGH)
+                .level(Level.MEDIUM_HARD)
+                .category(Category.SUBJECTIVE)
+                .questionTag(QuestionTag.MOCK_EXAM)
+                .title("테스트22")
+                .makerName("선생님22")
+                .build();
+            em.persist(questionPaper2);
+
+            for (Question subQuestion : questionList) {
+                ConnectQuestion connectQuestion = ConnectQuestion.builder()
+                    .question(subQuestion)
+                    .questionPaper(questionPaper)
+                    .build();
+                em.persist(connectQuestion);
+            }
+
+            for (Question subQuestion : questionList) {
+                ConnectQuestion connectQuestion = ConnectQuestion.builder()
+                    .question(subQuestion)
+                    .questionPaper(questionPaper2)
+                    .build();
+                em.persist(connectQuestion);
+            }
+
+
         }
     }
 }
