@@ -39,6 +39,9 @@ public class QuestionPaper extends AuditingTimeEntity {
     @OneToMany(mappedBy = "questionPaper", fetch = FetchType.LAZY)
     private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "questionPaper", fetch = FetchType.LAZY)
+    private final List<AssignQuestions> assignQuestions = new ArrayList<>();
+
     @Builder
     public QuestionPaper(School school, Level level, Category category, QuestionTag questionTag,
         String title, String makerName) {

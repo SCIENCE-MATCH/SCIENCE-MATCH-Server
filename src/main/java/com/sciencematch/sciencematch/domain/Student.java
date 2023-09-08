@@ -47,6 +47,9 @@ public class Student extends AuditingTimeEntity {
 
     private final Boolean deleted = Boolean.FALSE;
 
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private final List<AssignQuestions> assignQuestions = new ArrayList<>();
+
     @Builder
     public Student(String grade, String name, String parentNum, String phoneNum,
         Authority authority, Teacher teacher) {
