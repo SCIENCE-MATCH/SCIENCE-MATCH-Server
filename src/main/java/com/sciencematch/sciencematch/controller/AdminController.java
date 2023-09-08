@@ -139,7 +139,7 @@ public class AdminController {
     public ApiResponseDto<?> deleteQuestion(
         @RequestParam Long questionId) throws IOException {
         questionService.deleteQuestion(questionId);
-        return ApiResponseDto.success(SuccessStatus.DELETe_QUESTION_SUCCESS);
+        return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_SUCCESS);
     }
 
 }

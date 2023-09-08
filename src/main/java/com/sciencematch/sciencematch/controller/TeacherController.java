@@ -3,6 +3,8 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
@@ -90,9 +92,19 @@ public class TeacherController {
     }
 
     @GetMapping("/students/all")
-    @Operation(summary = "간단 학생들 조회", description = "왼쪽에 간략하게 나와있는 탭 (추후 수정가능성 존재)") //학습지 등 간략하게 학생 리스트를 살펴볼 때 필요한 api
-    public ApiResponseDto<List<SimpleStudentsResponseDto>> findAllStudents(@Parameter(hidden = true) @AuthenticationPrincipal User user) {
+    @Operation(summary = "간단 학생들 조회", description = "왼쪽에 간략하게 나와있는 탭 (추후 수정가능성 존재)")
+    //학습지 등 간략하게 학생 리스트를 살펴볼 때 필요한 api
+    public ApiResponseDto<List<SimpleStudentsResponseDto>> findAllStudents(
+        @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENT_SUCCESS,
             teacherService.findAllStudents(user.getUsername()));
+    }
+
+    @GetMapping("/question-paper")
+    @Operation(summary = "문제지 조회")
+    public ApiResponseDto<List<QuestionPaperResponseDto>> getAllQuestionPaper(
+        QuestionPaperSelectDto questionPaperSelectDto) {
+        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
+            teacherService.getAllQuestionPaper(questionPaperSelectDto));
     }
 }

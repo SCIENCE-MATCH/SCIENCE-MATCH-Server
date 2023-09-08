@@ -34,7 +34,8 @@ public enum SuccessStatus {
     PATCH_CHAPTER_SUCCESS(HttpStatus.OK, "단원 목록을 성공적으로 수정하였습니다."),
     POST_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 추가하였습니다."),
     GET_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 조회하였습니다."),
-    DELETe_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 삭제하였습니다."),
+    DELETE_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 삭제하였습니다."),
+    GET_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 조회하였습니다."),
 
     /*
      * 201 created

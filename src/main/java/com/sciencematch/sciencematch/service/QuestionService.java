@@ -7,7 +7,7 @@ import com.sciencematch.sciencematch.domain.dto.question.QuestionRequestDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
-import com.sciencematch.sciencematch.infrastructure.QuestionRepository;
+import com.sciencematch.sciencematch.infrastructure.Question.QuestionRepository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

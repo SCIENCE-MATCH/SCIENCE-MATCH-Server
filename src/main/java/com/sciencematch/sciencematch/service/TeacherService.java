@@ -2,10 +2,13 @@ package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.controller.dto.response.MyPageDto;
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
+import com.sciencematch.sciencematch.infrastructure.Question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.io.IOException;
@@ -21,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class TeacherService {
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
+    private final QuestionPaperRepository questionPaperRepository;
     private final S3Service s3Service;
 
     //로고 변경
@@ -58,5 +62,10 @@ public class TeacherService {
             return teacherRepository.getTeacherByEmail(email).getTeam().stream()
                 .map(TeamResponseDto::of)
                 .collect(Collectors.toList());
+    }
+
+    public List<QuestionPaperResponseDto> getAllQuestionPaper(
+        QuestionPaperSelectDto questionPaperSelectDto) {
+        return questionPaperRepository.search(questionPaperSelectDto);
     }
 }
