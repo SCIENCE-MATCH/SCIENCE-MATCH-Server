@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
@@ -101,7 +102,7 @@ public class TeacherController {
             teacherService.findAllStudents(user.getUsername()));
     }
 
-    @GetMapping("/question-paper")
+    @PostMapping("/question-paper")
     @Operation(summary = "문제지 조회")
     public ApiResponseDto<List<QuestionPaperResponseDto>> getAllQuestionPaper(
         QuestionPaperSelectDto questionPaperSelectDto) {
@@ -111,8 +112,16 @@ public class TeacherController {
 
     @PostMapping("/student/submit")
     @Operation(summary = "단일 문제 출제")
-    public ApiResponseDto<?> submitQuestionPaper(QuestionPaperSubmitDto questionPaperSubmitDto) {
+    public ApiResponseDto<?> submitQuestionPaper(@RequestBody QuestionPaperSubmitDto questionPaperSubmitDto) {
         teacherService.submitQuestionPaper(questionPaperSubmitDto);
+        return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
+    }
+
+    @PostMapping("/student/multiple-submit")
+    @Operation(summary = "복수 문제 출제")
+    public ApiResponseDto<?> submitMultipleQuestionPaper(
+        MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {
+        teacherService.submitMultipleQuestionPaper(multipleQuestionPaperSubmitDto);
         return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
 }

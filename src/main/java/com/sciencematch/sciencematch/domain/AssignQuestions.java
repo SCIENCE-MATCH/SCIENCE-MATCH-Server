@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+//학생에게 할당한 문제
 public class AssignQuestions {
 
     @Id

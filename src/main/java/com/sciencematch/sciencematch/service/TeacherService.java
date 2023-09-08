@@ -7,6 +7,7 @@ import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
@@ -78,7 +79,7 @@ public class TeacherService {
     @Transactional
     public void submitQuestionPaper(QuestionPaperSubmitDto questionPaperSubmitDto) {
         List<Student> students = studentRepository.getStudentsByList(
-            questionPaperSubmitDto.getStudentsId());
+            questionPaperSubmitDto.getStudentIds());
         QuestionPaper questionPaper = questionPaperRepository.getQuestionPaperById(
             questionPaperSubmitDto.getQuestionPaperId());
         for (Student student : students) {
@@ -87,6 +88,24 @@ public class TeacherService {
                 .student(student)
                 .subject(questionPaper.getSubject())
                 .build());
+        }
+    }
+
+    @Transactional
+    public void submitMultipleQuestionPaper(
+        MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {
+        List<Student> students = studentRepository.getStudentsByList(
+            multipleQuestionPaperSubmitDto.getStudentIds());
+        List<QuestionPaper> papers = questionPaperRepository.getQuestionPapersByList(
+            multipleQuestionPaperSubmitDto.getQuestionPaperIds());
+        for (QuestionPaper questionPaper : papers) {
+            for (Student student : students) {
+                assignQuestionRepository.save(AssignQuestions.builder()
+                    .questionPaper(questionPaper)
+                    .student(student)
+                    .subject(questionPaper.getSubject())
+                    .build());
+            }
         }
     }
 }

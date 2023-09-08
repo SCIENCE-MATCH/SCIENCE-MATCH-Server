@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+//문제지와 문제 연결
 public class ConnectQuestion extends AuditingTimeEntity {
 
     @Id

@@ -5,11 +5,12 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class QuestionPaperSubmitDto {
+public class MultipleQuestionPaperSubmitDto {
 
-    @Schema(example = "[3, 4]", type = "array")
+    @Schema(type = "array", example = "[3, 4]")
     private List<Long> studentIds;
-    @Schema(example = "18")
-    private Long questionPaperId;
+
+    @Schema(type = "array", example = "[18, 19]")
+    private List<Long> QuestionPaperIds;
 
 }
