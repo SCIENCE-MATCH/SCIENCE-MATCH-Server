@@ -1,13 +1,18 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.controller.dto.response.MyPageDto;
+import com.sciencematch.sciencematch.domain.AssignQuestions;
+import com.sciencematch.sciencematch.domain.QuestionPaper;
+import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
+import com.sciencematch.sciencematch.infrastructure.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.Question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
@@ -25,6 +30,7 @@ public class TeacherService {
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
     private final QuestionPaperRepository questionPaperRepository;
+    private final AssignQuestionRepository assignQuestionRepository;
     private final S3Service s3Service;
 
     //로고 변경
@@ -67,5 +73,20 @@ public class TeacherService {
     public List<QuestionPaperResponseDto> getAllQuestionPaper(
         QuestionPaperSelectDto questionPaperSelectDto) {
         return questionPaperRepository.search(questionPaperSelectDto);
+    }
+
+    @Transactional
+    public void submitQuestionPaper(QuestionPaperSubmitDto questionPaperSubmitDto) {
+        List<Student> students = studentRepository.getStudentsByList(
+            questionPaperSubmitDto.getStudentsId());
+        QuestionPaper questionPaper = questionPaperRepository.getQuestionPaperById(
+            questionPaperSubmitDto.getQuestionPaperId());
+        for (Student student : students) {
+            assignQuestionRepository.save(AssignQuestions.builder()
+                .questionPaper(questionPaper)
+                .student(student)
+                .subject(questionPaper.getSubject())
+                .build());
+        }
     }
 }

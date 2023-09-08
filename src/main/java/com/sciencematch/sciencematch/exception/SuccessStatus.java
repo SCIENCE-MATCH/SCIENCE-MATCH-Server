@@ -36,6 +36,7 @@ public enum SuccessStatus {
     GET_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 조회하였습니다."),
     DELETE_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 삭제하였습니다."),
     GET_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 조회하였습니다."),
+    SUBMIT_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 출제하였습니다."),
 
     /*
      * 201 created

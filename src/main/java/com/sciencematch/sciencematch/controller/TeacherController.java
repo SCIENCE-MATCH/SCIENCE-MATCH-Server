@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
@@ -106,5 +107,12 @@ public class TeacherController {
         QuestionPaperSelectDto questionPaperSelectDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
             teacherService.getAllQuestionPaper(questionPaperSelectDto));
+    }
+
+    @PostMapping("/student/submit")
+    @Operation(summary = "단일 문제 출제")
+    public ApiResponseDto<?> submitQuestionPaper(QuestionPaperSubmitDto questionPaperSubmitDto) {
+        teacherService.submitQuestionPaper(questionPaperSubmitDto);
+        return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
 }

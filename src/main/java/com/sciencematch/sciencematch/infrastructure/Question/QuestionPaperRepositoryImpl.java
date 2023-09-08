@@ -32,7 +32,8 @@ public class QuestionPaperRepositoryImpl implements QuestionPaperRepositoryCusto
                 questionPaper.questionNum,
                 questionPaper.title,
                 questionPaper.makerName,
-                questionPaper.category))
+                questionPaper.category,
+                questionPaper.subject))
             .from(questionPaper)
             .where(schoolEq(questionPaperSelectDto.getSchool()),
                 questionTagEq(questionPaperSelectDto.getQuestionTag()),

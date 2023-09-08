@@ -15,7 +15,9 @@ public class QuestionPaperSelectDto {
     @Schema(example = "NORMAL")
     private QuestionTag questionTag;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Schema(example = "2023-09-08T05:55:58")
     private LocalDateTime start;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Schema(example = "2023-12-08T05:55:58")
     private LocalDateTime end;
 }

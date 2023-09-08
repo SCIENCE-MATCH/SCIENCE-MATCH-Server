@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.domain.enumerate.Category;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
 import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
 import com.sciencematch.sciencematch.domain.enumerate.School;
+import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -35,6 +36,7 @@ public class QuestionPaper extends AuditingTimeEntity {
     private QuestionTag questionTag;
     private String title;
     private String makerName;
+    private Subject subject;
 
     @OneToMany(mappedBy = "questionPaper", fetch = FetchType.LAZY)
     private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
@@ -44,7 +46,7 @@ public class QuestionPaper extends AuditingTimeEntity {
 
     @Builder
     public QuestionPaper(School school, Level level, Category category, QuestionTag questionTag,
-        String title, String makerName) {
+        String title, String makerName, Subject subject) {
         this.questionNum = 0;
         this.school = school;
         this.level = level;
@@ -52,6 +54,7 @@ public class QuestionPaper extends AuditingTimeEntity {
         this.questionTag = questionTag;
         this.title = title;
         this.makerName = makerName;
+        this.subject = subject;
     }
 
     public void plusQuestionNum() {

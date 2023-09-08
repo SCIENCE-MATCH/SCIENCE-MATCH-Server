@@ -32,6 +32,7 @@ public enum ErrorStatus {
      */
     NOT_FOUND_USER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다"),
     NOT_FOUND_QUESTION_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 문제입니다"),
+    NOT_FOUND_QUESTION_PAPER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 문제입니다"),
     NOT_FOUND_GROUP_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 반입니다"),
     NOT_FOUND_IMAGE_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 이미지입니다."),
     NOT_FOUND_CHAPTER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 단원입니다."),

@@ -209,6 +209,7 @@ public class InitDb {
                 .questionTag(QuestionTag.NORMAL)
                 .title("테스트")
                 .makerName("선생님")
+                .subject(Subject.PHYSICS)
                 .build();
             em.persist(questionPaper);
 
@@ -219,6 +220,7 @@ public class InitDb {
                 .questionTag(QuestionTag.MOCK_EXAM)
                 .title("테스트22")
                 .makerName("선생님22")
+                .subject(Subject.BIOLOGY)
                 .build();
             em.persist(questionPaper2);
 
