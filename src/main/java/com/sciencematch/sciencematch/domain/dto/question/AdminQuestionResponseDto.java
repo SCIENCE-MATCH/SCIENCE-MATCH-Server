@@ -6,14 +6,14 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class QuestionResponseDto {
+public class AdminQuestionResponseDto {
 
     private Long questionId;
 
     private String imageURL;
 
-    public static QuestionResponseDto of(Question question) {
-        return new QuestionResponseDto(question.getId(), question.getImage());
+    public static AdminQuestionResponseDto of(Question question) {
+        return new AdminQuestionResponseDto(question.getId(), question.getImage());
     }
 
 }
