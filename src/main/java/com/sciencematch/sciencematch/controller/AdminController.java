@@ -9,7 +9,7 @@ import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionRequestDto;
-import com.sciencematch.sciencematch.domain.dto.question.QuestionResponseDto;
+import com.sciencematch.sciencematch.domain.dto.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
 import com.sciencematch.sciencematch.service.ChapterService;
@@ -103,7 +103,7 @@ public class AdminController {
             adminService.deleteTeam(id));
     }
 
-    @PostMapping("/chapter")
+    @PostMapping("/chapter/get")
     @Operation(summary = "단원 조회")
     public ApiResponseDto<List<ChapterResponseDto>> getChapter(
         @RequestBody ChapterRequestDto chapterRequestDto) {
@@ -128,7 +128,7 @@ public class AdminController {
 
     @PostMapping(value = "/question")
     @Operation(summary = "문제 조회")
-    public ApiResponseDto<List<QuestionResponseDto>> getQuestions(
+    public ApiResponseDto<List<AdminQuestionResponseDto>> getQuestions(
         @RequestBody QuestionRequestDto questionRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_SUCCESS,
             questionService.getQuestions(questionRequestDto));
