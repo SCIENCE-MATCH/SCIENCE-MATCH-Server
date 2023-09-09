@@ -3,8 +3,6 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
@@ -100,14 +98,6 @@ public class TeacherController {
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENT_SUCCESS,
             teacherService.findAllStudents(user.getUsername()));
-    }
-
-    @PostMapping("/question-paper")
-    @Operation(summary = "문제지 조회")
-    public ApiResponseDto<List<QuestionPaperResponseDto>> getAllQuestionPaper(
-        QuestionPaperSelectDto questionPaperSelectDto) {
-        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
-            teacherService.getAllQuestionPaper(questionPaperSelectDto));
     }
 
     @PostMapping("/student/submit")

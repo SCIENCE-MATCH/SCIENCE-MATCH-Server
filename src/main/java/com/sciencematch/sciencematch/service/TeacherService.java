@@ -5,8 +5,6 @@ import com.sciencematch.sciencematch.domain.AssignQuestions;
 import com.sciencematch.sciencematch.domain.QuestionPaper;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
@@ -69,11 +67,6 @@ public class TeacherService {
             return teacherRepository.getTeacherByEmail(email).getTeam().stream()
                 .map(TeamResponseDto::of)
                 .collect(Collectors.toList());
-    }
-
-    public List<QuestionPaperResponseDto> getAllQuestionPaper(
-        QuestionPaperSelectDto questionPaperSelectDto) {
-        return questionPaperRepository.search(questionPaperSelectDto);
     }
 
     @Transactional
