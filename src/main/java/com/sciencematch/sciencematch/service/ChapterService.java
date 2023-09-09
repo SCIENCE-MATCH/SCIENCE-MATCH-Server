@@ -20,7 +20,7 @@ public class ChapterService {
 
     public List<ChapterResponseDto> getChapter(ChapterRequestDto chapterRequestDto) {
         return chapterRepository.getChapterList(chapterRequestDto.getSchool(),
-                chapterRequestDto.getGrade(), chapterRequestDto.getSubject())
+                chapterRequestDto.getSemester(), chapterRequestDto.getSubject())
             .stream().map(ChapterResponseDto::of)
             .collect(Collectors.toList());
     }
@@ -38,7 +38,7 @@ public class ChapterService {
     public void createChapter(ChapterPatchDto chapterPatchDto, ChapterPatchDetailDto chapterPatchDetailDto, Chapter id) {
         Chapter chapter = Chapter.builder()
             .school(chapterPatchDto.getSchool())
-            .grade(chapterPatchDto.getGrade())
+            .semester(chapterPatchDto.getSemester())
             .subject(chapterPatchDto.getSubject())
             .parent(id)
             .description(chapterPatchDetailDto.getDescription())

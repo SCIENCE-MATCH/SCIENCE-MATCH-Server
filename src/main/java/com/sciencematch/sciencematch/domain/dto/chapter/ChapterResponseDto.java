@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.domain.dto.chapter;
 
 import com.sciencematch.sciencematch.domain.Chapter;
-import com.sciencematch.sciencematch.domain.enumerate.Grade;
+import com.sciencematch.sciencematch.domain.enumerate.Semester;
 import com.sciencematch.sciencematch.domain.enumerate.School;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import java.util.List;
@@ -15,7 +15,7 @@ public class ChapterResponseDto {
 
     private Long id;
     private School school;
-    private Grade grade;
+    private Semester semester;
     private Subject subject;
 
     private String description;
@@ -24,7 +24,7 @@ public class ChapterResponseDto {
     private List<ChapterResponseDto> children;
 
     public static ChapterResponseDto of(Chapter chapter) {
-        return new ChapterResponseDto(chapter.getId(), chapter.getSchool(), chapter.getGrade(),
+        return new ChapterResponseDto(chapter.getId(), chapter.getSchool(), chapter.getSemester(),
             chapter.getSubject(), chapter.getDescription(), chapter.getListOrder(),
             chapter.getChildren().stream().map(ChapterResponseDto::of).collect(Collectors.toList()));
     }

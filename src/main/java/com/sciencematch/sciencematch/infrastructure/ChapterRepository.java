@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.infrastructure;
 
 import com.sciencematch.sciencematch.domain.Chapter;
-import com.sciencematch.sciencematch.domain.enumerate.Grade;
+import com.sciencematch.sciencematch.domain.enumerate.Semester;
 import com.sciencematch.sciencematch.domain.enumerate.School;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
@@ -13,8 +13,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
-    @Query("select c from Chapter c where c.parent is null and c.school = :school and c.grade = :grade and c.subject = :subject order by c.listOrder")
-    List<Chapter> getChapterList(@Param("school") School school, @Param("grade") Grade grade,
+    @Query("select c from Chapter c where c.parent is null and c.school = :school and c.semester = :semester and c.subject = :subject order by c.listOrder")
+    List<Chapter> getChapterList(@Param("school") School school, @Param("semester") Semester semester,
         @Param("subject") Subject subject);
 
     default Chapter getChapterById(Long id) {

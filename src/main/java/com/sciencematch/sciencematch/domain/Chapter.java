@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.domain.enumerate.Grade;
+import com.sciencematch.sciencematch.domain.enumerate.Semester;
 import com.sciencematch.sciencematch.domain.enumerate.School;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class Chapter {
     private Long id;
 
     private School school;
-    private Grade grade;
+    private Semester semester;
     private Subject subject;
 
     private String description;
@@ -49,9 +49,9 @@ public class Chapter {
     private final Boolean deleted = Boolean.FALSE;
 
     @Builder
-    private Chapter(School school, Grade grade, Subject subject, String description, Chapter parent) {
+    private Chapter(School school, Semester semester, Subject subject, String description, Chapter parent) {
         this.school = school;
-        this.grade = grade;
+        this.semester = semester;
         this.subject = subject;
         this.description = description;
         setParent(parent);
