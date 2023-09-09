@@ -11,7 +11,7 @@ import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.enumerate.Authority;
 import com.sciencematch.sciencematch.domain.enumerate.Category;
-import com.sciencematch.sciencematch.domain.enumerate.Grade;
+import com.sciencematch.sciencematch.domain.enumerate.Semester;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
 import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
 import com.sciencematch.sciencematch.domain.enumerate.School;
@@ -96,21 +96,21 @@ public class InitDb {
 
             Chapter chapter1 = Chapter.builder()
                 .school(School.HIGH)
-                .grade(Grade.SECOND)
+                .semester(Semester.SECOND)
                 .subject(Subject.BIOLOGY)
                 .description("1단원")
                 .build();
 
             Chapter chapter2 = Chapter.builder()
                 .school(School.HIGH)
-                .grade(Grade.SECOND)
+                .semester(Semester.SECOND)
                 .subject(Subject.BIOLOGY)
                 .description("2단원")
                 .build();
 
             Chapter chapter2_1 = Chapter.builder()
                 .school(School.HIGH)
-                .grade(Grade.SECOND)
+                .semester(Semester.SECOND)
                 .subject(Subject.BIOLOGY)
                 .parent(chapter2)
                 .description("소단원")
@@ -118,7 +118,7 @@ public class InitDb {
 
             Chapter chapter2_1_1 = Chapter.builder()
                 .school(School.HIGH)
-                .grade(Grade.SECOND)
+                .semester(Semester.SECOND)
                 .subject(Subject.BIOLOGY)
                 .parent(chapter2_1)
                 .description("개념1")
@@ -126,7 +126,7 @@ public class InitDb {
 
             Chapter chapter2_1_2 = Chapter.builder()
                 .school(School.HIGH)
-                .grade(Grade.SECOND)
+                .semester(Semester.SECOND)
                 .subject(Subject.BIOLOGY)
                 .parent(chapter2_1)
                 .description("개념2")
@@ -134,14 +134,14 @@ public class InitDb {
 
             Chapter chapter3 = Chapter.builder()
                 .school(School.HIGH)
-                .grade(Grade.SECOND)
+                .semester(Semester.SECOND)
                 .subject(Subject.BIOLOGY)
                 .description("3단원")
                 .build();
 
             Chapter chapter4 = Chapter.builder()
                 .school(School.HIGH)
-                .grade(Grade.SECOND)
+                .semester(Semester.SECOND)
                 .subject(Subject.PHYSICS)
                 .description("1단원")
                 .build();
@@ -159,6 +159,7 @@ public class InitDb {
                 .solution("1이 답")
                 .bookName("비상비상")
                 .page(10)
+                .questionTag(QuestionTag.NORMAL)
                 .chapter(chapter2_1_1)
                 .build();
 
@@ -170,6 +171,7 @@ public class InitDb {
                 .solution("이게 답")
                 .bookName("비상비상")
                 .page(11)
+                .questionTag(QuestionTag.NORMAL)
                 .chapter(chapter2_1_1)
                 .build();
 
@@ -181,6 +183,7 @@ public class InitDb {
                 .solution("이게 답??")
                 .bookName("비상비상")
                 .page(12)
+                .questionTag(QuestionTag.NORMAL)
                 .chapter(chapter2_1_2)
                 .build();
 
@@ -192,6 +195,292 @@ public class InitDb {
                 .solution("3이 답")
                 .bookName("비상비상")
                 .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question4 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question5 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question6 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question7 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question8 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question9 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question10 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question11 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question12 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question13 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question14 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question15 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question16 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question17 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question18 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question19 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question20 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question21 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_2)
+                .build();
+
+            Question question22 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question23 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_HARD)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+
+            Question question24 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+            Question question25 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+            Question question26 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM_LOW)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
+                .chapter(chapter2_1_1)
+                .build();
+            Question question27 = Question.builder()
+                .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
+                .level(Level.MEDIUM)
+                .category(Category.MULTIPLE)
+                .answer("3")
+                .solution("3이 답")
+                .bookName("비상비상")
+                .page(10)
+                .questionTag(QuestionTag.NORMAL)
                 .chapter(chapter2_1_1)
                 .build();
 
@@ -199,6 +488,31 @@ public class InitDb {
             em.persist(question1);
             em.persist(question2);
             em.persist(question3);
+            em.persist(question4);
+            em.persist(question5);
+            em.persist(question6);
+            em.persist(question7);
+            em.persist(question8);
+            em.persist(question9);
+            em.persist(question10);
+            em.persist(question11);
+            em.persist(question12);
+            em.persist(question13);
+            em.persist(question14);
+            em.persist(question15);
+            em.persist(question16);
+            em.persist(question17);
+            em.persist(question18);
+            em.persist(question19);
+            em.persist(question20);
+            em.persist(question21);
+            em.persist(question22);
+            em.persist(question23);
+            em.persist(question24);
+            em.persist(question25);
+            em.persist(question26);
+            em.persist(question27);
+
 
             List<Question> questionList = Arrays.asList(question, question1, question2, question3);
 
