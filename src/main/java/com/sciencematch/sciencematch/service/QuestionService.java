@@ -4,7 +4,7 @@ import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Question;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionRequestDto;
-import com.sciencematch.sciencematch.domain.dto.question.QuestionResponseDto;
+import com.sciencematch.sciencematch.domain.dto.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.Question.QuestionRepository;
@@ -37,18 +37,19 @@ public class QuestionService {
             .solution(questionPostDto.getSolution())
             .bookName(questionPostDto.getBookName())
             .page(questionPostDto.getPage())
+            .questionTag(questionPostDto.getQuestionTag())
             .chapter(chapter)
             .build();
         questionRepository.save(question);
     }
 
-    public List<QuestionResponseDto> getQuestions(QuestionRequestDto questionRequestDto) {
+    public List<AdminQuestionResponseDto> getQuestions(QuestionRequestDto questionRequestDto) {
         Chapter chapter = chapterRepository.getChapterById(questionRequestDto.getChapterId());
         List<Chapter> chapterList = new ArrayList<>();
         chapterList.add(chapter);
         findChapterList(chapter, chapterList);
         return questionRepository.findAllByChapters(chapterList, questionRequestDto.getLevel(),
-                questionRequestDto.getCategory()).stream().map(QuestionResponseDto::of)
+                questionRequestDto.getCategory()).stream().map(AdminQuestionResponseDto::of)
             .collect(Collectors.toList());
     }
 

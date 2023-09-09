@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.domain.dto.question;
 
 import com.sciencematch.sciencematch.domain.enumerate.Category;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
+import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,9 @@ public class QuestionPostDto {
 
     @Schema(example = "17")
     private Integer page;
+
+    @Schema(example = "NORMAL")
+    private QuestionTag questionTag;
 
     @Schema
     private Long chapterId;
