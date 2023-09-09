@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.domain;
 
 import com.sciencematch.sciencematch.domain.enumerate.Category;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
+import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -9,8 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,9 +46,12 @@ public class Question {
 
     private Integer page;
 
+    private QuestionTag questionTag;
+
     private final Boolean deleted = false;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "chapterId")
     private Chapter chapter;
 
     @OneToMany(mappedBy = "question",fetch = FetchType.LAZY)
@@ -54,7 +59,7 @@ public class Question {
 
     @Builder
     private Question(String image, Level level, Category category, String answer, String solution,
-        String bookName, Integer page, Chapter chapter) {
+        String bookName, Integer page, QuestionTag questionTag, Chapter chapter) {
         this.image = image;
         this.level = level;
         this.category = category;
@@ -62,6 +67,7 @@ public class Question {
         this.solution = solution;
         this.bookName = bookName;
         this.page = page;
+        this.questionTag = questionTag;
         this.chapter = chapter;
     }
 
