@@ -2,7 +2,6 @@ package com.sciencematch.sciencematch.domain;
 
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.domain.enumerate.Category;
-import com.sciencematch.sciencematch.domain.enumerate.Level;
 import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
 import com.sciencematch.sciencematch.domain.enumerate.School;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
@@ -31,7 +30,6 @@ public class QuestionPaper extends AuditingTimeEntity {
 
     private Integer questionNum;
     private School school;
-    private Level level;
     private Category category;
     private QuestionTag questionTag;
     private String title;
@@ -45,22 +43,16 @@ public class QuestionPaper extends AuditingTimeEntity {
     private final List<AssignQuestions> assignQuestions = new ArrayList<>();
 
     @Builder
-    public QuestionPaper(School school, Level level, Category category, QuestionTag questionTag,
+    public QuestionPaper(Integer questionNum, School school, Category category, QuestionTag questionTag,
         String title, String makerName, Subject subject) {
-        this.questionNum = 0;
+        this.questionNum = questionNum;
         this.school = school;
-        this.level = level;
         this.category = category;
         this.questionTag = questionTag;
         this.title = title;
         this.makerName = makerName;
         this.subject = subject;
     }
-
-    public void plusQuestionNum() {
-        this.questionNum += 1;
-    }
-
 
 
 }

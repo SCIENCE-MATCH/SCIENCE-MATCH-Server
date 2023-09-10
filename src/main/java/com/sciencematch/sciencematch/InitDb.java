@@ -517,8 +517,8 @@ public class InitDb {
             List<Question> questionList = Arrays.asList(question, question1, question2, question3);
 
             QuestionPaper questionPaper = QuestionPaper.builder()
+                .questionNum(4)
                 .school(School.HIGH)
-                .level(Level.MEDIUM)
                 .category(Category.MULTIPLE)
                 .questionTag(QuestionTag.NORMAL)
                 .title("테스트")
@@ -528,8 +528,8 @@ public class InitDb {
             em.persist(questionPaper);
 
             QuestionPaper questionPaper2 = QuestionPaper.builder()
+                .questionNum(4)
                 .school(School.HIGH)
-                .level(Level.MEDIUM_HARD)
                 .category(Category.SUBJECTIVE)
                 .questionTag(QuestionTag.MOCK_EXAM)
                 .title("테스트22")

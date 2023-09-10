@@ -43,7 +43,6 @@ public class ConnectQuestion extends AuditingTimeEntity {
         this.questionPaper = questionPaper;
         if (!questionPaper.getConnectQuestions().contains(this)) {
             questionPaper.getConnectQuestions().add(this);
-            questionPaper.plusQuestionNum();
         }
     }
 
