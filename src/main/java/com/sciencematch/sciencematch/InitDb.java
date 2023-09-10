@@ -152,6 +152,9 @@ public class InitDb {
             em.persist(chapter4);
 
             Question question = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM)
                 .category(Category.MULTIPLE)
@@ -164,6 +167,9 @@ public class InitDb {
                 .build();
 
             Question question1 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
                 .category(Category.SUBJECTIVE)
@@ -176,6 +182,9 @@ public class InitDb {
                 .build();
 
             Question question2 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
                 .category(Category.DESCRIPTIVE)
@@ -188,6 +197,9 @@ public class InitDb {
                 .build();
 
             Question question3 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM)
                 .category(Category.MULTIPLE)
@@ -200,6 +212,9 @@ public class InitDb {
                 .build();
 
             Question question4 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
                 .category(Category.MULTIPLE)
@@ -212,6 +227,9 @@ public class InitDb {
                 .build();
 
             Question question5 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
                 .category(Category.MULTIPLE)
@@ -224,6 +242,9 @@ public class InitDb {
                 .build();
 
             Question question6 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
                 .category(Category.MULTIPLE)
@@ -236,6 +257,9 @@ public class InitDb {
                 .build();
 
             Question question7 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
                 .category(Category.MULTIPLE)
@@ -248,6 +272,9 @@ public class InitDb {
                 .build();
 
             Question question8 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
                 .category(Category.MULTIPLE)
@@ -260,6 +287,9 @@ public class InitDb {
                 .build();
 
             Question question9 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
                 .category(Category.MULTIPLE)
@@ -272,6 +302,9 @@ public class InitDb {
                 .build();
 
             Question question10 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
                 .category(Category.MULTIPLE)
@@ -284,6 +317,9 @@ public class InitDb {
                 .build();
 
             Question question11 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
                 .category(Category.MULTIPLE)
@@ -296,6 +332,9 @@ public class InitDb {
                 .build();
 
             Question question12 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
                 .category(Category.MULTIPLE)
@@ -308,6 +347,9 @@ public class InitDb {
                 .build();
 
             Question question13 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
                 .category(Category.MULTIPLE)
@@ -320,6 +362,9 @@ public class InitDb {
                 .build();
 
             Question question14 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
                 .category(Category.MULTIPLE)
@@ -332,6 +377,9 @@ public class InitDb {
                 .build();
 
             Question question15 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
                 .category(Category.MULTIPLE)
@@ -344,6 +392,9 @@ public class InitDb {
                 .build();
 
             Question question16 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
                 .category(Category.MULTIPLE)
@@ -356,6 +407,9 @@ public class InitDb {
                 .build();
 
             Question question17 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
                 .category(Category.MULTIPLE)
@@ -368,6 +422,9 @@ public class InitDb {
                 .build();
 
             Question question18 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
                 .category(Category.MULTIPLE)
@@ -380,6 +437,9 @@ public class InitDb {
                 .build();
 
             Question question19 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
                 .category(Category.MULTIPLE)
@@ -392,6 +452,9 @@ public class InitDb {
                 .build();
 
             Question question20 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
                 .category(Category.MULTIPLE)
@@ -404,6 +467,9 @@ public class InitDb {
                 .build();
 
             Question question21 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
                 .category(Category.MULTIPLE)
@@ -416,6 +482,9 @@ public class InitDb {
                 .build();
 
             Question question22 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
                 .category(Category.MULTIPLE)
@@ -428,6 +497,9 @@ public class InitDb {
                 .build();
 
             Question question23 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
                 .category(Category.MULTIPLE)
@@ -440,6 +512,9 @@ public class InitDb {
                 .build();
 
             Question question24 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_LOW)
                 .category(Category.MULTIPLE)
@@ -451,6 +526,9 @@ public class InitDb {
                 .chapter(chapter2_1_1)
                 .build();
             Question question25 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_LOW)
                 .category(Category.MULTIPLE)
@@ -462,6 +540,9 @@ public class InitDb {
                 .chapter(chapter2_1_1)
                 .build();
             Question question26 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_LOW)
                 .category(Category.MULTIPLE)
@@ -473,6 +554,9 @@ public class InitDb {
                 .chapter(chapter2_1_1)
                 .build();
             Question question27 = Question.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST)
+                .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM)
                 .category(Category.MULTIPLE)

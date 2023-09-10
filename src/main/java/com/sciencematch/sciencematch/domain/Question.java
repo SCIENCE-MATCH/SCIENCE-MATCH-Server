@@ -3,6 +3,9 @@ package com.sciencematch.sciencematch.domain;
 import com.sciencematch.sciencematch.domain.enumerate.Category;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
 import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
+import com.sciencematch.sciencematch.domain.enumerate.School;
+import com.sciencematch.sciencematch.domain.enumerate.Semester;
+import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -27,39 +30,35 @@ import org.hibernate.annotations.Where;
 @Where(clause = "deleted=false")
 public class Question {
 
+    private final Boolean deleted = false;
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
+    private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
     @Id
     @GeneratedValue
     @Column(name = "question_id")
     private Long id;
-
+    private School school;
+    private Semester semester;
+    private Subject subject;
     private String image;
-
     private Level level;
-
     private Category category;
-
     private String answer;
-
     private String solution;
-
     private String bookName;
-
     private Integer page;
-
     private QuestionTag questionTag;
-
-    private final Boolean deleted = false;
-
     @ManyToOne
     @JoinColumn(name = "chapterId")
     private Chapter chapter;
 
-    @OneToMany(mappedBy = "question",fetch = FetchType.LAZY)
-    private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
-
     @Builder
-    private Question(String image, Level level, Category category, String answer, String solution,
+    private Question(School school, Semester semester, Subject subject, String image, Level level,
+        Category category, String answer, String solution,
         String bookName, Integer page, QuestionTag questionTag, Chapter chapter) {
+        this.school = school;
+        this.semester = semester;
+        this.subject = subject;
         this.image = image;
         this.level = level;
         this.category = category;
