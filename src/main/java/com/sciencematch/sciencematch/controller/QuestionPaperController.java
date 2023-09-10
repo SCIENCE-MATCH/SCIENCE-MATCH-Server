@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
@@ -39,5 +40,13 @@ public class QuestionPaperController {
         NormalQuestionPaperRequestDto normalQuestionPaperRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_FOR_NORMAL_SUCCESS,
             questionPaperService.getNormalQuestions(normalQuestionPaperRequestDto));
+    }
+
+    @PostMapping("/question-paper/create")
+    @Operation(summary = "문제지 생성")
+    public ApiResponseDto<?> createQuestionPaper(
+        QuestionPaperCreateDto questionPaperCreateDto) {
+        questionPaperService.createQuestionPaper(questionPaperCreateDto);
+        return ApiResponseDto.success(SuccessStatus.CREATE_QUESTION_PAPER_SUCCESS);
     }
 }

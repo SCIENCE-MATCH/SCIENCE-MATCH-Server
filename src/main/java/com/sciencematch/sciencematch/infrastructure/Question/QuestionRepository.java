@@ -17,6 +17,9 @@ public interface QuestionRepository extends JpaRepository<Question, Long>, Quest
     List<Question> findAllByChapters(@Param("chapter") List<Chapter> chapterList,
         @Param("level") Level level, @Param("category") Category category);
 
+    @Query("select q from Question q where q.id in :ids")
+    List<Question> findAllByIds(@Param("ids") List<Long> idList);
+
     default Question getQuestionById(Long id) {
         return this.findById(id).orElseThrow(
             () -> new NotFoundException(ErrorStatus.NOT_FOUND_QUESTION_EXCEPTION,

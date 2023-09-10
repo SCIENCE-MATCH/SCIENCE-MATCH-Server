@@ -1,10 +1,15 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.domain.ConnectQuestion;
+import com.sciencematch.sciencematch.domain.Question;
+import com.sciencematch.sciencematch.domain.QuestionPaper;
 import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
+import com.sciencematch.sciencematch.infrastructure.ConnectQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.Question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.Question.QuestionRepository;
 import java.util.ArrayList;
@@ -20,7 +25,9 @@ public class QuestionPaperService {
 
     private final QuestionPaperRepository questionPaperRepository;
     private final QuestionRepository questionRepository;
+    private final ConnectQuestionRepository connectQuestionRepository;
 
+    //학습지 조회
     public List<QuestionPaperResponseDto> getAllQuestionPaper(
         QuestionPaperSelectDto questionPaperSelectDto) {
         return questionPaperRepository.search(questionPaperSelectDto);
@@ -100,5 +107,29 @@ public class QuestionPaperService {
                     questionNum * 3 / 10, questionNum * 2 / 5);
         }
         return null;
+    }
+
+    public void createQuestionPaper(QuestionPaperCreateDto questionPaperCreateDto) {
+        List<Question> questions = questionRepository.findAllByIds(
+            questionPaperCreateDto.getQuestionIds());
+
+        QuestionPaper questionPaper = QuestionPaper.builder()
+            .questionNum(questionPaperCreateDto.getQuestionNum())
+            .school(questionPaperCreateDto.getSchool())
+            .category(questionPaperCreateDto.getCategory())
+            .questionTag(questionPaperCreateDto.getQuestionTag())
+            .title(questionPaperCreateDto.getTitle())
+            .makerName(questionPaperCreateDto.getMakerName())
+            .subject(questionPaperCreateDto.getSubject())
+            .build();
+        questionPaperRepository.save(questionPaper);
+        for (Question question : questions) {
+            ConnectQuestion connectQuestion = ConnectQuestion.builder()
+                .question(question)
+                .questionPaper(questionPaper)
+                .build();
+            connectQuestionRepository.save(connectQuestion);
+        }
+
     }
 }
