@@ -28,7 +28,6 @@ public class QuestionPaperRepositoryImpl implements QuestionPaperRepositoryCusto
             .select(new QQuestionPaperResponseDto(
                 questionPaper.id,
                 questionPaper.school,
-                questionPaper.level,
                 questionPaper.questionNum,
                 questionPaper.title,
                 questionPaper.makerName,
