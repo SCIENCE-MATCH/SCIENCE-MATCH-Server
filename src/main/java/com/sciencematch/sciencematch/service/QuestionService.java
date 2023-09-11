@@ -28,7 +28,6 @@ public class QuestionService {
     @Transactional
     public void postQuestion(QuestionPostDto questionPostDto) throws IOException {
         String image = s3Service.uploadImage(questionPostDto.getImage(), "question");
-        Chapter chapter = chapterRepository.getChapterById(questionPostDto.getChapterId());
         Question question = Question.builder()
             .image(image)
             .level(questionPostDto.getLevel())
@@ -38,17 +37,19 @@ public class QuestionService {
             .bookName(questionPostDto.getBookName())
             .page(questionPostDto.getPage())
             .questionTag(questionPostDto.getQuestionTag())
-            .chapter(chapter)
+            .chapterId(questionPostDto.getChapterId())
             .build();
         questionRepository.save(question);
     }
 
     public List<AdminQuestionResponseDto> getQuestions(QuestionRequestDto questionRequestDto) {
+        List<Long> chapterIds = new ArrayList<>();
+
         Chapter chapter = chapterRepository.getChapterById(questionRequestDto.getChapterId());
-        List<Chapter> chapterList = new ArrayList<>();
-        chapterList.add(chapter);
-        findChapterList(chapter, chapterList);
-        return questionRepository.findAllByChapters(chapterList, questionRequestDto.getLevel(),
+        chapterIds.add(questionRequestDto.getChapterId());
+
+        findChapterList(chapter, chapterIds);
+        return questionRepository.findAllByChapterIds(chapterIds, questionRequestDto.getLevel(),
                 questionRequestDto.getCategory()).stream().map(AdminQuestionResponseDto::of)
             .collect(Collectors.toList());
     }
@@ -59,15 +60,15 @@ public class QuestionService {
         questionRepository.delete(question);
     }
 
-    private void findChapterList(Chapter chapter, List<Chapter> chapterList) {
+    private void findChapterList(Chapter chapter, List<Long> chapterIds) {
         List<Chapter> children = chapter.getChildren();
         if (children.size() == 0) { //자식이 없는 경우엔 자신을 리스트에 추가
-            chapterList.add(chapter);
+            chapterIds.add(chapter.getId());
             return;
         }
         for (Chapter targetChapter : children) {
-            findChapterList(targetChapter, chapterList);
+            findChapterList(targetChapter, chapterIds);
         }
-        chapterList.add(chapter); //빠져 나오며 자기 자신을 리스트에 추가
+        chapterIds.add(chapter.getId()); //빠져 나오며 자기 자신을 리스트에 추가
     }
 }

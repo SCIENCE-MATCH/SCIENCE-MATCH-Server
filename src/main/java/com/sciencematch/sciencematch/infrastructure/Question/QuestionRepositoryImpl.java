@@ -37,7 +37,7 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom{
     }
 
     private BooleanExpression chaptersEq(List<Long> chaptersId) {
-        return chaptersId.size()==0 ? null : question.chapter.id.in(chaptersId);
+        return chaptersId.size()==0 ? null : question.chapterId.in(chaptersId);
     }
 
     private BooleanExpression categoryEq(Category category) {
