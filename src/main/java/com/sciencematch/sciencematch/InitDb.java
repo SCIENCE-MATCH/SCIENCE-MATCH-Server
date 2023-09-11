@@ -163,7 +163,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question1 = Question.builder()
@@ -178,7 +178,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(11)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question2 = Question.builder()
@@ -193,7 +193,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(12)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_2)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question3 = Question.builder()
@@ -208,7 +208,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question4 = Question.builder()
@@ -223,7 +223,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question5 = Question.builder()
@@ -238,7 +238,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_2.getId())
                 .build();
 
             Question question6 = Question.builder()
@@ -253,7 +253,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question7 = Question.builder()
@@ -268,7 +268,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question8 = Question.builder()
@@ -283,7 +283,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_2.getId())
                 .build();
 
             Question question9 = Question.builder()
@@ -298,7 +298,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question10 = Question.builder()
@@ -313,7 +313,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question11 = Question.builder()
@@ -328,7 +328,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question12 = Question.builder()
@@ -343,7 +343,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question13 = Question.builder()
@@ -358,7 +358,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question14 = Question.builder()
@@ -373,7 +373,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question15 = Question.builder()
@@ -388,7 +388,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question16 = Question.builder()
@@ -403,7 +403,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question17 = Question.builder()
@@ -418,7 +418,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question18 = Question.builder()
@@ -433,7 +433,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question19 = Question.builder()
@@ -448,7 +448,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question20 = Question.builder()
@@ -463,7 +463,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question21 = Question.builder()
@@ -478,7 +478,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_2)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question22 = Question.builder()
@@ -493,7 +493,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question23 = Question.builder()
@@ -508,7 +508,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             Question question24 = Question.builder()
@@ -523,7 +523,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
             Question question25 = Question.builder()
                 .school(School.HIGH)
@@ -537,7 +537,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
             Question question26 = Question.builder()
                 .school(School.HIGH)
@@ -551,7 +551,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
             Question question27 = Question.builder()
                 .school(School.HIGH)
@@ -565,7 +565,7 @@ public class InitDb {
                 .bookName("비상비상")
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
-                .chapter(chapter2_1_1)
+                .chapterId(chapter2_1_1.getId())
                 .build();
 
             em.persist(question);
