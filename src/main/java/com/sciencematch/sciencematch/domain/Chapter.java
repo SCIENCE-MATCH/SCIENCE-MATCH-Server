@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Chapter {
+public class    Chapter {
 
     @Id
     @GeneratedValue
@@ -43,13 +43,11 @@ public class Chapter {
     private Integer listOrder;
 
     @OrderBy("listOrder asc")
-    @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private final List<Chapter> children = new ArrayList<>();
 
-    private final Boolean deleted = Boolean.FALSE;
-
     @Builder
-    private Chapter(School school, Semester semester, Subject subject, String description, Chapter parent) {
+    private Chapter(School school, Semester semester, Subject subject, String description, Chapter  parent) {
         this.school = school;
         this.semester = semester;
         this.subject = subject;

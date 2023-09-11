@@ -4,7 +4,6 @@ import com.sciencematch.sciencematch.domain.enumerate.Semester;
 import com.sciencematch.sciencematch.domain.enumerate.School;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
 import lombok.Data;
 
 @Data
@@ -17,6 +16,7 @@ public class ChapterPatchDto {
     @Schema(example = "BIOLOGY")
     private Subject subject;
 
-    List<ChapterPatchDetailDto> chapterPatchDetailDtos;
+    private Long parentId;
+    private String description;
 
 }

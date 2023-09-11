@@ -13,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -29,10 +27,6 @@ import org.hibernate.annotations.Where;
 @SQLDelete(sql = "UPDATE question SET deleted = true WHERE question_id=?")
 @Where(clause = "deleted=false")
 public class Question {
-
-    private final Boolean deleted = false;
-    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
-    private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
     @Id
     @GeneratedValue
     @Column(name = "question_id")
@@ -48,14 +42,18 @@ public class Question {
     private String bookName;
     private Integer page;
     private QuestionTag questionTag;
-    @ManyToOne
-    @JoinColumn(name = "chapterId")
-    private Chapter chapter;
+
+    private Long chapterId;
+
+    private final Boolean deleted = false;
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, orphanRemoval = true)
+    private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
 
     @Builder
     private Question(School school, Semester semester, Subject subject, String image, Level level,
         Category category, String answer, String solution,
-        String bookName, Integer page, QuestionTag questionTag, Chapter chapter) {
+        String bookName, Integer page, QuestionTag questionTag, Long chapterId) {
         this.school = school;
         this.semester = semester;
         this.subject = subject;
@@ -67,7 +65,7 @@ public class Question {
         this.bookName = bookName;
         this.page = page;
         this.questionTag = questionTag;
-        this.chapter = chapter;
+        this.chapterId = chapterId;
     }
 
 }

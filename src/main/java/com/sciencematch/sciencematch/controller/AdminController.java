@@ -24,9 +24,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -111,11 +111,18 @@ public class AdminController {
             chapterService.getChapter(chapterRequestDto));
     }
 
-    @PatchMapping("/chapter")
-    @Operation(summary = "단원 수정")
-    public ApiResponseDto<String> getChapter(@RequestBody ChapterPatchDto chapterPatchDto) {
-        return ApiResponseDto.success(SuccessStatus.PATCH_CHAPTER_SUCCESS,
-            chapterService.patchChapter(chapterPatchDto));
+    @PutMapping("/chapter")
+    @Operation(summary = "단원 추가")
+    public ApiResponseDto<?> putChapter(@RequestBody ChapterPatchDto chapterPatchDto) {
+        chapterService.putChapter(chapterPatchDto);
+        return ApiResponseDto.success(SuccessStatus.PUT_CHAPTER_SUCCESS);
+    }
+
+    @DeleteMapping("/chapter")
+    @Operation(summary = "단원 삭제")
+    public ApiResponseDto<?> deleteChapter(@RequestParam Long chapterId) {
+        chapterService.deleteChapter(chapterId);
+        return ApiResponseDto.success(SuccessStatus.DELETE_CHAPTER_SUCCESS);
     }
 
     @PostMapping(value = "/question/post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
