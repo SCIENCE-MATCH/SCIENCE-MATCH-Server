@@ -63,4 +63,8 @@ public class    Chapter {
         }
     }
 
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
 }

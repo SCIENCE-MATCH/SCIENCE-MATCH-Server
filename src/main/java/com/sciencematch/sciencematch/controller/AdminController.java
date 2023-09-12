@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPatchDto;
+import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPostDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
@@ -24,9 +25,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -111,11 +112,18 @@ public class AdminController {
             chapterService.getChapter(chapterRequestDto));
     }
 
-    @PutMapping("/chapter")
+    @PostMapping("/chapter")
     @Operation(summary = "단원 추가")
-    public ApiResponseDto<?> putChapter(@RequestBody ChapterPatchDto chapterPatchDto) {
-        chapterService.putChapter(chapterPatchDto);
-        return ApiResponseDto.success(SuccessStatus.PUT_CHAPTER_SUCCESS);
+    public ApiResponseDto<?> postChapter(@RequestBody ChapterPostDto chapterPostDto) {
+        chapterService.postChapter(chapterPostDto);
+        return ApiResponseDto.success(SuccessStatus.POST_CHAPTER_SUCCESS);
+    }
+
+    @PatchMapping("/chapter")
+    @Operation(summary = "단원 수정")
+    public ApiResponseDto<?> postChapter(@RequestBody ChapterPatchDto chapterPatchDto) {
+        chapterService.patchChapter(chapterPatchDto);
+        return ApiResponseDto.success(SuccessStatus.POST_CHAPTER_SUCCESS);
     }
 
     @DeleteMapping("/chapter")

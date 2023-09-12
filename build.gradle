@@ -58,8 +58,6 @@ dependencies {
 	// S3 AWS
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
 
-//	//쿼리 보기
-//	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
 }
 
 tasks.named('test') {

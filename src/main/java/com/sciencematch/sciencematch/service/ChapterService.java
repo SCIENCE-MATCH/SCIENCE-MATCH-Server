@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPatchDto;
+import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPostDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
@@ -27,24 +28,31 @@ public class ChapterService {
     }
 
     @Transactional
-    public void putChapter(ChapterPatchDto chapterPatchDto) {
-        Long parentId = chapterPatchDto.getParentId();
+    public void patchChapter(ChapterPatchDto chapterPatchDto) {
+        Chapter chapter = chapterRepository.getChapterById(chapterPatchDto.getId());
+        chapter.changeDescription(chapterPatchDto.getDescription());
+        chapterRepository.save(chapter);
+    }
+
+    @Transactional
+    public void postChapter(ChapterPostDto chapterPostDto) {
+        Long parentId = chapterPostDto.getParentId();
         Chapter chapter;
         if (parentId != null) {
             chapter = Chapter.builder()
-                .school(chapterPatchDto.getSchool())
-                .semester(chapterPatchDto.getSemester())
-                .subject(chapterPatchDto.getSubject())
+                .school(chapterPostDto.getSchool())
+                .semester(chapterPostDto.getSemester())
+                .subject(chapterPostDto.getSubject())
                 .parent(chapterRepository.getChapterById(parentId))
-                .description(chapterPatchDto.getDescription())
+                .description(chapterPostDto.getDescription())
                 .build();
         } else {
             chapter = Chapter.builder()
-                .school(chapterPatchDto.getSchool())
-                .semester(chapterPatchDto.getSemester())
-                .subject(chapterPatchDto.getSubject())
+                .school(chapterPostDto.getSchool())
+                .semester(chapterPostDto.getSemester())
+                .subject(chapterPostDto.getSubject())
                 .parent(null)
-                .description(chapterPatchDto.getDescription())
+                .description(chapterPostDto.getDescription())
                 .build();
         }
         chapterRepository.save(chapter);
