@@ -2,12 +2,14 @@ package com.sciencematch.sciencematch.domain;
 
 import com.sciencematch.sciencematch.domain.enumerate.AssignStatus;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,6 +36,9 @@ public class AssignQuestions {
 
     private Subject subject;
     private AssignStatus assignStatus;
+
+    @OneToMany(mappedBy = "assignQuestions")
+    private List<Answer> answers;
 
     private void setStudent(Student student) {
         this.student = student;
