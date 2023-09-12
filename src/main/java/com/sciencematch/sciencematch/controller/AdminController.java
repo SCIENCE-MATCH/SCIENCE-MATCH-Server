@@ -123,7 +123,7 @@ public class AdminController {
     @Operation(summary = "단원 수정")
     public ApiResponseDto<?> postChapter(@RequestBody ChapterPatchDto chapterPatchDto) {
         chapterService.patchChapter(chapterPatchDto);
-        return ApiResponseDto.success(SuccessStatus.POST_CHAPTER_SUCCESS);
+        return ApiResponseDto.success(SuccessStatus.PATCH_CHAPTER_SUCCESS);
     }
 
     @DeleteMapping("/chapter")
