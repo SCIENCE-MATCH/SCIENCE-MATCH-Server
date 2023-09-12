@@ -35,7 +35,7 @@ public class ChapterService {
     }
 
     @Transactional
-    public void postChapter(ChapterPostDto chapterPostDto) {
+    public Long postChapter(ChapterPostDto chapterPostDto) {
         Long parentId = chapterPostDto.getParentId();
         Chapter chapter;
         if (parentId != null) {
@@ -56,6 +56,7 @@ public class ChapterService {
                 .build();
         }
         chapterRepository.save(chapter);
+        return chapter.getId();
     }
 
     @Transactional

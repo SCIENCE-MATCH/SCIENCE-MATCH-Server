@@ -8,9 +8,9 @@ import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPatchDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPostDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
+import com.sciencematch.sciencematch.domain.dto.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionRequestDto;
-import com.sciencematch.sciencematch.domain.dto.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
 import com.sciencematch.sciencematch.service.ChapterService;
@@ -114,9 +114,9 @@ public class AdminController {
 
     @PostMapping("/chapter")
     @Operation(summary = "단원 추가")
-    public ApiResponseDto<?> postChapter(@RequestBody ChapterPostDto chapterPostDto) {
-        chapterService.postChapter(chapterPostDto);
-        return ApiResponseDto.success(SuccessStatus.POST_CHAPTER_SUCCESS);
+    public ApiResponseDto<Long> postChapter(@RequestBody ChapterPostDto chapterPostDto) {
+        return ApiResponseDto.success(SuccessStatus.POST_CHAPTER_SUCCESS,
+            chapterService.postChapter(chapterPostDto));
     }
 
     @PatchMapping("/chapter")
