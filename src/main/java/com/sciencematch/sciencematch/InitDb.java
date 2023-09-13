@@ -96,21 +96,21 @@ public class InitDb {
 
             Chapter chapter1 = Chapter.builder()
                 .school(School.HIGH)
-                .semester(Semester.SECOND)
+                .semester(Semester.SECOND1)
                 .subject(Subject.BIOLOGY)
                 .description("1단원")
                 .build();
 
             Chapter chapter2 = Chapter.builder()
                 .school(School.HIGH)
-                .semester(Semester.SECOND)
+                .semester(Semester.SECOND1)
                 .subject(Subject.BIOLOGY)
                 .description("2단원")
                 .build();
 
             Chapter chapter2_1 = Chapter.builder()
                 .school(School.HIGH)
-                .semester(Semester.SECOND)
+                .semester(Semester.SECOND1)
                 .subject(Subject.BIOLOGY)
                 .parent(chapter2)
                 .description("소단원")
@@ -118,7 +118,7 @@ public class InitDb {
 
             Chapter chapter2_1_1 = Chapter.builder()
                 .school(School.HIGH)
-                .semester(Semester.SECOND)
+                .semester(Semester.SECOND1)
                 .subject(Subject.BIOLOGY)
                 .parent(chapter2_1)
                 .description("개념1")
@@ -126,7 +126,7 @@ public class InitDb {
 
             Chapter chapter2_1_2 = Chapter.builder()
                 .school(School.HIGH)
-                .semester(Semester.SECOND)
+                .semester(Semester.SECOND1)
                 .subject(Subject.BIOLOGY)
                 .parent(chapter2_1)
                 .description("개념2")
@@ -134,14 +134,14 @@ public class InitDb {
 
             Chapter chapter3 = Chapter.builder()
                 .school(School.HIGH)
-                .semester(Semester.SECOND)
+                .semester(Semester.SECOND1)
                 .subject(Subject.BIOLOGY)
                 .description("3단원")
                 .build();
 
             Chapter chapter4 = Chapter.builder()
                 .school(School.HIGH)
-                .semester(Semester.SECOND)
+                .semester(Semester.SECOND1)
                 .subject(Subject.PHYSICS)
                 .description("1단원")
                 .build();
@@ -153,7 +153,7 @@ public class InitDb {
 
             Question question = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM)
@@ -168,7 +168,7 @@ public class InitDb {
 
             Question question1 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
@@ -183,7 +183,7 @@ public class InitDb {
 
             Question question2 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
@@ -198,7 +198,7 @@ public class InitDb {
 
             Question question3 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM)
@@ -213,7 +213,7 @@ public class InitDb {
 
             Question question4 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
@@ -228,7 +228,7 @@ public class InitDb {
 
             Question question5 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
@@ -243,7 +243,7 @@ public class InitDb {
 
             Question question6 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
@@ -258,7 +258,7 @@ public class InitDb {
 
             Question question7 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
@@ -273,7 +273,7 @@ public class InitDb {
 
             Question question8 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
@@ -288,7 +288,7 @@ public class InitDb {
 
             Question question9 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
@@ -303,7 +303,7 @@ public class InitDb {
 
             Question question10 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.LOW)
@@ -318,7 +318,7 @@ public class InitDb {
 
             Question question11 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
@@ -333,7 +333,7 @@ public class InitDb {
 
             Question question12 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
@@ -348,7 +348,7 @@ public class InitDb {
 
             Question question13 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
@@ -363,7 +363,7 @@ public class InitDb {
 
             Question question14 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
@@ -378,7 +378,7 @@ public class InitDb {
 
             Question question15 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.HARD)
@@ -393,7 +393,7 @@ public class InitDb {
 
             Question question16 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
@@ -408,7 +408,7 @@ public class InitDb {
 
             Question question17 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
@@ -423,7 +423,7 @@ public class InitDb {
 
             Question question18 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
@@ -438,7 +438,7 @@ public class InitDb {
 
             Question question19 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
@@ -453,7 +453,7 @@ public class InitDb {
 
             Question question20 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
@@ -468,7 +468,7 @@ public class InitDb {
 
             Question question21 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
@@ -483,7 +483,7 @@ public class InitDb {
 
             Question question22 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
@@ -498,7 +498,7 @@ public class InitDb {
 
             Question question23 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_HARD)
@@ -513,7 +513,7 @@ public class InitDb {
 
             Question question24 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_LOW)
@@ -527,7 +527,7 @@ public class InitDb {
                 .build();
             Question question25 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_LOW)
@@ -541,7 +541,7 @@ public class InitDb {
                 .build();
             Question question26 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM_LOW)
@@ -555,7 +555,7 @@ public class InitDb {
                 .build();
             Question question27 = Question.builder()
                 .school(School.HIGH)
-                .semester(Semester.FIRST)
+                .semester(Semester.FIRST1)
                 .subject(Subject.BIOLOGY)
                 .image("https://science-match-bucket.s3.ap-northeast-2.amazonaws.com/question/image/949819a6-3530-4f04-a60f-6e01f516affe.jpg")
                 .level(Level.MEDIUM)
