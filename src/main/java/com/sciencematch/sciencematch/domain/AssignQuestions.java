@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,8 +38,8 @@ public class AssignQuestions {
     private Subject subject;
     private AssignStatus assignStatus;
 
-    @OneToMany(mappedBy = "assignQuestions")
-    private List<Answer> answers;
+    @OneToMany(mappedBy = "assignQuestions", fetch = FetchType.LAZY)
+    private List<Answer> answer;
 
     private void setStudent(Student student) {
         this.student = student;
