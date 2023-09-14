@@ -50,6 +50,9 @@ public class Student extends AuditingTimeEntity {
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private final List<AssignQuestions> assignQuestions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private final List<AssignPaperTest> assignPaperTests = new ArrayList<>();
+
     @Builder
     public Student(String grade, String name, String parentNum, String phoneNum,
         Authority authority, Teacher teacher) {
