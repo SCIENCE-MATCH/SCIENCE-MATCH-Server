@@ -2,6 +2,8 @@ package com.sciencematch.sciencematch;
 
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Chapter;
+import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
+import com.sciencematch.sciencematch.domain.paper_test.PaperTestQuestion;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
 import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
@@ -637,6 +639,25 @@ public class InitDb {
                     .build();
                 em.persist(connectQuestion);
             }
+
+            PaperTest paperTest = PaperTest.builder()
+                .school(School.HIGH)
+                .semester(Semester.SECOND1)
+                .chapterId(9L)
+                .title("그냥 테스트")
+                .build();
+
+            paperTest.addQuestions(PaperTestQuestion.builder()
+                    .question("문제1")
+                    .solution("해결")
+                    .build());
+
+            paperTest.addQuestions(PaperTestQuestion.builder()
+                .question("문제2")
+                .solution("해결2")
+                .build());
+
+            em.persist(paperTest);
 
 
         }
