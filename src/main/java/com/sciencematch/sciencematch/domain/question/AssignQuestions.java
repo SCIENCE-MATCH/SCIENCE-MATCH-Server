@@ -1,5 +1,6 @@
-package com.sciencematch.sciencematch.domain;
+package com.sciencematch.sciencematch.domain.question;
 
+import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.enumerate.AssignStatus;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
 import java.util.List;

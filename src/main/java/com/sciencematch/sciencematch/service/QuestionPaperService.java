@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.domain.ConnectQuestion;
-import com.sciencematch.sciencematch.domain.Question;
-import com.sciencematch.sciencematch.domain.QuestionPaper;
+import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
+import com.sciencematch.sciencematch.domain.question.Question;
+import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;

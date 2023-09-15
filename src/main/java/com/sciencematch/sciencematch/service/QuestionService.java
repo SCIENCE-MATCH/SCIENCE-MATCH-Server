@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.domain.Chapter;
-import com.sciencematch.sciencematch.domain.Question;
+import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
 import com.sciencematch.sciencematch.domain.dto.question.QuestionRequestDto;
 import com.sciencematch.sciencematch.domain.dto.question.AdminQuestionResponseDto;

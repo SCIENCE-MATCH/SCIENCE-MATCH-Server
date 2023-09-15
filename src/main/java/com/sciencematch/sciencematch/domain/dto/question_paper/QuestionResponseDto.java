@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.domain.dto.question_paper;
 
 import com.querydsl.core.annotations.QueryProjection;
-import com.sciencematch.sciencematch.domain.Question;
+import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.enumerate.Category;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
 import lombok.Data;

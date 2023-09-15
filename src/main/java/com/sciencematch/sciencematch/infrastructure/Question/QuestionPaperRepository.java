@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.infrastructure.Question;
 
-import com.sciencematch.sciencematch.domain.QuestionPaper;
+import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.NotFoundException;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.infrastructure.Question;
 
-import com.sciencematch.sciencematch.domain.Question;
+import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.enumerate.Category;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
 import com.sciencematch.sciencematch.exception.ErrorStatus;

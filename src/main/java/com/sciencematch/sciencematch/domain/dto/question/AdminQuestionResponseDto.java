@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.domain.dto.question;
 
-import com.sciencematch.sciencematch.domain.Question;
+import com.sciencematch.sciencematch.domain.question.Question;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.domain;
+package com.sciencematch.sciencematch.domain.question;
 
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
