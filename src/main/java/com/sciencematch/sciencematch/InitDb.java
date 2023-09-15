@@ -2,9 +2,9 @@ package com.sciencematch.sciencematch;
 
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Chapter;
-import com.sciencematch.sciencematch.domain.ConnectQuestion;
-import com.sciencematch.sciencematch.domain.Question;
-import com.sciencematch.sciencematch.domain.QuestionPaper;
+import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
+import com.sciencematch.sciencematch.domain.question.Question;
+import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import com.sciencematch.sciencematch.domain.Team;
 import com.sciencematch.sciencematch.domain.TeamStudent;
 import com.sciencematch.sciencematch.domain.Student;

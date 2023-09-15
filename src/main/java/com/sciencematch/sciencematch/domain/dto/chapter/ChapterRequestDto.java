@@ -11,7 +11,7 @@ public class ChapterRequestDto {
 
     @Schema(example = "HIGH")
     private School school;
-    @Schema(example = "SECOND")
+    @Schema(example = "SECOND1")
     private Semester semester;
     @Schema(example = "BIOLOGY")
     private Subject subject;

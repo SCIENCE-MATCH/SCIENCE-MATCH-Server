@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.controller.dto.response.MyPageDto;
-import com.sciencematch.sciencematch.domain.AssignQuestions;
-import com.sciencematch.sciencematch.domain.QuestionPaper;
+import com.sciencematch.sciencematch.domain.question.AssignQuestions;
+import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
