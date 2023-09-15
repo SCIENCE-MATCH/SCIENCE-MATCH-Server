@@ -38,14 +38,17 @@ public enum SuccessStatus {
     GET_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 조회하였습니다."),
     DELETE_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 삭제하였습니다."),
     GET_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 조회하였습니다."),
+    GET_PAPER_TEST_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 조회하였습니다."),
     GET_QUESTION_FOR_NORMAL_SUCCESS(HttpStatus.OK, "단원 유형별 문제를 성공적으로 조회하였습니다."),
     SUBMIT_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 출제하였습니다."),
+    SUBMIT_PAPER_TEST_SUCCESS(HttpStatus.OK, "일대일 질문을 성공적으로 출제하였습니다."),
 
     /*
      * 201 created
      */
     SIGNUP_SUCCESS(HttpStatus.CREATED, "회원가입이 완료되었습니다."),
     CREATE_QUESTION_PAPER_SUCCESS(HttpStatus.CREATED, "문제지를 성공적으로 생성하였습니다."),
+    CREATE_PAPER_TEST_SUCCESS(HttpStatus.CREATED, "일대일 질문을 성공적으로 생성하였습니다."),
     CREATE_STUDENT_SUCCESS(HttpStatus.CREATED, "학생을 성공적으로 생성하였습니다."),
     CREATE_GROUP_SUCCESS(HttpStatus.CREATED, "반을 성공적으로 생성하였습니다."),
     ;

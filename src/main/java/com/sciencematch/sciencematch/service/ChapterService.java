@@ -6,7 +6,7 @@ import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPostDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
-import com.sciencematch.sciencematch.infrastructure.Question.QuestionRepository;
+import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
