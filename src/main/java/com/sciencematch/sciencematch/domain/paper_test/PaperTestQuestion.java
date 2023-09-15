@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.domain;
+package com.sciencematch.sciencematch.domain.paper_test;
 
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
@@ -23,15 +23,19 @@ public class PaperTestQuestion extends AuditingTimeEntity {
     private Long id;
 
     private String question;
-    private String answer;
+    private String solution;
 
     @ManyToOne
     @JoinColumn(name = "paper_test_id")
     private PaperTest paperTest;
 
     @Builder
-    public PaperTestQuestion(String question, String answer) {
+    public PaperTestQuestion(String question, String solution) {
         this.question = question;
-        this.answer = answer;
+        this.solution = solution;
+    }
+
+    public void setPaperTest(PaperTest paperTest) {
+        this.paperTest = paperTest;
     }
 }
