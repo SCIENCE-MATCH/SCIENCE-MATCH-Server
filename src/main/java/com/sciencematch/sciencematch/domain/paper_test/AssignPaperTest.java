@@ -4,12 +4,15 @@ import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.domain.enumerate.AssignStatus;
 import com.sciencematch.sciencematch.domain.enumerate.Subject;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,6 +38,9 @@ public class AssignPaperTest extends AuditingTimeEntity {
 
     private Subject subject;
     private AssignStatus assignStatus;
+
+    @OneToMany(mappedBy = "assignPaperTest")
+    private final List<PaperTestAnswer> paperTestAnswer = new ArrayList<>();
 
     private void setStudent(Student student) {
         this.student = student;
