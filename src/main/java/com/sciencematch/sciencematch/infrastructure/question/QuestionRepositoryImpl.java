@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.infrastructure.question;
 
-import static com.sciencematch.sciencematch.domain.QQuestion.question;
+import static com.sciencematch.sciencematch.domain.question.QQuestion.question;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;

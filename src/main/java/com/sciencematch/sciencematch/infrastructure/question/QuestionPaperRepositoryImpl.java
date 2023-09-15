@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-import static com.sciencematch.sciencematch.domain.QQuestionPaper.questionPaper;
+import static com.sciencematch.sciencematch.domain.question.QQuestionPaper.questionPaper;
 
 public class QuestionPaperRepositoryImpl implements QuestionPaperRepositoryCustom{
 
@@ -32,7 +32,8 @@ public class QuestionPaperRepositoryImpl implements QuestionPaperRepositoryCusto
                 questionPaper.title,
                 questionPaper.makerName,
                 questionPaper.category,
-                questionPaper.subject))
+                questionPaper.subject,
+                questionPaper.createAt))
             .from(questionPaper)
             .where(schoolEq(preLessonSelectDto.getSchool()),
                 questionTagEq(preLessonSelectDto.getQuestionTag()),
