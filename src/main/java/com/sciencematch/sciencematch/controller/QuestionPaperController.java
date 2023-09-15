@@ -6,6 +6,8 @@ import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCrea
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.QuestionPaperService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,5 +51,20 @@ public class QuestionPaperController {
         QuestionPaperCreateDto questionPaperCreateDto) {
         questionPaperService.createQuestionPaper(questionPaperCreateDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_QUESTION_PAPER_SUCCESS);
+    }
+
+    @PostMapping("/student/submit")
+    @Operation(summary = "단일 문제 출제")
+    public ApiResponseDto<?> submitQuestionPaper(@RequestBody QuestionPaperSubmitDto questionPaperSubmitDto) {
+        questionPaperService.submitQuestionPaper(questionPaperSubmitDto);
+        return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
+    }
+
+    @PostMapping("/student/multiple-submit")
+    @Operation(summary = "복수 문제 출제")
+    public ApiResponseDto<?> submitMultipleQuestionPaper(
+        MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {
+        questionPaperService.submitMultipleQuestionPaper(multipleQuestionPaperSubmitDto);
+        return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
 }

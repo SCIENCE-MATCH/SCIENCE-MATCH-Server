@@ -1,18 +1,11 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.controller.dto.response.MyPageDto;
-import com.sciencematch.sciencematch.domain.question.AssignQuestions;
-import com.sciencematch.sciencematch.domain.question.QuestionPaper;
-import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
-import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
-import com.sciencematch.sciencematch.infrastructure.AssignQuestionRepository;
-import com.sciencematch.sciencematch.infrastructure.Question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.io.IOException;
@@ -28,8 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class TeacherService {
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
-    private final QuestionPaperRepository questionPaperRepository;
-    private final AssignQuestionRepository assignQuestionRepository;
     private final S3Service s3Service;
 
     //로고 변경
@@ -67,38 +58,5 @@ public class TeacherService {
             return teacherRepository.getTeacherByEmail(email).getTeam().stream()
                 .map(TeamResponseDto::of)
                 .collect(Collectors.toList());
-    }
-
-    @Transactional
-    public void submitQuestionPaper(QuestionPaperSubmitDto questionPaperSubmitDto) {
-        List<Student> students = studentRepository.getStudentsByList(
-            questionPaperSubmitDto.getStudentIds());
-        QuestionPaper questionPaper = questionPaperRepository.getQuestionPaperById(
-            questionPaperSubmitDto.getQuestionPaperId());
-        for (Student student : students) {
-            assignQuestionRepository.save(AssignQuestions.builder()
-                .questionPaper(questionPaper)
-                .student(student)
-                .subject(questionPaper.getSubject())
-                .build());
-        }
-    }
-
-    @Transactional
-    public void submitMultipleQuestionPaper(
-        MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {
-        List<Student> students = studentRepository.getStudentsByList(
-            multipleQuestionPaperSubmitDto.getStudentIds());
-        List<QuestionPaper> papers = questionPaperRepository.getQuestionPapersByList(
-            multipleQuestionPaperSubmitDto.getQuestionPaperIds());
-        for (QuestionPaper questionPaper : papers) {
-            for (Student student : students) {
-                assignQuestionRepository.save(AssignQuestions.builder()
-                    .questionPaper(questionPaper)
-                    .student(student)
-                    .subject(questionPaper.getSubject())
-                    .build());
-            }
-        }
     }
 }

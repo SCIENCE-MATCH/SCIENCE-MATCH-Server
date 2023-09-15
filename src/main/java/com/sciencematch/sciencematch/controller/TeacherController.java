@@ -3,8 +3,6 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
 import com.sciencematch.sciencematch.controller.dto.response.StudentResponseDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
@@ -98,20 +96,5 @@ public class TeacherController {
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENT_SUCCESS,
             teacherService.findAllStudents(user.getUsername()));
-    }
-
-    @PostMapping("/student/submit")
-    @Operation(summary = "단일 문제 출제")
-    public ApiResponseDto<?> submitQuestionPaper(@RequestBody QuestionPaperSubmitDto questionPaperSubmitDto) {
-        teacherService.submitQuestionPaper(questionPaperSubmitDto);
-        return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
-    }
-
-    @PostMapping("/student/multiple-submit")
-    @Operation(summary = "복수 문제 출제")
-    public ApiResponseDto<?> submitMultipleQuestionPaper(
-        MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {
-        teacherService.submitMultipleQuestionPaper(multipleQuestionPaperSubmitDto);
-        return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
 }

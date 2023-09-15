@@ -1,5 +1,9 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.domain.Student;
+import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
 import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
@@ -9,15 +13,18 @@ import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResp
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
+import com.sciencematch.sciencematch.infrastructure.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.ConnectQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.Question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.Question.QuestionRepository;
+import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +33,8 @@ public class QuestionPaperService {
     private final QuestionPaperRepository questionPaperRepository;
     private final QuestionRepository questionRepository;
     private final ConnectQuestionRepository connectQuestionRepository;
+    private final AssignQuestionRepository assignQuestionRepository;
+    private final StudentRepository studentRepository;
 
     //학습지 조회
     public List<QuestionPaperResponseDto> getAllQuestionPaper(
@@ -131,5 +140,38 @@ public class QuestionPaperService {
             connectQuestionRepository.save(connectQuestion);
         }
 
+    }
+
+    @Transactional
+    public void submitQuestionPaper(QuestionPaperSubmitDto questionPaperSubmitDto) {
+        List<Student> students = studentRepository.getStudentsByList(
+            questionPaperSubmitDto.getStudentIds());
+        QuestionPaper questionPaper = questionPaperRepository.getQuestionPaperById(
+            questionPaperSubmitDto.getQuestionPaperId());
+        for (Student student : students) {
+            assignQuestionRepository.save(AssignQuestions.builder()
+                .questionPaper(questionPaper)
+                .student(student)
+                .subject(questionPaper.getSubject())
+                .build());
+        }
+    }
+
+    @Transactional
+    public void submitMultipleQuestionPaper(
+        MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {
+        List<Student> students = studentRepository.getStudentsByList(
+            multipleQuestionPaperSubmitDto.getStudentIds());
+        List<QuestionPaper> papers = questionPaperRepository.getQuestionPapersByList(
+            multipleQuestionPaperSubmitDto.getQuestionPaperIds());
+        for (QuestionPaper questionPaper : papers) {
+            for (Student student : students) {
+                assignQuestionRepository.save(AssignQuestions.builder()
+                    .questionPaper(questionPaper)
+                    .student(student)
+                    .subject(questionPaper.getSubject())
+                    .build());
+            }
+        }
     }
 }
