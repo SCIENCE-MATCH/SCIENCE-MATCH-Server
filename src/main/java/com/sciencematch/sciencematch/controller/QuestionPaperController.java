@@ -4,7 +4,7 @@ import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.PreLessonSelectDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
@@ -32,9 +32,9 @@ public class QuestionPaperController {
     @PostMapping("/question-paper")
     @Operation(summary = "문제지 조회")
     public ApiResponseDto<List<QuestionPaperResponseDto>> getAllQuestionPaper(
-        PreLessonSelectDto preLessonSelectDto) {
+        QuestionPaperSelectDto questionPaperSelectDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
-            questionPaperService.getAllQuestionPaper(preLessonSelectDto));
+            questionPaperService.getAllQuestionPaper(questionPaperSelectDto));
     }
 
     @PostMapping("/questions/normal")

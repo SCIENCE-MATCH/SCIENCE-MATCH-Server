@@ -4,7 +4,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.PreLessonSelectDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
 import com.sciencematch.sciencematch.domain.enumerate.School;
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ public class QuestionPaperRepositoryImpl implements QuestionPaperRepositoryCusto
 
     @Override
     //학년, 학습지 유형, 생성 기간
-    public List<QuestionPaperResponseDto> search(PreLessonSelectDto preLessonSelectDto) {
+    public List<QuestionPaperResponseDto> search(QuestionPaperSelectDto questionPaperSelectDto) {
         return queryFactory
             .select(new QQuestionPaperResponseDto(
                 questionPaper.id,
@@ -35,10 +35,10 @@ public class QuestionPaperRepositoryImpl implements QuestionPaperRepositoryCusto
                 questionPaper.subject,
                 questionPaper.createAt))
             .from(questionPaper)
-            .where(schoolEq(preLessonSelectDto.getSchool()),
-                questionTagEq(preLessonSelectDto.getQuestionTag()),
-                dateGoe(preLessonSelectDto.getStart()),
-                dateLoe(preLessonSelectDto.getEnd()))
+            .where(schoolEq(questionPaperSelectDto.getSchool()),
+                questionTagEq(questionPaperSelectDto.getQuestionTag()),
+                dateGoe(questionPaperSelectDto.getStart()),
+                dateLoe(questionPaperSelectDto.getEnd()))
             .fetch();
     }
     private BooleanExpression schoolEq(School school) {
