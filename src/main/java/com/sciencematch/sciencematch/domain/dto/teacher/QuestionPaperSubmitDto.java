@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class QuestionPaperSubmitDto {
 
-    @Schema(example = "[3, 4]", type = "array")
-    private List<Long> studentIds;
     @Schema(example = "18")
     private Long questionPaperId;
+    @Schema(example = "[3, 4]", type = "array")
+    private List<Long> studentIds;
 
 }

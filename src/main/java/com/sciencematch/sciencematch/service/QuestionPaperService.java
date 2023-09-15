@@ -10,13 +10,13 @@ import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.PreLessonSelectDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.domain.enumerate.Level;
 import com.sciencematch.sciencematch.infrastructure.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.ConnectQuestionRepository;
-import com.sciencematch.sciencematch.infrastructure.Question.QuestionPaperRepository;
-import com.sciencematch.sciencematch.infrastructure.Question.QuestionRepository;
+import com.sciencematch.sciencematch.infrastructure.question.QuestionPaperRepository;
+import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,8 +38,8 @@ public class QuestionPaperService {
 
     //학습지 조회
     public List<QuestionPaperResponseDto> getAllQuestionPaper(
-        QuestionPaperSelectDto questionPaperSelectDto) {
-        return questionPaperRepository.search(questionPaperSelectDto);
+        PreLessonSelectDto preLessonSelectDto) {
+        return questionPaperRepository.search(preLessonSelectDto);
     }
 
     //단원 유형별 자동 생성된 학습지 반환

@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.infrastructure.Question;
+package com.sciencematch.sciencematch.infrastructure.question;
 
 import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.enumerate.Category;

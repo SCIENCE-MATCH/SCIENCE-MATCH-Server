@@ -4,7 +4,7 @@ import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.domain.dto.question_paper.PreLessonSelectDto;
 import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
@@ -32,9 +32,9 @@ public class QuestionPaperController {
     @PostMapping("/question-paper")
     @Operation(summary = "문제지 조회")
     public ApiResponseDto<List<QuestionPaperResponseDto>> getAllQuestionPaper(
-        QuestionPaperSelectDto questionPaperSelectDto) {
+        PreLessonSelectDto preLessonSelectDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
-            questionPaperService.getAllQuestionPaper(questionPaperSelectDto));
+            questionPaperService.getAllQuestionPaper(preLessonSelectDto));
     }
 
     @PostMapping("/questions/normal")
@@ -53,14 +53,14 @@ public class QuestionPaperController {
         return ApiResponseDto.success(SuccessStatus.CREATE_QUESTION_PAPER_SUCCESS);
     }
 
-    @PostMapping("/student/submit")
+    @PostMapping("/question-paper/submit")
     @Operation(summary = "단일 문제 출제")
     public ApiResponseDto<?> submitQuestionPaper(@RequestBody QuestionPaperSubmitDto questionPaperSubmitDto) {
         questionPaperService.submitQuestionPaper(questionPaperSubmitDto);
         return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
 
-    @PostMapping("/student/multiple-submit")
+    @PostMapping("/question-paper/multiple-submit")
     @Operation(summary = "복수 문제 출제")
     public ApiResponseDto<?> submitMultipleQuestionPaper(
         MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {

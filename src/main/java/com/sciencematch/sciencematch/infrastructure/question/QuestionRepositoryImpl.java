@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.infrastructure.Question;
+package com.sciencematch.sciencematch.infrastructure.question;
 
 import static com.sciencematch.sciencematch.domain.QQuestion.question;
 
