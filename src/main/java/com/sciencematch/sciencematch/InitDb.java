@@ -2,8 +2,10 @@ package com.sciencematch.sciencematch;
 
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Chapter;
+import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTestQuestion;
+import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
 import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
@@ -659,6 +661,35 @@ public class InitDb {
 
             em.persist(paperTest);
 
+            AssignQuestions assignQuestions1 = AssignQuestions.builder()
+                .questionPaper(questionPaper)
+                .student(student1)
+                .subject(questionPaper.getSubject())
+                .build();
+
+            AssignQuestions assignQuestions2 = AssignQuestions.builder()
+                .questionPaper(questionPaper2)
+                .student(student1)
+                .subject(questionPaper2.getSubject())
+                .build();
+
+            em.persist(assignQuestions1);
+            em.persist(assignQuestions2);
+
+            AssignPaperTest paperTest1 = AssignPaperTest.builder()
+                .paperTest(paperTest)
+                .student(student1)
+                .subject(paperTest.getSubject())
+                .build();
+
+            AssignPaperTest paperTest2 = AssignPaperTest.builder()
+                .paperTest(paperTest)
+                .student(student1)
+                .subject(paperTest.getSubject())
+                .build();
+
+            em.persist(paperTest1);
+            em.persist(paperTest2);
 
         }
     }
