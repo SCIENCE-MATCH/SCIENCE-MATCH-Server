@@ -4,6 +4,7 @@ package com.sciencematch.sciencematch.domain;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,11 +24,11 @@ public class TeamStudent extends AuditingTimeEntity {
     @Column(name = "team_student_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private Student student;
 

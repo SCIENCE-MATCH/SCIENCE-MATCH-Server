@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.domain.question;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,11 +24,11 @@ public class ConnectQuestion extends AuditingTimeEntity {
     @Column(name = "connect_question_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_paper_id")
     private QuestionPaper questionPaper;
 

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -36,10 +35,10 @@ public class QuestionPaper extends AuditingTimeEntity {
     private String makerName;
     private Subject subject;
 
-    @OneToMany(mappedBy = "questionPaper", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "questionPaper")
     private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "questionPaper", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "questionPaper")
     private final List<AssignQuestions> assignQuestions = new ArrayList<>();
 
     @Builder

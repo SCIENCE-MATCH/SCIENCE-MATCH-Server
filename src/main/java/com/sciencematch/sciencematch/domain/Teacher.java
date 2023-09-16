@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,10 +40,10 @@ public class Teacher extends AuditingTimeEntity {
 
     private String logo;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.PERSIST)
     private final List<Student> students = new ArrayList<>();
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.PERSIST)
     private final List<Team> team = new ArrayList<>();
 
     private String phoneNum;

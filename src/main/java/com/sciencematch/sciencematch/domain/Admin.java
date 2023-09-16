@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -32,7 +31,7 @@ public class Admin {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     private List<Teacher> waitingTeacher;
 
     @Builder

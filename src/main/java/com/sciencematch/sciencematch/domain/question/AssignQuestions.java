@@ -28,18 +28,18 @@ public class AssignQuestions {
     @Column(name = "assign_questions_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_paper_id")
     private QuestionPaper questionPaper;
 
     private Subject subject;
     private AssignStatus assignStatus;
 
-    @OneToMany(mappedBy = "assignQuestions", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "assignQuestions")
     private List<Answer> answer;
 
     private void setStudent(Student student) {

@@ -52,7 +52,7 @@ public class Student extends AuditingTimeEntity {
     @OneToMany(mappedBy = "student")
     private final List<AssignQuestions> assignQuestions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student")
     private final List<AssignPaperTest> assignPaperTests = new ArrayList<>();
 
     @Builder

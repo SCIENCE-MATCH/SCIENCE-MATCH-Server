@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.domain.question;
 import com.sciencematch.sciencematch.Enums.Category;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,7 +31,7 @@ public class Answer {
     private Long chapterId;
     private Boolean rightAnswer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assign_questions_id")
     private AssignQuestions assignQuestions;
 
