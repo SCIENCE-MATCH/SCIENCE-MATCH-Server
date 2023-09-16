@@ -179,11 +179,20 @@ public class QuestionPaperService {
         List<QuestionPaper> papers = questionPaperRepository.getQuestionPapersByList(
             multipleQuestionPaperSubmitDto.getQuestionPaperIds());
         for (QuestionPaper questionPaper : papers) {
+            List<Answer> answerList = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
+                    questionPaper).stream()
+                .map(cq -> Answer.builder()
+                    .solution(cq.getQuestion().getSolution())
+                    .solutionImg(cq.getQuestion().getSolutionImg())
+                    .category(cq.getQuestion().getCategory())
+                    .chapterId(cq.getQuestion().getChapterId())
+                    .build()).collect(Collectors.toList());
             for (Student student : students) {
                 assignQuestionRepository.save(AssignQuestions.builder()
                     .questionPaper(questionPaper)
                     .student(student)
                     .subject(questionPaper.getSubject())
+                    .answer(answerList)
                     .build());
             }
         }
