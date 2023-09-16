@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.service;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.DTO.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.QuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
 import com.sciencematch.sciencematch.domain.question.Question;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -148,12 +150,24 @@ public class QuestionPaperService {
             questionPaperSubmitDto.getStudentIds());
         QuestionPaper questionPaper = questionPaperRepository.getQuestionPaperById(
             questionPaperSubmitDto.getQuestionPaperId());
+        //해설 및 카테고리 등 기본 세팅이 되어있는 answer 객체 도입 (추후 답안 문제의 타입이나 정답 검사등에 사용)
+        List<Answer> answerList = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
+                questionPaper).stream()
+            .map(cq -> Answer.builder()
+                .solution(cq.getQuestion().getSolution())
+                .solutionImg(cq.getQuestion().getSolutionImg())
+                .category(cq.getQuestion().getCategory())
+                .chapterId(cq.getQuestion().getChapterId())
+                .build()).collect(Collectors.toList());
+        //학생마다 문제 할당
         for (Student student : students) {
-            assignQuestionRepository.save(AssignQuestions.builder()
+            AssignQuestions assignQuestions = AssignQuestions.builder()
                 .questionPaper(questionPaper)
                 .student(student)
                 .subject(questionPaper.getSubject())
-                .build());
+                .answer(answerList)
+                .build();
+            assignQuestionRepository.save(assignQuestions);
         }
     }
 

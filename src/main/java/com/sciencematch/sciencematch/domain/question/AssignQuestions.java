@@ -57,10 +57,11 @@ public class AssignQuestions {
     }
 
     @Builder
-    public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject) {
+    public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject, List<Answer> answer) {
         setStudent(student);
         setQuestionPaper(questionPaper);
         this.subject = subject;
         this.assignStatus = AssignStatus.WAITING;
+        this.answer = answer;
     }
 }
