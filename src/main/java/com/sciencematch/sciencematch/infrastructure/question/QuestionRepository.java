@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.infrastructure.question;
 
 import com.sciencematch.sciencematch.domain.question.Question;
-import com.sciencematch.sciencematch.domain.enumerate.Category;
-import com.sciencematch.sciencematch.domain.enumerate.Level;
+import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.NotFoundException;
 import java.util.List;

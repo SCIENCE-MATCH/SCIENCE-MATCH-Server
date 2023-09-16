@@ -4,11 +4,11 @@ import static com.sciencematch.sciencematch.domain.question.QQuestion.question;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QQuestionResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
-import com.sciencematch.sciencematch.domain.enumerate.Category;
-import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
+import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QQuestionResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.Enums.QuestionTag;
 import java.util.List;
 import javax.persistence.EntityManager;
 

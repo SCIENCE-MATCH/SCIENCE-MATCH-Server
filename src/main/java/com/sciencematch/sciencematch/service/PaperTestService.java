@@ -1,15 +1,15 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.domain.Student;
-import com.sciencematch.sciencematch.domain.dto.paper_test.MultiplePaperTestSubmitDto;
-import com.sciencematch.sciencematch.domain.dto.paper_test.PaperTestResponseDto;
-import com.sciencematch.sciencematch.domain.dto.paper_test.PaperTestSelectDto;
-import com.sciencematch.sciencematch.domain.dto.paper_test.PaperTestSubmitDto;
+import com.sciencematch.sciencematch.DTO.paper_test.MultiplePaperTestSubmitDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSubmitDto;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTestQuestion;
-import com.sciencematch.sciencematch.domain.dto.paper_test.PaperTestQuestionDto;
-import com.sciencematch.sciencematch.domain.dto.paper_test.PaperTestRequestDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestQuestionDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.infrastructure.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;

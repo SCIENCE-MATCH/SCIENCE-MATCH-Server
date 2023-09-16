@@ -2,11 +2,11 @@ package com.sciencematch.sciencematch.infrastructure.question;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QQuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
-import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
-import com.sciencematch.sciencematch.domain.enumerate.School;
+import com.sciencematch.sciencematch.DTO.question_paper.QQuestionPaperResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.Enums.QuestionTag;
+import com.sciencematch.sciencematch.Enums.School;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityManager;

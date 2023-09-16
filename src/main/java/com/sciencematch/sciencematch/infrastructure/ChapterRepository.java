@@ -1,9 +1,9 @@
 package com.sciencematch.sciencematch.infrastructure;
 
 import com.sciencematch.sciencematch.domain.Chapter;
-import com.sciencematch.sciencematch.domain.enumerate.Semester;
-import com.sciencematch.sciencematch.domain.enumerate.School;
-import com.sciencematch.sciencematch.domain.enumerate.Subject;
+import com.sciencematch.sciencematch.Enums.Semester;
+import com.sciencematch.sciencematch.Enums.School;
+import com.sciencematch.sciencematch.Enums.Subject;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import java.util.List;

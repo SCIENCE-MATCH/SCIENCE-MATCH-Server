@@ -1,10 +1,10 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.controller.dto.response.MyPageDto;
+import com.sciencematch.sciencematch.DTO.auth.response.MyPageDto;
 import com.sciencematch.sciencematch.domain.Teacher;
-import com.sciencematch.sciencematch.domain.dto.team.TeamResponseDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.SimpleStudentsResponseDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.MyStudentsResponseDto;
+import com.sciencematch.sciencematch.DTO.team.TeamResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.SimpleStudentsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;

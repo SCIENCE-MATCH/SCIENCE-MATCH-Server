@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.domain.question;
 
-import com.sciencematch.sciencematch.domain.enumerate.Category;
+import com.sciencematch.sciencematch.Enums.Category;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

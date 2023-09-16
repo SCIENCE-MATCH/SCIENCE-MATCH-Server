@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.jwt;
 
-import com.sciencematch.sciencematch.controller.dto.response.TokenDto;
+import com.sciencematch.sciencematch.DTO.auth.response.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

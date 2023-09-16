@@ -1,9 +1,9 @@
 package com.sciencematch.sciencematch.domain.paper_test;
 
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
-import com.sciencematch.sciencematch.domain.enumerate.School;
-import com.sciencematch.sciencematch.domain.enumerate.Semester;
-import com.sciencematch.sciencematch.domain.enumerate.Subject;
+import com.sciencematch.sciencematch.Enums.School;
+import com.sciencematch.sciencematch.Enums.Semester;
+import com.sciencematch.sciencematch.Enums.Subject;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;

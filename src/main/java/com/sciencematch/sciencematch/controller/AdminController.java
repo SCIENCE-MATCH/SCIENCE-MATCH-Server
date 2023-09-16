@@ -1,16 +1,16 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
-import com.sciencematch.sciencematch.domain.dto.admin.AdminStudentResponseDto;
-import com.sciencematch.sciencematch.domain.dto.admin.AdminTeamResponseDto;
-import com.sciencematch.sciencematch.domain.dto.admin.WaitingTeacherResponseDto;
-import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPatchDto;
-import com.sciencematch.sciencematch.domain.dto.chapter.ChapterPostDto;
-import com.sciencematch.sciencematch.domain.dto.chapter.ChapterRequestDto;
-import com.sciencematch.sciencematch.domain.dto.chapter.ChapterResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question.AdminQuestionResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question.QuestionPostDto;
-import com.sciencematch.sciencematch.domain.dto.question.QuestionRequestDto;
+import com.sciencematch.sciencematch.DTO.admin.AdminStudentResponseDto;
+import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
+import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
+import com.sciencematch.sciencematch.DTO.chapter.ChapterPatchDto;
+import com.sciencematch.sciencematch.DTO.chapter.ChapterPostDto;
+import com.sciencematch.sciencematch.DTO.chapter.ChapterRequestDto;
+import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
+import com.sciencematch.sciencematch.DTO.question.AdminQuestionResponseDto;
+import com.sciencematch.sciencematch.DTO.question.QuestionPostDto;
+import com.sciencematch.sciencematch.DTO.question.QuestionRequestDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
 import com.sciencematch.sciencematch.service.ChapterService;

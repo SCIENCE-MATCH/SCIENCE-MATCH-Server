@@ -1,10 +1,10 @@
 package com.sciencematch.sciencematch.domain.question;
 
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
-import com.sciencematch.sciencematch.domain.enumerate.Category;
-import com.sciencematch.sciencematch.domain.enumerate.QuestionTag;
-import com.sciencematch.sciencematch.domain.enumerate.School;
-import com.sciencematch.sciencematch.domain.enumerate.Subject;
+import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.Enums.QuestionTag;
+import com.sciencematch.sciencematch.Enums.School;
+import com.sciencematch.sciencematch.Enums.Subject;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;

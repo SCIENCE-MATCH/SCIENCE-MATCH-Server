@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.domain.question;
 
 import com.sciencematch.sciencematch.domain.Student;
-import com.sciencematch.sciencematch.domain.enumerate.AssignStatus;
-import com.sciencematch.sciencematch.domain.enumerate.Subject;
+import com.sciencematch.sciencematch.Enums.AssignStatus;
+import com.sciencematch.sciencematch.Enums.Subject;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;

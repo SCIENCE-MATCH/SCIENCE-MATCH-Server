@@ -1,13 +1,13 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCreateDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperCreateDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.MultipleQuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.DTO.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.QuestionPaperService;
 import io.swagger.v3.oas.annotations.Operation;

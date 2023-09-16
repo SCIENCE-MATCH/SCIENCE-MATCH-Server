@@ -1,18 +1,18 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.domain.Student;
-import com.sciencematch.sciencematch.domain.dto.teacher.MultipleQuestionPaperSubmitDto;
-import com.sciencematch.sciencematch.domain.dto.teacher.QuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.DTO.teacher.MultipleQuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.DTO.teacher.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
 import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
-import com.sciencematch.sciencematch.domain.dto.question_paper.NormalQuestionPaperRequestDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperCreateDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionPaperSelectDto;
-import com.sciencematch.sciencematch.domain.dto.question_paper.QuestionResponseDto;
-import com.sciencematch.sciencematch.domain.enumerate.Level;
+import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperCreateDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.infrastructure.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.ConnectQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionPaperRepository;

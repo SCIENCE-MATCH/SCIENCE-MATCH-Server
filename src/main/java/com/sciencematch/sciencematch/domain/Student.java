@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.controller.dto.request.StudentRequestDto;
+import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
-import com.sciencematch.sciencematch.domain.enumerate.Authority;
+import com.sciencematch.sciencematch.Enums.Authority;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import io.swagger.v3.oas.annotations.media.Schema;
