@@ -36,8 +36,8 @@ public class Question {
     private String image;
     private Level level;
     private Category category;
-    private String answer;
     private String solution;
+    private String solutionImg;
     private String bookName;
     private Integer page;
     private QuestionTag questionTag;
@@ -51,7 +51,7 @@ public class Question {
 
     @Builder
     private Question(School school, Semester semester, Subject subject, String image, Level level,
-        Category category, String answer, String solution,
+        Category category, String solution, String solutionImg,
         String bookName, Integer page, QuestionTag questionTag, Long chapterId) {
         this.school = school;
         this.semester = semester;
@@ -59,8 +59,8 @@ public class Question {
         this.image = image;
         this.level = level;
         this.category = category;
-        this.answer = answer;
         this.solution = solution;
+        this.solutionImg = solutionImg;
         this.bookName = bookName;
         this.page = page;
         this.questionTag = questionTag;
