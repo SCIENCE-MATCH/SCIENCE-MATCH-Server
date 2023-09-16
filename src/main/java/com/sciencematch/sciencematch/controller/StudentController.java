@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
+import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.StudentService;
@@ -15,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,6 +35,13 @@ public class StudentController {
     public ApiResponseDto<List<AssignQuestionPaperResponseDto>> getMyQuestionPaper(@Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getMyQuestionPaper(user.getUsername()));
+    }
+
+    @Operation(summary = "학습지 답안 형식 조회")
+    @GetMapping("/question-paper/answer/structure")
+    public ApiResponseDto<List<Category>> getQuestionPaperStructure(@RequestParam Long AssignQuestionPaperId) {
+        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_STRUCTURE_SUCCESS,
+            studentService.getQuestionPaperStructure(AssignQuestionPaperId));
     }
 
     @Operation(summary = "일대일 질문지 조회")

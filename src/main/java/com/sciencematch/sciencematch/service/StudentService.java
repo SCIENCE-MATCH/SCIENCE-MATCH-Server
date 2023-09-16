@@ -2,7 +2,9 @@ package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
+import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
+import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.infrastructure.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
@@ -24,6 +26,11 @@ public class StudentService {
         Student student = studentRepository.getStudentByPhoneNum(phoneNum);
         return assignQuestionRepository.findAllByStudent(student).stream()
             .map(AssignQuestionPaperResponseDto::of).collect(Collectors.toList());
+    }
+
+    public List<Category> getQuestionPaperStructure(Long assignQuestionPaperId) {
+        return assignQuestionRepository.getAssignQuestionsById(assignQuestionPaperId)
+            .getAnswer().stream().map(Answer::getCategory).collect(Collectors.toList());
     }
 
     public List<AssignPaperTestResponseDto> getMyPaperTest(String phoneNum) {

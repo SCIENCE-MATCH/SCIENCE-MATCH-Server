@@ -40,6 +40,7 @@ public enum SuccessStatus {
     GET_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 조회하였습니다."),
     GET_PAPER_TEST_SUCCESS(HttpStatus.OK, "일대일 질문을 성공적으로 조회하였습니다."),
     GET_ASSIGN_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "학생에게 출제된 문제지를 성공적으로 조회하였습니다."),
+    GET_QUESTION_PAPER_STRUCTURE_SUCCESS(HttpStatus.OK, "문제지 답안 구조를 성공적으로 조회하였습니다."),
     GET_ASSIGN_PAPER_TEST_SUCCESS(HttpStatus.OK, "학생에게 출제된 일대일 질문을 성공적으로 조회하였습니다."),
     GET_QUESTION_FOR_NORMAL_SUCCESS(HttpStatus.OK, "단원 유형별 문제를 성공적으로 조회하였습니다."),
     SUBMIT_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 출제하였습니다."),
