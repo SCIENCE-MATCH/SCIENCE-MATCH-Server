@@ -37,7 +37,7 @@ public class StudentController {
             studentService.getMyQuestionPaper(user.getUsername()));
     }
 
-    @Operation(summary = "학습지 답안 형식 조회")
+    @Operation(summary = "학습지 답안 형식 조회", description = "문제 풀기 창에서 사용 | 일대일 질문은 전부 단답형")
     @GetMapping("/question-paper/answer/structure")
     public ApiResponseDto<List<Category>> getQuestionPaperStructure(@RequestParam Long AssignQuestionPaperId) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_STRUCTURE_SUCCESS,
