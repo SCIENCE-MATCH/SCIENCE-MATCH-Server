@@ -24,6 +24,7 @@ public class Answer {
     private Long id;
 
     private String submitAnswer;
+    private String solution;
     private String solutionImg;
 
     private Category category;
@@ -36,8 +37,9 @@ public class Answer {
     private AssignQuestions assignQuestions;
 
     @Builder
-    public Answer(String submitAnswer, String solutionImg, Category category, Long chapterId) {
+    public Answer(String submitAnswer, String solution, String solutionImg, Category category, Long chapterId) {
         this.submitAnswer = submitAnswer;
+        this.solution = solution;
         this.solutionImg = solutionImg;
         this.category = category;
         this.chapterId = chapterId;
