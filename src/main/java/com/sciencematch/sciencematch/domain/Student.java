@@ -39,17 +39,17 @@ public class Student extends AuditingTimeEntity {
     private String parentNum;
     @Column(unique = true)
     private String phoneNum;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student")
     private final List<TeamStudent> teamStudents = new ArrayList<>();
     private Authority authority;
 
     private final Boolean deleted = Boolean.FALSE;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student")
     private final List<AssignQuestions> assignQuestions = new ArrayList<>();
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)

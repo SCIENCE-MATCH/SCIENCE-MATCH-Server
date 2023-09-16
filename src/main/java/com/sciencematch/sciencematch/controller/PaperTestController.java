@@ -31,7 +31,7 @@ public class PaperTestController {
     @Operation(summary = "일대일 질문 조회")
     public ApiResponseDto<List<PaperTestResponseDto>> getAllQuestionPaper(
         PaperTestSelectDto paperTestSelectDto) {
-        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
+        return ApiResponseDto.success(SuccessStatus.GET_PAPER_TEST_SUCCESS,
             paperTestService.getAllPaperTest(paperTestSelectDto));
     }
 

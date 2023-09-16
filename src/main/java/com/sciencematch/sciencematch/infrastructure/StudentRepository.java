@@ -16,7 +16,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     boolean existsByPhoneNum(String phoneNum);
 
     @EntityGraph(attributePaths = {"teacher"})
-    List<Student> findAllByDeleted(Boolean deleted);
+    List<Student> findAllByDeleted(@Param("deleted") Boolean deleted);
 
     //삭제된 학생까지 조회 가능해야함
     List<Student> findAllByTeacher(Teacher teacher);
