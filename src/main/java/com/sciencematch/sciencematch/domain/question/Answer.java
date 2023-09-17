@@ -46,4 +46,16 @@ public class Answer {
         this.rightAnswer = false;
     }
 
+    public void setAssignQuestions(AssignQuestions assignQuestions) {
+        this.assignQuestions = assignQuestions;
+    }
+
+    public void setSubmitAnswer(String submitAnswer) {
+        this.submitAnswer = submitAnswer;
+    }
+
+    public void setRightAnswer() {
+        this.rightAnswer = true;
+    }
+
 }

@@ -56,12 +56,19 @@ public class AssignQuestions {
         }
     }
 
+    public void setAnswerAndAssignStatus(List<Answer> answers) {
+        for (Answer answer : answers) {
+            answer.setAssignQuestions(this);
+        }
+        this.answer = answers;
+        this.assignStatus = AssignStatus.COMPLETE;
+    }
+
     @Builder
-    public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject, List<Answer> answer) {
+    public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject) {
         setStudent(student);
         setQuestionPaper(questionPaper);
         this.subject = subject;
         this.assignStatus = AssignStatus.WAITING;
-        this.answer = answer;
     }
 }
