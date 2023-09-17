@@ -3,7 +3,6 @@ package com.sciencematch.sciencematch.service;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.DTO.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.QuestionPaperSubmitDto;
-import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
 import com.sciencematch.sciencematch.domain.question.Question;
@@ -14,8 +13,8 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.Enums.Level;
-import com.sciencematch.sciencematch.infrastructure.AssignQuestionRepository;
-import com.sciencematch.sciencematch.infrastructure.ConnectQuestionRepository;
+import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
+import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -150,25 +148,8 @@ public class QuestionPaperService {
             questionPaperSubmitDto.getStudentIds());
         QuestionPaper questionPaper = questionPaperRepository.getQuestionPaperById(
             questionPaperSubmitDto.getQuestionPaperId());
-        //해설 및 카테고리 등 기본 세팅이 되어있는 answer 객체 도입 (추후 답안 문제의 타입이나 정답 검사등에 사용)
-        List<Answer> answerList = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
-                questionPaper).stream()
-            .map(cq -> Answer.builder()
-                .solution(cq.getQuestion().getSolution())
-                .solutionImg(cq.getQuestion().getSolutionImg())
-                .category(cq.getQuestion().getCategory())
-                .chapterId(cq.getQuestion().getChapterId())
-                .build()).collect(Collectors.toList());
-        //학생마다 문제 할당
-        for (Student student : students) {
-            AssignQuestions assignQuestions = AssignQuestions.builder()
-                .questionPaper(questionPaper)
-                .student(student)
-                .subject(questionPaper.getSubject())
-                .answer(answerList)
-                .build();
-            assignQuestionRepository.save(assignQuestions);
-        }
+
+        makeAssignQuestionPaper(students, questionPaper);
     }
 
     @Transactional
@@ -179,22 +160,17 @@ public class QuestionPaperService {
         List<QuestionPaper> papers = questionPaperRepository.getQuestionPapersByList(
             multipleQuestionPaperSubmitDto.getQuestionPaperIds());
         for (QuestionPaper questionPaper : papers) {
-            List<Answer> answerList = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
-                    questionPaper).stream()
-                .map(cq -> Answer.builder()
-                    .solution(cq.getQuestion().getSolution())
-                    .solutionImg(cq.getQuestion().getSolutionImg())
-                    .category(cq.getQuestion().getCategory())
-                    .chapterId(cq.getQuestion().getChapterId())
-                    .build()).collect(Collectors.toList());
-            for (Student student : students) {
-                assignQuestionRepository.save(AssignQuestions.builder()
-                    .questionPaper(questionPaper)
-                    .student(student)
-                    .subject(questionPaper.getSubject())
-                    .answer(answerList)
-                    .build());
-            }
+            makeAssignQuestionPaper(students, questionPaper);
+        }
+    }
+
+    private void makeAssignQuestionPaper(List<Student> students, QuestionPaper questionPaper) {
+        for (Student student : students) {
+            assignQuestionRepository.save(AssignQuestions.builder()
+                .questionPaper(questionPaper)
+                .student(student)
+                .subject(questionPaper.getSubject())
+                .build());
         }
     }
 }

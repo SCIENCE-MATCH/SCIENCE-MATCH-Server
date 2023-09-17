@@ -1,7 +1,9 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
+import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
+import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
@@ -15,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,5 +53,19 @@ public class StudentController {
     public ApiResponseDto<List<AssignPaperTestResponseDto>> getMyPaperTest(@Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getMyPaperTest(user.getUsername()));
+    }
+
+    @Operation(summary = "학습지 답 제출")
+    @PostMapping("/question-paper")
+    public ApiResponseDto<?> solveAssignQuestionPaper(@RequestBody AssignQuestionPaperSolveDto assignQuestionPaperSolveDto) {
+        studentService.solveAssignQuestionPaper(assignQuestionPaperSolveDto);
+        return ApiResponseDto.success(SuccessStatus.SOLVE_QUESTION_PAPER_SUCCESS);
+    }
+
+    @Operation(summary = "일대일 질문 답 제출")
+    @PostMapping("/paper-test")
+    public ApiResponseDto<?> solveAssignPaperTest(@RequestBody AssignPaperTestSolveDto assignPaperTestSolveDto) {
+        studentService.solveAssignPaperTest(assignPaperTestSolveDto);
+        return ApiResponseDto.success(SuccessStatus.SOLVE_PAPER_TEST_SUCCESS);
     }
 }

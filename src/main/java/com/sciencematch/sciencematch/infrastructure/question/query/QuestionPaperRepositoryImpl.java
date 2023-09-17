@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.infrastructure.question;
+package com.sciencematch.sciencematch.infrastructure.question.query;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;

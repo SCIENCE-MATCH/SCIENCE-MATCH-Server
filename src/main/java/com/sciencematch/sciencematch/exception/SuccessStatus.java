@@ -45,6 +45,8 @@ public enum SuccessStatus {
     GET_QUESTION_FOR_NORMAL_SUCCESS(HttpStatus.OK, "단원 유형별 문제를 성공적으로 조회하였습니다."),
     SUBMIT_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 출제하였습니다."),
     SUBMIT_PAPER_TEST_SUCCESS(HttpStatus.OK, "일대일 질문을 성공적으로 출제하였습니다."),
+    SOLVE_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지 답을 성공적으로 제출하였습니다."),
+    SOLVE_PAPER_TEST_SUCCESS(HttpStatus.OK, "일대일 질문 답을 성공적으로 제출하였습니다."),
 
     /*
      * 201 created

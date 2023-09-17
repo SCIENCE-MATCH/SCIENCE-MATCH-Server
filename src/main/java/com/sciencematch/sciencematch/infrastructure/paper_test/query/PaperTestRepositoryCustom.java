@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.infrastructure.paper_test;
+package com.sciencematch.sciencematch.infrastructure.paper_test.query;
 
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;

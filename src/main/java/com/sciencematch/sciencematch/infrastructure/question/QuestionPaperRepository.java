@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.infrastructure.question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.NotFoundException;
+import com.sciencematch.sciencematch.infrastructure.question.query.QuestionPaperRepositoryCustom;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

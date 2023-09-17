@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.infrastructure.question;
+package com.sciencematch.sciencematch.infrastructure.question.query;
 
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;

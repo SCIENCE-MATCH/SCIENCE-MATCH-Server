@@ -10,7 +10,8 @@ import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTestQuestion;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestQuestionDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
-import com.sciencematch.sciencematch.infrastructure.AssignPaperTestRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import java.util.List;
@@ -25,6 +26,7 @@ public class PaperTestService {
     private final PaperTestRepository paperTestRepository;
     private final StudentRepository studentRepository;
     private final AssignPaperTestRepository assignPaperTestRepository;
+    private final PaperTestQuestionRepository paperTestQuestionRepository;
 
     public List<PaperTestResponseDto> getAllPaperTest(
         PaperTestSelectDto preLessonSelectDto) {
@@ -58,13 +60,8 @@ public class PaperTestService {
         PaperTest paperTest = paperTestRepository.getPaperTestById(
             paperTestSubmitDto.getQuestionPaperId());
 
-        for (Student student : students) {
-            assignPaperTestRepository.save(AssignPaperTest.builder()
-                .paperTest(paperTest)
-                .student(student)
-                .subject(paperTest.getSubject())
-                .build());
-        }
+        //해설 및 카테고리 등 기본 세팅이 되어있는 answer 객체 도입 (추후 답안 문제의 타입이나 정답 검사등에 사용)
+        makeAssignPaperTest(students, paperTest);
     }
 
     @Transactional
@@ -76,13 +73,18 @@ public class PaperTestService {
             multiplePaperTestSubmitDto.getPaperTestIds());
 
         for (PaperTest paperTest : paperTests) {
-            for (Student student : students) {
-                assignPaperTestRepository.save(AssignPaperTest.builder()
-                    .paperTest(paperTest)
-                    .student(student)
-                    .subject(paperTest.getSubject())
-                    .build());
-            }
+            makeAssignPaperTest(students, paperTest);
+        }
+    }
+
+    private void makeAssignPaperTest(List<Student> students, PaperTest paperTest) {
+        //학생마다 문제 할당
+        for (Student student : students) {
+            assignPaperTestRepository.save(AssignPaperTest.builder()
+                .paperTest(paperTest)
+                .student(student)
+                .subject(paperTest.getSubject())
+                .build());
         }
     }
 
