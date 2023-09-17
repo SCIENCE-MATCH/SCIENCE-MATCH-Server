@@ -642,25 +642,6 @@ public class InitDb {
                 em.persist(connectQuestion);
             }
 
-            PaperTest paperTest = PaperTest.builder()
-                .school(School.HIGH)
-                .semester(Semester.SECOND1)
-                .chapterId(9L)
-                .title("그냥 테스트")
-                .build();
-
-            paperTest.addQuestions(PaperTestQuestion.builder()
-                    .question("문제1")
-                    .solution("해결")
-                    .build());
-
-            paperTest.addQuestions(PaperTestQuestion.builder()
-                .question("문제2")
-                .solution("해결2")
-                .build());
-
-            em.persist(paperTest);
-
             AssignQuestions assignQuestions1 = AssignQuestions.builder()
                 .questionPaper(questionPaper)
                 .student(student1)
@@ -669,12 +650,31 @@ public class InitDb {
 
             AssignQuestions assignQuestions2 = AssignQuestions.builder()
                 .questionPaper(questionPaper2)
-                .student(student1)
+                .student(student2)
                 .subject(questionPaper2.getSubject())
                 .build();
 
             em.persist(assignQuestions1);
             em.persist(assignQuestions2);
+
+            PaperTest paperTest = PaperTest.builder()
+                .school(School.HIGH)
+                .semester(Semester.SECOND1)
+                .chapterId(9L)
+                .title("그냥 테스트")
+                .build();
+
+            paperTest.addQuestions(PaperTestQuestion.builder()
+                .question("문제1")
+                .solution("해결")
+                .build());
+
+            paperTest.addQuestions(PaperTestQuestion.builder()
+                .question("문제2")
+                .solution("해결2")
+                .build());
+
+            em.persist(paperTest);
 
             AssignPaperTest paperTest1 = AssignPaperTest.builder()
                 .paperTest(paperTest)
@@ -682,14 +682,7 @@ public class InitDb {
                 .subject(paperTest.getSubject())
                 .build();
 
-            AssignPaperTest paperTest2 = AssignPaperTest.builder()
-                .paperTest(paperTest)
-                .student(student1)
-                .subject(paperTest.getSubject())
-                .build();
-
             em.persist(paperTest1);
-            em.persist(paperTest2);
 
         }
     }
