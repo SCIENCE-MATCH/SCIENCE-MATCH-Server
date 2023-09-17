@@ -4,7 +4,6 @@ import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Subject;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +40,7 @@ public class AssignPaperTest extends AuditingTimeEntity {
     private AssignStatus assignStatus;
 
     @OneToMany(mappedBy = "assignPaperTest")
-    private final List<PaperTestAnswer> paperTestAnswer = new ArrayList<>();
+    private List<PaperTestAnswer> paperTestAnswer;
 
     private void setStudent(Student student) {
         this.student = student;
@@ -55,6 +54,14 @@ public class AssignPaperTest extends AuditingTimeEntity {
         if (!paperTest.getAssignPaperTests().contains(this)) {
             paperTest.getAssignPaperTests().add(this);
         }
+    }
+
+    public void setPaperTestAnswerAndAssignStatus(List<PaperTestAnswer> paperTestAnswers) {
+        for (PaperTestAnswer answer : paperTestAnswers) {
+            answer.setAssignPaperTest(this);
+        }
+        this.paperTestAnswer = paperTestAnswers;
+        this.assignStatus = AssignStatus.COMPLETE;
     }
 
     @Builder

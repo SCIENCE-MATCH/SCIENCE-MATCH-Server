@@ -23,17 +23,29 @@ public class PaperTestAnswer {
     private Long id;
 
     private String submitAnswer;
+    private String solution;
     private Boolean rightAnswer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assign_paper_test_id")
     private AssignPaperTest assignPaperTest;
 
-    @Builder
-    public PaperTestAnswer(String submitAnswer, Boolean rightAnswer, AssignPaperTest assignPaperTest) {
-        this.submitAnswer = submitAnswer;
-        this.rightAnswer = rightAnswer;
+    public void setAssignPaperTest(AssignPaperTest assignPaperTest) {
         this.assignPaperTest = assignPaperTest;
+    }
+
+    public void setSubmitAnswer(String submitAnswer) {
+        this.submitAnswer = submitAnswer;
+    }
+
+    public void setRightAnswer() {
+        this.rightAnswer = true;
+    }
+
+    @Builder
+    public PaperTestAnswer(String solution) {
+        this.solution = solution;
+        this.rightAnswer = false;
     }
 
 }
