@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
@@ -108,6 +109,12 @@ public class StudentService {
 
         assignPaperTest.setPaperTestAnswerAndAssignStatus(answers);
         paperTestAnswerRepository.saveAll(answers);
+    }
+
+    public List<AnswerResponseDto> getCompleteQuestionPaper(Long questionId) {
+        return assignQuestionRepository.getAssignQuestionsById(questionId).getAnswer().stream()
+            .map(AnswerResponseDto::of).collect(
+                Collectors.toList());
     }
 
 }

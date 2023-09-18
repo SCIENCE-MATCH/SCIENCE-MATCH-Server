@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.controller;
 
+import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,38 +36,50 @@ public class StudentController {
     //학습 현황 service 와 문제 풀기 service를 injection해서 이 컨트롤러에서 mapping되게 구현하자
     private final StudentService studentService;
 
-    @Operation(summary = "학습지 조회")
+    @Operation(summary = "학습지 리스트 조회")
     @GetMapping("/question-paper")
-    public ApiResponseDto<List<AssignQuestionPaperResponseDto>> getMyQuestionPaper(@Parameter(hidden = true) @AuthenticationPrincipal User user) {
-        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
+    public ApiResponseDto<List<AssignQuestionPaperResponseDto>> getMyQuestionPaper(
+        @Parameter(hidden = true) @AuthenticationPrincipal User user) {
+        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_LIST_SUCCESS,
             studentService.getMyQuestionPaper(user.getUsername()));
     }
 
     @Operation(summary = "학습지 답안 형식 조회", description = "문제 풀기 창에서 사용 | 일대일 질문은 전부 단답형")
     @GetMapping("/question-paper/answer/structure")
-    public ApiResponseDto<List<Category>> getQuestionPaperStructure(@RequestParam Long AssignQuestionPaperId) {
+    public ApiResponseDto<List<Category>> getQuestionPaperStructure(
+        @RequestParam Long AssignQuestionPaperId) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_STRUCTURE_SUCCESS,
             studentService.getQuestionPaperStructure(AssignQuestionPaperId));
     }
 
-    @Operation(summary = "일대일 질문지 조회")
+    @Operation(summary = "일대일 질문지 리스트 조회")
     @GetMapping("/paper-test")
-    public ApiResponseDto<List<AssignPaperTestResponseDto>> getMyPaperTest(@Parameter(hidden = true) @AuthenticationPrincipal User user) {
-        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
+    public ApiResponseDto<List<AssignPaperTestResponseDto>> getMyPaperTest(
+        @Parameter(hidden = true) @AuthenticationPrincipal User user) {
+        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_PAPER_TEST_LIST_SUCCESS,
             studentService.getMyPaperTest(user.getUsername()));
     }
 
     @Operation(summary = "학습지 답 제출")
     @PostMapping("/question-paper")
-    public ApiResponseDto<?> solveAssignQuestionPaper(@RequestBody AssignQuestionPaperSolveDto assignQuestionPaperSolveDto) {
+    public ApiResponseDto<?> solveAssignQuestionPaper(
+        @RequestBody AssignQuestionPaperSolveDto assignQuestionPaperSolveDto) {
         studentService.solveAssignQuestionPaper(assignQuestionPaperSolveDto);
         return ApiResponseDto.success(SuccessStatus.SOLVE_QUESTION_PAPER_SUCCESS);
     }
 
     @Operation(summary = "일대일 질문 답 제출")
     @PostMapping("/paper-test")
-    public ApiResponseDto<?> solveAssignPaperTest(@RequestBody AssignPaperTestSolveDto assignPaperTestSolveDto) {
+    public ApiResponseDto<?> solveAssignPaperTest(
+        @RequestBody AssignPaperTestSolveDto assignPaperTestSolveDto) {
         studentService.solveAssignPaperTest(assignPaperTestSolveDto);
         return ApiResponseDto.success(SuccessStatus.SOLVE_PAPER_TEST_SUCCESS);
+    }
+
+    @Operation(summary = "완료한 학습지 조회")
+    @GetMapping("/question-paper/{id}/complete")
+    public ApiResponseDto<List<AnswerResponseDto>> getCompleteQuestionPaper(@PathVariable("id") Long id) {
+        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
+            studentService.getCompleteQuestionPaper(id));
     }
 }
