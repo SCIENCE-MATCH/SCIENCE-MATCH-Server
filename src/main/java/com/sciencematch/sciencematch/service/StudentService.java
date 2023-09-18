@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
+import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
@@ -115,6 +116,11 @@ public class StudentService {
         return assignQuestionRepository.getAssignQuestionsById(questionId).getAnswer().stream()
             .map(AnswerResponseDto::of).collect(
                 Collectors.toList());
+    }
+
+    public List<PaperTestAnswerResponseDto> getCompletePaperTest(Long paperTestId) {
+        return assignPaperTestRepository.getAssignPaperTestById(paperTestId).getPaperTestAnswer().stream()
+            .map(PaperTestAnswerResponseDto::of).collect(Collectors.toList());
     }
 
 }

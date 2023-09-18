@@ -5,12 +5,14 @@ import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
+import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -78,8 +80,15 @@ public class StudentController {
 
     @Operation(summary = "완료한 학습지 조회")
     @GetMapping("/question-paper/{id}/complete")
-    public ApiResponseDto<List<AnswerResponseDto>> getCompleteQuestionPaper(@PathVariable("id") Long id) {
+    public ApiResponseDto<List<AnswerResponseDto>> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getCompleteQuestionPaper(id));
+    }
+
+    @Operation(summary = "완료한 일대일 질문 조회")
+    @GetMapping("/paper-test/{id}/complete")
+    public ApiResponseDto<List<PaperTestAnswerResponseDto>> getCompletePaperTest(@PathVariable("id") Long id) {
+        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
+            studentService.getCompletePaperTest(id));
     }
 }
