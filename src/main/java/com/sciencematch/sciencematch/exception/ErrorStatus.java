@@ -13,6 +13,7 @@ public enum ErrorStatus {
     VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     INVALID_TOKEN_INFO_EXCEPTION(HttpStatus.BAD_REQUEST, "토큰 혹은 만료시간 설정이 잘못되었습니다."),
     INVALID_MULTIPART_EXTENSION_EXCEPTION(HttpStatus.BAD_REQUEST, "허용되지 않은 타입의 파일입니다."),
+    INVALID_ANSWER_NUM_EXCEPTION(HttpStatus.BAD_REQUEST, "제출한 답의 수가 잘못되었습니다."),
 
     /**
      * 401 UNAUTHORIZED

@@ -12,6 +12,8 @@ import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTestAnswer;
 import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
+import com.sciencematch.sciencematch.exception.ErrorStatus;
+import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestAnswerRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestQuestionRepository;
@@ -72,6 +74,8 @@ public class StudentService {
 
         List<String> solvingAnswer = assignQuestionPaperSolveDto.getAnswer();
 
+        if (answers.size() != solvingAnswer.size()) throw new CustomException(ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION, ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION.getMessage());
+
         for (int i=0; i<(answers.size()); i++) {
             answers.get(i).setSubmitAnswer(solvingAnswer.get(i));
             //제출한 답과 answer의 solution이 일치하면 정답처리
@@ -98,6 +102,8 @@ public class StudentService {
             .build()).collect(Collectors.toList());
 
         List<String> solvingAnswer = assignPaperTestSolveDto.getAnswer();
+
+        if (answers.size() != solvingAnswer.size()) throw new CustomException(ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION, ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION.getMessage());
 
         for (int i=0; i<(answers.size()); i++) {
             answers.get(i).setSubmitAnswer(solvingAnswer.get(i));
