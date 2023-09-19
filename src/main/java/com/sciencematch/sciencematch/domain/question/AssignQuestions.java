@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.domain.question;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 //학생에게 할당한 문제
-public class AssignQuestions {
+public class AssignQuestions extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue
