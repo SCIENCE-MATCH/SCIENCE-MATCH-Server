@@ -1,11 +1,17 @@
 package com.sciencematch.sciencematch.controller;
 
+import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
+import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.GradingRequestDto;
+import com.sciencematch.sciencematch.DTO.teacher.TeacherAssignPaperTestsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.TeacherAssignQuestionsResponseDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
 import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
+import com.sciencematch.sciencematch.service.StudentService;
 import com.sciencematch.sciencematch.service.common.AuthService;
 import com.sciencematch.sciencematch.service.TeacherService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,12 +22,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +46,7 @@ public class TeacherController {
 
     private final TeacherService teacherService;
     private final AuthService authService;
+    private final StudentService studentService;
 
     @PostMapping(value = "/logo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "로고 변경")
@@ -96,5 +105,49 @@ public class TeacherController {
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_ALL_STUDENT_SUCCESS,
             teacherService.findAllStudents(user.getUsername()));
+    }
+
+    @GetMapping("/assign-question-paper/{studentId}")
+    @Operation(summary = "학생에게 출제한 학습지 리스트 조회")
+    public ApiResponseDto<List<TeacherAssignQuestionsResponseDto>> getAssignQuestionPaper(@Schema(example = "2") @Param("studentID") @PathVariable Long studentId) {
+        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_LIST_SUCCESS,
+            teacherService.getAssignQuestionPaper(studentId));
+
+    }
+
+    @GetMapping("/assign-paper-test/{studentId}")
+    @Operation(summary = "학생에게 출제한 일대일 질문 리스트 조회")
+    public ApiResponseDto<List<TeacherAssignPaperTestsResponseDto>> getAssignPaperTest(@Schema(example = "2") @Param("studentID") @PathVariable Long studentId) {
+        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_PAPER_TEST_LIST_SUCCESS,
+            teacherService.getAssignPaperTest(studentId));
+
+    }
+
+    @Operation(summary = "출제한 학습지 조회")
+    @GetMapping("/assign-question-paper/{id}/complete")
+    public ApiResponseDto<List<AnswerResponseDto>> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
+        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
+            studentService.getCompleteQuestionPaper(id));
+    }
+
+    @Operation(summary = "출제한 일대일 질문 조회")
+    @GetMapping("/assign-paper-test/{id}/complete")
+    public ApiResponseDto<List<PaperTestAnswerResponseDto>> getCompletePaperTest(@PathVariable("id") Long id) {
+        return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
+            studentService.getCompletePaperTest(id));
+    }
+
+    @Operation(summary = "학습지 문제 채점")
+    @PostMapping("/grading/question-paper")
+    public ApiResponseDto<?> gradingQuestionPaper(@RequestBody GradingRequestDto gradingRequestDto) {
+        teacherService.gradingQuestionPaper(gradingRequestDto);
+        return ApiResponseDto.success(SuccessStatus.GRADING_ANSWER_SUCCESS);
+    }
+
+    @Operation(summary = "일대일 질문 문제 채점")
+    @PostMapping("/grading/paperTest")
+    public ApiResponseDto<?> gradingPaperTest(@RequestBody GradingRequestDto gradingRequestDto) {
+        teacherService.gradingPaperTest(gradingRequestDto);
+        return ApiResponseDto.success(SuccessStatus.GRADING_ANSWER_SUCCESS);
     }
 }

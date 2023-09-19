@@ -1,13 +1,22 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.DTO.auth.response.MyPageDto;
+import com.sciencematch.sciencematch.DTO.teacher.GradingRequestDto;
+import com.sciencematch.sciencematch.DTO.teacher.TeacherAssignPaperTestsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.TeacherAssignQuestionsResponseDto;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.DTO.team.TeamResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.MyStudentsResponseDto;
+import com.sciencematch.sciencematch.domain.paper_test.PaperTestAnswer;
+import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestAnswerRepository;
+import com.sciencematch.sciencematch.infrastructure.question.AnswerRepository;
+import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +30,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class TeacherService {
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
+    private final AssignQuestionRepository assignQuestionRepository;
+    private final AssignPaperTestRepository assignPaperTestRepository;
+    private final AnswerRepository answerRepository;
+    private final PaperTestAnswerRepository paperTestAnswerRepository;
     private final S3Service s3Service;
 
     //로고 변경
@@ -58,5 +71,28 @@ public class TeacherService {
             return teacherRepository.getTeacherByEmail(email).getTeam().stream()
                 .map(TeamResponseDto::of)
                 .collect(Collectors.toList());
+    }
+
+    public List<TeacherAssignQuestionsResponseDto> getAssignQuestionPaper(Long studentId) {
+        return assignQuestionRepository.findAllByStudentId(
+                studentId).stream().map(TeacherAssignQuestionsResponseDto::of)
+            .collect(Collectors.toList());
+    }
+
+    public List<TeacherAssignPaperTestsResponseDto> getAssignPaperTest(Long studentId) {
+        return assignPaperTestRepository.findAllByStudentId(
+                studentId).stream().map(TeacherAssignPaperTestsResponseDto::of)
+            .collect(Collectors.toList());
+    }
+
+    public void gradingQuestionPaper(GradingRequestDto gradingRequestDto) {
+        Answer answer = answerRepository.getAnswerById(gradingRequestDto.getAnswerId());
+        answer.setRightAnswer(gradingRequestDto.getRightAnswer());
+    }
+
+    public void gradingPaperTest(GradingRequestDto gradingRequestDto) {
+        PaperTestAnswer answer = paperTestAnswerRepository.getAnswerById(
+            gradingRequestDto.getAnswerId());
+        answer.setRightAnswer(gradingRequestDto.getRightAnswer());
     }
 }

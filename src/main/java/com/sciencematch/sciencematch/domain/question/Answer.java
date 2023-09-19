@@ -54,8 +54,8 @@ public class Answer {
         this.submitAnswer = submitAnswer;
     }
 
-    public void setRightAnswer() {
-        this.rightAnswer = true;
+    public void setRightAnswer(Boolean rightAnswer) {
+        this.rightAnswer = rightAnswer;
     }
 
 }

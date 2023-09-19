@@ -81,7 +81,7 @@ public class StudentService {
             //제출한 답과 answer의 solution이 일치하면 정답처리
             if (Objects.equals(answers.get(i).getSolution(),
                 solvingAnswer.get(i))) {
-                answers.get(i).setRightAnswer();
+                answers.get(i).setRightAnswer(true);
             }
         }
 
@@ -110,7 +110,7 @@ public class StudentService {
             //제출한 답과 answer의 solution이 일치하면 정답처리
             if (Objects.equals(answers.get(i).getSolution(),
                 solvingAnswer.get(i))) {
-                answers.get(i).setRightAnswer();
+                answers.get(i).setRightAnswer(true);
             }
         }
 
