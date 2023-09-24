@@ -19,10 +19,9 @@ public class QuestionPostDto {
     private Category category;
 
     @Schema(example = "1")
-    private String answer;
-
-    @Schema(example = "답이 1번이기 때문에 1번입니다.")
     private String solution;
+
+    private MultipartFile solutionImg;
 
     @Schema(example = "비상비상")
     private String bookName;

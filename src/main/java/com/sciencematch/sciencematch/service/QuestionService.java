@@ -28,12 +28,13 @@ public class QuestionService {
     @Transactional
     public void postQuestion(QuestionPostDto questionPostDto) throws IOException {
         String image = s3Service.uploadImage(questionPostDto.getImage(), "question");
+        String solutionImg = s3Service.uploadImage(questionPostDto.getSolutionImg(), "solution");
         Question question = Question.builder()
             .image(image)
             .level(questionPostDto.getLevel())
             .category(questionPostDto.getCategory())
-            .solution(questionPostDto.getAnswer())
-            .solutionImg(questionPostDto.getSolution())
+            .solution(questionPostDto.getSolution())
+            .solutionImg(solutionImg)
             .bookName(questionPostDto.getBookName())
             .page(questionPostDto.getPage())
             .questionTag(questionPostDto.getQuestionTag())
