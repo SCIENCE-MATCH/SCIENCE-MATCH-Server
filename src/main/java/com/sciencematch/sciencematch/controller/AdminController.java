@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -107,21 +108,21 @@ public class AdminController {
     @PostMapping("/chapter/get")
     @Operation(summary = "단원 조회")
     public ApiResponseDto<List<ChapterResponseDto>> getChapter(
-        @RequestBody ChapterRequestDto chapterRequestDto) {
+        @RequestBody @Valid ChapterRequestDto chapterRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_CHAPTER_SUCCESS,
             chapterService.getChapter(chapterRequestDto));
     }
 
     @PostMapping("/chapter")
     @Operation(summary = "단원 추가")
-    public ApiResponseDto<Long> postChapter(@RequestBody ChapterPostDto chapterPostDto) {
+    public ApiResponseDto<Long> postChapter(@RequestBody @Valid ChapterPostDto chapterPostDto) {
         return ApiResponseDto.success(SuccessStatus.POST_CHAPTER_SUCCESS,
             chapterService.postChapter(chapterPostDto));
     }
 
     @PatchMapping("/chapter")
     @Operation(summary = "단원 수정")
-    public ApiResponseDto<?> postChapter(@RequestBody ChapterPatchDto chapterPatchDto) {
+    public ApiResponseDto<?> postChapter(@RequestBody @Valid ChapterPatchDto chapterPatchDto) {
         chapterService.patchChapter(chapterPatchDto);
         return ApiResponseDto.success(SuccessStatus.PATCH_CHAPTER_SUCCESS);
     }
@@ -135,7 +136,7 @@ public class AdminController {
 
     @PostMapping(value = "/question/post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "문제 추가")
-    public ApiResponseDto<?> postQuestion(@ModelAttribute QuestionPostDto questionPostDto)
+    public ApiResponseDto<?> postQuestion(@ModelAttribute @Valid QuestionPostDto questionPostDto)
         throws IOException {
         questionService.postQuestion(questionPostDto);
         return ApiResponseDto.success(SuccessStatus.POST_QUESTION_SUCCESS);
