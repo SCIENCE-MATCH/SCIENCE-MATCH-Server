@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -65,7 +66,7 @@ public class StudentController {
     @Operation(summary = "학습지 답 제출")
     @PostMapping("/question-paper")
     public ApiResponseDto<?> solveAssignQuestionPaper(
-        @RequestBody AssignQuestionPaperSolveDto assignQuestionPaperSolveDto) {
+        @RequestBody @Valid AssignQuestionPaperSolveDto assignQuestionPaperSolveDto) {
         studentService.solveAssignQuestionPaper(assignQuestionPaperSolveDto);
         return ApiResponseDto.success(SuccessStatus.SOLVE_QUESTION_PAPER_SUCCESS);
     }
@@ -73,7 +74,7 @@ public class StudentController {
     @Operation(summary = "일대일 질문 답 제출")
     @PostMapping("/paper-test")
     public ApiResponseDto<?> solveAssignPaperTest(
-        @RequestBody AssignPaperTestSolveDto assignPaperTestSolveDto) {
+        @RequestBody @Valid AssignPaperTestSolveDto assignPaperTestSolveDto) {
         studentService.solveAssignPaperTest(assignPaperTestSolveDto);
         return ApiResponseDto.success(SuccessStatus.SOLVE_PAPER_TEST_SUCCESS);
     }

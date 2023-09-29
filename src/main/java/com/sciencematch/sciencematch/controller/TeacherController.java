@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
@@ -69,7 +70,7 @@ public class TeacherController {
     @Operation(summary = "학생 생성")
     public ApiResponseDto<StudentResponseDto> createStudent(
         @Parameter(hidden = true) @AuthenticationPrincipal User user,
-        @RequestBody StudentRequestDto studentRequestDto) {
+        @RequestBody @Valid StudentRequestDto studentRequestDto) {
         return ApiResponseDto.success(SuccessStatus.CREATE_STUDENT_SUCCESS,
             authService.signupStudent(studentRequestDto, user.getUsername()));
     }
@@ -77,7 +78,7 @@ public class TeacherController {
     @PostMapping("/student/update")
     @Operation(summary = "학생 정보 업데이트")
     public ApiResponseDto<StudentResponseDto> updateStudent(
-        @RequestBody StudentRequestDto studentRequestDto) {
+        @RequestBody @Valid StudentRequestDto studentRequestDto) {
         return ApiResponseDto.success(SuccessStatus.STUDENT_INFO_UPDATE_SUCCESS,
             authService.updateStudent(studentRequestDto));
     }

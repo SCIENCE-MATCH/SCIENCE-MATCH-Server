@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class StudentRequestDto {
 
     @Schema(description = "학년", example = "고1")
+    @NotBlank
     private String grade;
 
     @NotBlank

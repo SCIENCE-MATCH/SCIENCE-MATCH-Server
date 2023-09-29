@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -55,7 +56,7 @@ public class TeamController {
     @Operation(summary = "반 상세 정보 업데이트")
     public ApiResponseDto<TeamDetailDto> updateGroupDetail(
         @Schema(example = "3") @RequestParam Long groupId,
-        @RequestBody TeamRequestDto teamRequestDto) {
+        @RequestBody @Valid TeamRequestDto teamRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_GROUP_DETAIL_SUCCESS,
             teamService.updateGroupDetail(groupId, teamRequestDto));
     }
@@ -64,7 +65,7 @@ public class TeamController {
     @Operation(summary = "반 생성")
     public ApiResponseDto<TeamResponseDto> createGroup(
         @Parameter(hidden = true) @AuthenticationPrincipal User user,
-        @RequestBody TeamRequestDto teamRequestDto) {
+        @RequestBody @Valid TeamRequestDto teamRequestDto) {
         return ApiResponseDto.success(SuccessStatus.CREATE_GROUP_SUCCESS,
             teamService.createGroup(user.getUsername(), teamRequestDto));
     }
