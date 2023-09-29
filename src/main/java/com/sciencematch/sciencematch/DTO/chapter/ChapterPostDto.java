@@ -4,8 +4,6 @@ import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Subject;
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -13,13 +11,13 @@ import lombok.Data;
 public class ChapterPostDto {
 
     @Schema(example = "HIGH")
-    @NotBlank
+    @NotNull
     private School school;
     @Schema(example = "SECOND")
-    @NotBlank
+    @NotNull
     private Semester semester;
     @Schema(example = "BIOLOGY")
-    @NotEmpty
+    @NotNull
     private Subject subject;
 
     private Long parentId;

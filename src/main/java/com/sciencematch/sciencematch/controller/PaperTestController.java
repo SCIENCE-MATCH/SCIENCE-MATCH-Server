@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,14 +38,14 @@ public class PaperTestController {
 
     @PostMapping("/paper-test/create")
     @Operation(summary = "일대일 질문 생성")
-    public ApiResponseDto<?> createPaperTest(@RequestBody PaperTestRequestDto paperTestRequestDto) {
+    public ApiResponseDto<?> createPaperTest(@RequestBody @Valid PaperTestRequestDto paperTestRequestDto) {
         paperTestService.createPaperTest(paperTestRequestDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_PAPER_TEST_SUCCESS);
     }
 
     @PostMapping("/paper-test/submit")
     @Operation(summary = "단일 질문 출제")
-    public ApiResponseDto<?> submitQuestionPaper(@RequestBody PaperTestSubmitDto paperTestSubmitDto) {
+    public ApiResponseDto<?> submitQuestionPaper(@RequestBody @Valid PaperTestSubmitDto paperTestSubmitDto) {
         paperTestService.submitPaperTest(paperTestSubmitDto);
         return ApiResponseDto.success(SuccessStatus.SUBMIT_PAPER_TEST_SUCCESS);
     }
