@@ -15,6 +15,7 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
     private final TokenProvider tokenProvider;
     private final RedisTemplate redisTemplate;
     private final JwtExceptionFilter jwtExceptionFilter;
+    private final CorsFilter corsFilter;
 
     //TokenProvider를 주입받아서 JwtFillter를 통해 Security 로직에 필터를 등록
     //HttpSecurity의 userpassword인증필터에 filter 추가
@@ -23,5 +24,6 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
         JwtFilter customFilter = new JwtFilter(tokenProvider, redisTemplate);
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtExceptionFilter, JwtFilter.class);
+        http.addFilterBefore(corsFilter, JwtExceptionFilter.class);
     }
 }

@@ -25,6 +25,7 @@ public class SecurityConfig {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     private final JwtExceptionFilter jwtExceptionFilter;
+    private final CorsFilter corsFilter;
     private final RedisTemplate redisTemplate;
 
     @Bean
@@ -36,8 +37,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //CSRF 설정 Disable
         http.csrf().disable();
-        http.cors();
-        http
+        http.cors().and()
 
                 //exception handling 할 때 우리가 만든 클래스를 추가
                 .exceptionHandling()
@@ -70,7 +70,7 @@ public class SecurityConfig {
 
                 //JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
                 .and()
-                .apply(new JwtSecurityConfig(tokenProvider, redisTemplate, jwtExceptionFilter));
+                .apply(new JwtSecurityConfig(tokenProvider, redisTemplate, jwtExceptionFilter, corsFilter));
 
         return http.build();
     }
