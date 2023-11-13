@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/auth/**")
                 .allowedMethods(ALLOWED_METHOD_NAMES.split(","))
+                .allowedHeaders("Authorization", "Content-Type", "Refresh")
                 .exposedHeaders(HttpHeaders.LOCATION);
     }
 }
