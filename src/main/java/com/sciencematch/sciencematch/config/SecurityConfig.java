@@ -4,7 +4,6 @@ import com.sciencematch.sciencematch.jwt.JwtAccessDeniedHandler;
 import com.sciencematch.sciencematch.jwt.JwtAuthenticationEntryPoint;
 import com.sciencematch.sciencematch.jwt.JwtExceptionFilter;
 import com.sciencematch.sciencematch.jwt.TokenProvider;
-import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,14 +11,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @RequiredArgsConstructor
@@ -40,9 +35,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //CSRF 설정 Disable
-        http.csrf().disable()
-
-                .cors(AbstractHttpConfigurer::disable)
+        http.csrf().disable();
+        http.cors();
+        http
 
                 //exception handling 할 때 우리가 만든 클래스를 추가
                 .exceptionHandling()
@@ -78,20 +73,5 @@ public class SecurityConfig {
                 .apply(new JwtSecurityConfig(tokenProvider, redisTemplate, jwtExceptionFilter));
 
         return http.build();
-    }
-
-    // CORS 허용 적용
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("HEAD", "POST", "GET", "DELETE", "PUT", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 }
