@@ -1,8 +1,10 @@
 package com.sciencematch.sciencematch.config;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+@Component
 public class CorsFilter extends org.springframework.web.filter.CorsFilter {
     public CorsFilter() {
         super(configurationSource());
