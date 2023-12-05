@@ -49,7 +49,6 @@ public class AdminController {
 
     private final AdminService adminService;
     private final ChapterService chapterService;
-
     private final QuestionService questionService;
 
     @GetMapping("/teachers/waiting")
