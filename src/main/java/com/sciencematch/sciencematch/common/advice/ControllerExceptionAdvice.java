@@ -1,7 +1,8 @@
 package com.sciencematch.sciencematch.common.advice;
 
+import static com.sciencematch.sciencematch.exception.ErrorStatus.INVALID_TOKEN_INFO_EXCEPTION;
+
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
-import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import io.lettuce.core.RedisCommandExecutionException;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,11 @@ public class ControllerExceptionAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(RedisCommandExecutionException.class)
-    protected ApiResponseDto handleRedisCommandExecutionException(
+    protected ResponseEntity<Object> handleRedisCommandExecutionException(
         final RedisCommandExecutionException e) {
-        return ApiResponseDto.error(ErrorStatus.INVALID_TOKEN_INFO_EXCEPTION);
+        return ResponseEntity.status(INVALID_TOKEN_INFO_EXCEPTION.getHttpStatus())
+            .body(ApiResponseDto.error(INVALID_TOKEN_INFO_EXCEPTION.getHttpStatusCode(),
+                INVALID_TOKEN_INFO_EXCEPTION.getMessage()));
     }
 
     @ExceptionHandler(CustomException.class)
