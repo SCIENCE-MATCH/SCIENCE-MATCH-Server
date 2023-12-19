@@ -60,6 +60,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
                 .antMatchers("/admin/chapter/get").permitAll()
+                .antMatchers("/weatherTest").permitAll()
                 .antMatchers("/teacher/**").hasRole("TEACHER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/auth/**").permitAll()
