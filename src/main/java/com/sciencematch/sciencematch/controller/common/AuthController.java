@@ -12,6 +12,7 @@ import com.sciencematch.sciencematch.jwt.TokenProvider;
 import com.sciencematch.sciencematch.service.common.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -116,7 +117,7 @@ public class AuthController {
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<?> changeStudentPW(
             @Parameter(hidden = true) @AuthenticationPrincipal User user,
-            @RequestBody String password) {
+            @Schema(example = "01014253678") @RequestBody String password) {
         authService.changeStudentPW(user.getUsername(), password);
         return ApiResponseDto.success(SuccessStatus.CHANGE_PW_SUCCESS);
     }
@@ -135,7 +136,7 @@ public class AuthController {
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<?> changeTeacherPW(
             @Parameter(hidden = true) @AuthenticationPrincipal User user,
-            @RequestBody String password) {
+            @Schema(example = "itsokay111") @RequestBody String password) {
         authService.changeTeacherPW(user.getUsername(), password);
         return ApiResponseDto.success(SuccessStatus.CHANGE_PW_SUCCESS);
     }

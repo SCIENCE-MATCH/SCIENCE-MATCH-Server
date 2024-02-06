@@ -11,6 +11,8 @@ public class AssignPaperTestSolveDto {
     @Schema(example = "57")
     @NotNull
     private Long assignPaperTestId;
+
+    @Schema(example = "[\"1\", \"돈줘\"]", type = "array")
     private List<String> answer;
 
 }

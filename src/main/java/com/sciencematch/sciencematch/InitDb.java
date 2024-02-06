@@ -69,6 +69,7 @@ public class InitDb {
                 .name("김사피")
                 .parentNum("01013467946")
                 .phoneNum("01087654321")
+                    .password("01087654321")
                 .authority(Authority.ROLE_STUDENT)
                 .teacher(teacher)
                 .build();
@@ -77,6 +78,7 @@ public class InitDb {
                 .name("김중삼")
                 .parentNum("01099482216")
                 .phoneNum("01084611579")
+                    .password("01084611579")
                 .authority(Authority.ROLE_STUDENT)
                 .teacher(teacher)
                 .build();

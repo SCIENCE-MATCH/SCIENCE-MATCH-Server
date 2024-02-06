@@ -87,14 +87,14 @@ public class StudentController {
         return ApiResponseDto.success(SuccessStatus.SOLVE_PAPER_TEST_SUCCESS);
     }
 
-    @Operation(summary = "완료한 학습지 조회")
+    @Operation(summary = "완료한 학습지 조회", description = "학습지 제출 후에 나오는 뷰도 이 api로 호출")
     @GetMapping("/question-paper/{id}/complete")
     public ApiResponseDto<List<AnswerResponseDto>> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getCompleteQuestionPaper(id));
     }
 
-    @Operation(summary = "완료한 일대일 질문 조회")
+    @Operation(summary = "완료한 일대일 질문 조회", description = "일대일 질문 제출 후에 나오는 뷰도 이 api로 호출")
     @GetMapping("/paper-test/{id}/complete")
     public ApiResponseDto<List<PaperTestAnswerResponseDto>> getCompletePaperTest(@PathVariable("id") Long id) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
