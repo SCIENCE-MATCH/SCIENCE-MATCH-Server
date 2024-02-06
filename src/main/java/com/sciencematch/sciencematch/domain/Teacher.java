@@ -66,4 +66,8 @@ public class Teacher extends AuditingTimeEntity {
     }
 
     public void assignTeacher() {this.authority = Authority.ROLE_TEACHER;}
+
+    public void changePW(String password) {
+        this.password = password;
+    }
 }

@@ -13,6 +13,8 @@ public enum SuccessStatus {
     LOGIN_SUCCESS(HttpStatus.OK, "로그인에 성공했습니다."),
     LOGOUT_SUCCESS(HttpStatus.OK, "로그아웃에 성공했습니다."),
     WITHDRAWAL_SUCCESS(HttpStatus.OK, "회원 탈퇴에 성공했습니다."),
+    CHECK_PW_SUCCESS(HttpStatus.OK, "비밀번호 확인에 성공했습니다."),
+    CHANGE_PW_SUCCESS(HttpStatus.OK, "비밀번호 변경에 성공했습니다."),
     REISSUE_SUCCESS(HttpStatus.OK, "토큰 재발행에 성공했습니다."),
     CHECK_DUPL_EMAIL_SUCCESS(HttpStatus.OK, "사용 가능한 이메일 주소입니다."),
     CHANGE_LOGO_SUCCESS(HttpStatus.OK, "로고 이미지를 성공적으로 교체하였습니다."),

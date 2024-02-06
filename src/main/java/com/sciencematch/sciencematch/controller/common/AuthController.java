@@ -101,4 +101,42 @@ public class AuthController {
         return ApiResponseDto.success(SuccessStatus.WITHDRAWAL_SUCCESS,
             authService.withdrawal(user.getUsername()));
     }
+
+    @PostMapping("/student/check-pw")
+    @Operation(summary = "학생 비밀번호 확인")
+    @SecurityRequirement(name = "JWT Auth")
+    public ApiResponseDto<?> checkStudentPW(
+            @Parameter(hidden = true) @AuthenticationPrincipal User user) {
+        authService.checkStudentPW(user.getUsername());
+        return ApiResponseDto.success(SuccessStatus.CHECK_PW_SUCCESS);
+    }
+
+    @PostMapping("/student/change-pw")
+    @Operation(summary = "학생 비밀번호 변경")
+    @SecurityRequirement(name = "JWT Auth")
+    public ApiResponseDto<?> changeStudentPW(
+            @Parameter(hidden = true) @AuthenticationPrincipal User user,
+            @RequestBody String password) {
+        authService.changeStudentPW(user.getUsername(), password);
+        return ApiResponseDto.success(SuccessStatus.CHANGE_PW_SUCCESS);
+    }
+
+    @PostMapping("/teacher/check-pw")
+    @Operation(summary = "선생 비밀번호 확인")
+    @SecurityRequirement(name = "JWT Auth")
+    public ApiResponseDto<?> checkTeacherPW(
+            @Parameter(hidden = true) @AuthenticationPrincipal User user) {
+        authService.checkTeacherPW(user.getUsername());
+        return ApiResponseDto.success(SuccessStatus.CHECK_PW_SUCCESS);
+    }
+
+    @PostMapping("/teacher/change-pw")
+    @Operation(summary = "선생 비밀번호 변경")
+    @SecurityRequirement(name = "JWT Auth")
+    public ApiResponseDto<?> changeTeacherPW(
+            @Parameter(hidden = true) @AuthenticationPrincipal User user,
+            @RequestBody String password) {
+        authService.changeTeacherPW(user.getUsername(), password);
+        return ApiResponseDto.success(SuccessStatus.CHANGE_PW_SUCCESS);
+    }
 }

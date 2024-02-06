@@ -81,4 +81,8 @@ public class Student extends AuditingTimeEntity {
         this.teacher = teacher;
         teacher.getStudents().add(this);
     }
+
+    public void changePW(String password) {
+        this.password = password;
+    }
 }

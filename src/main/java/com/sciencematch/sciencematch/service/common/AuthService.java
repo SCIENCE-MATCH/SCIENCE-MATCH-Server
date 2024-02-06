@@ -212,4 +212,30 @@ public class AuthService {
         teacherRepository.delete(teacherRepository.getTeacherByEmail(email));
         return "회원 탈퇴에 성공하였습니다";
     }
+
+    public void checkStudentPW(String phoneNum) {
+        if (studentRepository.existsByPhoneNum(phoneNum)) {
+            return;
+        }
+        throw new CustomException(ErrorStatus.NOT_FOUND_USER_EXCEPTION, "비밀번호가 일치하지 않습니다.");
+    }
+
+    @Transactional
+    public void changeStudentPW(String phoneNum, String password) {
+        Student student = studentRepository.getStudentByPhoneNum(phoneNum);
+        student.changePW(password);
+    }
+
+    public void checkTeacherPW(String email) {
+        if (teacherRepository.existsByEmail(email)) {
+            return;
+        }
+        throw new CustomException(ErrorStatus.NOT_FOUND_USER_EXCEPTION, "비밀번호가 일치하지 않습니다.");
+    }
+
+    @Transactional
+    public void changeTeacherPW(String email, String password) {
+        Teacher teacher = teacherRepository.getTeacherByEmail(email);
+        teacher.changePW(password);
+    }
 }
