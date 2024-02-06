@@ -39,6 +39,14 @@ public class StudentController {
     //학습 현황 service 와 문제 풀기 service를 injection해서 이 컨트롤러에서 mapping되게 구현하자
     private final StudentService studentService;
 
+    @GetMapping("/mypage")
+    @Operation(summary = "마이페이지 조회")
+    public ApiResponseDto<?> getMyPage(
+            @Parameter(hidden = true) @AuthenticationPrincipal User user) {
+        return ApiResponseDto.success(SuccessStatus.GET_MYPAGE_SUCCESS,
+                studentService.getMypage(user.getUsername()));
+    }
+
     @Operation(summary = "학습지 리스트 조회")
     @GetMapping("/question-paper")
     public ApiResponseDto<List<AssignQuestionPaperResponseDto>> getMyQuestionPaper(

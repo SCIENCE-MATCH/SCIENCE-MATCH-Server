@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-@NoArgsConstructor
 public class MyPageDto {
 
     private String id;

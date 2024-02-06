@@ -1,11 +1,13 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.DTO.auth.response.MyPageDto;
 import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
+import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
@@ -127,6 +129,10 @@ public class StudentService {
     public List<PaperTestAnswerResponseDto> getCompletePaperTest(Long paperTestId) {
         return assignPaperTestRepository.getAssignPaperTestById(paperTestId).getPaperTestAnswer().stream()
             .map(PaperTestAnswerResponseDto::of).collect(Collectors.toList());
+    }
+
+    public StudentMyPageDto getMypage(String phoneNum) {
+        return StudentMyPageDto.of(studentRepository.getStudentByPhoneNum(phoneNum));
     }
 
 }
