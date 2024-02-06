@@ -131,7 +131,7 @@ public class AuthService {
 
         //수동으로 user, password 토큰 생성 -> 인증 구현
         Authentication authentication = new UsernamePasswordAuthenticationToken(
-            studentLoginRequestDto.getPhoneNum(), null, list);
+            studentLoginRequestDto.getPhoneNum(), studentLoginRequestDto.getPassword(), list);
 
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);

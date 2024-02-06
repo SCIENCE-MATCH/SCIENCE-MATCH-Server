@@ -16,7 +16,7 @@ public class StudentLoginRequestDto {
     @Schema(description = "핸드폰 번호", example = "01087654321")
     private String phoneNum;
 
-    public UsernamePasswordAuthenticationToken toAuthentication() {
-        return new UsernamePasswordAuthenticationToken(phoneNum, null);
-    }
+    @NotBlank
+    @Schema(description = "비밀번호", example = "초기비밀번호는 전화번호")
+    private String password;
 }

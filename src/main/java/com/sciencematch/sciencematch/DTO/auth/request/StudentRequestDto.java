@@ -35,13 +35,14 @@ public class StudentRequestDto {
 
     public Student toStudent(Teacher teacher) {
         return Student.builder()
-            .grade(grade)
-            .name(name)
-            .phoneNum(phoneNum)
-            .parentNum(parentNum)
-            .authority(Authority.ROLE_STUDENT)
-            .teacher(teacher)
-            .build();
+                .grade(grade)
+                .name(name)
+                .phoneNum(phoneNum)
+                .password(phoneNum)
+                .parentNum(parentNum)
+                .authority(Authority.ROLE_STUDENT)
+                .teacher(teacher)
+                .build();
     }
 
 }

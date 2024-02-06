@@ -39,6 +39,8 @@ public class Student extends AuditingTimeEntity {
     private String parentNum;
     @Column(unique = true)
     private String phoneNum;
+
+    private String password;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
@@ -56,11 +58,12 @@ public class Student extends AuditingTimeEntity {
     private final List<AssignPaperTest> assignPaperTests = new ArrayList<>();
 
     @Builder
-    public Student(String grade, String name, String parentNum, String phoneNum,
+    public Student(String grade, String name, String parentNum, String phoneNum, String password,
         Authority authority, Teacher teacher) {
         this.grade = grade;
         this.name = name;
         this.parentNum = parentNum;
+        this.password = password;
         this.phoneNum = phoneNum;
         this.authority = authority;
         changeTeacher(teacher);
