@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.infrastructure.paper_test;
 
+import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
@@ -13,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 public interface AssignPaperTestRepository extends JpaRepository<AssignPaperTest, Long> {
 
     @EntityGraph(attributePaths = {"paperTest"})
-    List<AssignPaperTest> findAllByStudent(Student student);
+    List<AssignPaperTest> findAllByStudentAndAssignStatus(Student student, AssignStatus assignStatus);
 
     @EntityGraph(attributePaths = {"paperTest", "student"})
     @Query("select ap from AssignPaperTest ap where ap.student.id = :studentId")

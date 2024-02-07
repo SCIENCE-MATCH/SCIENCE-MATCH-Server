@@ -7,6 +7,7 @@ import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
+import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
@@ -54,7 +55,7 @@ public class StudentService {
 
     public List<AssignPaperTestResponseDto> getMyPaperTest(String phoneNum) {
         Student student = studentRepository.getStudentByPhoneNum(phoneNum);
-        return assignPaperTestRepository.findAllByStudent(student).stream()
+        return assignPaperTestRepository.findAllByStudentAndAssignStatus(student, AssignStatus.WAITING).stream()
             .map(AssignPaperTestResponseDto::of).collect(Collectors.toList());
     }
 
