@@ -3,8 +3,6 @@ package com.sciencematch.sciencematch.DTO.paper_test;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
-import javax.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -21,10 +19,10 @@ public class PaperTestRequestDto {
     @NonNull
     private Long chapterId;
 
-    @Schema(example = "예시 제목")
-    @NotBlank
-    private String title;
+    @Schema(example = "test 질문")
+    private String question;
+    @Schema(example = "test 답")
+    private String solution;
 
-    private List<PaperTestQuestionDto> paperTestQuestionDtos;
 
 }

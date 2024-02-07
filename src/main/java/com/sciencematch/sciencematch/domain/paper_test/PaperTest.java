@@ -1,12 +1,11 @@
 package com.sciencematch.sciencematch.domain.paper_test;
 
-import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,28 +31,22 @@ public class PaperTest extends AuditingTimeEntity {
     private Semester semester;
     private Subject subject;
     private Long chapterId;
-
-    private String title;
     private String makerName;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "paperTest")
-    private final List<PaperTestQuestion> questions = new ArrayList<>();
+    private String question;
+    private String solution;
 
     @OneToMany(mappedBy = "paperTest")
     private final List<AssignPaperTest> assignPaperTests = new ArrayList<>();
 
     @Builder
-    public PaperTest(School school, Semester semester, Subject subject, Long chapterId, String title, String makerName) {
+    public PaperTest(School school, Semester semester, Subject subject, Long chapterId, String makerName, String question, String solution) {
         this.school = school;
         this.semester = semester;
         this.subject = subject;
         this.chapterId = chapterId;
-        this.title = title;
         this.makerName = makerName;
-    }
-
-    public void addQuestions(PaperTestQuestion paperTestQuestion) {
-        this.questions.add(paperTestQuestion);
-        paperTestQuestion.setPaperTest(this);
+        this.question = question;
+        this.solution = solution;
     }
 }

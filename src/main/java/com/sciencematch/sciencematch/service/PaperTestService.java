@@ -1,19 +1,16 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.DTO.paper_test.MultiplePaperTestSubmitDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSubmitDto;
+import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
-import com.sciencematch.sciencematch.domain.paper_test.PaperTestQuestion;
-import com.sciencematch.sciencematch.DTO.paper_test.PaperTestQuestionDto;
-import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
-import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
-import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestQuestionRepository;
-import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +23,6 @@ public class PaperTestService {
     private final PaperTestRepository paperTestRepository;
     private final StudentRepository studentRepository;
     private final AssignPaperTestRepository assignPaperTestRepository;
-    private final PaperTestQuestionRepository paperTestQuestionRepository;
 
     public List<PaperTestResponseDto> getAllPaperTest(
         PaperTestSelectDto preLessonSelectDto) {
@@ -39,16 +35,9 @@ public class PaperTestService {
             .school(paperTestRequestDto.getSchool())
             .semester(paperTestRequestDto.getSemester())
             .chapterId(paperTestRequestDto.getChapterId())
-            .title(paperTestRequestDto.getTitle())
+            .question(paperTestRequestDto.getQuestion())
+            .solution(paperTestRequestDto.getSolution())
             .build();
-
-        for (PaperTestQuestionDto paperTestQuestionDto : paperTestRequestDto.getPaperTestQuestionDtos()) {
-            PaperTestQuestion paperTestQuestion = PaperTestQuestion.builder()
-                .question(paperTestQuestionDto.getQuestion())
-                .solution(paperTestQuestionDto.getSolution())
-                .build();
-            paperTest.addQuestions(paperTestQuestion);
-        }
 
         paperTestRepository.save(paperTest);
     }
