@@ -133,7 +133,7 @@ public class TeacherController {
 
     @Operation(summary = "출제한 일대일 질문 조회")
     @GetMapping("/assign-paper-test/{id}/complete")
-    public ApiResponseDto<List<PaperTestAnswerResponseDto>> getCompletePaperTest(@PathVariable("id") Long id) {
+    public ApiResponseDto<PaperTestAnswerResponseDto> getCompletePaperTest(@PathVariable("id") Long id) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getCompletePaperTest(id));
     }

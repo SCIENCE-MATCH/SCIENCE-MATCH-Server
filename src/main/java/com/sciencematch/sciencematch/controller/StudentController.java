@@ -96,7 +96,7 @@ public class StudentController {
 
     @Operation(summary = "완료한 일대일 질문 조회", description = "일대일 질문 제출 후에 나오는 뷰도 이 api로 호출")
     @GetMapping("/paper-test/{id}/complete")
-    public ApiResponseDto<List<PaperTestAnswerResponseDto>> getCompletePaperTest(@PathVariable("id") Long id) {
+    public ApiResponseDto<PaperTestAnswerResponseDto> getCompletePaperTest(@PathVariable("id") Long id) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getCompletePaperTest(id));
     }

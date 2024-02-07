@@ -1,7 +1,6 @@
 package com.sciencematch.sciencematch.DTO.student;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -12,7 +11,7 @@ public class AssignPaperTestSolveDto {
     @NotNull
     private Long assignPaperTestId;
 
-    @Schema(example = "[\"1\", \"돈줘\"]", type = "array")
-    private List<String> answer;
+    @Schema(example = "이게 답일까?")
+    private String answer;
 
 }

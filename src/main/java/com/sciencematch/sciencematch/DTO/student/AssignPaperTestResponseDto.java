@@ -13,11 +13,11 @@ public class AssignPaperTestResponseDto {
     private Long id;
     private Subject subject;
     private AssignStatus assignStatus;
-    private String title;
+    private String question;
 
     public static AssignPaperTestResponseDto of(AssignPaperTest assignPaperTest) {
         return new AssignPaperTestResponseDto(assignPaperTest.getId(),
             assignPaperTest.getSubject(), assignPaperTest.getAssignStatus(),
-            assignPaperTest.getPaperTest().getTitle());
+            assignPaperTest.getPaperTest().getQuestion());
     }
 }

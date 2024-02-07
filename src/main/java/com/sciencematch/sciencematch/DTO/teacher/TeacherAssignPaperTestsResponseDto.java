@@ -17,7 +17,7 @@ public class TeacherAssignPaperTestsResponseDto {
     private School school;
     private Semester semester;
     private Subject subject;
-    private String title;
+    private String question;
     private AssignStatus assignStatus;
     private LocalDateTime createdAt;
 
@@ -25,7 +25,7 @@ public class TeacherAssignPaperTestsResponseDto {
         return new TeacherAssignPaperTestsResponseDto(assignPaperTest.getId(),
             assignPaperTest.getPaperTest()
                 .getSchool(), assignPaperTest.getPaperTest().getSemester(),
-            assignPaperTest.getSubject(), assignPaperTest.getPaperTest().getTitle(),
+            assignPaperTest.getSubject(), assignPaperTest.getPaperTest().getQuestion(),
             assignPaperTest.getAssignStatus(), assignPaperTest.getCreateAt());
     }
 

@@ -1,10 +1,9 @@
 package com.sciencematch.sciencematch.domain.paper_test;
 
-import com.sciencematch.sciencematch.domain.Student;
-import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Subject;
-import java.util.List;
+import com.sciencematch.sciencematch.domain.Student;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,8 +38,8 @@ public class AssignPaperTest extends AuditingTimeEntity {
     private Subject subject;
     private AssignStatus assignStatus;
 
-    @OneToMany(mappedBy = "assignPaperTest")
-    private List<PaperTestAnswer> paperTestAnswer;
+    @OneToOne(fetch = FetchType.LAZY)
+    private PaperTestAnswer paperTestAnswer;
 
     private void setStudent(Student student) {
         this.student = student;
@@ -56,11 +55,9 @@ public class AssignPaperTest extends AuditingTimeEntity {
         }
     }
 
-    public void setPaperTestAnswerAndAssignStatus(List<PaperTestAnswer> paperTestAnswers) {
-        for (PaperTestAnswer answer : paperTestAnswers) {
-            answer.setAssignPaperTest(this);
-        }
-        this.paperTestAnswer = paperTestAnswers;
+    public void setPaperTestAnswerAndAssignStatus(PaperTestAnswer paperTestAnswer) {
+        paperTestAnswer.setAssignPaperTest(this);
+        this.paperTestAnswer = paperTestAnswer;
         this.assignStatus = AssignStatus.COMPLETE;
     }
 

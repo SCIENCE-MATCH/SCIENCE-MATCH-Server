@@ -20,4 +20,5 @@ public interface PaperTestRepository extends JpaRepository<PaperTest, Long>,
 
     @Query("select pt from PaperTest pt where pt.id in :paperTestIds")
     List<PaperTest> getPaperTestsByList(@Param("paperTestIds") List<Long> paperTestIds);
+
 }

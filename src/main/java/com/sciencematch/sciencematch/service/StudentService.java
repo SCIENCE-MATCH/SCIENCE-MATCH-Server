@@ -1,6 +1,5 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.DTO.auth.response.MyPageDto;
 import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
@@ -11,17 +10,17 @@ import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
+import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTestAnswer;
 import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
+import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestAnswerRepository;
-import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AnswerRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
-import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepository;
 import java.util.List;
 import java.util.Objects;
@@ -38,7 +37,6 @@ public class StudentService {
     private final AssignQuestionRepository assignQuestionRepository;
     private final AssignPaperTestRepository assignPaperTestRepository;
     private final ConnectQuestionRepository connectQuestionRepository;
-    private final PaperTestQuestionRepository paperTestQuestionRepository;
     private final AnswerRepository answerRepository;
     private final PaperTestAnswerRepository paperTestAnswerRepository;
 
@@ -96,28 +94,22 @@ public class StudentService {
     public void solveAssignPaperTest(AssignPaperTestSolveDto assignPaperTestSolveDto) {
         AssignPaperTest assignPaperTest = assignPaperTestRepository.getAssignPaperTestById(
             assignPaperTestSolveDto.getAssignPaperTestId());
+        PaperTest paperTest = assignPaperTest.getPaperTest();
 
-        //answer 객체 생성
-        List<PaperTestAnswer> answers = paperTestQuestionRepository.getAllPaperTestQuestionByPaperTest(
-            assignPaperTest.getPaperTest()).stream().map(cq -> PaperTestAnswer.builder()
-            .solution(cq.getSolution())
-            .build()).collect(Collectors.toList());
+        PaperTestAnswer answer = PaperTestAnswer.builder()
+            .solution(paperTest.getSolution())
+            .build();
 
-        List<String> solvingAnswer = assignPaperTestSolveDto.getAnswer();
+        String solvingAnswer = assignPaperTestSolveDto.getAnswer();
 
-        if (answers.size() != solvingAnswer.size()) throw new CustomException(ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION, ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION.getMessage());
+        answer.setSubmitAnswer(solvingAnswer);
 
-        for (int i=0; i<(answers.size()); i++) {
-            answers.get(i).setSubmitAnswer(solvingAnswer.get(i));
-            //제출한 답과 answer의 solution이 일치하면 정답처리
-            if (Objects.equals(answers.get(i).getSolution(),
-                solvingAnswer.get(i))) {
-                answers.get(i).setRightAnswer(true);
-            }
+        if (solvingAnswer.equals(answer.getSolution())) {
+            answer.setRightAnswer(true);
         }
 
-        assignPaperTest.setPaperTestAnswerAndAssignStatus(answers);
-        paperTestAnswerRepository.saveAll(answers);
+        assignPaperTest.setPaperTestAnswerAndAssignStatus(answer);
+        paperTestAnswerRepository.save(answer);
     }
 
     public List<AnswerResponseDto> getCompleteQuestionPaper(Long questionId) {
@@ -126,9 +118,8 @@ public class StudentService {
                 Collectors.toList());
     }
 
-    public List<PaperTestAnswerResponseDto> getCompletePaperTest(Long paperTestId) {
-        return assignPaperTestRepository.getAssignPaperTestById(paperTestId).getPaperTestAnswer().stream()
-            .map(PaperTestAnswerResponseDto::of).collect(Collectors.toList());
+    public PaperTestAnswerResponseDto getCompletePaperTest(Long paperTestId) {
+        return PaperTestAnswerResponseDto.of(assignPaperTestRepository.getAssignPaperTestById(paperTestId).getPaperTestAnswer());
     }
 
     public StudentMyPageDto getMypage(String phoneNum) {

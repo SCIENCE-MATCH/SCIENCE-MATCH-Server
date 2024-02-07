@@ -1,5 +1,7 @@
 package com.sciencematch.sciencematch.infrastructure.paper_test.query;
 
+import static com.sciencematch.sciencematch.domain.paper_test.QPaperTest.paperTest;
+
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
@@ -9,8 +11,6 @@ import com.sciencematch.sciencematch.Enums.School;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityManager;
-
-import static com.sciencematch.sciencematch.domain.paper_test.QPaperTest.paperTest;
 
 public class PaperTestRepositoryImpl implements PaperTestRepositoryCustom {
 
@@ -26,7 +26,7 @@ public class PaperTestRepositoryImpl implements PaperTestRepositoryCustom {
             .select(new QPaperTestResponseDto(
                 paperTest.id,
                 paperTest.school,
-                paperTest.title,
+                paperTest.question,
                 paperTest.makerName,
                 paperTest.subject,
                 paperTest.createAt
