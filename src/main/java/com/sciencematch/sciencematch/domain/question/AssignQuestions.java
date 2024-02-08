@@ -65,6 +65,12 @@ public class AssignQuestions extends AuditingTimeEntity {
         this.assignStatus = AssignStatus.COMPLETE;
     }
 
+    public void setGraded() {
+        if (this.assignStatus != AssignStatus.GRADED) {
+            this.assignStatus = AssignStatus.GRADED;
+        }
+    }
+
     @Builder
     public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject) {
         setStudent(student);

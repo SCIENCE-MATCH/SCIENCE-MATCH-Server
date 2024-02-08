@@ -85,11 +85,13 @@ public class TeacherService {
             .collect(Collectors.toList());
     }
 
+    @Transactional
     public void gradingQuestionPaper(GradingRequestDto gradingRequestDto) {
         Answer answer = answerRepository.getAnswerById(gradingRequestDto.getAnswerId());
         answer.setRightAnswer(gradingRequestDto.getRightAnswer());
     }
 
+    @Transactional
     public void gradingPaperTest(GradingRequestDto gradingRequestDto) {
         PaperTestAnswer answer = paperTestAnswerRepository.getAnswerById(
             gradingRequestDto.getAnswerId());

@@ -31,6 +31,7 @@ public class Answer {
 
     private Long chapterId;
     private Boolean rightAnswer;
+    private Boolean graded;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assign_questions_id")
@@ -44,6 +45,7 @@ public class Answer {
         this.category = category;
         this.chapterId = chapterId;
         this.rightAnswer = false;
+        this.graded = false;
     }
 
     public void setAssignQuestions(AssignQuestions assignQuestions) {
@@ -55,7 +57,9 @@ public class Answer {
     }
 
     public void setRightAnswer(Boolean rightAnswer) {
+        this.assignQuestions.setGraded();
         this.rightAnswer = rightAnswer;
+        this.graded = true;
     }
 
 }
