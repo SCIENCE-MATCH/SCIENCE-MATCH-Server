@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.DTO.teacher.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.QuestionPaperSubmitDto;
@@ -170,6 +171,7 @@ public class QuestionPaperService {
                 .questionPaper(questionPaper)
                 .student(student)
                 .subject(questionPaper.getSubject())
+                    .assignStatus(AssignStatus.WAITING)
                 .build());
         }
     }

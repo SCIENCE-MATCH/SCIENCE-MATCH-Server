@@ -72,10 +72,10 @@ public class AssignQuestions extends AuditingTimeEntity {
     }
 
     @Builder
-    public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject) {
+    public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject, AssignStatus assignStatus) {
         setStudent(student);
         setQuestionPaper(questionPaper);
         this.subject = subject;
-        this.assignStatus = AssignStatus.WAITING;
+        this.assignStatus = assignStatus;
     }
 }

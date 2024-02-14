@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch;
 
+import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Authority;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.Enums.Level;
@@ -681,10 +682,19 @@ public class InitDb {
                 .questionPaper(questionPaper2)
                 .student(student2)
                 .subject(questionPaper2.getSubject())
+                .assignStatus(AssignStatus.COMPLETE)
+                .build();
+
+            AssignQuestions assignQuestions3 = AssignQuestions.builder()
+                .questionPaper(questionPaper2)
+                .student(student2)
+                .subject(questionPaper2.getSubject())
+                .assignStatus(AssignStatus.GRADED)
                 .build();
 
             em.persist(assignQuestions1);
             em.persist(assignQuestions2);
+            em.persist(assignQuestions3);
 
             PaperTest paperTest = PaperTest.builder()
                 .school(School.HIGH)
