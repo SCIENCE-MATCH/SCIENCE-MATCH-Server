@@ -107,8 +107,8 @@ public class AuthController {
     @Operation(summary = "학생 비밀번호 확인")
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<?> checkStudentPW(
-            @Parameter(hidden = true) @AuthenticationPrincipal User user) {
-        authService.checkStudentPW(user.getUsername());
+            @Parameter(hidden = true) @AuthenticationPrincipal User user, @RequestBody String password) {
+        authService.checkStudentPW(user.getUsername(), password);
         return ApiResponseDto.success(SuccessStatus.CHECK_PW_SUCCESS);
     }
 
@@ -126,8 +126,8 @@ public class AuthController {
     @Operation(summary = "선생 비밀번호 확인")
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<?> checkTeacherPW(
-            @Parameter(hidden = true) @AuthenticationPrincipal User user) {
-        authService.checkTeacherPW(user.getUsername());
+            @Parameter(hidden = true) @AuthenticationPrincipal User user, @RequestBody String password) {
+        authService.checkTeacherPW(user.getUsername(), password);
         return ApiResponseDto.success(SuccessStatus.CHECK_PW_SUCCESS);
     }
 

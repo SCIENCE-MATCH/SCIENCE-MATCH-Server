@@ -213,8 +213,8 @@ public class AuthService {
         return "회원 탈퇴에 성공하였습니다";
     }
 
-    public void checkStudentPW(String phoneNum) {
-        if (studentRepository.existsByPhoneNum(phoneNum)) {
+    public void checkStudentPW(String phoneNum, String password) {
+        if (studentRepository.getStudentByPhoneNum(phoneNum).getPassword().equals(password)) {
             return;
         }
         throw new CustomException(ErrorStatus.NOT_FOUND_USER_EXCEPTION, "비밀번호가 일치하지 않습니다.");
@@ -226,8 +226,8 @@ public class AuthService {
         student.changePW(password);
     }
 
-    public void checkTeacherPW(String email) {
-        if (teacherRepository.existsByEmail(email)) {
+    public void checkTeacherPW(String email, String password) {
+        if (teacherRepository.getTeacherByEmail(email).getPassword().equals(password)) {
             return;
         }
         throw new CustomException(ErrorStatus.NOT_FOUND_USER_EXCEPTION, "비밀번호가 일치하지 않습니다.");
