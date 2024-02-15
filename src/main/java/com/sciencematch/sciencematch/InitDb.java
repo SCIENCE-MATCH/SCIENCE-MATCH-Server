@@ -676,18 +676,19 @@ public class InitDb {
                 .questionPaper(questionPaper)
                 .student(student1)
                 .subject(questionPaper.getSubject())
+                .assignStatus(AssignStatus.WAITING)
                 .build();
 
             AssignQuestions assignQuestions2 = AssignQuestions.builder()
                 .questionPaper(questionPaper2)
-                .student(student2)
+                .student(student1)
                 .subject(questionPaper2.getSubject())
                 .assignStatus(AssignStatus.COMPLETE)
                 .build();
 
             AssignQuestions assignQuestions3 = AssignQuestions.builder()
                 .questionPaper(questionPaper2)
-                .student(student2)
+                .student(student1)
                 .subject(questionPaper2.getSubject())
                 .assignStatus(AssignStatus.GRADED)
                 .build();
