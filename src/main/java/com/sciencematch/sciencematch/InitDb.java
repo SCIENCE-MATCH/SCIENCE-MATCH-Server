@@ -633,6 +633,7 @@ public class InitDb {
             em.persist(question27);
 
             List<Question> questionList = Arrays.asList(question, question1, question2, question3);
+            List<Question> questionList2 = Arrays.asList(question4, question5, question6, question7);
 
             QuestionPaper questionPaper = QuestionPaper.builder()
                 .questionNum(4)
@@ -656,6 +657,17 @@ public class InitDb {
                 .build();
             em.persist(questionPaper2);
 
+            QuestionPaper questionPaper3 = QuestionPaper.builder()
+                .questionNum(4)
+                .school(School.HIGH)
+                .category(Category.SUBJECTIVE)
+                .questionTag(QuestionTag.MOCK_EXAM)
+                .title("테스트33")
+                .makerName("선생님22")
+                .subject(Subject.BIOLOGY)
+                .build();
+            em.persist(questionPaper3);
+
             for (Question subQuestion : questionList) {
                 ConnectQuestion connectQuestion = ConnectQuestion.builder()
                     .question(subQuestion)
@@ -668,6 +680,14 @@ public class InitDb {
                 ConnectQuestion connectQuestion = ConnectQuestion.builder()
                     .question(subQuestion)
                     .questionPaper(questionPaper2)
+                    .build();
+                em.persist(connectQuestion);
+            }
+
+            for (Question subQuestion : questionList2) {
+                ConnectQuestion connectQuestion = ConnectQuestion.builder()
+                    .question(subQuestion)
+                    .questionPaper(questionPaper3)
                     .build();
                 em.persist(connectQuestion);
             }
@@ -693,9 +713,25 @@ public class InitDb {
                 .assignStatus(AssignStatus.GRADED)
                 .build();
 
+            AssignQuestions assignQuestions4 = AssignQuestions.builder()
+                .questionPaper(questionPaper3)
+                .student(student1)
+                .subject(questionPaper3.getSubject())
+                .assignStatus(AssignStatus.WAITING)
+                .build();
+
+            AssignQuestions assignQuestions5 = AssignQuestions.builder()
+                .questionPaper(questionPaper2)
+                .student(student1)
+                .subject(questionPaper2.getSubject())
+                .assignStatus(AssignStatus.WAITING)
+                .build();
+
             em.persist(assignQuestions1);
             em.persist(assignQuestions2);
             em.persist(assignQuestions3);
+            em.persist(assignQuestions4);
+            em.persist(assignQuestions5);
 
             PaperTest paperTest = PaperTest.builder()
                 .school(School.HIGH)
