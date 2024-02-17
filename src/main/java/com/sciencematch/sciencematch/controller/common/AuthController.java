@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.controller.common;
 
+import com.sciencematch.sciencematch.DTO.auth.request.PasswordDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.DTO.auth.request.DuplCheckDto;
 import com.sciencematch.sciencematch.DTO.auth.request.TeacherRequestDto;
@@ -107,8 +108,8 @@ public class AuthController {
     @Operation(summary = "학생 비밀번호 확인")
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<?> checkStudentPW(
-            @Parameter(hidden = true) @AuthenticationPrincipal User user, @RequestBody String password) {
-        authService.checkStudentPW(user.getUsername(), password);
+            @Parameter(hidden = true) @AuthenticationPrincipal User user, @RequestBody PasswordDto password) {
+        authService.checkStudentPW(user.getUsername(), password.getPassword());
         return ApiResponseDto.success(SuccessStatus.CHECK_PW_SUCCESS);
     }
 
@@ -117,8 +118,8 @@ public class AuthController {
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<?> changeStudentPW(
             @Parameter(hidden = true) @AuthenticationPrincipal User user,
-            @Schema(example = "01014253678") @RequestBody String password) {
-        authService.changeStudentPW(user.getUsername(), password);
+            @Schema(example = "01014253678") @RequestBody PasswordDto password) {
+        authService.changeStudentPW(user.getUsername(), password.getPassword());
         return ApiResponseDto.success(SuccessStatus.CHANGE_PW_SUCCESS);
     }
 
@@ -126,8 +127,8 @@ public class AuthController {
     @Operation(summary = "선생 비밀번호 확인")
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<?> checkTeacherPW(
-            @Parameter(hidden = true) @AuthenticationPrincipal User user, @RequestBody String password) {
-        authService.checkTeacherPW(user.getUsername(), password);
+            @Parameter(hidden = true) @AuthenticationPrincipal User user, @RequestBody PasswordDto password) {
+        authService.checkTeacherPW(user.getUsername(), password.getPassword());
         return ApiResponseDto.success(SuccessStatus.CHECK_PW_SUCCESS);
     }
 
@@ -136,8 +137,8 @@ public class AuthController {
     @SecurityRequirement(name = "JWT Auth")
     public ApiResponseDto<?> changeTeacherPW(
             @Parameter(hidden = true) @AuthenticationPrincipal User user,
-            @Schema(example = "itsokay111") @RequestBody String password) {
-        authService.changeTeacherPW(user.getUsername(), password);
+            @Schema(example = "itsokay111") @RequestBody PasswordDto password) {
+        authService.changeTeacherPW(user.getUsername(), password.getPassword());
         return ApiResponseDto.success(SuccessStatus.CHANGE_PW_SUCCESS);
     }
 }
