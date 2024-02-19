@@ -1,19 +1,19 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
+import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
+import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
+import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
 import com.sciencematch.sciencematch.DTO.teacher.GradingRequestDto;
+import com.sciencematch.sciencematch.DTO.teacher.MyStudentsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.TeacherAssignPaperTestsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.TeacherAssignQuestionsResponseDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
-import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
-import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.SimpleStudentsResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.StudentService;
-import com.sciencematch.sciencematch.service.common.AuthService;
 import com.sciencematch.sciencematch.service.TeacherService;
+import com.sciencematch.sciencematch.service.common.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -126,7 +126,7 @@ public class TeacherController {
 
     @Operation(summary = "출제한 학습지 조회")
     @GetMapping("/assign-question-paper/{id}/complete")
-    public ApiResponseDto<List<AnswerResponseDto>> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
+    public ApiResponseDto<SolvedPaperTestDto> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getCompleteQuestionPaper(id));
     }
