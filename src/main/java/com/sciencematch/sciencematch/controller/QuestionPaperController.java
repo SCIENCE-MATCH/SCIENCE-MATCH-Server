@@ -38,7 +38,7 @@ public class QuestionPaperController {
     }
 
     @PostMapping("/questions/normal")
-    @Operation(summary = "단원 유형별 학습지 생성시 범위 선택")
+    @Operation(summary = "단원 유형별 학습지 범위 선택")
     public ApiResponseDto<List<QuestionResponseDto>> getNormalQuestions(
         NormalQuestionPaperRequestDto normalQuestionPaperRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_FOR_NORMAL_SUCCESS,
