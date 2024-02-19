@@ -39,6 +39,7 @@ public class QuestionService {
             .page(questionPostDto.getPage())
             .questionTag(questionPostDto.getQuestionTag())
             .chapterId(questionPostDto.getChapterId())
+            .score(questionPostDto.getScore())
             .build();
         questionRepository.save(question);
     }

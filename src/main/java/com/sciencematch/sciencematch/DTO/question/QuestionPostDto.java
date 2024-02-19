@@ -34,5 +34,7 @@ public class QuestionPostDto {
 
     @Schema
     private Long chapterId;
+    @Schema(example = "3")
+    private Integer score;
 
 }

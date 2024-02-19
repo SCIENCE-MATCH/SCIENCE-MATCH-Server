@@ -137,6 +137,7 @@ public class QuestionPaperService {
             ConnectQuestion connectQuestion = ConnectQuestion.builder()
                 .question(question)
                 .questionPaper(questionPaper)
+                .score(question.getScore())
                 .build();
             connectQuestionRepository.save(connectQuestion);
         }
@@ -171,7 +172,7 @@ public class QuestionPaperService {
                 .questionPaper(questionPaper)
                 .student(student)
                 .subject(questionPaper.getSubject())
-                    .assignStatus(AssignStatus.WAITING)
+                .assignStatus(AssignStatus.WAITING)
                 .build());
         }
     }

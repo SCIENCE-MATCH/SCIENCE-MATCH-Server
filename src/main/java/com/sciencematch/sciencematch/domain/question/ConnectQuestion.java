@@ -24,6 +24,8 @@ public class ConnectQuestion extends AuditingTimeEntity {
     @Column(name = "connect_question_id")
     private Long id;
 
+    private Integer score;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private Question question;
@@ -48,9 +50,10 @@ public class ConnectQuestion extends AuditingTimeEntity {
     }
 
     @Builder
-    public ConnectQuestion(Question question, QuestionPaper questionPaper) {
+    public ConnectQuestion(Question question, QuestionPaper questionPaper, Integer score) {
         setQuestion(question);
         setQuestionPaper(questionPaper);
+        this.score = score;
     }
 
 }
