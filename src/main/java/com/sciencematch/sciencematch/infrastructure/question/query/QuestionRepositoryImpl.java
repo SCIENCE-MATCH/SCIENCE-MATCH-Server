@@ -28,7 +28,8 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom{
                 question.id,
                 question.image,
                 question.category,
-                question.level
+                question.level,
+                question.score
             )).from(question)
             .where(chaptersEq(normalQuestionPaperRequestDto.getChapterIds()),
                 categoryEq(normalQuestionPaperRequestDto.getCategory()),
