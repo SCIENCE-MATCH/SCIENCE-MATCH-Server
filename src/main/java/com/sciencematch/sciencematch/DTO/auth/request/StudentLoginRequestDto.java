@@ -16,6 +16,6 @@ public class StudentLoginRequestDto {
     private String phoneNum;
 
     @NotBlank
-    @Schema(description = "비밀번호", example = "초기비밀번호는 전화번호")
+    @Schema(description = "비밀번호", example = "01087654321")
     private String password;
 }

@@ -1,11 +1,11 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
+import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
@@ -89,7 +89,7 @@ public class StudentController {
 
     @Operation(summary = "완료한 학습지 조회", description = "학습지 제출 후에 나오는 뷰도 이 api로 호출")
     @GetMapping("/question-paper/{id}/complete")
-    public ApiResponseDto<List<AnswerResponseDto>> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
+    public ApiResponseDto<SolvedPaperTestDto> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getCompleteQuestionPaper(id));
     }

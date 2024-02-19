@@ -172,6 +172,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question1 = Question.builder()
@@ -188,6 +189,7 @@ public class InitDb {
                 .page(11)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(2)
                 .build();
 
             Question question2 = Question.builder()
@@ -204,6 +206,7 @@ public class InitDb {
                 .page(12)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(2)
                 .build();
 
             Question question3 = Question.builder()
@@ -220,6 +223,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(2)
                 .build();
 
             Question question4 = Question.builder()
@@ -236,6 +240,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(2)
                 .build();
 
             Question question5 = Question.builder()
@@ -252,6 +257,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_2.getId())
+                .score(2)
                 .build();
 
             Question question6 = Question.builder()
@@ -268,6 +274,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(2)
                 .build();
 
             Question question7 = Question.builder()
@@ -284,6 +291,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(2)
                 .build();
 
             Question question8 = Question.builder()
@@ -300,6 +308,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_2.getId())
+                .score(2)
                 .build();
 
             Question question9 = Question.builder()
@@ -316,6 +325,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(2)
                 .build();
 
             Question question10 = Question.builder()
@@ -332,6 +342,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(2)
                 .build();
 
             Question question11 = Question.builder()
@@ -348,6 +359,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question12 = Question.builder()
@@ -364,6 +376,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question13 = Question.builder()
@@ -380,6 +393,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question14 = Question.builder()
@@ -396,6 +410,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question15 = Question.builder()
@@ -412,6 +427,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question16 = Question.builder()
@@ -428,6 +444,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question17 = Question.builder()
@@ -444,6 +461,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question18 = Question.builder()
@@ -460,6 +478,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question19 = Question.builder()
@@ -476,6 +495,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question20 = Question.builder()
@@ -492,6 +512,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(3)
                 .build();
 
             Question question21 = Question.builder()
@@ -508,6 +529,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(4)
                 .build();
 
             Question question22 = Question.builder()
@@ -524,6 +546,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(4)
                 .build();
 
             Question question23 = Question.builder()
@@ -540,6 +563,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(4)
                 .build();
 
             Question question24 = Question.builder()
@@ -556,6 +580,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(4)
                 .build();
             Question question25 = Question.builder()
                 .school(School.HIGH)
@@ -571,6 +596,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(4)
                 .build();
             Question question26 = Question.builder()
                 .school(School.HIGH)
@@ -586,6 +612,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(4)
                 .build();
             Question question27 = Question.builder()
                 .school(School.HIGH)
@@ -601,6 +628,7 @@ public class InitDb {
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
+                .score(4)
                 .build();
 
             em.persist(question);

@@ -6,6 +6,7 @@ import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
+import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
 import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Category;
@@ -71,6 +72,7 @@ public class StudentService {
                 .solutionImg(cq.getQuestion().getSolutionImg())
                 .category(cq.getQuestion().getCategory())
                 .chapterId(cq.getQuestion().getChapterId())
+                .score(cq.getScore())
                 .build()).collect(Collectors.toList());
 
         List<String> solvingAnswer = assignQuestionPaperSolveDto.getAnswer();
@@ -78,12 +80,14 @@ public class StudentService {
         if (answers.size() != solvingAnswer.size()) throw new CustomException(ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION, ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION.getMessage());
 
         for (int i=0; i<(answers.size()); i++) {
-            answers.get(i).setSubmitAnswer(solvingAnswer.get(i));
+            Answer answer = answers.get(i);
+            answer.setSubmitAnswer(solvingAnswer.get(i));
             //제출한 답과 answer의 solution이 일치하면 정답처리
-            if (Objects.equals(answers.get(i).getSolution(),
-                solvingAnswer.get(i))) {
-                answers.get(i).setRightAnswer(true);
+            if (Objects.equals(answer.getSolution(), solvingAnswer.get(i))) {
+                answer.setRightAnswer(true);
+                questions.plusScore(answer.getScore());
             }
+            questions.plusTotalScore(answer.getScore());
         }
 
         questions.setAnswerAndAssignStatus(answers);
@@ -113,10 +117,16 @@ public class StudentService {
         paperTestAnswerRepository.save(answer);
     }
 
-    public List<AnswerResponseDto> getCompleteQuestionPaper(Long questionId) {
-        return assignQuestionRepository.getAssignQuestionsById(questionId).getAnswer().stream()
+    public SolvedPaperTestDto getCompleteQuestionPaper(Long questionId) {
+        AssignQuestions assignQuestions = assignQuestionRepository.getAssignQuestionsById(
+            questionId);
+        long correctNum = assignQuestions.getAnswer().stream().filter(Answer::getRightAnswer).count();
+        List<AnswerResponseDto> answerResponseDtos = assignQuestions.getAnswer().stream()
             .map(AnswerResponseDto::of).collect(
                 Collectors.toList());
+        return new SolvedPaperTestDto(assignQuestions.getScore(), assignQuestions.getTotalScore(),
+            (int) correctNum, assignQuestions.getQuestionNum(),
+            answerResponseDtos);
     }
 
     public PaperTestAnswerResponseDto getCompletePaperTest(Long paperTestId) {

@@ -40,6 +40,10 @@ public class AssignQuestions extends AuditingTimeEntity {
     private Subject subject;
     private AssignStatus assignStatus;
 
+    private Integer totalScore;
+    private Integer score;
+    private Integer questionNum;
+
     @OneToMany(mappedBy = "assignQuestions")
     private List<Answer> answer;
 
@@ -71,11 +75,23 @@ public class AssignQuestions extends AuditingTimeEntity {
         }
     }
 
+    public void plusScore(Integer score) {
+        this.score += score;
+    }
+
+    public void plusTotalScore(Integer score) {
+        this.totalScore += score;
+    }
+
     @Builder
-    public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject, AssignStatus assignStatus) {
+    public AssignQuestions(Student student, QuestionPaper questionPaper, Subject subject,
+        AssignStatus assignStatus) {
         setStudent(student);
         setQuestionPaper(questionPaper);
         this.subject = subject;
         this.assignStatus = assignStatus;
+        this.questionNum = questionPaper.getQuestionNum();
+        this.totalScore = 0;
+        this.score = 0;
     }
 }
