@@ -37,6 +37,7 @@ public class ConnectQuestion extends AuditingTimeEntity {
     // 연관 관계 편의 메서드
     private void setQuestion(Question question) {
         this.question = question;
+        this.score = question.getScore();
         if (!question.getConnectQuestions().contains(this)) {
             question.getConnectQuestions().add(this);
         }
