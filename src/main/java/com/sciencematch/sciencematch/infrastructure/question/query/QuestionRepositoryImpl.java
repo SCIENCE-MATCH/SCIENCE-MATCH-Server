@@ -1,6 +1,8 @@
 package com.sciencematch.sciencematch.infrastructure.question.query;
 
 import static com.sciencematch.sciencematch.domain.question.QQuestion.question;
+import static com.sciencematch.sciencematch.domain.QChapter.chapter;
+
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -29,8 +31,11 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom{
                 question.image,
                 question.category,
                 question.level,
-                question.score
+                question.score,
+                chapter.id,
+                chapter.description
             )).from(question)
+            .join(chapter).on(question.chapterId.eq(chapter.id))
             .where(chaptersEq(normalQuestionPaperRequestDto.getChapterIds()),
                 categoryEq(normalQuestionPaperRequestDto.getCategory()),
                 mockexamEq(normalQuestionPaperRequestDto.getMockExam()))
