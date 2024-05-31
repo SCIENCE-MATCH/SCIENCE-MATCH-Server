@@ -47,6 +47,15 @@ public class TeacherService {
         teacher.changeLogo(logoURL);
     }
 
+    //로고 변경
+    @Transactional
+    public void deleteLogo(String email) throws IOException {
+        Teacher teacher = teacherRepository.getTeacherByEmail(email);
+        if (teacher.getLogo() != null) {
+            s3Service.deleteFile(teacher.getLogo());
+        }
+    }
+
     //학생 관리 조회
     public List<MyStudentsResponseDto> getMyStudents(String email) {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
