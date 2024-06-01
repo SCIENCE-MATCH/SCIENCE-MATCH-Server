@@ -34,6 +34,8 @@ public class QuestionPaper extends AuditingTimeEntity {
     private String title;
     private String makerName;
     private Subject subject;
+    private String themeColor;
+    private Integer template;
 
     @OneToMany(mappedBy = "questionPaper")
     private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
@@ -43,7 +45,7 @@ public class QuestionPaper extends AuditingTimeEntity {
 
     @Builder
     public QuestionPaper(Integer questionNum, School school, Category category, QuestionTag questionTag,
-        String title, String makerName, Subject subject) {
+        String title, String makerName, Subject subject, String themeColor, Integer template) {
         this.questionNum = questionNum;
         this.school = school;
         this.category = category;
@@ -51,6 +53,8 @@ public class QuestionPaper extends AuditingTimeEntity {
         this.title = title;
         this.makerName = makerName;
         this.subject = subject;
+        this.themeColor = themeColor;
+        this.template = template;
     }
 
 

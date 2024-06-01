@@ -131,6 +131,8 @@ public class QuestionPaperService {
             .title(questionPaperCreateDto.getTitle())
             .makerName(questionPaperCreateDto.getMakerName())
             .subject(questionPaperCreateDto.getSubject())
+            .themeColor(questionPaperCreateDto.getThemeColor())
+            .template(questionPaperCreateDto.getTemplate())
             .build();
         questionPaperRepository.save(questionPaper);
         for (Question question : questions) {

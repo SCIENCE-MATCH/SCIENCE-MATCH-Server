@@ -33,4 +33,8 @@ public class QuestionPaperCreateDto {
     @Schema(example = "BIOLOGY")
     private Subject subject; //과목
 
+    @Schema(example = "#000000")
+    private String themeColor;
+    @Schema(example = "0")
+    private Integer template;
 }
