@@ -23,7 +23,7 @@ public class QuestionPaperCreateDto {
 
     @Schema(example = "HIGH")
     private School school;
-    @Schema(example = "FIRST")
+    @Schema(example = "FIRST1")
     private Semester semester;
 
     @Schema(example = "MULTIPLE")
