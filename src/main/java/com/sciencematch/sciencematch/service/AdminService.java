@@ -1,5 +1,8 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
+import com.sciencematch.sciencematch.domain.Chapter;
+import com.sciencematch.sciencematch.domain.Concept;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.Team;
@@ -7,9 +10,13 @@ import com.sciencematch.sciencematch.DTO.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.Enums.Authority;
+import com.sciencematch.sciencematch.external.client.aws.S3Service;
+import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
+import com.sciencematch.sciencematch.infrastructure.ConceptRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.infrastructure.TeamRepository;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +30,9 @@ public class AdminService {
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
     private final TeamRepository teamRepository;
+    private final ConceptRepository conceptRepository;
+    private final ChapterRepository chapterRepository;
+    private final S3Service s3Service;
 
     public List<WaitingTeacherResponseDto> getAllWaitingTeachers() {
         return teacherRepository.findAllByAuthority(Authority.ROLE_GUEST).stream()
@@ -71,5 +81,16 @@ public class AdminService {
         Team team = teamRepository.getTeamById(id);
         teamRepository.delete(team);
         return AdminTeamResponseDto.of(team);
+    }
+
+    @Transactional
+    public void postConcept(ConceptPostDto conceptPostDto) throws IOException {
+        String uploadImage = s3Service.uploadImage(conceptPostDto.getImage(), "concept");
+        Chapter chapter = chapterRepository.getChapterById(conceptPostDto.getChapterId());
+        Concept concept = Concept.builder()
+            .image(uploadImage)
+            .chapter(chapter)
+            .build();
+        conceptRepository.save(concept);
     }
 }

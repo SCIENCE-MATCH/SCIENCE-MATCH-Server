@@ -46,6 +46,9 @@ public class    Chapter {
     @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private final List<Chapter> children = new ArrayList<>();
 
+    @OneToMany(mappedBy = "chapter", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private final List<Concept> concepts = new ArrayList<>();
+
     @Builder
     private Chapter(School school, Semester semester, Subject subject, String description, Chapter  parent) {
         this.school = school;

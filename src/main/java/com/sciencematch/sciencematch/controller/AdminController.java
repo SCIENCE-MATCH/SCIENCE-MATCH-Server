@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.controller;
 
+import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
@@ -122,7 +123,7 @@ public class AdminController {
 
     @PatchMapping("/chapter")
     @Operation(summary = "단원 수정")
-    public ApiResponseDto<?> postChapter(@RequestBody @Valid ChapterPatchDto chapterPatchDto) {
+    public ApiResponseDto<?> patchChapter(@RequestBody @Valid ChapterPatchDto chapterPatchDto) {
         chapterService.patchChapter(chapterPatchDto);
         return ApiResponseDto.success(SuccessStatus.PATCH_CHAPTER_SUCCESS);
     }
@@ -158,4 +159,10 @@ public class AdminController {
         return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_SUCCESS);
     }
 
+    @PostMapping(value = "/concept")
+    @Operation(summary = "개념 생성")
+    public ApiResponseDto<?> postConcept(ConceptPostDto conceptPostDto) throws IOException {
+        adminService.postConcept(conceptPostDto);
+        return ApiResponseDto.success(SuccessStatus.CREATE_CONCEPT_SUCCESS);
+    }
 }

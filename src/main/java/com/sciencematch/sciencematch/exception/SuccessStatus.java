@@ -61,6 +61,7 @@ public enum SuccessStatus {
     CREATE_PAPER_TEST_SUCCESS(HttpStatus.CREATED, "일대일 질문을 성공적으로 생성하였습니다."),
     CREATE_STUDENT_SUCCESS(HttpStatus.CREATED, "학생을 성공적으로 생성하였습니다."),
     CREATE_GROUP_SUCCESS(HttpStatus.CREATED, "반을 성공적으로 생성하였습니다."),
+    CREATE_CONCEPT_SUCCESS(HttpStatus.CREATED, "개념을 성공적으로 생성하였습니다."),
     ;
 
     private final HttpStatus httpStatus;
