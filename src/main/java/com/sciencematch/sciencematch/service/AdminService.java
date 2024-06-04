@@ -99,4 +99,8 @@ public class AdminService {
             .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void deleteConcept(Long id) {
+        conceptRepository.deleteById(id);
+    }
 }

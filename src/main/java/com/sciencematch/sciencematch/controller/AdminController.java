@@ -171,4 +171,12 @@ public class AdminController {
     public ApiResponseDto<?> getConcept(@RequestParam Long chapterId) {
         return ApiResponseDto.success(SuccessStatus.GET_CONCEPT_SUCCESS, adminService.getConcept(chapterId));
     }
+
+    @DeleteMapping(value = "/concept")
+    @Operation(summary = "개념 삭제")
+    public ApiResponseDto<?> deleteConcept(
+        @RequestParam Long conceptId){
+        adminService.deleteConcept(conceptId);
+        return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_SUCCESS);
+    }
 }
