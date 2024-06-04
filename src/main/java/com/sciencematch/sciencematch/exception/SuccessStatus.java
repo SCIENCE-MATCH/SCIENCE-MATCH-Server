@@ -52,6 +52,8 @@ public enum SuccessStatus {
     GET_ASSIGN_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "출제된 문제지를 성공적으로 조회하였습니다."),
     GET_ASSIGN_PAPER_TEST_SUCCESS(HttpStatus.OK, "출제된 일대일 질문을 성공적으로 조회하였습니다."),
     GRADING_ANSWER_SUCCESS(HttpStatus.OK, "출제된 일대일 질문을 성공적으로 조회하였습니다."),
+    GET_CONCEPT_SUCCESS(HttpStatus.OK, "개념을 성공적으로 조회하였습니다."),
+    DELETE_CONCEPT_SUCCESS(HttpStatus.OK, "개념을 성공적으로 삭제하였습니다."),
 
     /*
      * 201 created

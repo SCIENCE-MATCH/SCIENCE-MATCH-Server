@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class    Chapter {
+public class Chapter {
 
     @Id
     @GeneratedValue

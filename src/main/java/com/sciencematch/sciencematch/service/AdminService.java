@@ -93,4 +93,10 @@ public class AdminService {
             .build();
         conceptRepository.save(concept);
     }
+
+    public List<String> getConcept(Long chapterId){
+        return conceptRepository.getByChapterId(chapterId).stream().map(Concept::getImage)
+            .collect(Collectors.toList());
+    }
+
 }

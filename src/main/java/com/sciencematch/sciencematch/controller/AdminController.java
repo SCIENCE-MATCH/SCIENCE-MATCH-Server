@@ -1,7 +1,5 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
-import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
@@ -9,9 +7,11 @@ import com.sciencematch.sciencematch.DTO.chapter.ChapterPatchDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterPostDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
+import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.DTO.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.question.QuestionPostDto;
 import com.sciencematch.sciencematch.DTO.question.QuestionRequestDto;
+import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
 import com.sciencematch.sciencematch.service.ChapterService;
@@ -159,10 +159,16 @@ public class AdminController {
         return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_SUCCESS);
     }
 
-    @PostMapping(value = "/concept")
+    @PostMapping(value = "/concept", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "개념 생성")
-    public ApiResponseDto<?> postConcept(ConceptPostDto conceptPostDto) throws IOException {
+    public ApiResponseDto<?> postConcept(@ModelAttribute ConceptPostDto conceptPostDto) throws IOException {
         adminService.postConcept(conceptPostDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_CONCEPT_SUCCESS);
+    }
+
+    @GetMapping(value = "/concept")
+    @Operation(summary = "개념 조회")
+    public ApiResponseDto<?> getConcept(@RequestParam Long chapterId) {
+        return ApiResponseDto.success(SuccessStatus.GET_CONCEPT_SUCCESS, adminService.getConcept(chapterId));
     }
 }
