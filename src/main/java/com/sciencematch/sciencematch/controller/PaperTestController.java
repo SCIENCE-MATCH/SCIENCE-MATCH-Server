@@ -38,7 +38,7 @@ public class PaperTestController {
 
     @PostMapping("/paper-test/create")
     @Operation(summary = "일대일 질문 생성")
-    public ApiResponseDto<?> createPaperTest(@RequestBody @Valid PaperTestRequestDto paperTestRequestDto) {
+    public ApiResponseDto<?> createPaperTest(@RequestBody @Valid List<PaperTestRequestDto> paperTestRequestDto) {
         paperTestService.createPaperTest(paperTestRequestDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_PAPER_TEST_SUCCESS);
     }

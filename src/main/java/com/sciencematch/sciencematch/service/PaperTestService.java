@@ -30,16 +30,17 @@ public class PaperTestService {
     }
 
     @Transactional
-    public void createPaperTest(PaperTestRequestDto paperTestRequestDto) {
-        PaperTest paperTest = PaperTest.builder()
-            .school(paperTestRequestDto.getSchool())
-            .semester(paperTestRequestDto.getSemester())
-            .chapterId(paperTestRequestDto.getChapterId())
-            .question(paperTestRequestDto.getQuestion())
-            .solution(paperTestRequestDto.getSolution())
-            .build();
-
-        paperTestRepository.save(paperTest);
+    public void createPaperTest(List<PaperTestRequestDto> paperTestRequestDtos) {
+        for (PaperTestRequestDto paperTestRequestDto : paperTestRequestDtos) {
+            PaperTest paperTest = PaperTest.builder()
+                .school(paperTestRequestDto.getSchool())
+                .semester(paperTestRequestDto.getSemester())
+                .chapterId(paperTestRequestDto.getChapterId())
+                .question(paperTestRequestDto.getQuestion())
+                .solution(paperTestRequestDto.getSolution())
+                .build();
+            paperTestRepository.save(paperTest);
+        }
     }
 
     @Transactional
