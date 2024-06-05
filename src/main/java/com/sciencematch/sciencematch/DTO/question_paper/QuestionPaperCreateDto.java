@@ -8,6 +8,7 @@ import com.sciencematch.sciencematch.Enums.Subject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class QuestionPaperCreateDto {
@@ -37,4 +38,5 @@ public class QuestionPaperCreateDto {
     private String themeColor;
     @Schema(example = "0")
     private Integer template;
+    private MultipartFile pdf;
 }

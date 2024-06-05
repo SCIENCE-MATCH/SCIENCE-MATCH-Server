@@ -13,9 +13,12 @@ import com.sciencematch.sciencematch.service.QuestionPaperService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +49,10 @@ public class QuestionPaperController {
             questionPaperService.getNormalQuestions(normalQuestionPaperRequestDto));
     }
 
-    @PostMapping("/question-paper/create")
+    @PostMapping(value = "/question-paper/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "문제지 생성")
     public ApiResponseDto<?> createQuestionPaper(
-        QuestionPaperCreateDto questionPaperCreateDto) {
+        @ModelAttribute QuestionPaperCreateDto questionPaperCreateDto) throws IOException {
         questionPaperService.createQuestionPaper(questionPaperCreateDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_QUESTION_PAPER_SUCCESS);
     }

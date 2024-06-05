@@ -14,11 +14,13 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.Enums.Level;
+import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,6 +38,7 @@ public class QuestionPaperService {
     private final ConnectQuestionRepository connectQuestionRepository;
     private final AssignQuestionRepository assignQuestionRepository;
     private final StudentRepository studentRepository;
+    private final S3Service s3Service;
 
     //학습지 조회
     public List<QuestionPaperResponseDto> getAllQuestionPaper(
@@ -119,9 +122,13 @@ public class QuestionPaperService {
         return null;
     }
 
-    public void createQuestionPaper(QuestionPaperCreateDto questionPaperCreateDto) {
+    public void createQuestionPaper(QuestionPaperCreateDto questionPaperCreateDto)
+        throws IOException {
         List<Question> questions = questionRepository.findAllByIds(
             questionPaperCreateDto.getQuestionIds());
+
+        String questionPaperUrl = s3Service.uploadImage(questionPaperCreateDto.getPdf(),
+            "question-paper");
 
         QuestionPaper questionPaper = QuestionPaper.builder()
             .questionNum(questionPaperCreateDto.getQuestionNum())
@@ -133,6 +140,7 @@ public class QuestionPaperService {
             .subject(questionPaperCreateDto.getSubject())
             .themeColor(questionPaperCreateDto.getThemeColor())
             .template(questionPaperCreateDto.getTemplate())
+            .pdf(questionPaperUrl)
             .build();
         questionPaperRepository.save(questionPaper);
         for (Question question : questions) {
