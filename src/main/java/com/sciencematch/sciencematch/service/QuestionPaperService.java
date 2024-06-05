@@ -177,4 +177,9 @@ public class QuestionPaperService {
                 .build());
         }
     }
+
+    @Transactional
+    public void deleteQuestionPaper(List<Long> questionPaperId) {
+        questionPaperRepository.deleteAllById(questionPaperId);
+    }
 }

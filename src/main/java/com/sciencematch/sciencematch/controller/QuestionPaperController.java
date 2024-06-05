@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,8 @@ public class QuestionPaperController {
 
     @PostMapping("/question-paper/submit")
     @Operation(summary = "단일 문제 출제")
-    public ApiResponseDto<?> submitQuestionPaper(@RequestBody QuestionPaperSubmitDto questionPaperSubmitDto) {
+    public ApiResponseDto<?> submitQuestionPaper(
+        @RequestBody QuestionPaperSubmitDto questionPaperSubmitDto) {
         questionPaperService.submitQuestionPaper(questionPaperSubmitDto);
         return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
@@ -66,5 +68,13 @@ public class QuestionPaperController {
         MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {
         questionPaperService.submitMultipleQuestionPaper(multipleQuestionPaperSubmitDto);
         return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
+    }
+
+    //TODO 연관관계 등 다시 확인할 필요 존재
+    @DeleteMapping("/question-paper")
+    @Operation(summary = "문제지 삭제")
+    public ApiResponseDto<?> deleteQuestionPaper(@RequestBody List<Long> questionPaperIds) {
+        questionPaperService.deleteQuestionPaper(questionPaperIds);
+        return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_PAPER_SUCCESS);
     }
 }
