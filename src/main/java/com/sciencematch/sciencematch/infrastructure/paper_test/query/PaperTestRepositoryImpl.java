@@ -26,9 +26,11 @@ public class PaperTestRepositoryImpl implements PaperTestRepositoryCustom {
             .select(new QPaperTestResponseDto(
                 paperTest.id,
                 paperTest.school,
+                paperTest.semester,
                 paperTest.question,
                 paperTest.makerName,
                 paperTest.subject,
+                paperTest.chapterDescription,
                 paperTest.createAt
             ))
             .from(paperTest)

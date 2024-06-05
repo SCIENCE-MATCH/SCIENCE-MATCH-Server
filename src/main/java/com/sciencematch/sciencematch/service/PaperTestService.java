@@ -5,9 +5,11 @@ import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSubmitDto;
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
+import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
@@ -23,6 +25,7 @@ public class PaperTestService {
     private final PaperTestRepository paperTestRepository;
     private final StudentRepository studentRepository;
     private final AssignPaperTestRepository assignPaperTestRepository;
+    private final ChapterRepository chapterRepository;
 
     public List<PaperTestResponseDto> getAllPaperTest(
         PaperTestSelectDto preLessonSelectDto) {
@@ -31,11 +34,13 @@ public class PaperTestService {
 
     @Transactional
     public void createPaperTest(List<PaperTestRequestDto> paperTestRequestDtos) {
+
         for (PaperTestRequestDto paperTestRequestDto : paperTestRequestDtos) {
+            Chapter chapter = chapterRepository.getChapterById(paperTestRequestDto.getChapterId());
             PaperTest paperTest = PaperTest.builder()
                 .school(paperTestRequestDto.getSchool())
                 .semester(paperTestRequestDto.getSemester())
-                .chapterId(paperTestRequestDto.getChapterId())
+                .chapterDescription(chapter.getDescription())
                 .question(paperTestRequestDto.getQuestion())
                 .solution(paperTestRequestDto.getSolution())
                 .build();

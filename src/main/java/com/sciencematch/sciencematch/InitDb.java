@@ -765,7 +765,7 @@ public class InitDb {
                 .school(School.HIGH)
                 .semester(Semester.SECOND1)
                 .subject(Subject.SCIENCE)
-                .chapterId(9L)
+                .chapterDescription("단원")
                 .question("문제1")
                 .solution("해결")
                 .build();
