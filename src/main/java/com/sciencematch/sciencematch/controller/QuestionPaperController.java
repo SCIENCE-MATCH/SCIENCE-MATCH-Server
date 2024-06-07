@@ -34,7 +34,7 @@ public class QuestionPaperController {
     private final QuestionPaperService questionPaperService;
 
     @PostMapping("/question-paper")
-    @Operation(summary = "문제지 조회")
+    @Operation(summary = "학습지 조회")
     public ApiResponseDto<List<QuestionPaperResponseDto>> getAllQuestionPaper(
         @RequestBody QuestionPaperSelectDto questionPaperSelectDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
@@ -50,7 +50,7 @@ public class QuestionPaperController {
     }
 
     @PostMapping(value = "/question-paper/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "문제지 생성")
+    @Operation(summary = "학습지 생성")
     public ApiResponseDto<?> createQuestionPaper(
         @ModelAttribute QuestionPaperCreateDto questionPaperCreateDto) throws IOException {
         questionPaperService.createQuestionPaper(questionPaperCreateDto);
@@ -75,7 +75,7 @@ public class QuestionPaperController {
 
     //TODO 연관관계 등 다시 확인할 필요 존재
     @DeleteMapping("/question-paper")
-    @Operation(summary = "문제지 삭제")
+    @Operation(summary = "학습지 삭제")
     public ApiResponseDto<?> deleteQuestionPaper(@RequestBody List<Long> questionPaperIds) {
         questionPaperService.deleteQuestionPaper(questionPaperIds);
         return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_PAPER_SUCCESS);
