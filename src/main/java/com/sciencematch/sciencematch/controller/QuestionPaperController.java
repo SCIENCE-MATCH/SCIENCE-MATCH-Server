@@ -36,7 +36,7 @@ public class QuestionPaperController {
     @PostMapping("/question-paper")
     @Operation(summary = "문제지 조회")
     public ApiResponseDto<List<QuestionPaperResponseDto>> getAllQuestionPaper(
-        QuestionPaperSelectDto questionPaperSelectDto) {
+        @RequestBody QuestionPaperSelectDto questionPaperSelectDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
             questionPaperService.getAllQuestionPaper(questionPaperSelectDto));
     }

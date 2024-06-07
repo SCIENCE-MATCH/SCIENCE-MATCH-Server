@@ -18,11 +18,13 @@ public class QuestionPaperResponseDto {
     private String makerName;
     private Category category;
     private Subject subject;
+    private String pdf;
     private LocalDateTime createdAt;
 
     @QueryProjection
     public QuestionPaperResponseDto(Long id, School school, Integer questionNum,
-        String title, String makerName, Category category, Subject subject, LocalDateTime createdAt) {
+        String title, String makerName, Category category, Subject subject,
+        String pdf, LocalDateTime createdAt) {
         this.id = id;
         this.school = school;
         this.questionNum = questionNum;
@@ -30,12 +32,14 @@ public class QuestionPaperResponseDto {
         this.makerName = makerName;
         this.category = category;
         this.subject = subject;
+        this.pdf = pdf;
         this.createdAt = createdAt;
     }
 
     public static QuestionPaperResponseDto of(QuestionPaper questionPaper) {
         return new QuestionPaperResponseDto(questionPaper.getId(), questionPaper.getSchool(), questionPaper.getQuestionNum(),
-            questionPaper.getTitle(), questionPaper.getMakerName(), questionPaper.getCategory(), questionPaper.getSubject(), questionPaper.getCreateAt());
+            questionPaper.getTitle(), questionPaper.getMakerName(), questionPaper.getCategory(), questionPaper.getSubject(),
+            questionPaper.getPdf(), questionPaper.getCreateAt());
     }
 
 }
