@@ -1,12 +1,12 @@
 package com.sciencematch.sciencematch.controller;
 
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDetailDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
-import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.StudentService;
@@ -55,12 +55,12 @@ public class StudentController {
             studentService.getMyQuestionPaper(user.getUsername()));
     }
 
-    @Operation(summary = "학습지 답안 형식 조회", description = "문제 풀기 창에서 사용 | 일대일 질문은 전부 단답형")
-    @GetMapping("/question-paper/answer/structure")
-    public ApiResponseDto<List<Category>> getQuestionPaperStructure(
+    @Operation(summary = "학습지 상세 조회", description = "문제 풀기 창에서 사용 | 일대일 질문은 전부 단답형")
+    @GetMapping("/question-paper/detail")
+    public ApiResponseDto<QuestionPaperDetailDto> getQuestionPaperDetail(
         @RequestParam Long AssignQuestionPaperId) {
-        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_STRUCTURE_SUCCESS,
-            studentService.getQuestionPaperStructure(AssignQuestionPaperId));
+        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_DETAIL_SUCCESS,
+            studentService.getQuestionPaperDetail(AssignQuestionPaperId));
     }
 
     @Operation(summary = "일대일 질문지 리스트 조회")

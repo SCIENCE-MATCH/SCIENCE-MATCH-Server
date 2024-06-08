@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDetailDto;
 import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
@@ -9,7 +10,6 @@ import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
 import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
-import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
@@ -49,9 +49,11 @@ public class StudentService {
             .map(AssignQuestionPaperResponseDto::of).collect(Collectors.toList());
     }
 
-    public List<Category> getQuestionPaperStructure(Long assignQuestionPaperId) {
-        return assignQuestionRepository.getAssignQuestionsById(assignQuestionPaperId)
-            .getAnswer().stream().map(Answer::getCategory).collect(Collectors.toList());
+    public QuestionPaperDetailDto getQuestionPaperDetail(Long assignQuestionPaperId) {
+        AssignQuestions assignQuestions = assignQuestionRepository.getAssignQuestionsById(
+            assignQuestionPaperId);
+
+        return QuestionPaperDetailDto.of(assignQuestions);
     }
 
     public List<AssignPaperTestResponseDto> getMyPaperTest(String phoneNum) {
