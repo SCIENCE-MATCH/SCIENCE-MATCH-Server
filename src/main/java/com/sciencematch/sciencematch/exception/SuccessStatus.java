@@ -65,6 +65,12 @@ public enum SuccessStatus {
     CREATE_STUDENT_SUCCESS(HttpStatus.CREATED, "학생을 성공적으로 생성하였습니다."),
     CREATE_GROUP_SUCCESS(HttpStatus.CREATED, "반을 성공적으로 생성하였습니다."),
     CREATE_CONCEPT_SUCCESS(HttpStatus.CREATED, "개념을 성공적으로 생성하였습니다."),
+
+
+    /**
+     *  204 no content
+     */
+    DELETE_GROUP_SUCCESS(HttpStatus.NO_CONTENT, "반을 성공적으로 삭제하였습니다.")
     ;
 
     private final HttpStatus httpStatus;

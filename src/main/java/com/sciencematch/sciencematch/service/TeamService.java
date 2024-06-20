@@ -77,4 +77,13 @@ public class TeamService {
             .build());
     }
 
+    @Transactional
+    public void deleteGroup(List<Long> groupIds) {
+        for (Long id : groupIds) {
+            teamStudentRepository.deleteAllByTeamId(id);
+        }
+        teamStudentRepository.flush();
+        teamRepository.deleteAllByIdInBatch(groupIds);
+    }
+
 }

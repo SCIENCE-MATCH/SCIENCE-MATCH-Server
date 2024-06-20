@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TeamStudentRepository extends JpaRepository<TeamStudent, Long> {
 
+    void deleteAllByTeamId(Long teamId);
+
 }

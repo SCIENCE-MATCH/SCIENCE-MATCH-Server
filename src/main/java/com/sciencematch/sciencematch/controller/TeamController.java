@@ -1,12 +1,12 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.DTO.team.TeamDetailDto;
 import com.sciencematch.sciencematch.DTO.team.TeamResponseDto;
 import com.sciencematch.sciencematch.DTO.team.request.TeamRequestDto;
+import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
-import com.sciencematch.sciencematch.service.TeamService;
 import com.sciencematch.sciencematch.service.TeacherService;
+import com.sciencematch.sciencematch.service.TeamService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,12 +62,20 @@ public class TeamController {
             teamService.updateGroupDetail(groupId, teamRequestDto));
     }
 
-    @PostMapping("/group")
+    @PostMapping("/team")
     @Operation(summary = "반 생성")
     public ApiResponseDto<TeamResponseDto> createGroup(
         @Parameter(hidden = true) @AuthenticationPrincipal User user,
         @RequestBody @Valid TeamRequestDto teamRequestDto) {
         return ApiResponseDto.success(SuccessStatus.CREATE_GROUP_SUCCESS,
             teamService.createGroup(user.getUsername(), teamRequestDto));
+    }
+
+    @DeleteMapping("/team")
+    @Operation(summary = "반 삭제")
+    public ApiResponseDto<?> deleteGroup(
+        @Schema(example = "1") @RequestBody List<Long> groupIds) {
+        teamService.deleteGroup(groupIds);
+        return ApiResponseDto.success(SuccessStatus.DELETE_GROUP_SUCCESS);
     }
 }
