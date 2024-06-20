@@ -37,7 +37,6 @@ public class TeamStudent extends AuditingTimeEntity {
         this.team = team;
         if (!team.getTeamStudents().contains(this)) {
             team.getTeamStudents().add(this);
-            team.plusStudentsNum();
         }
     }
 
