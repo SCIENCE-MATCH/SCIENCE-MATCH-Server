@@ -15,6 +15,6 @@ public class TeamResponseDto {
 
     public static TeamResponseDto of(Team team) {
         return new TeamResponseDto(team.getId(), team.getName(), team.getTeacher().getName(),
-            team.getStudentsNum());
+            team.getTeamStudents().size());
     }
 }
