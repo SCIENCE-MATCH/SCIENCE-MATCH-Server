@@ -1,13 +1,14 @@
 package com.sciencematch.sciencematch.domain;
 
 import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
-import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.Enums.Authority;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,7 @@ public class Student extends AuditingTimeEntity {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.REMOVE})
     private final List<TeamStudent> teamStudents = new ArrayList<>();
     private Authority authority;
 
