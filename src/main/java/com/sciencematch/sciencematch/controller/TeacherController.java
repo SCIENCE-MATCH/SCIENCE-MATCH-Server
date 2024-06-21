@@ -30,6 +30,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -98,6 +99,14 @@ public class TeacherController {
         @Schema(example = "01087654321") @RequestParam("phoneNum") String phoneNum) {
         return ApiResponseDto.success(SuccessStatus.DELETE_STUDENT_SUCCESS,
             authService.deleteStudent(phoneNum));
+    }
+
+    @PatchMapping("/student/re-enroll")
+    @Operation(summary = "학생 재등록")
+    public ApiResponseDto<?> reEnrollStudent(
+        @RequestParam @Valid Long studentId) {
+        authService.reEnrollStudent(studentId);
+        return ApiResponseDto.success(SuccessStatus.RE_ENROLL_STUDENT_SUCCESS);
     }
 
     @GetMapping("/students")

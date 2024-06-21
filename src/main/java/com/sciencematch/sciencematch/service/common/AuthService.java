@@ -87,6 +87,11 @@ public class AuthService {
     }
 
     @Transactional
+    public void reEnrollStudent(Long studentId) {
+        studentRepository.reEnrollStudent(studentId);
+    }
+
+    @Transactional
     public String duplCheck(DuplCheckDto email) {
 
         if (teacherRepository.existsByEmail(email.getEmail())) {
