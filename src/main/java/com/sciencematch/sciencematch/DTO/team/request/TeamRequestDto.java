@@ -11,6 +11,9 @@ public class TeamRequestDto {
     @Schema(example = "예시 반")
     @NotBlank
     private String teamName;
+    @Schema(example = "예시 선생님 이름")
+    @NotBlank
+    private String teacherName;
     @Schema(example = "[1, 2]")
     private List<Long> studentIds;
 }

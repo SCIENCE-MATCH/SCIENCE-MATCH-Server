@@ -51,6 +51,7 @@ public class TeamService {
 
         Team team = teamRepository.save(Team.builder()
             .name(teamRequestDto.getTeamName())
+            .teacherName(teamRequestDto.getTeacherName())
             .teacher(teacher)
             .build());
 

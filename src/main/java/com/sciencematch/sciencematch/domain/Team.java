@@ -32,6 +32,7 @@ public class Team extends AuditingTimeEntity {
     private Long id;
 
     private String name;
+    private String teacherName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
@@ -45,8 +46,9 @@ public class Team extends AuditingTimeEntity {
 
     //반 생성시 선택한 학생들의 id로 조회해 리스트로 넘겨서 그룹 생성
     @Builder
-    public Team(String name, Teacher teacher) {
+    public Team(String name, String teacherName, Teacher teacher) {
         this.name = name;
+        this.teacherName = teacherName;
         setTeacher(teacher);
         this.teamStudents = new ArrayList<>();
     }

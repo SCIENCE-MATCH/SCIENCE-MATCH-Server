@@ -14,7 +14,7 @@ public class TeamResponseDto {
     private Integer studentNum;
 
     public static TeamResponseDto of(Team team) {
-        return new TeamResponseDto(team.getId(), team.getName(), team.getTeacher().getName(),
+        return new TeamResponseDto(team.getId(), team.getName(), team.getTeacherName(),
             team.getTeamStudents().size());
     }
 }

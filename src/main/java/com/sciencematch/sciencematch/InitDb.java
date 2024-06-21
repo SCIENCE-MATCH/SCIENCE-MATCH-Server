@@ -86,6 +86,7 @@ public class InitDb {
 
             Team team = Team.builder()
                 .name("예시 반")
+                .teacherName("예시 선생 이름")
                 .teacher(teacher)
                 .build();
 
