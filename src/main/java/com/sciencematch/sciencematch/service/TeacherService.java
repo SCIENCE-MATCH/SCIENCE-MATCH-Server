@@ -70,7 +70,7 @@ public class TeacherService {
 
     //간단 학생 조회 (반 생성, 퀴즈 등)
     public List<SimpleStudentsResponseDto> findAllStudents(String email) {
-        return teacherRepository.getTeacherByEmail(email).getStudents().stream().map(
+        return teacherRepository.getTeacherByEmail(email).getStudents().stream().filter(s -> !s.getDeleted()).map(
                 SimpleStudentsResponseDto::of)
             .collect(Collectors.toList());
     }
