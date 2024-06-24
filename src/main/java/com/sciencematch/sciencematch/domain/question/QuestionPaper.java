@@ -7,6 +7,7 @@ import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Subject;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,10 +40,10 @@ public class QuestionPaper extends AuditingTimeEntity {
 
     private String pdf;
 
-    @OneToMany(mappedBy = "questionPaper")
+    @OneToMany(mappedBy = "questionPaper", cascade = {CascadeType.REMOVE})
     private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "questionPaper")
+    @OneToMany(mappedBy = "questionPaper", cascade = {CascadeType.REMOVE})
     private final List<AssignQuestions> assignQuestions = new ArrayList<>();
 
     @Builder

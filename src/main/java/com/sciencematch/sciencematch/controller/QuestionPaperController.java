@@ -73,7 +73,6 @@ public class QuestionPaperController {
         return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
 
-    //TODO 연관관계 등 다시 확인할 필요 존재
     @DeleteMapping("/question-paper")
     @Operation(summary = "학습지 삭제")
     public ApiResponseDto<?> deleteQuestionPaper(@RequestBody List<Long> questionPaperIds) {

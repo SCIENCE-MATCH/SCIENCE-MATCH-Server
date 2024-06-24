@@ -188,6 +188,12 @@ public class QuestionPaperService {
 
     @Transactional
     public void deleteQuestionPaper(List<Long> questionPaperId) {
+        for (Long id : questionPaperId) {
+            connectQuestionRepository.deleteAllByQuestionPaperId(id);
+            assignQuestionRepository.deleteAllByQuestionPaperId(id);
+        }
+        connectQuestionRepository.flush();
+        assignQuestionRepository.flush();
         questionPaperRepository.deleteAllById(questionPaperId);
     }
 }

@@ -14,4 +14,6 @@ public interface ConnectQuestionRepository extends JpaRepository<ConnectQuestion
     @Query("select cq from ConnectQuestion cq where cq.questionPaper = :questionPaper")
     List<ConnectQuestion> getAllConnectQuestionByQuestionPaper(@Param("questionPaper") QuestionPaper questionPaper);
 
+    void deleteAllByQuestionPaperId(Long questionPaperId);
+
 }

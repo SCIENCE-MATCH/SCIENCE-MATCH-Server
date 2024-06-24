@@ -24,4 +24,6 @@ public interface AssignQuestionRepository extends JpaRepository<AssignQuestions,
             () -> new CustomException(ErrorStatus.NOT_FOUND_QUESTION_PAPER_EXCEPTION,
                 ErrorStatus.NOT_FOUND_QUESTION_PAPER_EXCEPTION.getMessage()));
     }
+
+    void deleteAllByQuestionPaperId(Long id);
 }
