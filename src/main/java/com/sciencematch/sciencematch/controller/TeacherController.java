@@ -131,7 +131,6 @@ public class TeacherController {
     public ApiResponseDto<List<TeacherAssignQuestionsResponseDto>> getAssignQuestionPaper(@Schema(example = "2") @Param("studentID") @PathVariable Long studentId) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_LIST_SUCCESS,
             teacherService.getAssignQuestionPaper(studentId));
-
     }
 
     @GetMapping("/assign-paper-test/{studentId}")
@@ -139,7 +138,13 @@ public class TeacherController {
     public ApiResponseDto<List<TeacherAssignPaperTestsResponseDto>> getAssignPaperTest(@Schema(example = "2") @Param("studentID") @PathVariable Long studentId) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_PAPER_TEST_LIST_SUCCESS,
             teacherService.getAssignPaperTest(studentId));
+    }
 
+    @DeleteMapping("/assign-paper-test/{paperTestId}")
+    @Operation(summary = "학생에게 출제한 일대일 질문 삭제")
+    public ApiResponseDto<?> deleteAssignPaperTest(@Schema(example = "2") @Param("paperTestId") @PathVariable Long paperTestId) {
+        teacherService.deleteAssignPaperTest(paperTestId);
+        return ApiResponseDto.success(SuccessStatus.DELETE_ASSIGN_PAPER_TEST_SUCCESS);
     }
 
     @Operation(summary = "출제한 학습지 조회")

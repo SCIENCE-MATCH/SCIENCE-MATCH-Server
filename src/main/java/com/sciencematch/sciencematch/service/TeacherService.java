@@ -89,9 +89,13 @@ public class TeacherService {
     }
 
     public List<TeacherAssignPaperTestsResponseDto> getAssignPaperTest(Long studentId) {
-        return assignPaperTestRepository.findAllByStudentId(
-                studentId).stream().map(TeacherAssignPaperTestsResponseDto::of)
+        return assignPaperTestRepository.findAllByStudentId(studentId).stream().map(TeacherAssignPaperTestsResponseDto::of)
             .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteAssignPaperTest(Long paperTestId) {
+        assignPaperTestRepository.deleteById(paperTestId);
     }
 
     @Transactional

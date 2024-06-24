@@ -73,6 +73,7 @@ public enum SuccessStatus {
      */
     DELETE_GROUP_SUCCESS(HttpStatus.NO_CONTENT, "반을 성공적으로 삭제하였습니다."),
     DELETE_PAPER_TEST_SUCCESS(HttpStatus.NO_CONTENT, "일대일 질문을 성공적으로 삭제하였습니다."),
+    DELETE_ASSIGN_PAPER_TEST_SUCCESS(HttpStatus.NO_CONTENT, "출제한 일대일 질문을 성공적으로 삭제하였습니다."),
     ;
 
     private final HttpStatus httpStatus;

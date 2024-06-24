@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Subject;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,7 +45,7 @@ public class AssignQuestions extends AuditingTimeEntity {
     private Integer score;
     private Integer questionNum;
 
-    @OneToMany(mappedBy = "assignQuestions")
+    @OneToMany(mappedBy = "assignQuestions", cascade = {CascadeType.REMOVE})
     private List<Answer> answer;
 
     private void setStudent(Student student) {
