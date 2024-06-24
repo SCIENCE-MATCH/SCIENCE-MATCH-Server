@@ -26,4 +26,6 @@ public interface AssignPaperTestRepository extends JpaRepository<AssignPaperTest
                 ErrorStatus.NOT_FOUND_PAPER_TEST_EXCEPTION.getMessage()));
     }
 
+    void deleteAllByPaperTestId(Long paperTestId);
+
 }

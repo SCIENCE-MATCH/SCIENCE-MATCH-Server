@@ -33,6 +33,15 @@ public class PaperTestService {
     }
 
     @Transactional
+    public void deletePaperTest(List<Long> paperTestId) {
+        for (Long id : paperTestId) {
+            assignPaperTestRepository.deleteAllByPaperTestId(id);
+        }
+        assignPaperTestRepository.flush();
+        paperTestRepository.deleteAllByIdInBatch(paperTestId);
+    }
+
+    @Transactional
     public void createPaperTest(List<PaperTestRequestDto> paperTestRequestDtos) {
 
         for (PaperTestRequestDto paperTestRequestDto : paperTestRequestDtos) {

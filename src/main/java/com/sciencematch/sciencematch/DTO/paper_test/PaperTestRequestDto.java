@@ -3,10 +3,14 @@ package com.sciencematch.sciencematch.DTO.paper_test;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PaperTestRequestDto {
 
     @Schema(example = "HIGH")

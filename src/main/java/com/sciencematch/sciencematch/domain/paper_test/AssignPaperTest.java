@@ -4,6 +4,7 @@ import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Subject;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +39,7 @@ public class AssignPaperTest extends AuditingTimeEntity {
     private Subject subject;
     private AssignStatus assignStatus;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private PaperTestAnswer paperTestAnswer;
 
     private void setStudent(Student student) {

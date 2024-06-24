@@ -6,6 +6,7 @@ import com.sciencematch.sciencematch.Enums.Subject;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class PaperTest extends AuditingTimeEntity {
     private String question;
     private String solution;
 
-    @OneToMany(mappedBy = "paperTest")
+    @OneToMany(mappedBy = "paperTest", cascade = {CascadeType.REMOVE})
     private final List<AssignPaperTest> assignPaperTests = new ArrayList<>();
 
     @Builder

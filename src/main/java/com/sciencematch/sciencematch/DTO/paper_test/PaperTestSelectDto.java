@@ -15,7 +15,7 @@ public class PaperTestSelectDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime start;
 
-    @Schema(example = "2023-12-08T05:55:58", type = "string")
+    @Schema(example = "2024-12-08T05:55:58", type = "string")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime end;
 }
