@@ -1,16 +1,16 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.domain.Team;
-import com.sciencematch.sciencematch.domain.TeamStudent;
-import com.sciencematch.sciencematch.domain.Student;
-import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.DTO.team.TeamDetailDto;
 import com.sciencematch.sciencematch.DTO.team.TeamResponseDto;
 import com.sciencematch.sciencematch.DTO.team.request.TeamRequestDto;
-import com.sciencematch.sciencematch.infrastructure.TeamStudentRepository;
+import com.sciencematch.sciencematch.domain.Student;
+import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.Team;
+import com.sciencematch.sciencematch.domain.TeamStudent;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.infrastructure.TeamRepository;
+import com.sciencematch.sciencematch.infrastructure.TeamStudentRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -79,12 +79,10 @@ public class TeamService {
     }
 
     @Transactional
-    public void deleteGroup(List<Long> groupIds) {
-        for (Long id : groupIds) {
-            teamStudentRepository.deleteAllByTeamId(id);
-        }
+    public void deleteGroup(Long groupId) {
+        teamStudentRepository.deleteAllByTeamId(groupId);
         teamStudentRepository.flush();
-        teamRepository.deleteAllByIdInBatch(groupIds);
+        teamRepository.deleteById(groupId);
     }
 
 }
