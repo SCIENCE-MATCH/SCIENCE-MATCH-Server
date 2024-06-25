@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.DTO.question_paper;
 
 import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.Enums.QuestionTag;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
@@ -33,6 +34,8 @@ public class QuestionPaperCreateDto {
     private QuestionTag questionTag; //단원별, 시중교재, 모의고사
     @Schema(example = "BIOLOGY")
     private Subject subject; //과목
+    @Schema(example = "MEDIUM")
+    private Level level;
 
     @Schema(example = "#000000")
     private String themeColor;

@@ -139,6 +139,7 @@ public class QuestionPaperService {
             .title(questionPaperCreateDto.getTitle())
             .makerName(questionPaperCreateDto.getMakerName())
             .subject(questionPaperCreateDto.getSubject())
+            .level(questionPaperCreateDto.getLevel())
             .themeColor(questionPaperCreateDto.getThemeColor())
             .template(questionPaperCreateDto.getTemplate())
             .pdf(questionPaperUrl)

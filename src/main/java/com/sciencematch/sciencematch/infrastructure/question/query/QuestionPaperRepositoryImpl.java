@@ -35,6 +35,7 @@ public class QuestionPaperRepositoryImpl implements QuestionPaperRepositoryCusto
                 questionPaper.category,
                 questionPaper.questionTag,
                 questionPaper.subject,
+                questionPaper.level,
                 questionPaper.pdf,
                 questionPaper.createAt))
             .from(questionPaper)

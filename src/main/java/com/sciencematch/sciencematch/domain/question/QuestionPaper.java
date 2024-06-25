@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain.question;
 
+import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.Enums.Category;
@@ -37,6 +38,7 @@ public class QuestionPaper extends AuditingTimeEntity {
     private String title;
     private String makerName;
     private Subject subject;
+    private Level level;
     private String themeColor;
     private Integer template;
 
@@ -50,7 +52,7 @@ public class QuestionPaper extends AuditingTimeEntity {
 
     @Builder
     public QuestionPaper(Integer questionNum, School school, Semester semester, Category category, QuestionTag questionTag,
-        String title, String makerName, Subject subject, String themeColor, Integer template, String pdf) {
+        String title, String makerName, Subject subject, Level level, String themeColor, Integer template, String pdf) {
         this.questionNum = questionNum;
         this.school = school;
         this.semester = semester;
@@ -59,6 +61,7 @@ public class QuestionPaper extends AuditingTimeEntity {
         this.title = title;
         this.makerName = makerName;
         this.subject = subject;
+        this.level = level;
         this.themeColor = themeColor;
         this.template = template;
         this.pdf = pdf;
