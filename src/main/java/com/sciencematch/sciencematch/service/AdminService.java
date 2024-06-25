@@ -86,8 +86,12 @@ public class AdminService {
 
     @Transactional
     public Long postConcept(ConceptPostDto conceptPostDto) throws IOException {
-        String uploadImage = s3Service.uploadImage(conceptPostDto.getImage(), "concept");
         Chapter chapter = chapterRepository.getChapterById(conceptPostDto.getChapterId());
+        Concept postConcept = conceptRepository.getByChapterId(conceptPostDto.getChapterId());
+        s3Service.deleteFile(postConcept.getImage());
+        conceptRepository.delete(postConcept);
+
+        String uploadImage = s3Service.uploadImage(conceptPostDto.getImage(), "concept");
         Concept concept = Concept.builder()
             .image(uploadImage)
             .chapter(chapter)
@@ -96,9 +100,8 @@ public class AdminService {
         return concept.getId();
     }
 
-    public List<ConceptResponseDto> getConcept(Long chapterId){
-        return conceptRepository.getByChapterId(chapterId).stream().map(ConceptResponseDto::of)
-            .collect(Collectors.toList());
+    public ConceptResponseDto getConcept(Long chapterId){
+        return ConceptResponseDto.of(conceptRepository.getByChapterId(chapterId));
     }
 
     @Transactional
