@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.School;
+import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.Subject;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +46,8 @@ public class Chapter {
     @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private final List<Chapter> children = new ArrayList<>();
 
-    @OneToMany(mappedBy = "chapter", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-    private final List<Concept> concepts = new ArrayList<>();
-
     @Builder
-    private Chapter(School school, Semester semester, Subject subject, String description, Chapter  parent) {
+    private Chapter(School school, Semester semester, Subject subject, String description, Chapter parent) {
         this.school = school;
         this.semester = semester;
         this.subject = subject;
