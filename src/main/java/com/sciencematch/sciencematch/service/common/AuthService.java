@@ -178,12 +178,12 @@ public class AuthService {
     }
 
     @Transactional
-    public TokenDto reissue(String accessToken, String refreshToken) {
+    public TokenDto reissue(String refreshToken) {
         // 1. Refresh Token 검증
         tokenProvider.validateToken(refreshToken);
 
         // 2. Access Token 에서 Member ID(user email) 가져오기
-        Authentication authentication = tokenProvider.getAuthentication(accessToken);
+        Authentication authentication = tokenProvider.getAuthentication(refreshToken);
         // 3. 저장소에서 Member ID 를 기반으로 Refresh Token 값 가져옴
         String existRefreshToken = (String) redisTemplate.opsForValue()
             .get("RT:" + authentication.getName());

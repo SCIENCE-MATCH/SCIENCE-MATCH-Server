@@ -77,14 +77,12 @@ public class AuthController {
     @PostMapping("/reissue")
     @Operation(summary = "액세스 토큰 재발행")
     @SecurityRequirements({
-        @SecurityRequirement(name = "JWT Auth"),
         @SecurityRequirement(name = "Refresh")
     })
     public ApiResponseDto<TokenDto> reissue(@Parameter(hidden = true) HttpServletRequest request) {
-        String accessToken = tokenProvider.resolveAccessToken(request);
         String refreshToken = tokenProvider.resolveRefreshToken(request);
         return ApiResponseDto.success(SuccessStatus.REISSUE_SUCCESS,
-            authService.reissue(accessToken, refreshToken));
+            authService.reissue(refreshToken));
     }
 
     @PostMapping("/dupl-check")
