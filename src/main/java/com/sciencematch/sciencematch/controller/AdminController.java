@@ -162,8 +162,7 @@ public class AdminController {
     @PostMapping(value = "/concept", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "개념 생성")
     public ApiResponseDto<?> postConcept(@ModelAttribute ConceptPostDto conceptPostDto) throws IOException {
-        adminService.postConcept(conceptPostDto);
-        return ApiResponseDto.success(SuccessStatus.CREATE_CONCEPT_SUCCESS);
+        return ApiResponseDto.success(SuccessStatus.CREATE_CONCEPT_SUCCESS, adminService.postConcept(conceptPostDto));
     }
 
     @GetMapping(value = "/concept")

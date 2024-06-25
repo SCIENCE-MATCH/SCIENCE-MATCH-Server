@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
+import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Concept;
 import com.sciencematch.sciencematch.domain.Student;
@@ -84,7 +85,7 @@ public class AdminService {
     }
 
     @Transactional
-    public void postConcept(ConceptPostDto conceptPostDto) throws IOException {
+    public Long postConcept(ConceptPostDto conceptPostDto) throws IOException {
         String uploadImage = s3Service.uploadImage(conceptPostDto.getImage(), "concept");
         Chapter chapter = chapterRepository.getChapterById(conceptPostDto.getChapterId());
         Concept concept = Concept.builder()
@@ -92,10 +93,11 @@ public class AdminService {
             .chapter(chapter)
             .build();
         conceptRepository.save(concept);
+        return concept.getId();
     }
 
-    public List<String> getConcept(Long chapterId){
-        return conceptRepository.getByChapterId(chapterId).stream().map(Concept::getImage)
+    public List<ConceptResponseDto> getConcept(Long chapterId){
+        return conceptRepository.getByChapterId(chapterId).stream().map(ConceptResponseDto::of)
             .collect(Collectors.toList());
     }
 
