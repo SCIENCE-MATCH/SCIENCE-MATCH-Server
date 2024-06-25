@@ -133,6 +133,7 @@ public class QuestionPaperService {
         QuestionPaper questionPaper = QuestionPaper.builder()
             .questionNum(questionPaperCreateDto.getQuestionNum())
             .school(questionPaperCreateDto.getSchool())
+            .semester(questionPaperCreateDto.getSemester())
             .category(questionPaperCreateDto.getCategory())
             .questionTag(questionPaperCreateDto.getQuestionTag())
             .title(questionPaperCreateDto.getTitle())

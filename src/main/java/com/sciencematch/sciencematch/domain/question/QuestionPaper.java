@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain.question;
 
+import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.Enums.QuestionTag;
@@ -30,6 +31,7 @@ public class QuestionPaper extends AuditingTimeEntity {
 
     private Integer questionNum;
     private School school;
+    private Semester semester;
     private Category category;
     private QuestionTag questionTag;
     private String title;
@@ -47,10 +49,11 @@ public class QuestionPaper extends AuditingTimeEntity {
     private final List<AssignQuestions> assignQuestions = new ArrayList<>();
 
     @Builder
-    public QuestionPaper(Integer questionNum, School school, Category category, QuestionTag questionTag,
+    public QuestionPaper(Integer questionNum, School school, Semester semester, Category category, QuestionTag questionTag,
         String title, String makerName, Subject subject, String themeColor, Integer template, String pdf) {
         this.questionNum = questionNum;
         this.school = school;
+        this.semester = semester;
         this.category = category;
         this.questionTag = questionTag;
         this.title = title;
