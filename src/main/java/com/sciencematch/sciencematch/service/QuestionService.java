@@ -26,7 +26,7 @@ public class QuestionService {
     private final S3Service s3Service;
 
     @Transactional
-    public void postQuestion(QuestionPostDto questionPostDto) throws IOException {
+    public void postQuestion(QuestionPostDto questionPostDto) {
         String image = s3Service.uploadFile(questionPostDto.getImage(), "question");
         String solutionImg = s3Service.uploadFile(questionPostDto.getSolutionImg(), "solution");
         Question question = Question.builder()
@@ -64,7 +64,7 @@ public class QuestionService {
 
     private void findChapterList(Chapter chapter, List<Long> chapterIds) {
         List<Chapter> children = chapter.getChildren();
-        if (children.size() == 0) { //자식이 없는 경우엔 자신을 리스트에 추가
+        if (children.isEmpty()) { //자식이 없는 경우엔 자신을 리스트에 추가
             chapterIds.add(chapter.getId());
             return;
         }

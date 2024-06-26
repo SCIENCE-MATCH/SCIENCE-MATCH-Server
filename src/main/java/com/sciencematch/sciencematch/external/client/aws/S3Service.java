@@ -12,7 +12,6 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.NotFoundException;
-import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class S3Service {
 
     private final AmazonS3 amazonS3;
-    private final TeacherRepository teacherRepository;
 
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
@@ -51,7 +49,7 @@ public class S3Service {
             .build();
     }
 
-    public String uploadFile(MultipartFile multipartFile, String folder) throws IOException {
+    public String uploadFile(MultipartFile multipartFile, String folder) {
         String fileName = createFileName(multipartFile.getOriginalFilename());
         //inputStream 통해 Byte로 파일이 전달되기 때문에 파일에 대한 정보가 없어서 objectMetadata 같이 넘겨야 함
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -76,7 +74,7 @@ public class S3Service {
 
     // 파일 유효성 검사
     private String getFileExtension(String fileName) {
-        if (fileName.length() == 0) {
+        if (fileName.isEmpty()) {
             throw new NotFoundException(ErrorStatus.NOT_FOUND_IMAGE_EXCEPTION,
                 ErrorStatus.NOT_FOUND_IMAGE_EXCEPTION.getMessage());
         }
