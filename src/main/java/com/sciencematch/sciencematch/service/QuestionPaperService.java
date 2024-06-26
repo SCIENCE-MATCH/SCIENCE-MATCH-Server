@@ -139,7 +139,7 @@ public class QuestionPaperService {
         List<Question> questions = questionRepository.findAllByIds(
             questionPaperCreateDto.getQuestionIds());
 
-        String questionPaperUrl = s3Service.uploadImage(questionPaperCreateDto.getPdf(),
+        String questionPaperUrl = s3Service.uploadFile(questionPaperCreateDto.getPdf(),
             "question-paper");
 
         QuestionPaper questionPaper = QuestionPaper.builder()

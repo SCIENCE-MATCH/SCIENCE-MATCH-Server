@@ -52,7 +52,7 @@ public class TeacherService {
         if (teacher.getLogo() != null) {
             s3Service.deleteFile(teacher.getLogo());
         }
-        String logoURL = s3Service.uploadImage(logo, "logo");
+        String logoURL = s3Service.uploadFile(logo, "logo");
         teacher.changeLogo(logoURL);
     }
 

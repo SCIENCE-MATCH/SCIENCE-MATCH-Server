@@ -27,8 +27,8 @@ public class QuestionService {
 
     @Transactional
     public void postQuestion(QuestionPostDto questionPostDto) throws IOException {
-        String image = s3Service.uploadImage(questionPostDto.getImage(), "question");
-        String solutionImg = s3Service.uploadImage(questionPostDto.getSolutionImg(), "solution");
+        String image = s3Service.uploadFile(questionPostDto.getImage(), "question");
+        String solutionImg = s3Service.uploadFile(questionPostDto.getSolutionImg(), "solution");
         Question question = Question.builder()
             .image(image)
             .level(questionPostDto.getLevel())

@@ -94,7 +94,7 @@ public class AdminService {
             conceptRepository.delete(postConcept);
         }
 
-        String uploadImage = s3Service.uploadImage(conceptPostDto.getImage(), "concept");
+        String uploadImage = s3Service.uploadFile(conceptPostDto.getImage(), "concept");
         Concept concept = Concept.builder()
             .image(uploadImage)
             .chapter(chapter)

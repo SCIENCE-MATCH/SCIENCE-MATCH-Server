@@ -51,7 +51,7 @@ public class S3Service {
             .build();
     }
 
-    public String uploadImage(MultipartFile multipartFile, String folder) throws IOException {
+    public String uploadFile(MultipartFile multipartFile, String folder) throws IOException {
         String fileName = createFileName(multipartFile.getOriginalFilename());
         //inputStream 통해 Byte로 파일이 전달되기 때문에 파일에 대한 정보가 없어서 objectMetadata 같이 넘겨야 함
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -87,6 +87,7 @@ public class S3Service {
         fileValidate.add(".JPG");
         fileValidate.add(".JPEG");
         fileValidate.add(".PNG");
+        fileValidate.add(".pdf");
         String idxFileName = fileName.substring(fileName.lastIndexOf("."));
         if (!fileValidate.contains(idxFileName)) {
             throw new CustomException(ErrorStatus.INVALID_MULTIPART_EXTENSION_EXCEPTION,
