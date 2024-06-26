@@ -5,9 +5,9 @@ import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.GradingRequestDto;
+import com.sciencematch.sciencematch.DTO.teacher.request.SummaryRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.SimpleStudentsResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.request.SummaryRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignPaperTestsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignQuestionsResponseDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,7 +51,7 @@ public class TeacherController {
     private final AuthService authService;
     private final StudentService studentService;
 
-    @PutMapping(value = "/logo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/logo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "로고 변경")
     public ApiResponseDto<?> uploadLogo(
         @Parameter(hidden = true) @AuthenticationPrincipal User user,
