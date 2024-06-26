@@ -16,17 +16,17 @@ public class QuestionResponseDto {
     private Level level;
     private Integer score;
     private Long chapterId;
-    private String description;
+    private String chapterDescription;
 
     @QueryProjection
-    public QuestionResponseDto(Long questionId, String imageURL, Category category, Level level, Integer score, Long chapterId, String description) {
+    public QuestionResponseDto(Long questionId, String imageURL, Category category, Level level, Integer score, Long chapterId, String chapterDescription) {
         this.questionId = questionId;
         this.imageURL = imageURL;
         this.category = category;
         this.level = level;
         this.score = score;
         this.chapterId = chapterId;
-        this.description = description;
+        this.chapterDescription = chapterDescription;
     }
 
     public static QuestionResponseDto of(Question question, Chapter chapter) {

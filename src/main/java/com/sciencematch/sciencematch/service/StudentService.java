@@ -75,6 +75,7 @@ public class StudentService {
                 .category(cq.getQuestion().getCategory())
                 .chapterId(cq.getQuestion().getChapterId())
                 .score(cq.getScore())
+                .questionId(cq.getQuestion().getId())
                 .build()).collect(Collectors.toList());
 
         List<String> solvingAnswer = assignQuestionPaperSolveDto.getAnswer();

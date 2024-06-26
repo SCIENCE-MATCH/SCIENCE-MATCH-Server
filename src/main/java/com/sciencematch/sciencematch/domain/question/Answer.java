@@ -36,13 +36,15 @@ public class Answer {
     private Boolean graded;
     private Integer score;
 
+    private Long questionId;
+
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assign_questions_id")
     private AssignQuestions assignQuestions;
 
     @Builder
-    public Answer(String submitAnswer, String solution, String solutionImg, Category category, Long chapterId, Integer score) {
+    public Answer(String submitAnswer, String solution, String solutionImg, Category category, Long chapterId, Integer score, Long questionId) {
         this.submitAnswer = submitAnswer;
         this.solution = solution;
         this.solutionImg = solutionImg;
@@ -51,6 +53,7 @@ public class Answer {
         this.rightAnswer = false;
         this.graded = false;
         this.score = score;
+        this.questionId = questionId;
     }
 
     public void setRightAnswer(Boolean rightAnswer) {

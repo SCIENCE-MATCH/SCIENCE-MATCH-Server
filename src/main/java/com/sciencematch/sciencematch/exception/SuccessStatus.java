@@ -56,6 +56,7 @@ public enum SuccessStatus {
     DELETE_CONCEPT_SUCCESS(HttpStatus.OK, "개념을 성공적으로 삭제하였습니다."),
     DELETE_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "학습지를 성공적으로 삭제하였습니다."),
     RE_ENROLL_STUDENT_SUCCESS(HttpStatus.OK, "학생을 성공적으로 재등록하였습니다."),
+    GET_WRONG_SUCCESS(HttpStatus.OK, "오답 문제를 성공적으로 추출하였습니다."),
 
     /*
      * 201 created

@@ -1,6 +1,5 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
@@ -8,12 +7,12 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.QuestionPaperService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -52,7 +51,7 @@ public class QuestionPaperController {
     @PostMapping(value = "/question-paper/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "학습지 생성")
     public ApiResponseDto<?> createQuestionPaper(
-        @ModelAttribute QuestionPaperCreateDto questionPaperCreateDto) throws IOException {
+        @ModelAttribute QuestionPaperCreateDto questionPaperCreateDto) {
         questionPaperService.createQuestionPaper(questionPaperCreateDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_QUESTION_PAPER_SUCCESS);
     }
@@ -78,5 +77,11 @@ public class QuestionPaperController {
     public ApiResponseDto<?> deleteQuestionPaper(@RequestBody List<Long> questionPaperIds) {
         questionPaperService.deleteQuestionPaper(questionPaperIds);
         return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_PAPER_SUCCESS);
+    }
+
+    @PostMapping("/question-paper/wrong")
+    @Operation(summary = "오답 문제 추출")
+    public ApiResponseDto<List<QuestionResponseDto>> getWrongQuestion(@RequestBody List<Long> assignQuestionIds) {
+        return ApiResponseDto.success(SuccessStatus.GET_WRONG_SUCCESS, questionPaperService.getWrongQuestion(assignQuestionIds));
     }
 }
