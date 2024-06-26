@@ -22,7 +22,6 @@ import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -667,33 +666,39 @@ public class InitDb {
             QuestionPaper questionPaper = QuestionPaper.builder()
                 .questionNum(4)
                 .school(School.HIGH)
+                .semester(Semester.FIRST1)
                 .category(Category.MULTIPLE)
                 .questionTag(QuestionTag.NORMAL)
                 .title("테스트")
                 .makerName("선생님")
                 .subject(Subject.PHYSICS)
+                .level(Level.HARD)
                 .build();
             em.persist(questionPaper);
 
             QuestionPaper questionPaper2 = QuestionPaper.builder()
                 .questionNum(4)
                 .school(School.HIGH)
+                .semester(Semester.FIRST2)
                 .category(Category.SUBJECTIVE)
                 .questionTag(QuestionTag.MOCK_EXAM)
                 .title("테스트22")
                 .makerName("선생님22")
                 .subject(Subject.BIOLOGY)
+                .level(Level.MEDIUM_LOW)
                 .build();
             em.persist(questionPaper2);
 
             QuestionPaper questionPaper3 = QuestionPaper.builder()
                 .questionNum(4)
                 .school(School.HIGH)
+                .semester(Semester.SECOND1)
                 .category(Category.SUBJECTIVE)
                 .questionTag(QuestionTag.MOCK_EXAM)
                 .title("테스트33")
                 .makerName("선생님22")
                 .subject(Subject.BIOLOGY)
+                .level(Level.LOW)
                 .build();
             em.persist(questionPaper3);
 
