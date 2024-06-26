@@ -36,6 +36,8 @@ public class QuestionPaperRepositoryImpl implements QuestionPaperRepositoryCusto
                 questionPaper.questionTag,
                 questionPaper.subject,
                 questionPaper.level,
+                questionPaper.minChapterId,
+                questionPaper.maxChapterId,
                 questionPaper.pdf,
                 questionPaper.createAt))
             .from(questionPaper)
