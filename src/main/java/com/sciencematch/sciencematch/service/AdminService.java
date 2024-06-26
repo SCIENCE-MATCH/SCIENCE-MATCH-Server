@@ -1,16 +1,16 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.DTO.admin.AdminStudentResponseDto;
+import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
+import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
+import com.sciencematch.sciencematch.Enums.Authority;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Concept;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.Team;
-import com.sciencematch.sciencematch.DTO.admin.AdminStudentResponseDto;
-import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
-import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
-import com.sciencematch.sciencematch.Enums.Authority;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.ConceptRepository;
@@ -74,7 +74,8 @@ public class AdminService {
     }
 
     public List<AdminTeamResponseDto> getAllTeams() {
-        return teamRepository.findAll().stream().map(AdminTeamResponseDto::of).collect(Collectors.toList());
+        return teamRepository.findAll().stream().map(AdminTeamResponseDto::of)
+            .collect(Collectors.toList());
     }
 
     @Transactional
@@ -88,7 +89,9 @@ public class AdminService {
     public Long postConcept(ConceptPostDto conceptPostDto) throws IOException {
         Chapter chapter = chapterRepository.getChapterById(conceptPostDto.getChapterId());
         Concept postConcept = conceptRepository.getByChapterId(conceptPostDto.getChapterId());
-        s3Service.deleteFile(postConcept.getImage());
+        if (postConcept.getImage() != null) {
+            s3Service.deleteFile(postConcept.getImage());
+        }
         conceptRepository.delete(postConcept);
 
         String uploadImage = s3Service.uploadImage(conceptPostDto.getImage(), "concept");
@@ -100,7 +103,7 @@ public class AdminService {
         return concept.getId();
     }
 
-    public ConceptResponseDto getConcept(Long chapterId){
+    public ConceptResponseDto getConcept(Long chapterId) {
         return ConceptResponseDto.of(conceptRepository.getByChapterId(chapterId));
     }
 
