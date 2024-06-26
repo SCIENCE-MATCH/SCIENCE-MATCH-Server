@@ -62,6 +62,7 @@ public class TeacherService {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
         if (teacher.getLogo() != null) {
             s3Service.deleteFile(teacher.getLogo());
+            teacher.changeLogo(null);
         }
     }
 
