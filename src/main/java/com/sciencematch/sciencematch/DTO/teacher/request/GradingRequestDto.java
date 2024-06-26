@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.DTO.teacher;
+package com.sciencematch.sciencematch.DTO.teacher.request;
 
 import lombok.Data;
 

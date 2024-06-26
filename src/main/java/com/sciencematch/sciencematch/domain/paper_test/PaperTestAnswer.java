@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -22,25 +23,16 @@ public class PaperTestAnswer {
     @Column(name = "paper_test_answer_id")
     private Long id;
 
-    private String submitAnswer;
     private String solution;
+    @Setter
+    private String submitAnswer;
+    @Setter
     private Boolean rightAnswer;
 
+    @Setter
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assign_paper_test_id")
     private AssignPaperTest assignPaperTest;
-
-    public void setAssignPaperTest(AssignPaperTest assignPaperTest) {
-        this.assignPaperTest = assignPaperTest;
-    }
-
-    public void setSubmitAnswer(String submitAnswer) {
-        this.submitAnswer = submitAnswer;
-    }
-
-    public void setRightAnswer(Boolean rightAnswer) {
-        this.rightAnswer = rightAnswer;
-    }
 
     @Builder
     public PaperTestAnswer(String solution) {

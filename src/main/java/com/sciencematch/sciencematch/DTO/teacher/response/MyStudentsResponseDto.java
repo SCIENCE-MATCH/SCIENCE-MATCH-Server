@@ -1,4 +1,4 @@
-package com.sciencematch.sciencematch.DTO.teacher;
+package com.sciencematch.sciencematch.DTO.teacher.response;
 
 import com.sciencematch.sciencematch.domain.Student;
 import lombok.AllArgsConstructor;

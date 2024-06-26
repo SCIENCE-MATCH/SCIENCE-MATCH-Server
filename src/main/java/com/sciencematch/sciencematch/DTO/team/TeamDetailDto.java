@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.DTO.team;
 
-import com.sciencematch.sciencematch.DTO.teacher.SimpleStudentsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.response.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.domain.Team;
 import java.util.List;
 import java.util.stream.Collectors;

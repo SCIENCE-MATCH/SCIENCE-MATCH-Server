@@ -2,8 +2,8 @@ package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Student;
-import com.sciencematch.sciencematch.DTO.teacher.MultipleQuestionPaperSubmitDto;
-import com.sciencematch.sciencematch.DTO.teacher.QuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
+import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
 import com.sciencematch.sciencematch.domain.question.Question;

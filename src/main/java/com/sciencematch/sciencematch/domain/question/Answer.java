@@ -12,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -23,6 +24,7 @@ public class Answer {
     @Column(name = "answer_id")
     private Long id;
 
+    @Setter
     private String submitAnswer;
     private String solution;
     private String solutionImg;
@@ -34,6 +36,7 @@ public class Answer {
     private Boolean graded;
     private Integer score;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assign_questions_id")
     private AssignQuestions assignQuestions;
@@ -48,14 +51,6 @@ public class Answer {
         this.rightAnswer = false;
         this.graded = false;
         this.score = score;
-    }
-
-    public void setAssignQuestions(AssignQuestions assignQuestions) {
-        this.assignQuestions = assignQuestions;
-    }
-
-    public void setSubmitAnswer(String submitAnswer) {
-        this.submitAnswer = submitAnswer;
     }
 
     public void setRightAnswer(Boolean rightAnswer) {
