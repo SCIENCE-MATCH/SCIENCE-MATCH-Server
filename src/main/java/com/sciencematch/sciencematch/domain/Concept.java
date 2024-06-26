@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -21,6 +22,7 @@ public class Concept {
     @GeneratedValue
     @Column(name = "concept_id")
     private Long id;
+    @Setter
     private String image;
     @OneToOne
     private Chapter chapter;

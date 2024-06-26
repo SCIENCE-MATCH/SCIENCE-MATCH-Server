@@ -89,10 +89,10 @@ public class AdminService {
     public Long postConcept(ConceptPostDto conceptPostDto) throws IOException {
         Chapter chapter = chapterRepository.getChapterById(conceptPostDto.getChapterId());
         Concept postConcept = conceptRepository.getByChapterId(conceptPostDto.getChapterId());
-        if (postConcept != null) {
+        if (postConcept.getImage() != null) {
             s3Service.deleteFile(postConcept.getImage());
+            conceptRepository.delete(postConcept);
         }
-        conceptRepository.delete(postConcept);
 
         String uploadImage = s3Service.uploadImage(conceptPostDto.getImage(), "concept");
         Concept concept = Concept.builder()
