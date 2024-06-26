@@ -4,11 +4,12 @@ import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
 import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
-import com.sciencematch.sciencematch.DTO.teacher.GradingRequestDto;
-import com.sciencematch.sciencematch.DTO.teacher.MyStudentsResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.SimpleStudentsResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.TeacherAssignPaperTestsResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.TeacherAssignQuestionsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.request.GradingRequestDto;
+import com.sciencematch.sciencematch.DTO.teacher.response.MyStudentsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.response.SimpleStudentsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.request.SummaryRequestDto;
+import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignPaperTestsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignQuestionsResponseDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.StudentService;
@@ -74,6 +75,14 @@ public class TeacherController {
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_MYPAGE_SUCCESS,
             teacherService.getMypage(user.getUsername()));
+    }
+
+    @PostMapping("/student/summary")
+    @Operation(summary = "학습내역 조회")
+    public ApiResponseDto<?> getStudentSummary(
+        @RequestBody @Valid SummaryRequestDto summaryRequestDto) {
+        return ApiResponseDto.success(SuccessStatus.GET_MYPAGE_SUCCESS,
+            teacherService.getStudentSummary(summaryRequestDto));
     }
 
     @PostMapping("/student/create")

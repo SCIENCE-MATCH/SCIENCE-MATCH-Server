@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,4 +29,13 @@ public interface AssignPaperTestRepository extends JpaRepository<AssignPaperTest
 
     void deleteAllByPaperTestId(Long paperTestId);
 
+    @EntityGraph(attributePaths = {"paperTest"})
+    @Query("SELECT a FROM AssignPaperTest a WHERE a.student.id = :studentId AND a.updatedAt BETWEEN :startDate AND :endDate AND (a.assignStatus = :status1 OR a.assignStatus = :status2)")
+    List<AssignPaperTest> findAllForSummary(
+        @Param("studentId") Long studentId,
+        @Param("startDate") LocalDateTime startDate,
+        @Param("endDate") LocalDateTime endDate,
+        @Param("status1") AssignStatus status1,
+        @Param("status2") AssignStatus status2
+    );
 }
