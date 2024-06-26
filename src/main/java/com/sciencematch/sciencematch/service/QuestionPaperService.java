@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.Enums.AssignStatus;
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
@@ -15,6 +16,7 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
 import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
+import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionPaperRepository;
@@ -38,12 +40,22 @@ public class QuestionPaperService {
     private final ConnectQuestionRepository connectQuestionRepository;
     private final AssignQuestionRepository assignQuestionRepository;
     private final StudentRepository studentRepository;
+    private final ChapterRepository chapterRepository;
     private final S3Service s3Service;
 
     //학습지 조회
     public List<QuestionPaperResponseDto> getAllQuestionPaper(
         QuestionPaperSelectDto questionPaperSelectDto) {
-        return questionPaperRepository.search(questionPaperSelectDto);
+
+        List<QuestionPaperResponseDto> search = questionPaperRepository.search(
+            questionPaperSelectDto);
+
+        for (QuestionPaperResponseDto qp : search) {
+            Chapter minChapter = chapterRepository.getChapterById(qp.getMinChapterId());
+            Chapter maxChapter = chapterRepository.getChapterById(qp.getMaxChapterId());
+            qp.setBoundary(minChapter.getDescription()+" ~ "+maxChapter.getDescription());
+        }
+        return search;
     }
 
     //단원 유형별 자동 생성된 학습지 반환
@@ -143,6 +155,8 @@ public class QuestionPaperService {
             .themeColor(questionPaperCreateDto.getThemeColor())
             .template(questionPaperCreateDto.getTemplate())
             .pdf(questionPaperUrl)
+            .minChapterId(questionPaperCreateDto.getMinChapterId())
+            .maxChapterId(questionPaperCreateDto.getMaxChapterId())
             .build();
         questionPaperRepository.save(questionPaper);
         for (Question question : questions) {

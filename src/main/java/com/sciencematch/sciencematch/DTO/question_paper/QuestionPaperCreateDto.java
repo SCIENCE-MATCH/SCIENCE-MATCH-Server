@@ -42,4 +42,7 @@ public class QuestionPaperCreateDto {
     @Schema(example = "0")
     private Integer template;
     private MultipartFile pdf;
+
+    private Long minChapterId;
+    private Long maxChapterId;
 }

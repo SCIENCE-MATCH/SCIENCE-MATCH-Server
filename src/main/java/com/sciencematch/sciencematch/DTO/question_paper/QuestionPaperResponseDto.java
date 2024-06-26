@@ -24,13 +24,16 @@ public class QuestionPaperResponseDto {
     private QuestionTag questionTag;
     private Subject subject;
     private Level level;
+    private Long minChapterId;
+    private Long maxChapterId;
     private String pdf;
     private LocalDateTime createdAt;
+    private String boundary;
 
     @QueryProjection
     public QuestionPaperResponseDto(Long id, School school, Semester semester, Integer questionNum,
         String title, String makerName, Category category, QuestionTag questionTag, Subject subject, Level level,
-        String pdf, LocalDateTime createdAt) {
+        Long minChapterId, Long maxChapterId, String pdf, LocalDateTime createdAt) {
         this.id = id;
         this.school = school;
         this.semester = semester;
@@ -41,6 +44,8 @@ public class QuestionPaperResponseDto {
         this.questionTag = questionTag;
         this.subject = subject;
         this.level = level;
+        this.minChapterId = minChapterId;
+        this.maxChapterId = maxChapterId;
         this.pdf = pdf;
         this.createdAt = createdAt;
     }
@@ -48,7 +53,7 @@ public class QuestionPaperResponseDto {
     public static QuestionPaperResponseDto of(QuestionPaper questionPaper) {
         return new QuestionPaperResponseDto(questionPaper.getId(), questionPaper.getSchool(), questionPaper.getSemester(), questionPaper.getQuestionNum(),
             questionPaper.getTitle(), questionPaper.getMakerName(), questionPaper.getCategory(), questionPaper.getQuestionTag(),
-            questionPaper.getSubject(), questionPaper.getLevel(), questionPaper.getPdf(), questionPaper.getCreateAt());
+            questionPaper.getSubject(), questionPaper.getLevel(), questionPaper.getMinChapterId(), questionPaper.getMaxChapterId(), questionPaper.getPdf(), questionPaper.getCreateAt());
     }
 
 }

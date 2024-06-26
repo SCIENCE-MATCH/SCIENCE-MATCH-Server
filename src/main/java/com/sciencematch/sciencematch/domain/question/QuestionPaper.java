@@ -41,6 +41,8 @@ public class QuestionPaper extends AuditingTimeEntity {
     private Level level;
     private String themeColor;
     private Integer template;
+    private Long minChapterId;
+    private Long maxChapterId;
 
     private String pdf;
 
@@ -52,7 +54,8 @@ public class QuestionPaper extends AuditingTimeEntity {
 
     @Builder
     public QuestionPaper(Integer questionNum, School school, Semester semester, Category category, QuestionTag questionTag,
-        String title, String makerName, Subject subject, Level level, String themeColor, Integer template, String pdf) {
+        String title, String makerName, Subject subject, Level level, String themeColor, Integer template,
+        Long minChapterId, Long maxChapterId, String pdf) {
         this.questionNum = questionNum;
         this.school = school;
         this.semester = semester;
@@ -65,6 +68,8 @@ public class QuestionPaper extends AuditingTimeEntity {
         this.themeColor = themeColor;
         this.template = template;
         this.pdf = pdf;
+        this.minChapterId = minChapterId;
+        this.maxChapterId = maxChapterId;
     }
 
 
