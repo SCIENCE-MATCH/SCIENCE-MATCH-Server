@@ -50,6 +50,8 @@ public enum SuccessStatus {
     RE_ENROLL_STUDENT_SUCCESS(HttpStatus.OK, "학생을 성공적으로 재등록하였습니다."),
     GET_WRONG_SUCCESS(HttpStatus.OK, "오답 문제를 성공적으로 추출하였습니다."),
     GET_BOOK_SUCCESS(HttpStatus.OK, "시중 교재를 성공적으로 조회하였습니다."),
+    GET_BOOK_QUESTION_SUCCESS(HttpStatus.OK, "시중 교재 문제를 성공적으로 조회하였습니다."),
+    GET_BOOK_CHAPTER_SUCCESS(HttpStatus.OK, "시중 교재 단원을 성공적으로 조회하였습니다."),
 
     /*
      * 201 created

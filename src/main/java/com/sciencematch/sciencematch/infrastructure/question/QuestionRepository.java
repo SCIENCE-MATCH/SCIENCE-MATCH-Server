@@ -23,6 +23,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long>,
 
     List<Question> findAllByChapterId(Long chapterId);
 
+    List<Question> findAllByBookId(Long bookId);
+
     default Question getQuestionById(Long id) {
         return this.findById(id).orElseThrow(
             () -> new NotFoundException(ErrorStatus.NOT_FOUND_QUESTION_EXCEPTION,
