@@ -40,6 +40,12 @@ public class BookService {
         bookRepository.save(book);
     }
 
+    public void updateBook(Long bookId, CreateBookDto createBookDto) {
+        Book book = bookRepository.getBookById(bookId);
+        book.patchBook(createBookDto);
+        bookRepository.save(book);
+    }
+
     public Map<String, List<Integer>> getBookChapter(Long bookId) {
         //question에서 챕터 id와 page만 필요
         Map<String, List<Integer>> group = new HashMap<>();

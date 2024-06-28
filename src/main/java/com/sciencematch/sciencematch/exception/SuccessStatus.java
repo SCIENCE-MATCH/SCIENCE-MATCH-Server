@@ -52,6 +52,7 @@ public enum SuccessStatus {
     GET_BOOK_SUCCESS(HttpStatus.OK, "시중 교재를 성공적으로 조회하였습니다."),
     GET_BOOK_QUESTION_SUCCESS(HttpStatus.OK, "시중 교재 문제를 성공적으로 조회하였습니다."),
     GET_BOOK_CHAPTER_SUCCESS(HttpStatus.OK, "시중 교재 단원을 성공적으로 조회하였습니다."),
+    UPDATE_BOOK_SUCCESS(HttpStatus.OK, "시중 교재를 성공적으로 수정하였습니다."),
 
     /*
      * 201 created

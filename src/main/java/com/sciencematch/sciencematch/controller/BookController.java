@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,13 @@ public class BookController {
     public ApiResponseDto<?> createBook(@RequestBody CreateBookDto createBookDto) {
         bookService.createBook(createBookDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_BOOK_SUCCESS);
+    }
+
+    @PatchMapping("/admin/book/update/{id}")
+    @Operation(summary = "교재 정보 수정", description = "뭔지 모를 뷰의 교재 수정 부분입니다.")
+    public ApiResponseDto<?> createBook(@PathVariable("id") Long bookId, @RequestBody CreateBookDto createBookDto) {
+        bookService.updateBook(bookId, createBookDto);
+        return ApiResponseDto.success(SuccessStatus.UPDATE_BOOK_SUCCESS);
     }
 
     @GetMapping("/book/chapter/{id}")

@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain;
 
+import com.sciencematch.sciencematch.DTO.book.request.CreateBookDto;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
 import javax.persistence.Column;
@@ -33,6 +34,24 @@ public class Book {
         this.title = title;
         this.editionNum = editionNum;
         this.publisher = publisher;
+    }
+
+    public void patchBook(CreateBookDto createBookDto) {
+        if (createBookDto.getSchool() != null) {
+            this.school = createBookDto.getSchool();
+        }
+        if (createBookDto.getSemester() != null) {
+            this.semester = createBookDto.getSemester();
+        }
+        if (createBookDto.getTitle() != null) {
+            this.title = createBookDto.getTitle();
+        }
+        if (createBookDto.getEditionNum() != null) {
+            this.editionNum = createBookDto.getEditionNum();
+        }
+        if (createBookDto.getPublisher() != null) {
+            this.publisher = createBookDto.getPublisher();
+        }
     }
 
 }

@@ -32,6 +32,7 @@ public enum ErrorStatus {
      * 404 NOT FOUND
      */
     NOT_FOUND_USER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다"),
+    NOT_FOUND_BOOK_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 교재입니다"),
     NOT_FOUND_QUESTION_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 문제입니다"),
     NOT_FOUND_ANSWER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 답안입니다"),
     NOT_FOUND_QUESTION_PAPER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 학습지입니다"),
