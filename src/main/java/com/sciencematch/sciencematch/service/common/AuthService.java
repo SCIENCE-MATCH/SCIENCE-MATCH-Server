@@ -228,7 +228,7 @@ public class AuthService {
     @Transactional
     public void changeStudentPW(String phoneNum, String password) {
         Student student = studentRepository.getStudentByPhoneNum(phoneNum);
-        student.changePW(password);
+        student.changePW(passwordEncoder.encode(password));
     }
 
     public void checkTeacherPW(String email, String password) {
@@ -241,6 +241,6 @@ public class AuthService {
     @Transactional
     public void changeTeacherPW(String email, String password) {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
-        teacher.changePW(password);
+        teacher.changePW(passwordEncoder.encode(password));
     }
 }
