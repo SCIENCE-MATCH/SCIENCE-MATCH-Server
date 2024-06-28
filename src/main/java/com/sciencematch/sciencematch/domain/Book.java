@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +25,14 @@ public class Book {
     private String title;
     private Integer editionNum;
     private String publisher;
+
+    @Builder
+    public Book(School school, Semester semester, String title, Integer editionNum, String publisher) {
+        this.school = school;
+        this.semester = semester;
+        this.title = title;
+        this.editionNum = editionNum;
+        this.publisher = publisher;
+    }
 
 }
