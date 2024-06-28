@@ -34,6 +34,7 @@ public enum SuccessStatus {
     POST_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 추가하였습니다."),
     GET_QUESTION_SUCCESS(HttpStatus.OK, "문제를 성공적으로 조회하였습니다."),
     GET_QUESTION_PAPER_SUCCESS(HttpStatus.OK, "문제지를 성공적으로 조회하였습니다."),
+    GET_QUESTION_CONCEPT_SUCCESS(HttpStatus.OK, "개념을 성공적으로 조회하였습니다."),
     GET_PAPER_TEST_SUCCESS(HttpStatus.OK, "일대일 질문을 성공적으로 조회하였습니다."),
     GET_ASSIGN_QUESTION_PAPER_LIST_SUCCESS(HttpStatus.OK, "학생에게 출제된 문제지들을 성공적으로 조회하였습니다."),
     GET_ASSIGN_PAPER_TEST_LIST_SUCCESS(HttpStatus.OK, "학생에게 출제된 일대일 질문들을 성공적으로 조회하였습니다."),

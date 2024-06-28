@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.service;
 
+import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
@@ -18,6 +19,7 @@ import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
+import com.sciencematch.sciencematch.infrastructure.ConceptRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AnswerRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
@@ -43,6 +45,7 @@ public class QuestionPaperService {
     private final QuestionRepository questionRepository;
     private final ConnectQuestionRepository connectQuestionRepository;
     private final AssignQuestionRepository assignQuestionRepository;
+    private final ConceptRepository conceptRepository;
     private final AnswerRepository answerRepository;
     private final StudentRepository studentRepository;
     private final ChapterRepository chapterRepository;
@@ -61,6 +64,12 @@ public class QuestionPaperService {
             qp.setBoundary(minChapter.getDescription() + " ~ " + maxChapter.getDescription());
         }
         return search;
+    }
+
+    // 개념 조회
+    public List<ConceptResponseDto> getQuestionPaperConcepts(List<Long> chapterIds) {
+        return conceptRepository.getByChapterIds(chapterIds).stream().map(ConceptResponseDto::of).collect(
+            Collectors.toList());
     }
 
     //단원 유형별 자동 생성된 학습지 반환

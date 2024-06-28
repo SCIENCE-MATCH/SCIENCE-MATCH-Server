@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.controller;
 
+import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperCreateDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
@@ -38,6 +39,14 @@ public class QuestionPaperController {
         @RequestBody QuestionPaperSelectDto questionPaperSelectDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_SUCCESS,
             questionPaperService.getAllQuestionPaper(questionPaperSelectDto));
+    }
+
+    @PostMapping("/question-paper/concept")
+    @Operation(summary = "개념 조회")
+    public ApiResponseDto<List<ConceptResponseDto>> getQuestionPaperConcepts(
+        @RequestBody List<Long> chapterIds) {
+        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_CONCEPT_SUCCESS,
+            questionPaperService.getQuestionPaperConcepts(chapterIds));
     }
 
     @PostMapping("/questions/normal")
