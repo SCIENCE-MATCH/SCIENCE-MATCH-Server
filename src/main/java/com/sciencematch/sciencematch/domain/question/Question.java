@@ -40,6 +40,7 @@ public class Question {
     private String solutionImg;
     private String bookName;
     private Integer page;
+    private Double pageOrder;
     private QuestionTag questionTag;
     private Long chapterId;
     private Long bookId;
