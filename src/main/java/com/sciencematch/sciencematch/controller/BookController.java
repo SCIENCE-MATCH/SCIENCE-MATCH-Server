@@ -42,9 +42,9 @@ public class BookController {
         return ApiResponseDto.success(SuccessStatus.GET_BOOK_QUESTION_SUCCESS, bookService.getBookChapter(bookId));
     }
 
-    @GetMapping("/book/question/{id}")
+    @GetMapping("/book/question/{id}/{page}")
     @Operation(summary = "교재 문제 조회", description = "선생 1-1 뷰의 시중 교재 문제 선택 부분입니다.")
-    public ApiResponseDto<?> getBookQuestion(@PathVariable("id") Long bookId) {
-        return ApiResponseDto.success(SuccessStatus.GET_BOOK_QUESTION_SUCCESS);
+    public ApiResponseDto<?> getBookQuestion(@PathVariable("id") Long bookId, @PathVariable("page") Integer page) {
+        return ApiResponseDto.success(SuccessStatus.GET_BOOK_QUESTION_SUCCESS, bookService.getBookQuestion(bookId, page));
     }
 }

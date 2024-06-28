@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.DTO.book.request.CreateBookDto;
+import com.sciencematch.sciencematch.DTO.book.response.BookQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.book.response.BookResponseDto;
 import com.sciencematch.sciencematch.domain.Book;
 import com.sciencematch.sciencematch.domain.question.Question;
@@ -58,5 +59,10 @@ public class BookService {
             group.put(description, new ArrayList<>(question.getPage()));
         }
         return group;
+    }
+
+    public List<BookQuestionResponseDto> getBookQuestion(Long bookId, Integer page) {
+        return questionRepository.findAllByBookIdAndPage(bookId, page).stream().map(BookQuestionResponseDto::of)
+            .collect(Collectors.toList());
     }
 }
