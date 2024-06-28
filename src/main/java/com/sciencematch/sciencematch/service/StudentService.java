@@ -53,6 +53,21 @@ public class StudentService {
         AssignQuestions assignQuestions = assignQuestionRepository.getAssignQuestionsById(
             assignQuestionPaperId);
 
+        //학습지에 연결된 문제들을 불러오기 + answer 객체로 변환
+        List<Answer> answers = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
+                assignQuestions.getQuestionPaper())
+            .stream().map(cq -> Answer.builder()
+                .solution(cq.getQuestion().getSolution())
+                .solutionImg(cq.getQuestion().getSolutionImg())
+                .category(cq.getQuestion().getCategory())
+                .chapterId(cq.getQuestion().getChapterId())
+                .score(cq.getScore())
+                .questionId(cq.getQuestion().getId())
+                .questionImg(cq.getQuestion().getImage())
+                .build()).collect(Collectors.toList());
+
+        answerRepository.saveAll(answers);
+
         return QuestionPaperDetailDto.of(assignQuestions);
     }
 
@@ -64,21 +79,11 @@ public class StudentService {
 
     @Transactional
     public void solveAssignQuestionPaper(AssignQuestionPaperSolveDto assignQuestionPaperSolveDto) {
-
+        //출제한 학습지 불러오기
         AssignQuestions questions = assignQuestionRepository.getAssignQuestionsById(assignQuestionPaperSolveDto.getAssignQuestionPaperId());
+        List<Answer> answers = questions.getAnswer();
 
-        List<Answer> answers = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
-                questions.getQuestionPaper())
-            .stream().map(cq -> Answer.builder()
-                .solution(cq.getQuestion().getSolution())
-                .solutionImg(cq.getQuestion().getSolutionImg())
-                .category(cq.getQuestion().getCategory())
-                .chapterId(cq.getQuestion().getChapterId())
-                .score(cq.getScore())
-                .questionId(cq.getQuestion().getId())
-                .questionImg(cq.getQuestion().getImage())
-                .build()).collect(Collectors.toList());
-
+        // 제출한 답
         List<String> solvingAnswer = assignQuestionPaperSolveDto.getAnswer();
 
         if (answers.size() != solvingAnswer.size()) throw new CustomException(ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION, ErrorStatus.INVALID_ANSWER_NUM_EXCEPTION.getMessage());
