@@ -64,11 +64,13 @@ public class StudentService {
                 .score(cq.getScore())
                 .questionId(cq.getQuestion().getId())
                 .questionImg(cq.getQuestion().getImage())
+                .assignQuestions(assignQuestions)
                 .build()).collect(Collectors.toList());
 
         answerRepository.saveAll(answers);
 
-        return QuestionPaperDetailDto.of(assignQuestions);
+        return QuestionPaperDetailDto.of(assignQuestions, answers.stream().map(Answer::getCategory).collect(
+            Collectors.toList()));
     }
 
     public List<AssignPaperTestResponseDto> getMyPaperTest(String phoneNum) {
