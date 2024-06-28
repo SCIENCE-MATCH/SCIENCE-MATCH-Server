@@ -47,16 +47,16 @@ public class StudentController {
                 studentService.getMypage(user.getUsername()));
     }
 
-    @Operation(summary = "학습지 리스트 조회")
     @GetMapping("/question-paper")
+    @Operation(summary = "학습지 리스트 조회")
     public ApiResponseDto<List<AssignQuestionPaperResponseDto>> getMyQuestionPaper(
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_LIST_SUCCESS,
             studentService.getMyQuestionPaper(user.getUsername()));
     }
 
-    @Operation(summary = "학습지 상세 조회", description = "문제 풀기 창에서 사용 | 일대일 질문은 전부 단답형")
     @GetMapping("/question-paper/detail")
+    @Operation(summary = "학습지 상세 조회", description = "문제 풀기 창에서 사용 | 일대일 질문은 전부 단답형")
     public ApiResponseDto<QuestionPaperDetailDto> getQuestionPaperDetail(
         @RequestParam Long AssignQuestionPaperId) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_PAPER_DETAIL_SUCCESS,

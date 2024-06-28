@@ -16,13 +16,14 @@ public class AssignQuestionPaperResponseDto {
     private String title;
     private Integer score;
     private Integer totalScore;
+    private Integer questionNum;
 
     public static AssignQuestionPaperResponseDto of(AssignQuestions assignQuestions) {
         return new AssignQuestionPaperResponseDto(assignQuestions.getId(),
             assignQuestions.getSubject(), assignQuestions.getAssignStatus(),
             assignQuestions.getQuestionPaper().getTitle(),
             assignQuestions.getScore(),
-            assignQuestions.getTotalScore());
+            assignQuestions.getTotalScore(), assignQuestions.getQuestionNum());
     }
 
 
