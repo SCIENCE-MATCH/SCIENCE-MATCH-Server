@@ -149,6 +149,7 @@ public class QuestionPaperService {
         return null;
     }
 
+    @Transactional
     public void createQuestionPaper(QuestionPaperCreateDto questionPaperCreateDto) {
         List<Question> questions = questionRepository.findAllByIds(
             questionPaperCreateDto.getQuestionIds());
