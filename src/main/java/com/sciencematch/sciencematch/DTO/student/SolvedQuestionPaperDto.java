@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SolvedPaperTestDto {
+public class SolvedQuestionPaperDto {
     private Integer score;
     private Integer totalScore;
     private Integer correctNum;

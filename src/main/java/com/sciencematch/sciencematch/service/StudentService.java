@@ -7,7 +7,7 @@ import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
-import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
+import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
 import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Student;
@@ -126,14 +126,14 @@ public class StudentService {
         paperTestAnswerRepository.save(answer);
     }
 
-    public SolvedPaperTestDto getCompleteQuestionPaper(Long questionId) {
+    public SolvedQuestionPaperDto getCompleteQuestionPaper(Long questionId) {
         AssignQuestions assignQuestions = assignQuestionRepository.getAssignQuestionsById(
             questionId);
         long correctNum = assignQuestions.getAnswer().stream().filter(Answer::getRightAnswer).count();
         List<AnswerResponseDto> answerResponseDtos = assignQuestions.getAnswer().stream()
             .map(AnswerResponseDto::of).collect(
                 Collectors.toList());
-        return new SolvedPaperTestDto(assignQuestions.getScore(), assignQuestions.getTotalScore(),
+        return new SolvedQuestionPaperDto(assignQuestions.getScore(), assignQuestions.getTotalScore(),
             (int) correctNum, assignQuestions.getQuestionNum(),
             answerResponseDtos);
     }

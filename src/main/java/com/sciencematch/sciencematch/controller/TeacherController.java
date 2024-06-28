@@ -3,7 +3,7 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
 import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
-import com.sciencematch.sciencematch.DTO.student.SolvedPaperTestDto;
+import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.GradingRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.SummaryRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.MyStudentsResponseDto;
@@ -157,7 +157,7 @@ public class TeacherController {
 
     @Operation(summary = "출제한 학습지 조회")
     @GetMapping("/assign-question-paper/{id}/complete")
-    public ApiResponseDto<SolvedPaperTestDto> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
+    public ApiResponseDto<SolvedQuestionPaperDto> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {
         return ApiResponseDto.success(SuccessStatus.GET_ASSIGN_QUESTION_PAPER_SUCCESS,
             studentService.getCompleteQuestionPaper(id));
     }
