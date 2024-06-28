@@ -42,6 +42,7 @@ public class Question {
     private Integer page;
     private QuestionTag questionTag;
     private Long chapterId;
+    private Long bookId;
     private Integer score;
 
     private final Boolean deleted = false;
@@ -51,8 +52,7 @@ public class Question {
 
     @Builder
     private Question(School school, Semester semester, Subject subject, String image, Level level,
-        Category category, String solution, String solutionImg,
-        String bookName, Integer page, QuestionTag questionTag, Long chapterId, Integer score) {
+        Category category, String solution, String solutionImg, String bookName, Integer page, Double pageOrder, QuestionTag questionTag, Long chapterId, Long bookId, Integer score) {
         this.school = school;
         this.semester = semester;
         this.subject = subject;
@@ -63,8 +63,10 @@ public class Question {
         this.solutionImg = solutionImg;
         this.bookName = bookName;
         this.page = page;
+        this.pageOrder = pageOrder;
         this.questionTag = questionTag;
         this.chapterId = chapterId;
+        this.bookId = bookId;
         this.score = score;
 
     }

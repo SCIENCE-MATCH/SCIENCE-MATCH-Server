@@ -37,8 +37,10 @@ public class QuestionService {
             .solutionImg(solutionImg)
             .bookName(questionPostDto.getBookName())
             .page(questionPostDto.getPage())
+            .pageOrder(questionPostDto.getPageOrder())
             .questionTag(questionPostDto.getQuestionTag())
             .chapterId(questionPostDto.getChapterId())
+            .bookId(questionPostDto.getBookId())
             .score(questionPostDto.getScore())
             .build();
         questionRepository.save(question);

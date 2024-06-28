@@ -29,11 +29,16 @@ public class QuestionPostDto {
     @Schema(example = "17")
     private Integer page;
 
+    @Schema(example = "2.1")
+    private Double pageOrder;
+
     @Schema(example = "NORMAL")
     private QuestionTag questionTag;
 
-    @Schema
+    @Schema(example = "7")
     private Long chapterId;
+    @Schema(example = "33")
+    private Long bookId;
     @Schema(example = "3")
     private Integer score;
 
