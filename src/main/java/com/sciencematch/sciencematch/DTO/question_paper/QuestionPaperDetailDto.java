@@ -16,7 +16,6 @@ public class QuestionPaperDetailDto {
     public static QuestionPaperDetailDto of(AssignQuestions assignQuestions, List<Category> categories) {
         String pdf = assignQuestions.getQuestionPaper().getPdf();
         return new QuestionPaperDetailDto(pdf, categories);
-
     }
 
 }

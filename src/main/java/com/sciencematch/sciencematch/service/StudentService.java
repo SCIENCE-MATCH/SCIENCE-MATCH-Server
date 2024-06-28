@@ -10,6 +10,7 @@ import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
 import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
+import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
@@ -49,29 +50,14 @@ public class StudentService {
             .map(AssignQuestionPaperResponseDto::of).collect(Collectors.toList());
     }
 
-    @Transactional
     public QuestionPaperDetailDto getQuestionPaperDetail(Long assignQuestionPaperId) {
         AssignQuestions assignQuestions = assignQuestionRepository.getAssignQuestionsById(
             assignQuestionPaperId);
+        List<Category> categories = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
+                assignQuestions.getQuestionPaper()).stream().map(cq -> cq.getQuestion().getCategory())
+            .collect(Collectors.toList());
 
-        //학습지에 연결된 문제들을 불러오기 + answer 객체로 변환
-        List<Answer> answers = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
-                assignQuestions.getQuestionPaper())
-            .stream().map(cq -> Answer.builder()
-                .solution(cq.getQuestion().getSolution())
-                .solutionImg(cq.getQuestion().getSolutionImg())
-                .category(cq.getQuestion().getCategory())
-                .chapterId(cq.getQuestion().getChapterId())
-                .score(cq.getScore())
-                .questionId(cq.getQuestion().getId())
-                .questionImg(cq.getQuestion().getImage())
-                .assignQuestions(assignQuestions)
-                .build()).collect(Collectors.toList());
-
-        answerRepository.saveAll(answers);
-
-        return QuestionPaperDetailDto.of(assignQuestions, answers.stream().map(Answer::getCategory).collect(
-            Collectors.toList()));
+        return QuestionPaperDetailDto.of(assignQuestions, categories);
     }
 
     public List<AssignPaperTestResponseDto> getMyPaperTest(String phoneNum) {
@@ -84,7 +70,21 @@ public class StudentService {
     public void solveAssignQuestionPaper(AssignQuestionPaperSolveDto assignQuestionPaperSolveDto) {
         //출제한 학습지 불러오기
         AssignQuestions questions = assignQuestionRepository.getAssignQuestionsById(assignQuestionPaperSolveDto.getAssignQuestionPaperId());
-        List<Answer> answers = questions.getAnswer();
+        //학습지에 연결된 문제들을 불러오기 + answer 객체로 변환
+        List<Answer> answers = connectQuestionRepository.getAllConnectQuestionByQuestionPaper(
+                questions.getQuestionPaper())
+            .stream().map(cq -> Answer.builder()
+                .solution(cq.getQuestion().getSolution())
+                .solutionImg(cq.getQuestion().getSolutionImg())
+                .category(cq.getQuestion().getCategory())
+                .chapterId(cq.getQuestion().getChapterId())
+                .score(cq.getScore())
+                .questionId(cq.getQuestion().getId())
+                .questionImg(cq.getQuestion().getImage())
+                .assignQuestions(questions)
+                .build()).collect(Collectors.toList());
+
+        answerRepository.saveAll(answers);
 
         // 제출한 답
         List<String> solvingAnswer = assignQuestionPaperSolveDto.getAnswer();
