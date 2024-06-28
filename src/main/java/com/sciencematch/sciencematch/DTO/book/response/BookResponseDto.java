@@ -10,6 +10,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class BookResponseDto {
 
+    private Long bookId;
     private School school;
     private Semester semester;
     private String title;
@@ -17,7 +18,7 @@ public class BookResponseDto {
     private String publisher;
 
     public static BookResponseDto of(Book book) {
-        return new BookResponseDto(book.getSchool(), book.getSemester(), book.getTitle(),
+        return new BookResponseDto(book.getId(), book.getSchool(), book.getSemester(), book.getTitle(),
             book.getEditionNum(), book.getPublisher());
     }
 }
