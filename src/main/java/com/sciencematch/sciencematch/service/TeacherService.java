@@ -134,8 +134,7 @@ public class TeacherService {
     }
 
     public List<TeacherAssignQuestionsResponseDto> getAssignQuestionPaper(Long studentId) {
-        return assignQuestionRepository.findAllByStudentId(
-                studentId).stream().map(TeacherAssignQuestionsResponseDto::of)
+        return assignQuestionRepository.findAllByStudentId(studentId).stream().map(TeacherAssignQuestionsResponseDto::of)
             .collect(Collectors.toList());
     }
 

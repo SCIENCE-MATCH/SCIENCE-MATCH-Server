@@ -21,13 +21,14 @@ public class TeacherAssignQuestionsResponseDto {
     private AssignStatus assignStatus;
     private Integer questionNum;
     private LocalDateTime createdAt;
+    private String pdf;
 
     public static TeacherAssignQuestionsResponseDto of(AssignQuestions assignQuestions) {
         return new TeacherAssignQuestionsResponseDto(assignQuestions.getId(),
             assignQuestions.getQuestionPaper().getSchool(), assignQuestions.getQuestionPaper()
             .getCategory(), assignQuestions.getQuestionPaper().getTitle(),
             assignQuestions.getSubject(), assignQuestions.getAssignStatus(),
-            assignQuestions.getQuestionPaper().getQuestionNum(), assignQuestions.getCreateAt());
+            assignQuestions.getQuestionPaper().getQuestionNum(), assignQuestions.getCreateAt(), assignQuestions.getQuestionPaper().getPdf());
     }
 
 
