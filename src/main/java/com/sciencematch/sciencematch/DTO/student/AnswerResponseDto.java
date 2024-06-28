@@ -14,12 +14,13 @@ public class AnswerResponseDto {
     private String submitAnswer;
     private String solution;
     private String solutionImg;
+    private String questionImg;
 
     private Category category;
     private Boolean rightAnswer;
 
     public static AnswerResponseDto of(Answer answer) {
         return new AnswerResponseDto(answer.getId(), answer.getSubmitAnswer(), answer.getSolution(),
-            answer.getSolutionImg(), answer.getCategory(), answer.getRightAnswer());
+            answer.getSolutionImg(), answer.getQuestionImg(), answer.getCategory(), answer.getRightAnswer());
     }
 }

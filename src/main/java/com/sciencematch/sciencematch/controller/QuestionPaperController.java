@@ -57,7 +57,7 @@ public class QuestionPaperController {
     }
 
     @PostMapping("/question-paper/submit")
-    @Operation(summary = "단일 문제 출제")
+    @Operation(summary = "단일 문제지 출제")
     public ApiResponseDto<?> submitQuestionPaper(
         @RequestBody QuestionPaperSubmitDto questionPaperSubmitDto) {
         questionPaperService.submitQuestionPaper(questionPaperSubmitDto);
@@ -65,7 +65,7 @@ public class QuestionPaperController {
     }
 
     @PostMapping("/question-paper/multiple-submit")
-    @Operation(summary = "복수 문제 출제")
+    @Operation(summary = "복수 문제지 출제")
     public ApiResponseDto<?> submitMultipleQuestionPaper(
         MultipleQuestionPaperSubmitDto multipleQuestionPaperSubmitDto) {
         questionPaperService.submitMultipleQuestionPaper(multipleQuestionPaperSubmitDto);

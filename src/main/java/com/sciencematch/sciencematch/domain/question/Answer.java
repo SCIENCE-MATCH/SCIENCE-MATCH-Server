@@ -37,6 +37,7 @@ public class Answer {
     private Integer score;
 
     private Long questionId;
+    private String questionImg;
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,7 +45,7 @@ public class Answer {
     private AssignQuestions assignQuestions;
 
     @Builder
-    public Answer(String submitAnswer, String solution, String solutionImg, Category category, Long chapterId, Integer score, Long questionId) {
+    public Answer(String submitAnswer, String solution, String solutionImg, Category category, Long chapterId, Integer score, Long questionId, String questionImg) {
         this.submitAnswer = submitAnswer;
         this.solution = solution;
         this.solutionImg = solutionImg;
@@ -54,6 +55,7 @@ public class Answer {
         this.graded = false;
         this.score = score;
         this.questionId = questionId;
+        this.questionImg = questionImg;
     }
 
     public void setRightAnswer(Boolean rightAnswer) {
