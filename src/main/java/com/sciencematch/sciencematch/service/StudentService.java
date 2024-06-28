@@ -49,6 +49,7 @@ public class StudentService {
             .map(AssignQuestionPaperResponseDto::of).collect(Collectors.toList());
     }
 
+    @Transactional
     public QuestionPaperDetailDto getQuestionPaperDetail(Long assignQuestionPaperId) {
         AssignQuestions assignQuestions = assignQuestionRepository.getAssignQuestionsById(
             assignQuestionPaperId);
