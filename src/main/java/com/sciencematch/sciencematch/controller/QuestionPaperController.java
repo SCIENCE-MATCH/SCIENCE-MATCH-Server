@@ -80,7 +80,7 @@ public class QuestionPaperController {
         return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
 
-    @PostMapping("/question-paper")
+    @PostMapping("/question-paper/delete")
     @Operation(summary = "학습지 삭제")
     public ApiResponseDto<?> deleteQuestionPaper(@RequestBody List<Long> questionPaperIds) {
         questionPaperService.deleteQuestionPaper(questionPaperIds);
