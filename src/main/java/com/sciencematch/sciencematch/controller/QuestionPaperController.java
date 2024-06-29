@@ -17,7 +17,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -81,7 +80,7 @@ public class QuestionPaperController {
         return ApiResponseDto.success(SuccessStatus.SUBMIT_QUESTION_PAPER_SUCCESS);
     }
 
-    @DeleteMapping("/question-paper")
+    @PostMapping("/question-paper")
     @Operation(summary = "학습지 삭제")
     public ApiResponseDto<?> deleteQuestionPaper(@RequestBody List<Long> questionPaperIds) {
         questionPaperService.deleteQuestionPaper(questionPaperIds);
