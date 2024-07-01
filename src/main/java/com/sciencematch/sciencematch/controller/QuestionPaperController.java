@@ -3,6 +3,8 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperCreateDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadRequestDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
@@ -17,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -89,7 +92,17 @@ public class QuestionPaperController {
 
     @PostMapping("/question-paper/wrong")
     @Operation(summary = "오답 문제 추출")
-    public ApiResponseDto<List<QuestionResponseDto>> getWrongQuestion(@RequestBody List<Long> assignQuestionIds) {
-        return ApiResponseDto.success(SuccessStatus.GET_WRONG_SUCCESS, questionPaperService.getWrongQuestion(assignQuestionIds));
+    public ApiResponseDto<List<QuestionResponseDto>> getWrongQuestion(
+        @RequestBody List<Long> assignQuestionIds) {
+        return ApiResponseDto.success(SuccessStatus.GET_WRONG_SUCCESS,
+            questionPaperService.getWrongQuestion(assignQuestionIds));
+    }
+
+    @GetMapping("/question-paper/download")
+    @Operation(summary = "학습지 다운로드")
+    public ApiResponseDto<QuestionPaperDownloadDto> downloadQuestionPaper(
+        QuestionPaperDownloadRequestDto questionPaperDownloadRequestDto) {
+        return ApiResponseDto.success(SuccessStatus.QUESTION_PAPER_DOWNLOAD_SUCCESS,
+            questionPaperService.downloadQuestionPaper(questionPaperDownloadRequestDto));
     }
 }

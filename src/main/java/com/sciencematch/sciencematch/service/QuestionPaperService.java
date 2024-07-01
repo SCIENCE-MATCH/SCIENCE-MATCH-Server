@@ -3,6 +3,8 @@ package com.sciencematch.sciencematch.service;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperCreateDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadDto;
+import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadRequestDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
@@ -238,5 +240,15 @@ public class QuestionPaperService {
             result.add(QuestionResponseDto.of(question, chapter));
         }
         return result;
+    }
+
+    public QuestionPaperDownloadDto downloadQuestionPaper(
+        QuestionPaperDownloadRequestDto questionPaperDownloadRequestDto) {
+        QuestionPaper questionPaper = questionPaperRepository.getQuestionPaperById(
+            questionPaperDownloadRequestDto.getQuestionPaperId());
+        List<Question> questions = questionPaper.getConnectQuestions().stream()
+            .map(ConnectQuestion::getQuestion)
+            .collect(Collectors.toList());
+        return QuestionPaperDownloadDto.of(questions, questionPaperDownloadRequestDto);
     }
 }
