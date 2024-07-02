@@ -40,8 +40,8 @@ if [ -z $IDLE_PID ]
 then
   echo "> 현재 구동중인 애플리케이션이 없으므로 종료하지 않습니다."
 else
-  echo "> kill -15 $IDLE_PID"
-  kill -15 $IDLE_PID
+  echo "> kill -9 $IDLE_PID"
+  kill -9 $IDLE_PID
   sleep 5
 fi
 
@@ -79,4 +79,13 @@ done
 
 echo "> 스위칭"
 sleep 10
-/home/ubuntu/app/nonstop/switch.sh
+
+echo "> 전환할 Port: $IDLE_PORT"
+echo "> Port 전환"
+echo "set \$service_url http://127.0.0.1:${IDLE_PORT};" | sudo tee /etc/nginx/conf.d/service-url.inc
+
+PROXY_PORT=$(curl -sL http:localhost/profile)
+echo "> Nginx Current Proxy Port: $PROXY_PORT"
+
+echo "> Nginx Reload"
+sudo service nginx reload
