@@ -115,8 +115,6 @@ public class TeacherService {
         int assignPaperCorrectPercent = assignPaperTotalNum == 0 ? 0 : (int) (
                 ((double) assignPaperCorrectNum / assignPaperTotalNum) * 100);
 
-        System.out.println();
-
         return new SummaryResponseDto(assignQuestionTotalNum,
             assignQuestionAverageScore, assignPaperTotalNum,
             assignPaperCorrectPercent, summaryAQResponseDtos);
