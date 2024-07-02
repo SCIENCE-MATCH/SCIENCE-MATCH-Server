@@ -5,6 +5,7 @@ import com.sciencematch.sciencematch.DTO.book.response.BookChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.book.response.BookQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.book.response.BookResponseDto;
 import com.sciencematch.sciencematch.domain.Book;
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.infrastructure.BookRepository;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
@@ -74,7 +75,11 @@ public class BookService {
     }
 
     public List<BookQuestionResponseDto> getBookQuestion(Long bookId, Integer page) {
-        return questionRepository.findAllByBookIdAndPage(bookId, page).stream().map(BookQuestionResponseDto::of)
-            .collect(Collectors.toList());
+        List<BookQuestionResponseDto> result = new ArrayList<>();
+        for (Question question : questionRepository.findAllByBookIdAndPage(bookId, page)) {
+            Chapter chapter = chapterRepository.getChapterById(question.getChapterId());
+            result.add(BookQuestionResponseDto.of(question, chapter));
+        }
+        return result;
     }
 }

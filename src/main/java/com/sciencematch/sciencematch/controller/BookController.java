@@ -37,22 +37,22 @@ public class BookController {
         return ApiResponseDto.success(SuccessStatus.CREATE_BOOK_SUCCESS);
     }
 
-    @PatchMapping("/admin/book/update/{id}")
+    @PatchMapping("/admin/book/update/{bookId}")
     @Operation(summary = "교재 정보 수정", description = "뭔지 모를 뷰의 교재 수정 부분입니다.")
-    public ApiResponseDto<?> createBook(@PathVariable("id") Long bookId, @RequestBody CreateBookDto createBookDto) {
+    public ApiResponseDto<?> createBook(@PathVariable("bookId") Long bookId, @RequestBody CreateBookDto createBookDto) {
         bookService.updateBook(bookId, createBookDto);
         return ApiResponseDto.success(SuccessStatus.UPDATE_BOOK_SUCCESS);
     }
 
-    @GetMapping("/book/chapter/{id}")
+    @GetMapping("/book/chapter/{bookId}")
     @Operation(summary = "교재 챕터 조회", description = "선생 1-1 뷰의 시중 교재 문제 선택 부분입니다.")
-    public ApiResponseDto<?> getBookChapter(@PathVariable("id") Long bookId) {
+    public ApiResponseDto<?> getBookChapter(@PathVariable("bookId") Long bookId) {
         return ApiResponseDto.success(SuccessStatus.GET_BOOK_QUESTION_SUCCESS, bookService.getBookChapter(bookId));
     }
 
-    @GetMapping("/book/question/{id}/{page}")
+    @GetMapping("/book/question/{bookId}/{page}")
     @Operation(summary = "교재 문제 조회", description = "선생 1-1 뷰의 시중 교재 문제 선택 부분입니다.")
-    public ApiResponseDto<?> getBookQuestion(@PathVariable("id") Long bookId, @PathVariable("page") Integer page) {
+    public ApiResponseDto<?> getBookQuestion(@PathVariable("bookId") Long bookId, @PathVariable("page") Integer page) {
         return ApiResponseDto.success(SuccessStatus.GET_BOOK_QUESTION_SUCCESS, bookService.getBookQuestion(bookId, page));
     }
 }
