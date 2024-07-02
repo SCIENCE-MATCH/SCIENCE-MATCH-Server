@@ -10,8 +10,9 @@ public class BookQuestionResponseDto {
 
     private Long questionId;
     private Double pageOrder;
+    private String questionImg;
 
     public static BookQuestionResponseDto of(Question question) {
-        return new BookQuestionResponseDto(question.getId(), question.getPageOrder());
+        return new BookQuestionResponseDto(question.getId(), question.getPageOrder(), question.getImage());
     }
 }
