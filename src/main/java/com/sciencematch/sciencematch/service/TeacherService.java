@@ -111,9 +111,11 @@ public class TeacherService {
             .count();
 
         int assignQuestionAverageScore = assignQuestionTotalScore == 0 ? 0 : (int) (
-                (double) (assignQuestionScore / assignQuestionTotalScore) * 100);
+                ((double) assignQuestionScore / assignQuestionTotalScore) * 100);
         int assignPaperCorrectPercent = assignPaperTotalNum == 0 ? 0 : (int) (
-                (double) (assignPaperCorrectNum / assignPaperTotalNum) * 100);
+                ((double) assignPaperCorrectNum / assignPaperTotalNum) * 100);
+
+        System.out.println();
 
         return new SummaryResponseDto(assignQuestionTotalNum,
             assignQuestionAverageScore, assignPaperTotalNum,
