@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.DTO.book.request.CreateBookDto;
+import com.sciencematch.sciencematch.DTO.book.response.BookChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.book.response.BookQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.book.response.BookResponseDto;
 import com.sciencematch.sciencematch.domain.Book;
@@ -46,25 +47,30 @@ public class BookService {
         bookRepository.save(book);
     }
 
-    public Map<String, List<Integer>> getBookChapter(Long bookId) {
+    public List<BookChapterResponseDto> getBookChapter(Long bookId) {
         //question에서 챕터 id와 page만 필요
-        Map<String, List<Integer>> group = new HashMap<>();
+        Map<Long, List<Integer>> group = new HashMap<>();
         List<Question> questions = questionRepository.findAllByBookId(bookId);
 
         for (Question question : questions) {
-            String description = chapterRepository.getChapterById(question.getChapterId())
-                .getDescription();
-            if (group.containsKey(description)){
-                List<Integer> value = group.get(description);
+            Long chapterId = chapterRepository.getChapterById(question.getChapterId()).getId();
+            if (group.containsKey(chapterId)){
+                List<Integer> value = group.get(chapterId);
                 if (!value.contains(question.getPage())) {
                     value.add(question.getPage());
                 }
                 continue;
             }
             // 값이 존재하지 않으면 새로운 리스트를 생성하고 페이지 추가
-            group.put(description, new ArrayList<>(question.getPage()));
+            group.put(chapterId, new ArrayList<>(List.of(question.getPage())));
         }
-        return group;
+        List<BookChapterResponseDto> bookChapterResponseDtos = new ArrayList<>();
+        for (Map.Entry<Long, List<Integer>> entry : group.entrySet()) {
+            bookChapterResponseDtos.add(
+                BookChapterResponseDto.of(chapterRepository.getChapterById(entry.getKey()),
+                    entry.getValue()));
+        }
+        return bookChapterResponseDtos;
     }
 
     public List<BookQuestionResponseDto> getBookQuestion(Long bookId, Integer page) {
