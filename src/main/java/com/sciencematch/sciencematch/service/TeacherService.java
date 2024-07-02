@@ -110,8 +110,10 @@ public class TeacherService {
             .filter(answer -> Boolean.TRUE.equals(answer.getRightAnswer())) // getRightAnswer()가 null인 경우를 대비
             .count();
 
-        int assignQuestionAverageScore = assignQuestionTotalScore == 0 ? 0 : (assignQuestionScore / assignQuestionTotalScore) * 100;
-        int assignPaperCorrectPercent = assignPaperTotalNum == 0 ? 0 : (assignPaperCorrectNum / assignPaperTotalNum) * 100;
+        int assignQuestionAverageScore = assignQuestionTotalScore == 0 ? 0 : (int) (
+                (double) (assignQuestionScore / assignQuestionTotalScore) * 100);
+        int assignPaperCorrectPercent = assignPaperTotalNum == 0 ? 0 : (int) (
+                (double) (assignPaperCorrectNum / assignPaperTotalNum) * 100);
 
         return new SummaryResponseDto(assignQuestionTotalNum,
             assignQuestionAverageScore, assignPaperTotalNum,
