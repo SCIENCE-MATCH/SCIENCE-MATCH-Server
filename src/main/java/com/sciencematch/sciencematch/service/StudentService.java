@@ -11,20 +11,25 @@ import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
 import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTestAnswer;
 import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
+import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
+import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestAnswerRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AnswerRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepository;
+import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -40,6 +45,8 @@ public class StudentService {
     private final AssignQuestionRepository assignQuestionRepository;
     private final AssignPaperTestRepository assignPaperTestRepository;
     private final ConnectQuestionRepository connectQuestionRepository;
+    private final ChapterRepository chapterRepository;
+    private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final PaperTestAnswerRepository paperTestAnswerRepository;
 
@@ -133,9 +140,12 @@ public class StudentService {
         AssignQuestions assignQuestions = assignQuestionRepository.getAssignQuestionsById(
             questionId);
         long correctNum = assignQuestions.getAnswer().stream().filter(Answer::getRightAnswer).count();
-        List<AnswerResponseDto> answerResponseDtos = assignQuestions.getAnswer().stream()
-            .map(AnswerResponseDto::of).collect(
-                Collectors.toList());
+        List<AnswerResponseDto> answerResponseDtos = new ArrayList<>();
+        for (Answer answer : assignQuestions.getAnswer()) {
+            Question question = questionRepository.getQuestionById(answer.getQuestionId());
+            Chapter chapter = chapterRepository.getChapterById(answer.getChapterId());
+            answerResponseDtos.add(AnswerResponseDto.of(answer, question, chapter));
+        }
         return new SolvedQuestionPaperDto(assignQuestions.getScore(), assignQuestions.getTotalScore(),
             (int) correctNum, assignQuestions.getQuestionNum(),
             answerResponseDtos);
