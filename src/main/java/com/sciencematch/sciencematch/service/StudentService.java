@@ -102,7 +102,7 @@ public class StudentService {
             questions.plusTotalScore(answer.getScore());
         }
 
-        questions.setAnswerAndAssignStatus(answers);
+        questions.setAnswerAndAssignStatus(answers, questions.getQuestionPaper().getCategory());
         answerRepository.saveAll(answers);
 
     }

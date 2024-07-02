@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain.question;
 
+import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Subject;
@@ -62,12 +63,12 @@ public class AssignQuestions extends AuditingTimeEntity {
         }
     }
 
-    public void setAnswerAndAssignStatus(List<Answer> answers) {
+    public void setAnswerAndAssignStatus(List<Answer> answers, Category category) {
         for (Answer answer : answers) {
             answer.setAssignQuestions(this);
         }
         this.answer = answers;
-        this.assignStatus = AssignStatus.COMPLETE;
+        this.assignStatus = category != Category.MULTIPLE ? AssignStatus.COMPLETE : AssignStatus.GRADED;
     }
 
     public void setGraded() {
