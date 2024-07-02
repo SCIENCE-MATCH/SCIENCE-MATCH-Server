@@ -30,12 +30,11 @@ public interface AssignPaperTestRepository extends JpaRepository<AssignPaperTest
     void deleteAllByPaperTestId(Long paperTestId);
 
     @EntityGraph(attributePaths = {"paperTest"})
-    @Query("SELECT a FROM AssignPaperTest a WHERE a.student.id = :studentId AND a.updatedAt BETWEEN :startDate AND :endDate AND (a.assignStatus = :status1 OR a.assignStatus = :status2)")
+    @Query("SELECT a FROM AssignPaperTest a WHERE a.student.id = :studentId AND a.updatedAt BETWEEN :startDate AND :endDate AND a.assignStatus = :status")
     List<AssignPaperTest> findAllForSummary(
         @Param("studentId") Long studentId,
         @Param("startDate") LocalDateTime startDate,
         @Param("endDate") LocalDateTime endDate,
-        @Param("status1") AssignStatus status1,
-        @Param("status2") AssignStatus status2
+        @Param("status") AssignStatus status
     );
 }

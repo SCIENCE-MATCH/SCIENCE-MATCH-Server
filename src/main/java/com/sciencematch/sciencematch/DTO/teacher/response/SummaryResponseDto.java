@@ -12,5 +12,7 @@ public class SummaryResponseDto {
     private Integer assignQuestionAverageScore;
     private Integer assignPaperTotalNum;
     private Integer assignPaperCorrectPercent;
-    private List<SummaryAQResponseDto> summaryAQResponseDtos;
+    private List<SummaryAQResponseDto> solvedAQDto;
+    private List<SummaryAQResponseDto> notSolvedAQDto;
+    private List<SummaryPTResponseDto> solvedPTDto;
 }

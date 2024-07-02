@@ -6,6 +6,7 @@ import com.sciencematch.sciencematch.DTO.teacher.request.SummaryRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.SimpleStudentsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.SummaryAQResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.response.SummaryPTResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.SummaryResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignPaperTestsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignQuestionsResponseDto;
@@ -81,10 +82,10 @@ public class TeacherService {
     public SummaryResponseDto getStudentSummary(SummaryRequestDto summaryRequestDto) {
         List<AssignQuestions> assignQuestions = assignQuestionRepository.findAllForSummary(
             summaryRequestDto.getStudentId(), summaryRequestDto.getStartDate(),
-            summaryRequestDto.getEndDate(), AssignStatus.COMPLETE, AssignStatus.GRADED);
+            summaryRequestDto.getEndDate());
         List<AssignPaperTest> assignPaperTests = assignPaperTestRepository.findAllForSummary(
             summaryRequestDto.getStudentId(), summaryRequestDto.getStartDate(),
-            summaryRequestDto.getEndDate(), AssignStatus.COMPLETE, AssignStatus.GRADED);
+            summaryRequestDto.getEndDate(), AssignStatus.COMPLETE);
         return createSummaryResponseDto(assignQuestions, assignPaperTests);
     }
 
@@ -93,14 +94,22 @@ public class TeacherService {
         int assignQuestionTotalNum = 0;
         int assignQuestionTotalScore = 0;
         int assignQuestionScore = 0;
-        List<SummaryAQResponseDto> summaryAQResponseDtos = new ArrayList<>();
+        List<SummaryAQResponseDto> solvedAQDto = new ArrayList<>();
+        List<SummaryAQResponseDto> notSolvedAQDto = new ArrayList<>();
+        List<SummaryPTResponseDto> solvedPTDto = assignPaperTests.stream().map(SummaryPTResponseDto::of).collect(
+            Collectors.toList());
 
         for (AssignQuestions assignQuestion : assignQuestions) {
-            assignQuestionTotalNum += assignQuestion.getQuestionNum();
-            assignQuestionTotalScore += assignQuestion.getTotalScore();
-            assignQuestionScore += assignQuestion.getScore();
-            summaryAQResponseDtos.add(SummaryAQResponseDto.of(assignQuestion));
+            if (assignQuestion.getAssignStatus() == AssignStatus.GRADED) {
+                assignQuestionTotalNum += assignQuestion.getQuestionNum();
+                assignQuestionTotalScore += assignQuestion.getTotalScore();
+                assignQuestionScore += assignQuestion.getScore();
+                solvedAQDto.add(SummaryAQResponseDto.of(assignQuestion));
+                continue;
+            }
+            notSolvedAQDto.add(SummaryAQResponseDto.of(assignQuestion));
         }
+
 
         int assignPaperTotalNum = assignPaperTests.size();
         int assignPaperCorrectNum = (int) assignPaperTests.stream()
@@ -117,7 +126,7 @@ public class TeacherService {
 
         return new SummaryResponseDto(assignQuestionTotalNum,
             assignQuestionAverageScore, assignPaperTotalNum,
-            assignPaperCorrectPercent, summaryAQResponseDtos);
+            assignPaperCorrectPercent, solvedAQDto, notSolvedAQDto, solvedPTDto);
     }
 
     //간단 학생 조회 (반 생성, 퀴즈 등)
