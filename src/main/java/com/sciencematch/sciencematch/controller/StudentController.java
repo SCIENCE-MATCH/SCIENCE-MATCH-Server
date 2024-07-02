@@ -7,6 +7,7 @@ import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
+import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.StudentService;
@@ -41,7 +42,7 @@ public class StudentController {
 
     @GetMapping("/mypage")
     @Operation(summary = "마이페이지 조회")
-    public ApiResponseDto<?> getMyPage(
+    public ApiResponseDto<StudentMyPageDto> getMyPage(
             @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_MYPAGE_SUCCESS,
                 studentService.getMypage(user.getUsername()));

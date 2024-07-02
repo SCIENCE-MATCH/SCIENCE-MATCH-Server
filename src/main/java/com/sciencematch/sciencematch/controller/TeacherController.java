@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
+import com.sciencematch.sciencematch.DTO.auth.response.MyPageDto;
 import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
@@ -8,6 +9,7 @@ import com.sciencematch.sciencematch.DTO.teacher.request.GradingRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.SummaryRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.MyStudentsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.SimpleStudentsResponseDto;
+import com.sciencematch.sciencematch.DTO.teacher.response.SummaryResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignPaperTestsResponseDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignQuestionsResponseDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
@@ -70,7 +72,7 @@ public class TeacherController {
 
     @GetMapping("/mypage")
     @Operation(summary = "마이페이지 조회")
-    public ApiResponseDto<?> getMyPage(
+    public ApiResponseDto<MyPageDto> getMyPage(
         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ApiResponseDto.success(SuccessStatus.GET_MYPAGE_SUCCESS,
             teacherService.getMypage(user.getUsername()));
@@ -78,7 +80,7 @@ public class TeacherController {
 
     @PostMapping("/student/summary")
     @Operation(summary = "학습내역 조회")
-    public ApiResponseDto<?> getStudentSummary(
+    public ApiResponseDto<SummaryResponseDto> getStudentSummary(
         @RequestBody @Valid SummaryRequestDto summaryRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_MYPAGE_SUCCESS,
             teacherService.getStudentSummary(summaryRequestDto));

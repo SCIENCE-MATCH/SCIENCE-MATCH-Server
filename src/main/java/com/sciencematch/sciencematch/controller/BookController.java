@@ -1,12 +1,15 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.DTO.book.request.CreateBookDto;
+import com.sciencematch.sciencematch.DTO.book.response.BookChapterResponseDto;
+import com.sciencematch.sciencematch.DTO.book.response.BookQuestionResponseDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -46,13 +49,13 @@ public class BookController {
 
     @GetMapping("/book/chapter/{bookId}")
     @Operation(summary = "교재 챕터 조회", description = "선생 1-1 뷰의 시중 교재 문제 선택 부분입니다.")
-    public ApiResponseDto<?> getBookChapter(@PathVariable("bookId") Long bookId) {
+    public ApiResponseDto<List<BookChapterResponseDto>> getBookChapter(@PathVariable("bookId") Long bookId) {
         return ApiResponseDto.success(SuccessStatus.GET_BOOK_QUESTION_SUCCESS, bookService.getBookChapter(bookId));
     }
 
     @GetMapping("/book/question/{bookId}/{page}")
     @Operation(summary = "교재 문제 조회", description = "선생 1-1 뷰의 시중 교재 문제 선택 부분입니다.")
-    public ApiResponseDto<?> getBookQuestion(@PathVariable("bookId") Long bookId, @PathVariable("page") Integer page) {
+    public ApiResponseDto<List<BookQuestionResponseDto>> getBookQuestion(@PathVariable("bookId") Long bookId, @PathVariable("page") Integer page) {
         return ApiResponseDto.success(SuccessStatus.GET_BOOK_QUESTION_SUCCESS, bookService.getBookQuestion(bookId, page));
     }
 }
