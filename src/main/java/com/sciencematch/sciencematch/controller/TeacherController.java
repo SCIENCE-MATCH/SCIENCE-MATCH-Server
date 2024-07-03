@@ -157,6 +157,13 @@ public class TeacherController {
         return ApiResponseDto.success(SuccessStatus.DELETE_ASSIGN_PAPER_TEST_SUCCESS);
     }
 
+    @DeleteMapping("/assign-paper-test/{assignQuestionId}")
+    @Operation(summary = "학생에게 출제한 일대일 질문 삭제")
+    public ApiResponseDto<?> deleteAssignQuestions(@Schema(example = "2") @Param("assignQuestionId") @PathVariable Long assignQuestionId) {
+        teacherService.deleteAssignQuestion(assignQuestionId);
+        return ApiResponseDto.success(SuccessStatus.DELETE_ASSIGN_PAPER_TEST_SUCCESS);
+    }
+
     @Operation(summary = "출제한 학습지 조회")
     @GetMapping("/assign-question-paper/{id}/complete")
     public ApiResponseDto<SolvedQuestionPaperDto> getCompleteQuestionPaper(@Schema(example = "52") @PathVariable("id") Long id) {

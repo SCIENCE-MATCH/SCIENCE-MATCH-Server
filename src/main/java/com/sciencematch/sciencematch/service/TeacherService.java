@@ -161,6 +161,11 @@ public class TeacherService {
     }
 
     @Transactional
+    public void deleteAssignQuestion(Long assignQuestionId) {
+        assignQuestionRepository.deleteById(assignQuestionId);
+    }
+
+    @Transactional
     public void gradingQuestionPaper(GradingRequestDto gradingRequestDto) {
         Answer answer = answerRepository.getAnswerById(gradingRequestDto.getAnswerId());
         answer.setRightAnswer(gradingRequestDto.getRightAnswer());
