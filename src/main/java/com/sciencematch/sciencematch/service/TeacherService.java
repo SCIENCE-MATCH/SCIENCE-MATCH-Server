@@ -12,12 +12,15 @@ import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignPaperTest
 import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignQuestionsResponseDto;
 import com.sciencematch.sciencematch.DTO.team.TeamResponseDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTestAnswer;
 import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
+import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
+import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
@@ -40,6 +43,7 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
+    private final ChapterRepository chapterRepository;
     private final AssignQuestionRepository assignQuestionRepository;
     private final AssignPaperTestRepository assignPaperTestRepository;
     private final AnswerRepository answerRepository;
@@ -145,8 +149,17 @@ public class TeacherService {
     }
 
     public List<TeacherAssignQuestionsResponseDto> getAssignQuestionPaper(Long studentId) {
-        return assignQuestionRepository.findAllByStudentId(studentId).stream().map(TeacherAssignQuestionsResponseDto::of)
-            .collect(Collectors.toList());
+        List<AssignQuestions> assignQuestions = assignQuestionRepository.findAllByStudentId(
+            studentId);
+        List<TeacherAssignQuestionsResponseDto> result = new ArrayList<>();
+        for (AssignQuestions assignQuestion : assignQuestions) {
+            QuestionPaper qp = assignQuestion.getQuestionPaper();
+            Chapter minChapter = chapterRepository.getChapterById(qp.getMinChapterId());
+            Chapter maxChapter = chapterRepository.getChapterById(qp.getMaxChapterId());
+            result.add(TeacherAssignQuestionsResponseDto.of(assignQuestion,
+                minChapter.getDescription() + " ~ " + maxChapter.getDescription()));
+        }
+        return result;
     }
 
     public List<TeacherAssignPaperTestsResponseDto> getAssignPaperTest(Long studentId) {

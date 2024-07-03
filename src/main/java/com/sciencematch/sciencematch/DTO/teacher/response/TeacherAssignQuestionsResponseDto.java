@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.DTO.teacher.response;
 
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Subject;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
@@ -22,13 +23,16 @@ public class TeacherAssignQuestionsResponseDto {
     private Integer questionNum;
     private LocalDateTime createdAt;
     private String pdf;
+    private Level level;
+    private String boundary;
 
-    public static TeacherAssignQuestionsResponseDto of(AssignQuestions assignQuestions) {
+    public static TeacherAssignQuestionsResponseDto of(AssignQuestions assignQuestions, String boundary) {
         return new TeacherAssignQuestionsResponseDto(assignQuestions.getId(),
             assignQuestions.getQuestionPaper().getSchool(), assignQuestions.getQuestionPaper()
             .getCategory(), assignQuestions.getQuestionPaper().getTitle(),
             assignQuestions.getSubject(), assignQuestions.getAssignStatus(),
-            assignQuestions.getQuestionPaper().getQuestionNum(), assignQuestions.getCreateAt(), assignQuestions.getQuestionPaper().getPdf());
+            assignQuestions.getQuestionPaper().getQuestionNum(), assignQuestions.getCreateAt(), assignQuestions.getQuestionPaper().getPdf(),
+            assignQuestions.getQuestionPaper().getLevel(), boundary);
     }
 
 
