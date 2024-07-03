@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -154,11 +155,14 @@ public class QuestionPaperService {
 
     @Transactional
     public void createQuestionPaper(QuestionPaperCreateDto questionPaperCreateDto) {
-        for (Long id : questionPaperCreateDto.getQuestionIds()) {
-            System.out.println(id);
-        }
         List<Question> questions = questionRepository.findAllByIds(
             questionPaperCreateDto.getQuestionIds());
+
+        Map<Long, Question> collect = questions.stream()
+            .collect(Collectors.toMap(Question::getId, question -> question));
+        List<Question> sortedQuestion = questionPaperCreateDto.getQuestionIds().stream()
+            .map(collect::get)
+            .collect(Collectors.toList());
 
         String questionPaperUrl = s3Service.uploadFile(questionPaperCreateDto.getPdf(),
             "question-paper");
@@ -180,7 +184,7 @@ public class QuestionPaperService {
             .maxChapterId(questionPaperCreateDto.getMaxChapterId())
             .build();
         questionPaperRepository.save(questionPaper);
-        for (Question question : questions) {
+        for (Question question : sortedQuestion) {
             ConnectQuestion connectQuestion = ConnectQuestion.builder()
                 .question(question)
                 .questionPaper(questionPaper)
