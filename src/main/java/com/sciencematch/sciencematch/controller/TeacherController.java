@@ -157,7 +157,7 @@ public class TeacherController {
         return ApiResponseDto.success(SuccessStatus.DELETE_ASSIGN_PAPER_TEST_SUCCESS);
     }
 
-    @DeleteMapping("/assign-paper-test/{assignQuestionId}")
+    @DeleteMapping("/assign-question-paper/{assignQuestionId}")
     @Operation(summary = "학생에게 출제한 학습지 삭제")
     public ApiResponseDto<?> deleteAssignQuestions(@Schema(example = "2") @Param("assignQuestionId") @PathVariable Long assignQuestionId) {
         teacherService.deleteAssignQuestion(assignQuestionId);
