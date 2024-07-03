@@ -23,7 +23,6 @@ import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,10 +35,10 @@ public class InitDb {
 
     private final InitService initService;
 
-    @PostConstruct
-    public void init() {
-        initService.dbInit();
-    }
+//    @PostConstruct
+//    public void init() {
+//        initService.dbInit();
+//    }
 
     @Component
     @Transactional

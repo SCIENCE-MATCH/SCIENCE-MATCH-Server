@@ -8,6 +8,7 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadReq
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.WrongAnswerPeriodDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
@@ -230,9 +231,21 @@ public class QuestionPaperService {
         questionPaperRepository.deleteAllById(questionPaperId);
     }
 
-    public List<QuestionResponseDto> getWrongQuestion(List<Long> assignQuestionId) {
+    public List<QuestionResponseDto> getWrongQuestionById(List<Long> assignQuestionId) {
         List<Long> questionIds = answerRepository.findAllByAssignQuestionsId(assignQuestionId)
             .stream().map(Answer::getQuestionId).collect(Collectors.toList());
+        return getQuestionResponseDtos(questionIds);
+    }
+
+    public List<QuestionResponseDto> getWrongQuestionByPeriod(
+        WrongAnswerPeriodDto wrongAnswerPeriodDto) {
+        List<Long> questionIds = answerRepository.findAllByRightAnswerAndUpdatedAtBetween(false,
+                wrongAnswerPeriodDto.getStart(), wrongAnswerPeriodDto.getEnd()).stream()
+            .map(Answer::getQuestionId).collect(Collectors.toList());
+        return getQuestionResponseDtos(questionIds);
+    }
+
+    private List<QuestionResponseDto> getQuestionResponseDtos(List<Long> questionIds) {
         List<Question> questions = questionRepository.findAllByIds(questionIds);
         List<QuestionResponseDto> result = new ArrayList<>();
         for (Question question : questions) {

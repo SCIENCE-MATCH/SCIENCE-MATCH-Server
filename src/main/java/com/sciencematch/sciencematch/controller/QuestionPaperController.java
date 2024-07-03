@@ -8,6 +8,7 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadReq
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.WrongAnswerPeriodDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
@@ -90,12 +91,20 @@ public class QuestionPaperController {
         return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_PAPER_SUCCESS);
     }
 
-    @PostMapping("/question-paper/wrong")
-    @Operation(summary = "오답 문제 추출")
-    public ApiResponseDto<List<QuestionResponseDto>> getWrongQuestion(
+    @PostMapping("/question-paper/wrong/assign")
+    @Operation(summary = "학습지별 오답 문제 추출")
+    public ApiResponseDto<List<QuestionResponseDto>> getWrongQuestionById(
         @RequestBody List<Long> assignQuestionIds) {
         return ApiResponseDto.success(SuccessStatus.GET_WRONG_SUCCESS,
-            questionPaperService.getWrongQuestion(assignQuestionIds));
+            questionPaperService.getWrongQuestionById(assignQuestionIds));
+    }
+
+    @PostMapping("/question-paper/wrong/period")
+    @Operation(summary = "기간별 오답 문제 추출")
+    public ApiResponseDto<List<QuestionResponseDto>> getWrongQuestionByPeriod(
+        @RequestBody WrongAnswerPeriodDto wrongAnswerPeriodDto) {
+        return ApiResponseDto.success(SuccessStatus.GET_WRONG_SUCCESS,
+            questionPaperService.getWrongQuestionByPeriod(wrongAnswerPeriodDto));
     }
 
     @GetMapping("/question-paper/download")
