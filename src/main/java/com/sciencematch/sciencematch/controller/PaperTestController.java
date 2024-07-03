@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +36,7 @@ public class PaperTestController {
             paperTestService.getAllPaperTest(paperTestSelectDto));
     }
 
-    @DeleteMapping("/paper-test")
+    @PostMapping("/paper-test/delete")
     @Operation(summary = "일대일 질문 삭제")
     public ApiResponseDto<?> deletePaperTest(
         @RequestBody List<Long> paperTestId) {
