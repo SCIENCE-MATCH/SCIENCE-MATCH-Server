@@ -9,6 +9,7 @@ import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.Subject;
 import com.sciencematch.sciencematch.domain.Admin;
+import com.sciencematch.sciencematch.domain.Book;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
@@ -22,6 +23,7 @@ import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,10 +36,10 @@ public class InitDb {
 
     private final InitService initService;
 
-//    @PostConstruct
-//    public void init() {
-//        initService.dbInit();
-//    }
+    @PostConstruct
+    public void init() {
+        initService.dbInit();
+    }
 
     @Component
     @Transactional
@@ -169,6 +171,7 @@ public class InitDb {
                 .solution("1")
                 .solutionImg("https://i.pinimg.com/736x/57/07/21/5707216fdf56be1997e8e6309b06c85e.jpg")
                 .bookName("비상비상")
+                .bookId(64L)
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
@@ -186,6 +189,7 @@ public class InitDb {
                 .solution("주관식")
                 .solutionImg("https://i.pinimg.com/236x/5f/a3/b6/5fa3b60a29aa9c9c50cfc3b00c76fa41.jpg")
                 .bookName("비상비상")
+                .bookId(64L)
                 .page(11)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_1.getId())
@@ -305,6 +309,7 @@ public class InitDb {
                 .solution("3")
                 .solutionImg("https://i.pinimg.com/736x/e2/9f/f5/e29ff57a77b5c00fbd5dd7e517c682dc.jpg")
                 .bookName("비상비상")
+                .bookId(64L)
                 .page(10)
                 .questionTag(QuestionTag.NORMAL)
                 .chapterId(chapter2_1_2.getId())
@@ -785,6 +790,16 @@ public class InitDb {
                 .build();
 
             em.persist(paperTest1);
+
+            Book book = Book.builder()
+                .school(School.HIGH)
+                .semester(Semester.FIRST1)
+                .title("테스트용 책")
+                .editionNum(1)
+                .publisher("비상")
+                .build();
+
+            em.persist(book);
 
         }
     }

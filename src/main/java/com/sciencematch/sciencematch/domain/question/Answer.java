@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.domain.question;
 
 import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Answer {
+public class Answer extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue

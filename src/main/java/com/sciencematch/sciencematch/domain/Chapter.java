@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.domain;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -23,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Chapter {
+public class Chapter extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue

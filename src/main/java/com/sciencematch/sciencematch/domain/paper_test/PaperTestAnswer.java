@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain.paper_test;
 
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PaperTestAnswer {
+public class PaperTestAnswer extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue

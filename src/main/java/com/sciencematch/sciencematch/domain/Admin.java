@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.domain;
 
 import com.sciencematch.sciencematch.Enums.Authority;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Admin {
+public class Admin extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue

@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.domain;
 import com.sciencematch.sciencematch.DTO.book.request.CreateBookDto;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Book {
+public class Book extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue

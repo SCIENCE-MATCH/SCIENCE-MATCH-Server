@@ -6,6 +6,7 @@ import com.sciencematch.sciencematch.Enums.QuestionTag;
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE question SET deleted = true WHERE question_id=?")
 @Where(clause = "deleted=false")
-public class Question {
+public class Question extends AuditingTimeEntity {
     @Id
     @GeneratedValue
     @Column(name = "question_id")

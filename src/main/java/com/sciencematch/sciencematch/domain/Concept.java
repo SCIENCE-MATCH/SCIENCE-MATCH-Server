@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain;
 
+import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Concept {
+public class Concept extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue
