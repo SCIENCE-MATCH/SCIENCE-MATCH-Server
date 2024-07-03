@@ -154,6 +154,9 @@ public class QuestionPaperService {
 
     @Transactional
     public void createQuestionPaper(QuestionPaperCreateDto questionPaperCreateDto) {
+        for (Long id : questionPaperCreateDto.getQuestionIds()) {
+            System.out.println(id);
+        }
         List<Question> questions = questionRepository.findAllByIds(
             questionPaperCreateDto.getQuestionIds());
 
