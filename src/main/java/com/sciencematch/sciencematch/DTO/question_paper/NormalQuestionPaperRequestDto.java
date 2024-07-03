@@ -17,8 +17,8 @@ public class NormalQuestionPaperRequestDto {
     private Integer questionNum;
     @Schema(example = "MEDIUM")
     private Level level;
-    @Schema(example = "MULTIPLE")
-    private Category category;
+    @Schema(example = "[MULTIPLE]", type = "array")
+    private List<Category> category;
     @Schema(example = "false")
     private Boolean mockExam; //모의고사 포함, 제외, 모의고사만
 

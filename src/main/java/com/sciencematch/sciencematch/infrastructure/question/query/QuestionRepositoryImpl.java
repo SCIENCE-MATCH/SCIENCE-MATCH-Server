@@ -38,27 +38,23 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom{
             .join(chapter).on(question.chapterId.eq(chapter.id))
             .where(chaptersEq(normalQuestionPaperRequestDto.getChapterIds()),
                 categoryEq(normalQuestionPaperRequestDto.getCategory()),
-                mockexamEq(normalQuestionPaperRequestDto.getMockExam()))
+                mockExamEq(normalQuestionPaperRequestDto.getMockExam()))
             .fetch();
     }
 
     private BooleanExpression chaptersEq(List<Long> chaptersId) {
-        return chaptersId.size()==0 ? null : question.chapterId.in(chaptersId);
+        return chaptersId.isEmpty() ? null : question.chapterId.in(chaptersId);
     }
 
-    private BooleanExpression categoryEq(Category category) {
-        if (category == null) {
-            return null;
-        }
-        return category.equals(Category.MULTIPLE) ? question.category.eq(category)
-            : question.category.in(Category.SUBJECTIVE, Category.DESCRIPTIVE);
+    private BooleanExpression categoryEq(List<Category> category) {
+        return category.isEmpty() ? null : question.category.in(category);
     }
 
-    private BooleanExpression mockexamEq(Boolean mockexam) {
-        if (mockexam == null) {
+    private BooleanExpression mockExamEq(Boolean mockExam) {
+        if (mockExam == null) {
             return question.questionTag.eq(QuestionTag.MOCK_EXAM);
         }
-        return mockexam ? question.questionTag.ne(QuestionTag.TEXT_BOOK)
+        return mockExam ? question.questionTag.ne(QuestionTag.TEXT_BOOK)
             : question.questionTag.eq(QuestionTag.NORMAL);
     }
 }
