@@ -2,6 +2,7 @@ package com.sciencematch.sciencematch.DTO.paper_test;
 
 import com.sciencematch.sciencematch.Enums.School;
 import com.sciencematch.sciencematch.Enums.Semester;
+import com.sciencematch.sciencematch.Enums.Subject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class PaperTestRequestDto {
     private String question;
     @Schema(example = "test 답")
     private String solution;
+    private Subject subject;
 
 
 }

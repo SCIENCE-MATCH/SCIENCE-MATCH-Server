@@ -52,6 +52,7 @@ public class PaperTestService {
                 .chapterDescription(chapter.getDescription())
                 .question(paperTestRequestDto.getQuestion())
                 .solution(paperTestRequestDto.getSolution())
+                .subject(paperTestRequestDto.getSubject())
                 .build();
             paperTestRepository.save(paperTest);
         }
