@@ -71,9 +71,12 @@ public class AssignQuestions extends AuditingTimeEntity {
         this.assignStatus = category != Category.MULTIPLE ? AssignStatus.COMPLETE : AssignStatus.GRADED;
     }
 
-    public void setGraded() {
+    public void setGraded(Boolean rightAnswer, Integer score) {
         if (this.assignStatus != AssignStatus.GRADED) {
             this.assignStatus = AssignStatus.GRADED;
+        }
+        if (rightAnswer) {
+            this.score += score;
         }
     }
 

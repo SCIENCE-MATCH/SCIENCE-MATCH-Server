@@ -169,7 +169,7 @@ public class TeacherService {
     public void gradingQuestionPaper(GradingRequestDto gradingRequestDto) {
         Answer answer = answerRepository.getAnswerById(gradingRequestDto.getAnswerId());
         answer.setRightAnswer(gradingRequestDto.getRightAnswer());
-        answer.getAssignQuestions().setGraded();
+        answer.getAssignQuestions().setGraded(gradingRequestDto.getRightAnswer(), answer.getScore());
     }
 
     @Transactional
