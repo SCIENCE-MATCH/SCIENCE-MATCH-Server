@@ -9,9 +9,10 @@ import lombok.Data;
 public class ConceptResponseDto {
     private Long id;
     private String url;
+    private Long chapterId;
 
     public static ConceptResponseDto of(Concept concept) {
-        return new ConceptResponseDto(concept.getId(), concept.getImage());
+        return new ConceptResponseDto(concept.getId(), concept.getImage(), concept.getChapter().getId());
     }
 
 }
