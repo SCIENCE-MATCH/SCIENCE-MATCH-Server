@@ -200,9 +200,9 @@ public class AdminController {
         return ApiResponseDto.success(SuccessStatus.DELETE_PAPER_TEST_SUCCESS);
     }
 
-    @PostMapping("/paper-test/create")
+    @PostMapping(value = "/paper-test/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "일대일 질문 생성")
-    public ApiResponseDto<?> createPaperTest(@RequestBody @Valid List<PaperTestRequestDto> paperTestRequestDto) {
+    public ApiResponseDto<?> createPaperTest(@ModelAttribute PaperTestRequestDto paperTestRequestDto) {
         adminService.createPaperTest(paperTestRequestDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_PAPER_TEST_SUCCESS);
     }

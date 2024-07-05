@@ -14,6 +14,7 @@ public class PaperTestResponseDto {
     private Long id;
     private School school;
     private Semester semester;
+    private String image;
     private String question;
     private String makerName;
     private Subject subject;
@@ -21,11 +22,12 @@ public class PaperTestResponseDto {
     private LocalDateTime createdAt;
 
     @QueryProjection
-    public PaperTestResponseDto(Long id, School school, Semester semester,
+    public PaperTestResponseDto(Long id, School school, Semester semester, String image,
         String question, String makerName, Subject subject, String chapterDescription, LocalDateTime createdAt) {
         this.id = id;
         this.school = school;
         this.semester = semester;
+        this.image = image;
         this.question = question;
         this.makerName = makerName;
         this.subject = subject;
@@ -34,7 +36,7 @@ public class PaperTestResponseDto {
     }
 
     public static PaperTestResponseDto of(PaperTest paperTest) {
-        return new PaperTestResponseDto(paperTest.getId(), paperTest.getSchool(), paperTest.getSemester(),
+        return new PaperTestResponseDto(paperTest.getId(), paperTest.getSchool(), paperTest.getSemester(), paperTest.getImage(),
             paperTest.getQuestion(), paperTest.getMakerName(), paperTest.getSubject(), paperTest.getChapterDescription(),
             paperTest.getCreateAt());
     }

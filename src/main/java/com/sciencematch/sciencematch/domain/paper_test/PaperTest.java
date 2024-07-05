@@ -34,6 +34,7 @@ public class PaperTest extends AuditingTimeEntity {
     private String chapterDescription;
     private String makerName;
 
+    private String image;
     private String question;
     private String solution;
 
@@ -41,7 +42,7 @@ public class PaperTest extends AuditingTimeEntity {
     private final List<AssignPaperTest> assignPaperTests = new ArrayList<>();
 
     @Builder
-    public PaperTest(School school, Semester semester, Subject subject, String chapterDescription, String makerName, String question, String solution) {
+    public PaperTest(School school, Semester semester, Subject subject, String chapterDescription, String makerName, String image, String question, String solution) {
         this.school = school;
         this.semester = semester;
         this.subject = subject;

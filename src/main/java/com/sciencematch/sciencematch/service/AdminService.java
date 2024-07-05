@@ -130,20 +130,20 @@ public class AdminService {
     }
 
     @Transactional
-    public void createPaperTest(List<PaperTestRequestDto> paperTestRequestDtos) {
+    public void createPaperTest(PaperTestRequestDto paperTestRequestDto) {
+        String uploadImage = s3Service.uploadFile(paperTestRequestDto.getImage(), "paper-test");
+        Chapter chapter = chapterRepository.getChapterById(paperTestRequestDto.getChapterId());
+        PaperTest paperTest = PaperTest.builder()
+            .school(paperTestRequestDto.getSchool())
+            .semester(paperTestRequestDto.getSemester())
+            .chapterDescription(chapter.getDescription())
+            .image(uploadImage)
+            .question(paperTestRequestDto.getQuestion())
+            .solution(paperTestRequestDto.getSolution())
+            .subject(paperTestRequestDto.getSubject())
+            .build();
+        paperTestRepository.save(paperTest);
 
-        for (PaperTestRequestDto paperTestRequestDto : paperTestRequestDtos) {
-            Chapter chapter = chapterRepository.getChapterById(paperTestRequestDto.getChapterId());
-            PaperTest paperTest = PaperTest.builder()
-                .school(paperTestRequestDto.getSchool())
-                .semester(paperTestRequestDto.getSemester())
-                .chapterDescription(chapter.getDescription())
-                .question(paperTestRequestDto.getQuestion())
-                .solution(paperTestRequestDto.getSolution())
-                .subject(paperTestRequestDto.getSubject())
-                .build();
-            paperTestRepository.save(paperTest);
-        }
     }
 
     public List<PaperTestResponseDto> getAllPaperTest(

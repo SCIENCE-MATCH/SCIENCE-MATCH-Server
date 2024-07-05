@@ -27,6 +27,7 @@ public class PaperTestRepositoryImpl implements PaperTestRepositoryCustom {
                 paperTest.id,
                 paperTest.school,
                 paperTest.semester,
+                paperTest.image,
                 paperTest.question,
                 paperTest.makerName,
                 paperTest.subject,

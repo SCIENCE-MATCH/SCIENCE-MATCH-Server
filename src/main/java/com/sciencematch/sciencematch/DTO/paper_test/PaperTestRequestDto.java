@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
@@ -24,6 +25,7 @@ public class PaperTestRequestDto {
     @NonNull
     private Long chapterId;
 
+    private MultipartFile image;
     @Schema(example = "test 질문")
     private String question;
     @Schema(example = "test 답")
