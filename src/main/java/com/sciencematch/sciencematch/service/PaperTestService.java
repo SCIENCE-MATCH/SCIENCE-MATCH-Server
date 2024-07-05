@@ -1,11 +1,9 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.DTO.paper_test.MultiplePaperTestSubmitDto;
-import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSubmitDto;
-import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
@@ -30,32 +28,6 @@ public class PaperTestService {
     public List<PaperTestResponseDto> getAllPaperTest(
         PaperTestSelectDto preLessonSelectDto) {
         return paperTestRepository.search(preLessonSelectDto);
-    }
-
-    @Transactional
-    public void deletePaperTest(List<Long> paperTestId) {
-        for (Long id : paperTestId) {
-            assignPaperTestRepository.deleteAllByPaperTestId(id);
-        }
-        assignPaperTestRepository.flush();
-        paperTestRepository.deleteAllByIdInBatch(paperTestId);
-    }
-
-    @Transactional
-    public void createPaperTest(List<PaperTestRequestDto> paperTestRequestDtos) {
-
-        for (PaperTestRequestDto paperTestRequestDto : paperTestRequestDtos) {
-            Chapter chapter = chapterRepository.getChapterById(paperTestRequestDto.getChapterId());
-            PaperTest paperTest = PaperTest.builder()
-                .school(paperTestRequestDto.getSchool())
-                .semester(paperTestRequestDto.getSemester())
-                .chapterDescription(chapter.getDescription())
-                .question(paperTestRequestDto.getQuestion())
-                .solution(paperTestRequestDto.getSolution())
-                .subject(paperTestRequestDto.getSubject())
-                .build();
-            paperTestRepository.save(paperTest);
-        }
     }
 
     @Transactional

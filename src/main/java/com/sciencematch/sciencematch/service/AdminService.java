@@ -5,18 +5,24 @@ import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
 import com.sciencematch.sciencematch.Enums.Authority;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Concept;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.Team;
+import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.ConceptRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.infrastructure.TeamRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +39,8 @@ public class AdminService {
     private final TeamRepository teamRepository;
     private final ConceptRepository conceptRepository;
     private final ChapterRepository chapterRepository;
+    private final PaperTestRepository paperTestRepository;
+    private final AssignPaperTestRepository assignPaperTestRepository;
     private final S3Service s3Service;
 
     public List<WaitingTeacherResponseDto> getAllWaitingTeachers() {
@@ -110,5 +118,36 @@ public class AdminService {
     @Transactional
     public void deleteConcept(Long id) {
         conceptRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deletePaperTest(List<Long> paperTestId) {
+        for (Long id : paperTestId) {
+            assignPaperTestRepository.deleteAllByPaperTestId(id);
+        }
+        assignPaperTestRepository.flush();
+        paperTestRepository.deleteAllByIdInBatch(paperTestId);
+    }
+
+    @Transactional
+    public void createPaperTest(List<PaperTestRequestDto> paperTestRequestDtos) {
+
+        for (PaperTestRequestDto paperTestRequestDto : paperTestRequestDtos) {
+            Chapter chapter = chapterRepository.getChapterById(paperTestRequestDto.getChapterId());
+            PaperTest paperTest = PaperTest.builder()
+                .school(paperTestRequestDto.getSchool())
+                .semester(paperTestRequestDto.getSemester())
+                .chapterDescription(chapter.getDescription())
+                .question(paperTestRequestDto.getQuestion())
+                .solution(paperTestRequestDto.getSolution())
+                .subject(paperTestRequestDto.getSubject())
+                .build();
+            paperTestRepository.save(paperTest);
+        }
+    }
+
+    public List<PaperTestResponseDto> getAllPaperTest(
+        PaperTestSelectDto preLessonSelectDto) {
+        return paperTestRepository.search(preLessonSelectDto);
     }
 }

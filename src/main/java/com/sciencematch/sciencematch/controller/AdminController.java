@@ -10,6 +10,9 @@ import com.sciencematch.sciencematch.DTO.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
 import com.sciencematch.sciencematch.DTO.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.question.QuestionPostDto;
 import com.sciencematch.sciencematch.DTO.question.QuestionRequestDto;
@@ -187,5 +190,28 @@ public class AdminController {
         @PathVariable("id") Long conceptId){
         adminService.deleteConcept(conceptId);
         return ApiResponseDto.success(SuccessStatus.DELETE_QUESTION_SUCCESS);
+    }
+
+    @PostMapping("/paper-test/delete")
+    @Operation(summary = "일대일 질문 삭제")
+    public ApiResponseDto<?> deletePaperTest(
+        @RequestBody List<Long> paperTestId) {
+        adminService.deletePaperTest(paperTestId);
+        return ApiResponseDto.success(SuccessStatus.DELETE_PAPER_TEST_SUCCESS);
+    }
+
+    @PostMapping("/paper-test/create")
+    @Operation(summary = "일대일 질문 생성")
+    public ApiResponseDto<?> createPaperTest(@RequestBody @Valid List<PaperTestRequestDto> paperTestRequestDto) {
+        adminService.createPaperTest(paperTestRequestDto);
+        return ApiResponseDto.success(SuccessStatus.CREATE_PAPER_TEST_SUCCESS);
+    }
+
+    @PostMapping("/paper-test")
+    @Operation(summary = "일대일 질문 조회")
+    public ApiResponseDto<List<PaperTestResponseDto>> getAllQuestionPaper(
+        @RequestBody PaperTestSelectDto paperTestSelectDto) {
+        return ApiResponseDto.success(SuccessStatus.GET_PAPER_TEST_SUCCESS,
+            adminService.getAllPaperTest(paperTestSelectDto));
     }
 }

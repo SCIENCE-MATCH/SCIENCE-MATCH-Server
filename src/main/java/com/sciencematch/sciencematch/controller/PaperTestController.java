@@ -1,7 +1,6 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.DTO.paper_test.MultiplePaperTestSubmitDto;
-import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSubmitDto;
@@ -34,21 +33,6 @@ public class PaperTestController {
         @RequestBody PaperTestSelectDto paperTestSelectDto) {
         return ApiResponseDto.success(SuccessStatus.GET_PAPER_TEST_SUCCESS,
             paperTestService.getAllPaperTest(paperTestSelectDto));
-    }
-
-    @PostMapping("/paper-test/delete")
-    @Operation(summary = "일대일 질문 삭제")
-    public ApiResponseDto<?> deletePaperTest(
-        @RequestBody List<Long> paperTestId) {
-        paperTestService.deletePaperTest(paperTestId);
-        return ApiResponseDto.success(SuccessStatus.DELETE_PAPER_TEST_SUCCESS);
-    }
-
-    @PostMapping("/paper-test/create")
-    @Operation(summary = "일대일 질문 생성")
-    public ApiResponseDto<?> createPaperTest(@RequestBody @Valid List<PaperTestRequestDto> paperTestRequestDto) {
-        paperTestService.createPaperTest(paperTestRequestDto);
-        return ApiResponseDto.success(SuccessStatus.CREATE_PAPER_TEST_SUCCESS);
     }
 
     @PostMapping("/paper-test/submit")
