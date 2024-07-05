@@ -1,13 +1,16 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.domain.Chapter;
+import com.sciencematch.sciencematch.DTO.chapter.ChapterOrderDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterPatchDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterPostDto;
-import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterRequestDto;
+import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -63,5 +66,27 @@ public class ChapterService {
     public void deleteChapter(Long chapterId) {
         questionRepository.deleteAllInBatch(questionRepository.findAllByChapterId(chapterId));
         chapterRepository.deleteById(chapterId);
+    }
+
+    @Transactional
+    public void updateChapterOrders(ChapterOrderDto chapterOrderDto) {
+        Chapter target = chapterRepository.findChapterWithParentById(
+            chapterOrderDto.getTargetId());
+        if (!Objects.equals(target.getParent().getId(), chapterOrderDto.getParentId())) {
+            Chapter parent = chapterRepository.getChapterById(chapterOrderDto.getParentId());
+            target.changeParent(parent);
+        }
+
+        List<Chapter> chapters = chapterRepository.findAllById(chapterOrderDto.getOrderedChapterIds());
+        Map<Long, Chapter> chapterMap = chapters.stream().collect(Collectors.toMap(Chapter::getId, chapter -> chapter));
+
+        int order = 1;
+        for (Long chapterId : chapterOrderDto.getOrderedChapterIds()) {
+            Chapter chapter = chapterMap.get(chapterId);
+            if (chapter != null) {
+                chapter.updateOrder(order);
+                order++;
+            }
+        }
     }
 }

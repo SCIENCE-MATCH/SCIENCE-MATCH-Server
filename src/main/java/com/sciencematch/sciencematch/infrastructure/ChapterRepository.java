@@ -1,12 +1,13 @@
 package com.sciencematch.sciencematch.infrastructure;
 
-import com.sciencematch.sciencematch.domain.Chapter;
-import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.School;
+import com.sciencematch.sciencematch.Enums.Semester;
 import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import java.util.List;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,7 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
             () -> new CustomException(ErrorStatus.NOT_FOUND_CHAPTER_EXCEPTION,
                 ErrorStatus.NOT_FOUND_CHAPTER_EXCEPTION.getMessage()));
     }
+
+    @EntityGraph(attributePaths = {"parent"})
+    Chapter findChapterWithParentById(Long id);
 }

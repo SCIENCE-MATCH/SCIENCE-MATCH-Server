@@ -3,11 +3,13 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.DTO.admin.AdminStudentResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
+import com.sciencematch.sciencematch.DTO.chapter.ChapterOrderDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterPatchDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterPostDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
+import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
 import com.sciencematch.sciencematch.DTO.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.question.QuestionPostDto;
 import com.sciencematch.sciencematch.DTO.question.QuestionRequestDto;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -107,7 +110,7 @@ public class AdminController {
     }
 
     @PostMapping("/chapter/get")
-    @Operation(summary = "단원 조회")
+    @Operation(summary = "단원 조회", description = "단원 drag & drop 할 때마다 호출")
     public ApiResponseDto<List<ChapterResponseDto>> getChapter(
         @RequestBody @Valid ChapterRequestDto chapterRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_CHAPTER_SUCCESS,
@@ -133,6 +136,13 @@ public class AdminController {
     public ApiResponseDto<?> deleteChapter(@RequestParam Long chapterId) {
         chapterService.deleteChapter(chapterId);
         return ApiResponseDto.success(SuccessStatus.DELETE_CHAPTER_SUCCESS);
+    }
+
+    @PutMapping("/chapter/order")
+    @Operation(summary = "단원 순서 변경")
+    public ApiResponseDto<?> updateChapterOrders(@RequestBody ChapterOrderDto chapterOrderDto) {
+        chapterService.updateChapterOrders(chapterOrderDto);
+        return ApiResponseDto.success(SuccessStatus.UPDATE_CHAPTER_ORDER_SUCCESS);
     }
 
     @PostMapping(value = "/question/post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -161,13 +171,13 @@ public class AdminController {
 
     @PostMapping(value = "/concept", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "개념 생성")
-    public ApiResponseDto<?> postConcept(@ModelAttribute ConceptPostDto conceptPostDto) throws IOException {
+    public ApiResponseDto<Long> postConcept(@ModelAttribute ConceptPostDto conceptPostDto) throws IOException {
         return ApiResponseDto.success(SuccessStatus.CREATE_CONCEPT_SUCCESS, adminService.postConcept(conceptPostDto));
     }
 
     @GetMapping(value = "/concept")
     @Operation(summary = "개념 조회")
-    public ApiResponseDto<?> getConcept(@RequestParam Long chapterId) {
+    public ApiResponseDto<ConceptResponseDto> getConcept(@RequestParam Long chapterId) {
         return ApiResponseDto.success(SuccessStatus.GET_CONCEPT_SUCCESS, adminService.getConcept(chapterId));
     }
 

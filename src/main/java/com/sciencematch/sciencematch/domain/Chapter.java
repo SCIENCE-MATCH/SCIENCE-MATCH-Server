@@ -68,4 +68,14 @@ public class Chapter extends AuditingTimeEntity {
         this.description = description;
     }
 
+    public void updateOrder(int order) {
+        this.listOrder = order;
+    }
+
+    public void changeParent(Chapter parent) {
+        this.parent.children.remove(this);
+        parent.getChildren().add(this);
+        this.parent = parent;
+    }
+
 }
