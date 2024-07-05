@@ -14,7 +14,9 @@ public class PaperTestSubmitDto {
 
     @Schema(example = "52")
     @NonNull
-    private Long questionPaperId;
+    private Long paperTestId;
+    @Schema(example = "테스트 선생")
+    private String teacherName;
     @Schema(example = "[3, 4]", type = "array")
     private List<Long> studentIds;
 }

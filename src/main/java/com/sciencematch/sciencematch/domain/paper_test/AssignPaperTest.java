@@ -38,6 +38,7 @@ public class AssignPaperTest extends AuditingTimeEntity {
 
     private Subject subject;
     private AssignStatus assignStatus;
+    private String teacherName;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private PaperTestAnswer paperTestAnswer;
@@ -63,11 +64,12 @@ public class AssignPaperTest extends AuditingTimeEntity {
     }
 
     @Builder
-    public AssignPaperTest(Student student, PaperTest paperTest, Subject subject) {
+    public AssignPaperTest(Student student, PaperTest paperTest, Subject subject, String teacherName) {
         setStudent(student);
         setPaperTest(paperTest);
         this.subject = subject;
         this.assignStatus = AssignStatus.WAITING;
+        this.teacherName = teacherName;
     }
 
 }

@@ -35,10 +35,10 @@ public class PaperTestService {
         List<Student> students = studentRepository.getStudentsByList(
             paperTestSubmitDto.getStudentIds());
         PaperTest paperTest = paperTestRepository.getPaperTestById(
-            paperTestSubmitDto.getQuestionPaperId());
+            paperTestSubmitDto.getPaperTestId());
 
         //해설 및 카테고리 등 기본 세팅이 되어있는 answer 객체 도입 (추후 답안 문제의 타입이나 정답 검사등에 사용)
-        makeAssignPaperTest(students, paperTest);
+        makeAssignPaperTest(students, paperTest, paperTestSubmitDto.getTeacherName());
     }
 
     @Transactional
@@ -50,17 +50,18 @@ public class PaperTestService {
             multiplePaperTestSubmitDto.getPaperTestIds());
 
         for (PaperTest paperTest : paperTests) {
-            makeAssignPaperTest(students, paperTest);
+            makeAssignPaperTest(students, paperTest, multiplePaperTestSubmitDto.getTeacherName());
         }
     }
 
-    private void makeAssignPaperTest(List<Student> students, PaperTest paperTest) {
+    private void makeAssignPaperTest(List<Student> students, PaperTest paperTest, String teacherName) {
         //학생마다 문제 할당
         for (Student student : students) {
             assignPaperTestRepository.save(AssignPaperTest.builder()
                 .paperTest(paperTest)
                 .student(student)
                 .subject(paperTest.getSubject())
+                .teacherName(teacherName)
                 .build());
         }
     }
