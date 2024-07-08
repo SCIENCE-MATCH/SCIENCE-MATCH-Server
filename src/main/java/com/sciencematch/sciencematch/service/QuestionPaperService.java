@@ -12,7 +12,6 @@ import com.sciencematch.sciencematch.DTO.question_paper.WrongAnswerPeriodDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
-import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.question.Answer;
@@ -30,7 +29,6 @@ import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepo
 import com.sciencematch.sciencematch.infrastructure.question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -72,8 +70,9 @@ public class QuestionPaperService {
 
     // 개념 조회
     public List<ConceptResponseDto> getQuestionPaperConcepts(List<Long> chapterIds) {
-        return conceptRepository.getByChapterIds(chapterIds).stream().map(ConceptResponseDto::of).collect(
-            Collectors.toList());
+        return conceptRepository.getByChapterIds(chapterIds).stream().map(ConceptResponseDto::of)
+            .collect(
+                Collectors.toList());
     }
 
     //단원 유형별 자동 생성된 학습지 반환
@@ -82,9 +81,8 @@ public class QuestionPaperService {
         //레벨 관계 없이 데이터 조회
         List<QuestionResponseDto> search = questionRepository.search(normalQuestionPaperRequestDto);
         Collections.shuffle(search);
-        List<Integer> selectCount = getSelectCount(normalQuestionPaperRequestDto.getLevel(),
-            normalQuestionPaperRequestDto.getQuestionNum());
-        return makeNormalQuestionList(search, selectCount,
+
+        return makeNormalQuestionList(search, normalQuestionPaperRequestDto.getSelectCount(),
             normalQuestionPaperRequestDto.getQuestionNum());
     }
 
@@ -130,27 +128,6 @@ public class QuestionPaperService {
         }
         return result;
 
-    }
-
-    private List<Integer> getSelectCount(Level level, Integer questionNum) { //난이도별 문제 개수 설정
-        switch (level) {
-            case LOW:
-                return Arrays.asList(questionNum * 2 / 5, questionNum * 2 / 5, questionNum / 5,
-                    0, 0);
-            case MEDIUM_LOW:
-                return Arrays.asList(questionNum / 5, questionNum * 2 / 5, questionNum * 3 / 10,
-                    questionNum / 10, 0);
-            case MEDIUM:
-                return Arrays.asList(questionNum / 10, questionNum * 3 / 10, questionNum * 3 / 10,
-                    questionNum / 5, questionNum / 10);
-            case MEDIUM_HARD:
-                return Arrays.asList(0, questionNum / 5, questionNum * 3 / 10,
-                    questionNum * 3 / 10, questionNum / 5);
-            case HARD:
-                return Arrays.asList(0, 0, questionNum * 3 / 10,
-                    questionNum * 3 / 10, questionNum * 2 / 5);
-        }
-        return null;
     }
 
     @Transactional
