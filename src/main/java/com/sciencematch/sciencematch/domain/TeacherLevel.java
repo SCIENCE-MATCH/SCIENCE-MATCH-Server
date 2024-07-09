@@ -30,8 +30,8 @@ public class TeacherLevel {
     private Double low;
     private Double mediumLow;
     private Double medium;
-    private Double mediumHigh;
-    private Double high;
+    private Double mediumHard;
+    private Double hard;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
@@ -42,8 +42,8 @@ public class TeacherLevel {
             (int) (questionNum * low),
             (int) (questionNum * mediumLow),
             (int) (questionNum * medium),
-            (int) (questionNum * mediumHigh),
-            (int) (questionNum * high)
+            (int) (questionNum * mediumHard),
+            (int) (questionNum * hard)
         );
     }
 }

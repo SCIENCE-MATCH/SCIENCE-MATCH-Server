@@ -9,21 +9,25 @@ import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
 import com.sciencematch.sciencematch.Enums.Authority;
+import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Concept;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.TeacherLevel;
 import com.sciencematch.sciencematch.domain.Team;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.ConceptRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
+import com.sciencematch.sciencematch.infrastructure.TeacherLevelRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.infrastructure.TeamRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdminService {
 
     private final TeacherRepository teacherRepository;
+    private final TeacherLevelRepository teacherLevelRepository;
     private final StudentRepository studentRepository;
     private final TeamRepository teamRepository;
     private final ConceptRepository conceptRepository;
@@ -53,7 +58,18 @@ public class AdminService {
     public WaitingTeacherResponseDto assignTeacher(Long id) {
         Teacher teacher = teacherRepository.getTeacherById(id);
         teacher.assignTeacher();
+        makeTeacherLevel(teacher);
         return WaitingTeacherResponseDto.of(teacher);
+    }
+
+    private void makeTeacherLevel(Teacher teacher) {
+        teacherLevelRepository.saveAll(Arrays.asList(
+            new TeacherLevel(null, Level.HARD, 0.0, 0.0, 0.3, 0.3, 0.4, teacher),
+            new TeacherLevel(null, Level.MEDIUM_HARD, 0.0, 0.2, 0.3, 0.3, 0.2, teacher),
+            new TeacherLevel(null, Level.MEDIUM, 0.05, 0.3, 0.3, 0.25, 0.1, teacher),
+            new TeacherLevel(null, Level.MEDIUM_LOW, 0.2, 0.4, 0.3, 0.1, 0.0, teacher),
+            new TeacherLevel(null, Level.LOW, 0.4, 0.4, 0.2, 0.0, 0.0, teacher)
+        ));
     }
 
     public List<WaitingTeacherResponseDto> getAllTeachers() {
