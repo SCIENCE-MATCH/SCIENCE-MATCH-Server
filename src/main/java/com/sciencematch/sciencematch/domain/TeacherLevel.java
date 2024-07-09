@@ -1,5 +1,6 @@
 package com.sciencematch.sciencematch.domain;
 
+import com.sciencematch.sciencematch.DTO.question_paper.TeacherLevelUpdateDto;
 import com.sciencematch.sciencematch.Enums.Level;
 import java.util.Arrays;
 import java.util.List;
@@ -45,5 +46,13 @@ public class TeacherLevel {
             (int) (questionNum * mediumHard),
             (int) (questionNum * hard)
         );
+    }
+
+    public void updateTeacherLevel(TeacherLevelUpdateDto teacherLevelUpdateDto) {
+        this.low = teacherLevelUpdateDto.getLow().doubleValue() / 100;
+        this.mediumLow = teacherLevelUpdateDto.getMediumLow().doubleValue() / 100;
+        this.medium = teacherLevelUpdateDto.getMedium().doubleValue() / 100;
+        this.mediumHard = teacherLevelUpdateDto.getMediumHard().doubleValue() / 100;
+        this.hard = teacherLevelUpdateDto.getHard().doubleValue() / 100;
     }
 }

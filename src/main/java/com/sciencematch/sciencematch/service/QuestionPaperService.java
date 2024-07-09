@@ -8,6 +8,7 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadReq
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.TeacherLevelUpdateDto;
 import com.sciencematch.sciencematch.DTO.question_paper.TeacherLevelResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.WrongAnswerPeriodDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
@@ -16,6 +17,7 @@ import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.TeacherLevel;
 import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
@@ -78,6 +80,15 @@ public class QuestionPaperService {
         Teacher teacher = teacherRepository.getTeacherByEmail(email);
         return teacherLevelRepository.findAllByTeacher(teacher).stream().map(TeacherLevelResponseDto::of).collect(
             Collectors.toList());
+    }
+
+    @Transactional
+    public void updateTeacherLevel(List<TeacherLevelUpdateDto> teacherLevelUpdateDtos) {
+        for (TeacherLevelUpdateDto teacherLevelUpdateDto : teacherLevelUpdateDtos) {
+            TeacherLevel teacherLevel = teacherLevelRepository.getTeacherLevelById(
+                teacherLevelUpdateDto.getId());
+            teacherLevel.updateTeacherLevel(teacherLevelUpdateDto);
+        }
     }
 
     // 개념 조회

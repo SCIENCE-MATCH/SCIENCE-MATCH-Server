@@ -9,6 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class TeacherLevelResponseDto {
 
+    private Long id;
     private Level level;
     private Integer low;
     private Integer mediumLow;
@@ -18,6 +19,7 @@ public class TeacherLevelResponseDto {
 
     public static TeacherLevelResponseDto of(TeacherLevel teacherLevel) {
         return new TeacherLevelResponseDto(
+            teacherLevel.getId(),
             teacherLevel.getLevel(),
             teacherLevel.getLow().intValue(),
             teacherLevel.getMediumLow().intValue(),

@@ -56,7 +56,8 @@ public enum SuccessStatus {
     UPDATE_BOOK_SUCCESS(HttpStatus.OK, "시중 교재를 성공적으로 수정하였습니다."),
     QUESTION_PAPER_DOWNLOAD_SUCCESS(HttpStatus.OK, "학습지를 성공적으로 다운로드하였습니다."),
     UPDATE_CHAPTER_ORDER_SUCCESS(HttpStatus.OK, "단원 순서를 성공적으로 변경하였습니다."),
-    GET_TEACHER_LEVEL_SUCCESS(HttpStatus.OK, "단원 순서를 성공적으로 변경하였습니다."),
+    GET_TEACHER_LEVEL_SUCCESS(HttpStatus.OK, "난이도 비율을 성공적으로 조회하였습니다."),
+    UPDATE_TEACHER_LEVEL_SUCCESS(HttpStatus.OK, "난이도 비율을 성공적으로 수정하였습니다."),
 
     /*
      * 201 created

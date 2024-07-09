@@ -8,6 +8,8 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadReq
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.TeacherLevelUpdateDto;
+import com.sciencematch.sciencematch.DTO.question_paper.TeacherLevelResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.WrongAnswerPeriodDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
@@ -57,11 +59,20 @@ public class QuestionPaperController {
 
     @GetMapping("/level")
     @Operation(summary = "난이도 비율 불러오기")
-    public ApiResponseDto<?> getTeacherLevel(
+    public ApiResponseDto<List<TeacherLevelResponseDto>> getTeacherLevel(
         @Parameter(hidden = true) @AuthenticationPrincipal User user
     ) {
         return ApiResponseDto.success(SuccessStatus.GET_TEACHER_LEVEL_SUCCESS,
             questionPaperService.getTeacherLevel(user.getUsername()));
+    }
+
+    @PostMapping("/level")
+    @Operation(summary = "난이도 비율 저장하기")
+    public ApiResponseDto<?> updateTeacherLevel(
+        List<TeacherLevelUpdateDto> teacherLevelUpdateDtos
+    ) {
+        questionPaperService.updateTeacherLevel(teacherLevelUpdateDtos);
+        return ApiResponseDto.success(SuccessStatus.UPDATE_TEACHER_LEVEL_SUCCESS);
     }
 
     @PostMapping("/questions/normal")
