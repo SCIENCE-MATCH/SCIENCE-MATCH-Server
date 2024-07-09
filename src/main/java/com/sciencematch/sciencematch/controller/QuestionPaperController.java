@@ -15,11 +15,14 @@ import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.QuestionPaperService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,9 +58,10 @@ public class QuestionPaperController {
     @PostMapping("/questions/normal")
     @Operation(summary = "단원 유형별 학습지 범위 선택")
     public ApiResponseDto<List<QuestionResponseDto>> getNormalQuestions(
+        @Parameter(hidden = true) @AuthenticationPrincipal User user,
         NormalQuestionPaperRequestDto normalQuestionPaperRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_FOR_NORMAL_SUCCESS,
-            questionPaperService.getNormalQuestions(normalQuestionPaperRequestDto));
+            questionPaperService.getNormalQuestions(user.getUsername(), normalQuestionPaperRequestDto));
     }
 
     @PostMapping(value = "/question-paper/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

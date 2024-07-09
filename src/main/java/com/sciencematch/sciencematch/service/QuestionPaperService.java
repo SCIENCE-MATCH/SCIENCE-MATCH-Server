@@ -14,6 +14,7 @@ import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
+import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
 import com.sciencematch.sciencematch.domain.question.ConnectQuestion;
@@ -23,6 +24,8 @@ import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.ConceptRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
+import com.sciencematch.sciencematch.infrastructure.TeacherLevelRepository;
+import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AnswerRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepository;
@@ -51,6 +54,8 @@ public class QuestionPaperService {
     private final AnswerRepository answerRepository;
     private final StudentRepository studentRepository;
     private final ChapterRepository chapterRepository;
+    private final TeacherRepository teacherRepository;
+    private final TeacherLevelRepository teacherLevelRepository;
     private final S3Service s3Service;
 
     //학습지 조회
@@ -71,19 +76,21 @@ public class QuestionPaperService {
     // 개념 조회
     public List<ConceptResponseDto> getQuestionPaperConcepts(List<Long> chapterIds) {
         return conceptRepository.getByChapterIds(chapterIds).stream().map(ConceptResponseDto::of)
-            .collect(
-                Collectors.toList());
+            .collect(Collectors.toList());
     }
 
     //단원 유형별 자동 생성된 학습지 반환
-    public List<QuestionResponseDto> getNormalQuestions(
+    public List<QuestionResponseDto> getNormalQuestions(String email,
         NormalQuestionPaperRequestDto normalQuestionPaperRequestDto) {
+        Teacher teacher = teacherRepository.getTeacherByEmail(email);
+
         //레벨 관계 없이 데이터 조회
         List<QuestionResponseDto> search = questionRepository.search(normalQuestionPaperRequestDto);
         Collections.shuffle(search);
 
-        return makeNormalQuestionList(search, normalQuestionPaperRequestDto.getSelectCount(),
-            normalQuestionPaperRequestDto.getQuestionNum());
+        return makeNormalQuestionList(search, teacherLevelRepository.findByTeacherAndLevel(teacher,
+                    normalQuestionPaperRequestDto.getLevel()).getSelectCount(normalQuestionPaperRequestDto.getQuestionNum()),
+                    normalQuestionPaperRequestDto.getQuestionNum());
     }
 
     private List<QuestionResponseDto> makeNormalQuestionList( //난이도별 문제 개수에 맞게 선택해 반환
