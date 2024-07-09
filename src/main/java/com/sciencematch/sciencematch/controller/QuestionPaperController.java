@@ -55,6 +55,15 @@ public class QuestionPaperController {
             questionPaperService.getQuestionPaperConcepts(chapterIds));
     }
 
+    @GetMapping("/level")
+    @Operation(summary = "난이도 비율 불러오기")
+    public ApiResponseDto<?> getTeacherLevel(
+        @Parameter(hidden = true) @AuthenticationPrincipal User user
+    ) {
+        return ApiResponseDto.success(SuccessStatus.GET_TEACHER_LEVEL_SUCCESS,
+            questionPaperService.getTeacherLevel(user.getUsername()));
+    }
+
     @PostMapping("/questions/normal")
     @Operation(summary = "단원 유형별 학습지 범위 선택")
     public ApiResponseDto<List<QuestionResponseDto>> getNormalQuestions(

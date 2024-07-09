@@ -8,6 +8,7 @@ import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDownloadReq
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperSelectDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.DTO.question_paper.TeacherLevelResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.WrongAnswerPeriodDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.QuestionPaperSubmitDto;
@@ -71,6 +72,12 @@ public class QuestionPaperService {
             qp.setBoundary(minChapter.getDescription() + " ~ " + maxChapter.getDescription());
         }
         return search;
+    }
+
+    public List<TeacherLevelResponseDto> getTeacherLevel(String email) {
+        Teacher teacher = teacherRepository.getTeacherByEmail(email);
+        return teacherLevelRepository.findAllByTeacher(teacher).stream().map(TeacherLevelResponseDto::of).collect(
+            Collectors.toList());
     }
 
     // 개념 조회
