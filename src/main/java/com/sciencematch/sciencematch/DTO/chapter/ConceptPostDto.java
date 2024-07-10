@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ConceptPostDto {
 
     private MultipartFile image;
+    private MultipartFile blankImage;
 
     private Long chapterId;
 

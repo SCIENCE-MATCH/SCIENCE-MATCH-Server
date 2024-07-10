@@ -25,13 +25,15 @@ public class Concept extends AuditingTimeEntity {
     private Long id;
     @Setter
     private String image;
+    private String blankImage;
     @OneToOne
     private Chapter chapter;
 
 
     @Builder
-    public Concept(String image, Chapter chapter) {
+    public Concept(String image, String blankImage, Chapter chapter) {
         this.image = image;
+        this.blankImage = blankImage;
         this.chapter = chapter;
     }
 }

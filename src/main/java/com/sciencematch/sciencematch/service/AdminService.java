@@ -119,8 +119,10 @@ public class AdminService {
         }
 
         String uploadImage = s3Service.uploadFile(conceptPostDto.getImage(), "concept");
+        String blankImage = s3Service.uploadFile(conceptPostDto.getBlankImage(), "concept/blank");
         Concept concept = Concept.builder()
             .image(uploadImage)
+            .blankImage(blankImage)
             .chapter(chapter)
             .build();
         conceptRepository.save(concept);

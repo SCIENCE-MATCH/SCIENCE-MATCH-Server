@@ -8,11 +8,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class ConceptResponseDto {
     private Long id;
-    private String url;
+    private String image;
+    private String blankImage;
     private Long chapterId;
 
     public static ConceptResponseDto of(Concept concept) {
-        return new ConceptResponseDto(concept.getId(), concept.getImage(), concept.getChapter().getId());
+        return new ConceptResponseDto(concept.getId(), concept.getImage(), concept.getBlankImage(), concept.getChapter().getId());
     }
 
 }
