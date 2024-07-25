@@ -13,6 +13,7 @@ import com.sciencematch.sciencematch.domain.Book;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.TeacherLevel;
 import com.sciencematch.sciencematch.domain.Team;
 import com.sciencematch.sciencematch.domain.TeamStudent;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
@@ -64,6 +65,12 @@ public class InitDb {
                 .phoneNum("01012345678")
                 .authority(Authority.ROLE_TEACHER)
                 .build();
+
+            em.persist(new TeacherLevel(null, Level.HARD, 0.0, 0.0, 0.3, 0.3, 0.4, teacher));
+            em.persist(new TeacherLevel(null, Level.MEDIUM_HARD, 0.0, 0.2, 0.3, 0.3, 0.2, teacher));
+            em.persist(new TeacherLevel(null, Level.MEDIUM, 0.05, 0.3, 0.3, 0.25, 0.1, teacher));
+            em.persist(new TeacherLevel(null, Level.MEDIUM_LOW, 0.2, 0.4, 0.3, 0.1, 0.0, teacher));
+            em.persist(new TeacherLevel(null, Level.LOW, 0.4, 0.4, 0.2, 0.0, 0.0, teacher));
 
             Student student1 = Student.builder()
                 .grade("고1")

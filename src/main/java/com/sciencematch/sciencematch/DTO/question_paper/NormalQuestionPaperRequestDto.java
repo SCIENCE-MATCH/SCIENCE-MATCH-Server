@@ -10,14 +10,14 @@ import lombok.Data;
 public class NormalQuestionPaperRequestDto {
 
     //공통 조회 데이터
-    @Schema(example = "[10, 11]", type = "array")
+    @Schema(example = "[15, 16]", type = "array")
     private List<Long> chapterIds;
 
     @Schema(example = "10")
     private Integer questionNum;
     @Schema(example = "MEDIUM")
     private Level level;
-    @Schema(example = "[MULTIPLE]", type = "array")
+    @Schema(example = "[\"MULTIPLE\"]", type = "array")
     private List<Category> category;
     @Schema(example = "false")
     private Boolean mockExam; //모의고사 포함, 제외, 모의고사만
