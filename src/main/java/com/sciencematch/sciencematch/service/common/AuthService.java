@@ -8,15 +8,18 @@ import com.sciencematch.sciencematch.DTO.auth.request.TeacherRequestDto;
 import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
 import com.sciencematch.sciencematch.DTO.auth.response.TeacherResponseDto;
 import com.sciencematch.sciencematch.DTO.auth.response.TokenDto;
+import com.sciencematch.sciencematch.Enums.Level;
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
+import com.sciencematch.sciencematch.domain.TeacherLevel;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import com.sciencematch.sciencematch.exception.model.ExistEmailException;
 import com.sciencematch.sciencematch.exception.model.LogoutRefreshtokenException;
 import com.sciencematch.sciencematch.infrastructure.AdminRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
+import com.sciencematch.sciencematch.infrastructure.TeacherLevelRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.jwt.TokenProvider;
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ public class AuthService {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TeacherRepository teacherRepository;
+    private final TeacherLevelRepository teacherLevelRepository;
     private final StudentRepository studentRepository;
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
@@ -54,10 +58,19 @@ public class AuthService {
         }
 
         Teacher saveTeacher = teacherRepository.save(teacherRequestDto.toTeacher(passwordEncoder));
+        setTeacherLevel(saveTeacher);
         Admin admin = adminRepository.getAdminById(1L);
         admin.getWaitingTeacher().add(saveTeacher); //권한은 Guest인 상태로 Teacher를 만들어 admin에 저장
 
         return TeacherResponseDto.of(saveTeacher);
+    }
+
+    private void setTeacherLevel(Teacher teacher) {
+        teacherLevelRepository.save(new TeacherLevel(null, Level.HARD, 0.0, 0.0, 0.3, 0.3, 0.4, teacher));
+        teacherLevelRepository.save(new TeacherLevel(null, Level.MEDIUM_HARD, 0.0, 0.2, 0.3, 0.3, 0.2, teacher));
+        teacherLevelRepository.save(new TeacherLevel(null, Level.MEDIUM, 0.05, 0.3, 0.3, 0.25, 0.1, teacher));
+        teacherLevelRepository.save(new TeacherLevel(null, Level.MEDIUM_LOW, 0.2, 0.4, 0.3, 0.1, 0.0, teacher));
+        teacherLevelRepository.save(new TeacherLevel(null, Level.LOW, 0.4, 0.4, 0.2, 0.0, 0.0, teacher));
     }
 
     @Transactional
