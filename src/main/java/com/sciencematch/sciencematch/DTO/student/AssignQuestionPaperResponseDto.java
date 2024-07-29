@@ -11,6 +11,7 @@ import lombok.Data;
 public class AssignQuestionPaperResponseDto {
 
     private Long id;
+    private Long originQuestionPaperId;
     private Subject subject;
     private AssignStatus assignStatus;
     private String title;
@@ -20,7 +21,7 @@ public class AssignQuestionPaperResponseDto {
 
     public static AssignQuestionPaperResponseDto of(AssignQuestions assignQuestions) {
         return new AssignQuestionPaperResponseDto(assignQuestions.getId(),
-            assignQuestions.getSubject(), assignQuestions.getAssignStatus(),
+            assignQuestions.getQuestionPaper().getId(), assignQuestions.getSubject(), assignQuestions.getAssignStatus(),
             assignQuestions.getQuestionPaper().getTitle(), assignQuestions.getScore(),
             assignQuestions.getTotalScore(), assignQuestions.getQuestionNum());
     }
