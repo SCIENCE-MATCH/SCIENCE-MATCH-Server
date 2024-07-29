@@ -69,7 +69,7 @@ public class QuestionPaperController {
     @PostMapping("/level")
     @Operation(summary = "난이도 비율 저장하기")
     public ApiResponseDto<?> updateTeacherLevel(
-        List<TeacherLevelUpdateDto> teacherLevelUpdateDtos
+        @RequestBody List<TeacherLevelUpdateDto> teacherLevelUpdateDtos
     ) {
         questionPaperService.updateTeacherLevel(teacherLevelUpdateDtos);
         return ApiResponseDto.success(SuccessStatus.UPDATE_TEACHER_LEVEL_SUCCESS);

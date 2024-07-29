@@ -21,11 +21,11 @@ public class TeacherLevelResponseDto {
         return new TeacherLevelResponseDto(
             teacherLevel.getId(),
             teacherLevel.getLevel(),
-            teacherLevel.getLow().intValue(),
-            teacherLevel.getMediumLow().intValue(),
-            teacherLevel.getMedium().intValue(),
-            teacherLevel.getMediumHard().intValue(),
-            teacherLevel.getHard().intValue()
+            (int) (teacherLevel.getLow() * 100),
+            (int) (teacherLevel.getMediumLow() * 100),
+            (int) (teacherLevel.getMedium() * 100),
+            (int) (teacherLevel.getMediumHard() * 100),
+            (int) (teacherLevel.getHard() * 100)
         );
     }
 }
