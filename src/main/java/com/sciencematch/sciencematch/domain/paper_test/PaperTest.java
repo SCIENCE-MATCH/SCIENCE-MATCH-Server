@@ -48,6 +48,7 @@ public class PaperTest extends AuditingTimeEntity {
         this.subject = subject;
         this.chapterDescription = chapterDescription;
         this.makerName = makerName;
+        this.image = image;
         this.question = question;
         this.solution = solution;
     }
