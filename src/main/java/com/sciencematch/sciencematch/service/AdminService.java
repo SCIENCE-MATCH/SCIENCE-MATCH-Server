@@ -159,6 +159,7 @@ public class AdminService {
             .question(paperTestRequestDto.getQuestion())
             .solution(paperTestRequestDto.getSolution())
             .subject(paperTestRequestDto.getSubject())
+            .makerName(paperTestRequestDto.getMakerName())
             .build();
         paperTestRepository.save(paperTest);
 

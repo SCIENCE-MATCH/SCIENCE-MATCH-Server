@@ -31,6 +31,8 @@ public class PaperTestRequestDto {
     @Schema(example = "test 답")
     private String solution;
     private Subject subject;
+    @Schema(example = "정인호")
+    private String makerName;
 
 
 }
