@@ -1,6 +1,7 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.DTO.auth.response.MyPageDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.GradingRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.SummaryRequestDto;
 import com.sciencematch.sciencematch.DTO.teacher.response.MyStudentsResponseDto;
@@ -15,6 +16,7 @@ import com.sciencematch.sciencematch.Enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
+import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.domain.paper_test.PaperTestAnswer;
 import com.sciencematch.sciencematch.domain.question.Answer;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
@@ -25,6 +27,7 @@ import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestAnswerRepository;
+import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AnswerRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
 import java.io.IOException;
@@ -48,6 +51,7 @@ public class TeacherService {
     private final AssignPaperTestRepository assignPaperTestRepository;
     private final AnswerRepository answerRepository;
     private final PaperTestAnswerRepository paperTestAnswerRepository;
+    private final PaperTestRepository paperTestRepository;
     private final S3Service s3Service;
 
     //로고 변경
@@ -190,5 +194,23 @@ public class TeacherService {
         PaperTestAnswer answer = paperTestAnswerRepository.getAnswerById(
             gradingRequestDto.getAnswerId());
         answer.setRightAnswer(gradingRequestDto.getRightAnswer());
+    }
+
+    @Transactional
+    public void createPaperTest(PaperTestRequestDto paperTestRequestDto) {
+        String uploadImage = s3Service.uploadFile(paperTestRequestDto.getImage(), "paper-test");
+        Chapter chapter = chapterRepository.getChapterById(paperTestRequestDto.getChapterId());
+        PaperTest paperTest = PaperTest.builder()
+            .school(paperTestRequestDto.getSchool())
+            .semester(paperTestRequestDto.getSemester())
+            .chapterDescription(chapter.getDescription())
+            .image(uploadImage)
+            .question(paperTestRequestDto.getQuestion())
+            .solution(paperTestRequestDto.getSolution())
+            .subject(paperTestRequestDto.getSubject())
+            .makerName(paperTestRequestDto.getMakerName())
+            .build();
+        paperTestRepository.save(paperTest);
+
     }
 }

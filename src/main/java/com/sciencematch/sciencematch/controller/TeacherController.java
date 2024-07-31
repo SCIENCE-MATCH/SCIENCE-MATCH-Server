@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
 import com.sciencematch.sciencematch.DTO.auth.response.MyPageDto;
 import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
+import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
 import com.sciencematch.sciencematch.DTO.teacher.request.GradingRequestDto;
@@ -190,5 +191,12 @@ public class TeacherController {
     public ApiResponseDto<?> gradingPaperTest(@RequestBody GradingRequestDto gradingRequestDto) {
         teacherService.gradingPaperTest(gradingRequestDto);
         return ApiResponseDto.success(SuccessStatus.GRADING_ANSWER_SUCCESS);
+    }
+
+    @PostMapping(value = "/paper-test/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "일대일 질문 생성")
+    public ApiResponseDto<?> createPaperTest(@ModelAttribute PaperTestRequestDto paperTestRequestDto) {
+        teacherService.createPaperTest(paperTestRequestDto);
+        return ApiResponseDto.success(SuccessStatus.CREATE_PAPER_TEST_SUCCESS);
     }
 }
