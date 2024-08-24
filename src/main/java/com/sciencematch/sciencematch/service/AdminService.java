@@ -149,7 +149,10 @@ public class AdminService {
 
     @Transactional
     public void createPaperTest(PaperTestRequestDto paperTestRequestDto) {
-        String uploadImage = s3Service.uploadFile(paperTestRequestDto.getImage(), "paper-test");
+        String uploadImage = null;
+        if (paperTestRequestDto.getImage() != null) {
+            uploadImage = s3Service.uploadFile(paperTestRequestDto.getImage(), "paper-test");
+        }
         Chapter chapter = chapterRepository.getChapterById(paperTestRequestDto.getChapterId());
         PaperTest paperTest = PaperTest.builder()
             .school(paperTestRequestDto.getSchool())
@@ -162,7 +165,6 @@ public class AdminService {
             .makerName(paperTestRequestDto.getMakerName())
             .build();
         paperTestRepository.save(paperTest);
-
     }
 
     public List<PaperTestResponseDto> getAllPaperTest(
