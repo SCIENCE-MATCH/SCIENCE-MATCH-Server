@@ -12,10 +12,12 @@ public class AssignPaperTestResponseDto {
     private Long id;
     private Subject subject;
     private String question;
+    private String image;
 
     public static AssignPaperTestResponseDto of(AssignPaperTest assignPaperTest) {
         return new AssignPaperTestResponseDto(assignPaperTest.getId(),
             assignPaperTest.getSubject(),
-            assignPaperTest.getPaperTest().getQuestion());
+            assignPaperTest.getPaperTest().getQuestion(),
+            assignPaperTest.getPaperTest().getImage());
     }
 }
