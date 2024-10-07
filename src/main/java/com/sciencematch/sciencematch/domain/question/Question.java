@@ -27,6 +27,10 @@ import org.hibernate.annotations.Where;
 @SQLDelete(sql = "UPDATE question SET deleted = true WHERE question_id=?")
 @Where(clause = "deleted=false")
 public class Question extends AuditingTimeEntity {
+
+    private final Boolean deleted = false;
+    @OneToMany(mappedBy = "question", orphanRemoval = true)
+    private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
     @Id
     @GeneratedValue
     @Column(name = "question_id")
@@ -45,16 +49,14 @@ public class Question extends AuditingTimeEntity {
     private QuestionTag questionTag;
     private Long chapterId;
     private Long bookId;
+    private Long csatId;
     private Integer score;
-
-    private final Boolean deleted = false;
-
-    @OneToMany(mappedBy = "question", orphanRemoval = true)
-    private final List<ConnectQuestion> connectQuestions = new ArrayList<>();
 
     @Builder
     private Question(School school, Semester semester, Subject subject, String image, Level level,
-        Category category, String solution, String solutionImg, String bookName, Integer page, Double pageOrder, QuestionTag questionTag, Long chapterId, Long bookId, Integer score) {
+        Category category, String solution, String solutionImg, String bookName, Integer page,
+        Double pageOrder, QuestionTag questionTag, Long chapterId, Long bookId, Long csatId,
+        Integer score) {
         this.school = school;
         this.semester = semester;
         this.subject = subject;
@@ -69,6 +71,7 @@ public class Question extends AuditingTimeEntity {
         this.questionTag = questionTag;
         this.chapterId = chapterId;
         this.bookId = bookId;
+        this.csatId = csatId;
         this.score = score;
 
     }
