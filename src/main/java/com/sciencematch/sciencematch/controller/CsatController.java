@@ -1,7 +1,9 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.DTO.csat.request.CsatIdsRequestDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByNumDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatForNumberResponseDto;
+import com.sciencematch.sciencematch.DTO.csat.response.CsatQuestionResponseDto;
 import com.sciencematch.sciencematch.service.CsatService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +23,11 @@ public class CsatController {
     public List<CsatForNumberResponseDto> getCsatIds(
         @RequestBody CsatIdsRequestDto csatIdsRequestDto) {
         return csatService.getCsatIds(csatIdsRequestDto);
+    }
+
+    @PostMapping("/question/num")
+    public List<CsatQuestionResponseDto> getCsatQuestionByNum(
+        @RequestBody List<CsatRequestByNumDto> csatRequestByNumDto) {
+        return csatService.getCsatQuestionByNum(csatRequestByNumDto);
     }
 }
