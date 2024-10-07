@@ -58,6 +58,9 @@ public enum SuccessStatus {
     UPDATE_CHAPTER_ORDER_SUCCESS(HttpStatus.OK, "단원 순서를 성공적으로 변경하였습니다."),
     GET_TEACHER_LEVEL_SUCCESS(HttpStatus.OK, "난이도 비율을 성공적으로 조회하였습니다."),
     UPDATE_TEACHER_LEVEL_SUCCESS(HttpStatus.OK, "난이도 비율을 성공적으로 수정하였습니다."),
+    GET_CSAT_IDS_SUCCESS(HttpStatus.OK, "모의고사 ID들을 성공적으로 조회하였습니다."),
+    GET_CSAT_QUESTION_SUCCESS(HttpStatus.OK, "모의고사 문제를 성공적으로 조회하였습니다."),
+    GET_CSAT_CHAPTER_SUCCESS(HttpStatus.OK, "모의고사 단원을 성공적으로 조회하였습니다."),
 
     /*
      * 201 created
