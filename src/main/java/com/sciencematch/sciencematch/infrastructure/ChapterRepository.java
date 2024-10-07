@@ -18,6 +18,8 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
     List<Chapter> getChapterList(@Param("school") School school, @Param("semester") Semester semester,
         @Param("subject") Subject subject);
 
+    List<Chapter> findAllBySubject(Subject subject);
+
     default Chapter getChapterById(Long id) {
         return this.findById(id).orElseThrow(
             () -> new CustomException(ErrorStatus.NOT_FOUND_CHAPTER_EXCEPTION,
