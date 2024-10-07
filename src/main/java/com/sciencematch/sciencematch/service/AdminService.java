@@ -6,6 +6,7 @@ import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
 import com.sciencematch.sciencematch.DTO.csat.request.CsatIdsRequestDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatAdminResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
@@ -193,5 +194,10 @@ public class AdminService {
             .stream().map(Csat::getId).collect(Collectors.toList());
         return questionRepository.findAllByCsatIdIn(csatIds).stream().map(AdminQuestionResponseDto::of)
             .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void postCsat(CsatRequestDto csatRequestDto) {
+        csatRepository.save(Csat.of(csatRequestDto));
     }
 }

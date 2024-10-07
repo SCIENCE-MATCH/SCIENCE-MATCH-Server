@@ -7,7 +7,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByNumDto;
-import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByChapterDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.csat.response.QCsatQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
@@ -65,7 +65,7 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
 
     @Override
     public List<CsatQuestionResponseDto> searchCsatByChapter(
-        CsatRequestDto csatRequestDto) {
+        CsatRequestByChapterDto csatRequestByChapterDto) {
         return queryFactory
             .select(new QCsatQuestionResponseDto(
                 question.id,
@@ -78,9 +78,9 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
                 chapter.description
             )).from(question)
             .join(chapter).on(question.chapterId.eq(chapter.id))
-            .where(question.chapterId.in(csatRequestDto.getChapterId())
-                .and(question.csatId.in(csatRequestDto.getCsatId()))
-                .and(question.score.in(csatRequestDto.getScore())))
+            .where(question.chapterId.in(csatRequestByChapterDto.getChapterId())
+                .and(question.csatId.in(csatRequestByChapterDto.getCsatId()))
+                .and(question.score.in(csatRequestByChapterDto.getScore())))
             .fetch();
     }
 

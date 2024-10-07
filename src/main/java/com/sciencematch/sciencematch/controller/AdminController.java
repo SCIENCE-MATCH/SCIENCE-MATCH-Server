@@ -11,6 +11,7 @@ import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
 import com.sciencematch.sciencematch.DTO.csat.request.CsatIdsRequestDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatAdminResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
@@ -218,15 +219,27 @@ public class AdminController {
 
     @PostMapping("/csat/{subject}/{year}/{month}")
     @Operation(summary = "모의고사 조회")
-    public List<CsatAdminResponseDto> getCsat(
+    public ApiResponseDto<List<CsatAdminResponseDto>> getCsat(
         @PathVariable(name = "subject") Subject subject, @PathVariable(name = "year") Integer year, @PathVariable(name = "month") Integer month) {
-        return adminService.getCsat(subject, year, month);
+        return ApiResponseDto.success(SuccessStatus.GET_CSAT_QUESTION_SUCCESS,
+            adminService.getCsat(subject, year, month));
     }
 
     @PostMapping("/csat/question")
     @Operation(summary = "모의고사 문제 조회")
-    public List<AdminQuestionResponseDto> getCsatQuestions(
+    public ApiResponseDto<List<AdminQuestionResponseDto>> getCsatQuestions(
         @RequestBody CsatIdsRequestDto csatIdsRequestDto) {
-        return adminService.getCsatQuestions(csatIdsRequestDto);
+        return ApiResponseDto.success(SuccessStatus.GET_CSAT_QUESTION_SUCCESS,
+            adminService.getCsatQuestions(csatIdsRequestDto));
     }
+
+    @PostMapping("/csat/add")
+    @Operation(summary = "모의고사 추가")
+    public ApiResponseDto<?> postCsat(
+        @RequestBody CsatRequestDto csatRequestDto) {
+        adminService.postCsat(csatRequestDto);
+        return ApiResponseDto.success(SuccessStatus.CREATE_CSAT_SUCCESS);
+    }
+
+
 }

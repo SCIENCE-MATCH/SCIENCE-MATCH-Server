@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.infrastructure.question.query;
 
 import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByNumDto;
-import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByChapterDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
 import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
@@ -13,6 +13,7 @@ public interface QuestionRepositoryCustom {
 
     List<CsatQuestionResponseDto> searchCsat(List<CsatRequestByNumDto> csatRequestByNumDto);
 
-    List<CsatQuestionResponseDto> searchCsatByChapter(CsatRequestDto csatRequestDto);
+    List<CsatQuestionResponseDto> searchCsatByChapter(
+        CsatRequestByChapterDto csatRequestByChapterDto);
 
 }

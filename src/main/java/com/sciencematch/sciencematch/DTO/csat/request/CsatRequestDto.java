@@ -1,13 +1,15 @@
 package com.sciencematch.sciencematch.DTO.csat.request;
 
-import java.util.List;
+import com.sciencematch.sciencematch.Enums.Subject;
 import lombok.Data;
 
 @Data
 public class CsatRequestDto {
 
-    private List<Long> csatId;
-    private List<Long> chapterId;
-    private List<Integer> score;
+    private Integer year;
+    private Integer month;
+    private Subject subject;
+    private Integer subjectNum;
+    private String publisher;
 
 }
