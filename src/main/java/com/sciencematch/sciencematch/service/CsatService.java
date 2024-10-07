@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.service;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.csat.request.CsatIdsRequestDto;
 import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByNumDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatForNumberResponseDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatQuestionResponseDto;
 import com.sciencematch.sciencematch.Enums.Subject;
@@ -38,5 +39,10 @@ public class CsatService {
         return chapterRepository.findAllBySubject(subject)
             .stream().map(ChapterResponseDto::of)
             .collect(Collectors.toList());
+    }
+
+    public List<CsatQuestionResponseDto> getCsatQuestionByChapter(
+        CsatRequestDto csatRequestDto) {
+        return questionRepository.searchCsatByChapter(csatRequestDto);
     }
 }

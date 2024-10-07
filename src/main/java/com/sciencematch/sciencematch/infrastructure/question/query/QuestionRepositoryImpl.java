@@ -7,6 +7,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByNumDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.csat.response.QCsatQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
@@ -60,6 +61,27 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
             )).from(question)
             .join(chapter).on(question.chapterId.eq(chapter.id))
             .where(csatMatches(csatRequestByNumDto)).fetch();
+    }
+
+    @Override
+    public List<CsatQuestionResponseDto> searchCsatByChapter(
+        CsatRequestDto csatRequestDto) {
+        return queryFactory
+            .select(new QCsatQuestionResponseDto(
+                question.id,
+                question.pageOrder,
+                question.image,
+                question.category,
+                question.level,
+                question.score,
+                chapter.id,
+                chapter.description
+            )).from(question)
+            .join(chapter).on(question.chapterId.eq(chapter.id))
+            .where(question.chapterId.in(csatRequestDto.getChapterId())
+                .and(question.csatId.in(csatRequestDto.getCsatId()))
+                .and(question.score.in(csatRequestDto.getScore())))
+            .fetch();
     }
 
     private BooleanBuilder csatMatches(List<CsatRequestByNumDto> csatRequestByNumDto) {

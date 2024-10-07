@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch.controller;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.csat.request.CsatIdsRequestDto;
 import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByNumDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatForNumberResponseDto;
 import com.sciencematch.sciencematch.DTO.csat.response.CsatQuestionResponseDto;
 import com.sciencematch.sciencematch.Enums.Subject;
@@ -41,5 +42,12 @@ public class CsatController {
     @GetMapping("/chapter/{subject}")
     public List<ChapterResponseDto> getChapter(@PathVariable(name = "subject") Subject subject) {
         return csatService.getChapter(subject);
+    }
+
+    //단원으로 추가
+    @PostMapping("/question/num")
+    public List<CsatQuestionResponseDto> getCsatQuestionByChapter(
+        @RequestBody CsatRequestDto csatRequestDto) {
+        return csatService.getCsatQuestionByChapter(csatRequestDto);
     }
 }
