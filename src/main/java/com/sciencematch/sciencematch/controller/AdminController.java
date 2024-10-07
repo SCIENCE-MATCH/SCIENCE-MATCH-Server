@@ -10,12 +10,15 @@ import com.sciencematch.sciencematch.DTO.chapter.ChapterRequestDto;
 import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatIdsRequestDto;
+import com.sciencematch.sciencematch.DTO.csat.response.CsatAdminResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
 import com.sciencematch.sciencematch.DTO.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.DTO.question.QuestionPostDto;
 import com.sciencematch.sciencematch.DTO.question.QuestionRequestDto;
+import com.sciencematch.sciencematch.Enums.Subject;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.AdminService;
@@ -211,5 +214,19 @@ public class AdminController {
         @RequestBody PaperTestSelectDto paperTestSelectDto) {
         return ApiResponseDto.success(SuccessStatus.GET_PAPER_TEST_SUCCESS,
             adminService.getAllPaperTest(paperTestSelectDto));
+    }
+
+    @PostMapping("/csat/{subject}/{year}/{month}")
+    @Operation(summary = "모의고사 조회")
+    public List<CsatAdminResponseDto> getCsat(
+        @PathVariable(name = "subject") Subject subject, @PathVariable(name = "year") Integer year, @PathVariable(name = "month") Integer month) {
+        return adminService.getCsat(subject, year, month);
+    }
+
+    @PostMapping("/csat/question")
+    @Operation(summary = "모의고사 문제 조회")
+    public List<AdminQuestionResponseDto> getCsatQuestions(
+        @RequestBody CsatIdsRequestDto csatIdsRequestDto) {
+        return adminService.getCsatQuestions(csatIdsRequestDto);
     }
 }

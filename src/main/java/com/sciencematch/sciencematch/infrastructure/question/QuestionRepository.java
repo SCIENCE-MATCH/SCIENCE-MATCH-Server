@@ -27,6 +27,8 @@ import org.springframework.data.repository.query.Param;
 
     List<Question> findAllByBookIdAndPage(Long bookId, Integer page);
 
+    List<Question> findAllByCsatIdIn(List<Long> csatId);
+
     default Question getQuestionById(Long id) {
         return this.findById(id).orElseThrow(
             () -> new NotFoundException(ErrorStatus.NOT_FOUND_QUESTION_EXCEPTION,

@@ -5,13 +5,18 @@ import com.sciencematch.sciencematch.DTO.admin.AdminTeamResponseDto;
 import com.sciencematch.sciencematch.DTO.admin.WaitingTeacherResponseDto;
 import com.sciencematch.sciencematch.DTO.chapter.ConceptPostDto;
 import com.sciencematch.sciencematch.DTO.concept.ConceptResponseDto;
+import com.sciencematch.sciencematch.DTO.csat.request.CsatIdsRequestDto;
+import com.sciencematch.sciencematch.DTO.csat.response.CsatAdminResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
 import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
+import com.sciencematch.sciencematch.DTO.question.AdminQuestionResponseDto;
 import com.sciencematch.sciencematch.Enums.Authority;
 import com.sciencematch.sciencematch.Enums.Level;
+import com.sciencematch.sciencematch.Enums.Subject;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Concept;
+import com.sciencematch.sciencematch.domain.Csat;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.TeacherLevel;
@@ -20,12 +25,14 @@ import com.sciencematch.sciencematch.domain.paper_test.PaperTest;
 import com.sciencematch.sciencematch.external.client.aws.S3Service;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.ConceptRepository;
+import com.sciencematch.sciencematch.infrastructure.CsatRepository;
 import com.sciencematch.sciencematch.infrastructure.StudentRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherLevelRepository;
 import com.sciencematch.sciencematch.infrastructure.TeacherRepository;
 import com.sciencematch.sciencematch.infrastructure.TeamRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.AssignPaperTestRepository;
 import com.sciencematch.sciencematch.infrastructure.paper_test.PaperTestRepository;
+import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +53,9 @@ public class AdminService {
     private final ChapterRepository chapterRepository;
     private final PaperTestRepository paperTestRepository;
     private final AssignPaperTestRepository assignPaperTestRepository;
+    private final CsatRepository csatRepository;
     private final S3Service s3Service;
+    private final QuestionRepository questionRepository;
 
     public List<WaitingTeacherResponseDto> getAllWaitingTeachers() {
         return teacherRepository.findAllByAuthority(Authority.ROLE_GUEST).stream()
@@ -170,5 +179,19 @@ public class AdminService {
     public List<PaperTestResponseDto> getAllPaperTest(
         PaperTestSelectDto preLessonSelectDto) {
         return paperTestRepository.search(preLessonSelectDto);
+    }
+
+    public List<CsatAdminResponseDto> getCsat(Subject subject, Integer year, Integer month) {
+        return csatRepository.findAllBySubjectAndYearAndMonth(
+                subject, year, month).stream().map(CsatAdminResponseDto::of).collect(Collectors.toList());
+    }
+
+    public List<AdminQuestionResponseDto> getCsatQuestions(CsatIdsRequestDto csatIdsRequestDto) {
+        List<Long> csatIds = csatRepository.findAllBySubjectAndYearInAndMonthInAndPublisherIn(
+                csatIdsRequestDto.getSubject(), csatIdsRequestDto.getYear(),
+                csatIdsRequestDto.getMonth(), csatIdsRequestDto.getPublisher())
+            .stream().map(Csat::getId).collect(Collectors.toList());
+        return questionRepository.findAllByCsatIdIn(csatIds).stream().map(AdminQuestionResponseDto::of)
+            .collect(Collectors.toList());
     }
 }
