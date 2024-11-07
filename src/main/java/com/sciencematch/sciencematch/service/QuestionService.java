@@ -41,6 +41,7 @@ public class QuestionService {
             .questionTag(questionPostDto.getQuestionTag())
             .chapterId(questionPostDto.getChapterId())
             .bookId(questionPostDto.getBookId())
+            .csatId(questionPostDto.getCsatId())
             .score(questionPostDto.getScore())
             .build();
         questionRepository.save(question);

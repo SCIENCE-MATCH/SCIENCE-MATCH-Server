@@ -39,6 +39,8 @@ public class QuestionPostDto {
     private Long chapterId;
     @Schema(example = "33")
     private Long bookId;
+    @Schema(example = "7")
+    private Long csatId;
     @Schema(example = "3")
     private Integer score;
 
