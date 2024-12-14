@@ -9,11 +9,12 @@ import lombok.Data;
 public class AdminQuestionResponseDto {
 
     private Long questionId;
-
     private String imageURL;
+    private Double pageOrder;
 
     public static AdminQuestionResponseDto of(Question question) {
-        return new AdminQuestionResponseDto(question.getId(), question.getImage());
+        return new AdminQuestionResponseDto(question.getId(), question.getImage(),
+            question.getPageOrder());
     }
 
 }
