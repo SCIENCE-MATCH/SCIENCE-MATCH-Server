@@ -13,10 +13,12 @@ public class CsatForNumberResponseDto {
     private Subject subject;
     private Integer year;
     private Integer month;
+    private String publisher;
+    private Integer subjectNum;
 
     public static CsatForNumberResponseDto of(Csat csat) {
         return new CsatForNumberResponseDto(csat.getId(), csat.getSubject(), csat.getYear(),
-            csat.getMonth());
+            csat.getMonth(), csat.getPublisher(), csat.getSubjectNum());
     }
 
 }
