@@ -3,6 +3,7 @@ package com.sciencematch.sciencematch;
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Book;
 import com.sciencematch.sciencematch.domain.Chapter;
+import com.sciencematch.sciencematch.domain.Csat;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.TeacherLevel;
