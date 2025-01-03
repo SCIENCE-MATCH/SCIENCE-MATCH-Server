@@ -1,7 +1,8 @@
 package com.sciencematch.sciencematch.domain.question;
 
-import com.sciencematch.sciencematch.Enums.Category;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
+import com.sciencematch.sciencematch.enums.AssignStatus;
+import com.sciencematch.sciencematch.enums.Category;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -62,8 +63,24 @@ public class Answer extends AuditingTimeEntity {
     }
 
     public void setRightAnswer(Boolean rightAnswer) {
-        this.rightAnswer = rightAnswer;
-        this.graded = true;
+        if (assignQuestions.getAssignStatus() != AssignStatus.GRADED) {
+            assignQuestions.setAssignStatus(AssignStatus.GRADED);
+        }
+
+        if (!graded) { // 처음 채점하는 경우
+            this.graded = true;
+            this.rightAnswer = rightAnswer;
+            if (rightAnswer) {
+                assignQuestions.setScore(true, score);
+                return;
+            }
+        }
+
+        if (this.rightAnswer != rightAnswer) { // 채점 결과가 달라지는 경우
+            this.rightAnswer = rightAnswer;
+            assignQuestions.setScore(rightAnswer, score);
+        }
+
     }
 
     public void setAssignQuestions(AssignQuestions assignQuestions) {

@@ -1,18 +1,18 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.DTO.auth.response.MyPageDto;
-import com.sciencematch.sciencematch.DTO.paper_test.PaperTestRequestDto;
-import com.sciencematch.sciencematch.DTO.teacher.request.GradingRequestDto;
-import com.sciencematch.sciencematch.DTO.teacher.request.SummaryRequestDto;
-import com.sciencematch.sciencematch.DTO.teacher.response.MyStudentsResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.response.SimpleStudentsResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.response.SummaryAQResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.response.SummaryPTResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.response.SummaryResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignPaperTestsResponseDto;
-import com.sciencematch.sciencematch.DTO.teacher.response.TeacherAssignQuestionsResponseDto;
-import com.sciencematch.sciencematch.DTO.team.TeamResponseDto;
-import com.sciencematch.sciencematch.Enums.AssignStatus;
+import com.sciencematch.sciencematch.dto.auth.response.MyPageDto;
+import com.sciencematch.sciencematch.dto.paper_test.PaperTestRequestDto;
+import com.sciencematch.sciencematch.dto.teacher.request.GradingRequestDto;
+import com.sciencematch.sciencematch.dto.teacher.request.SummaryRequestDto;
+import com.sciencematch.sciencematch.dto.teacher.response.MyStudentsResponseDto;
+import com.sciencematch.sciencematch.dto.teacher.response.SimpleStudentsResponseDto;
+import com.sciencematch.sciencematch.dto.teacher.response.SummaryAQResponseDto;
+import com.sciencematch.sciencematch.dto.teacher.response.SummaryPTResponseDto;
+import com.sciencematch.sciencematch.dto.teacher.response.SummaryResponseDto;
+import com.sciencematch.sciencematch.dto.teacher.response.TeacherAssignPaperTestsResponseDto;
+import com.sciencematch.sciencematch.dto.teacher.response.TeacherAssignQuestionsResponseDto;
+import com.sciencematch.sciencematch.dto.team.TeamResponseDto;
+import com.sciencematch.sciencematch.enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
@@ -186,7 +186,6 @@ public class TeacherService {
     public void gradingQuestionPaper(GradingRequestDto gradingRequestDto) {
         Answer answer = answerRepository.getAnswerById(gradingRequestDto.getAnswerId());
         answer.setRightAnswer(gradingRequestDto.getRightAnswer());
-        answer.getAssignQuestions().setGraded(gradingRequestDto.getRightAnswer(), answer.getScore());
     }
 
     @Transactional

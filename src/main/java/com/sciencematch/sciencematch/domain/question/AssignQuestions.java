@@ -1,9 +1,9 @@
 package com.sciencematch.sciencematch.domain.question;
 
-import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.enums.Category;
 import com.sciencematch.sciencematch.domain.Student;
-import com.sciencematch.sciencematch.Enums.AssignStatus;
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.enums.AssignStatus;
+import com.sciencematch.sciencematch.enums.Subject;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -19,6 +19,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -40,6 +41,7 @@ public class AssignQuestions extends AuditingTimeEntity {
     private QuestionPaper questionPaper;
 
     private Subject subject;
+    @Setter
     private AssignStatus assignStatus;
 
     private Integer totalScore;
@@ -71,16 +73,11 @@ public class AssignQuestions extends AuditingTimeEntity {
         this.assignStatus = category != Category.MULTIPLE ? AssignStatus.COMPLETE : AssignStatus.GRADED;
     }
 
-    public void setGraded(Boolean rightAnswer, Integer score) {
-        if (this.assignStatus != AssignStatus.GRADED) {
-            this.assignStatus = AssignStatus.GRADED;
+    public void setScore(Boolean rightAnswer, Integer score) {
+        if (!rightAnswer) {
+            this.score -= score;
+            return;
         }
-        if (rightAnswer) {
-            this.score += score;
-        }
-    }
-
-    public void plusScore(Integer score) {
         this.score += score;
     }
 
