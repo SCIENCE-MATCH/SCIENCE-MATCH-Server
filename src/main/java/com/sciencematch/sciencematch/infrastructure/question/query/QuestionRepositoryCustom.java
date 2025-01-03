@@ -1,10 +1,10 @@
 package com.sciencematch.sciencematch.infrastructure.question.query;
 
-import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByNumDto;
-import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByChapterDto;
-import com.sciencematch.sciencematch.DTO.csat.response.CsatQuestionResponseDto;
-import com.sciencematch.sciencematch.DTO.question_paper.NormalQuestionPaperRequestDto;
-import com.sciencematch.sciencematch.DTO.question_paper.QuestionResponseDto;
+import com.sciencematch.sciencematch.dto.csat.request.CsatRequestByNumDto;
+import com.sciencematch.sciencematch.dto.csat.request.CsatRequestByChapterDto;
+import com.sciencematch.sciencematch.dto.csat.response.CsatQuestionResponseDto;
+import com.sciencematch.sciencematch.dto.question_paper.NormalQuestionPaperRequestDto;
+import com.sciencematch.sciencematch.dto.question_paper.QuestionResponseDto;
 import java.util.List;
 
 public interface QuestionRepositoryCustom {

@@ -1,9 +1,9 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.DTO.paper_test.MultiplePaperTestSubmitDto;
-import com.sciencematch.sciencematch.DTO.paper_test.PaperTestResponseDto;
-import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSelectDto;
-import com.sciencematch.sciencematch.DTO.paper_test.PaperTestSubmitDto;
+import com.sciencematch.sciencematch.dto.paper_test.MultiplePaperTestSubmitDto;
+import com.sciencematch.sciencematch.dto.paper_test.PaperTestResponseDto;
+import com.sciencematch.sciencematch.dto.paper_test.PaperTestSelectDto;
+import com.sciencematch.sciencematch.dto.paper_test.PaperTestSubmitDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.PaperTestService;

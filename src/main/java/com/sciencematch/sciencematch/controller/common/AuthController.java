@@ -1,12 +1,12 @@
 package com.sciencematch.sciencematch.controller.common;
 
-import com.sciencematch.sciencematch.DTO.auth.request.DuplCheckDto;
-import com.sciencematch.sciencematch.DTO.auth.request.PasswordDto;
-import com.sciencematch.sciencematch.DTO.auth.request.StudentLoginRequestDto;
-import com.sciencematch.sciencematch.DTO.auth.request.TeacherLoginRequestDto;
-import com.sciencematch.sciencematch.DTO.auth.request.TeacherRequestDto;
-import com.sciencematch.sciencematch.DTO.auth.response.TeacherResponseDto;
-import com.sciencematch.sciencematch.DTO.auth.response.TokenDto;
+import com.sciencematch.sciencematch.dto.auth.request.DuplCheckDto;
+import com.sciencematch.sciencematch.dto.auth.request.PasswordDto;
+import com.sciencematch.sciencematch.dto.auth.request.StudentLoginRequestDto;
+import com.sciencematch.sciencematch.dto.auth.request.TeacherLoginRequestDto;
+import com.sciencematch.sciencematch.dto.auth.request.TeacherRequestDto;
+import com.sciencematch.sciencematch.dto.auth.response.TeacherResponseDto;
+import com.sciencematch.sciencematch.dto.auth.response.TokenDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.jwt.TokenProvider;

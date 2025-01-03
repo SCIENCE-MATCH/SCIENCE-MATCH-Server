@@ -1,16 +1,17 @@
 package com.sciencematch.sciencematch;
 
-import com.sciencematch.sciencematch.Enums.AssignStatus;
-import com.sciencematch.sciencematch.Enums.Authority;
-import com.sciencematch.sciencematch.Enums.Category;
-import com.sciencematch.sciencematch.Enums.Level;
-import com.sciencematch.sciencematch.Enums.QuestionTag;
-import com.sciencematch.sciencematch.Enums.School;
-import com.sciencematch.sciencematch.Enums.Semester;
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.enums.AssignStatus;
+import com.sciencematch.sciencematch.enums.Authority;
+import com.sciencematch.sciencematch.enums.Category;
+import com.sciencematch.sciencematch.enums.Level;
+import com.sciencematch.sciencematch.enums.QuestionTag;
+import com.sciencematch.sciencematch.enums.School;
+import com.sciencematch.sciencematch.enums.Semester;
+import com.sciencematch.sciencematch.enums.Subject;
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Book;
 import com.sciencematch.sciencematch.domain.Chapter;
+import com.sciencematch.sciencematch.domain.Csat;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.TeacherLevel;
@@ -24,6 +25,7 @@ import com.sciencematch.sciencematch.domain.question.Question;
 import com.sciencematch.sciencematch.domain.question.QuestionPaper;
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,10 +38,10 @@ public class InitDb {
 
     private final InitService initService;
 
-//    @PostConstruct
-//    public void init() {
-//        initService.dbInit();
-//    }
+    @PostConstruct
+    public void init() {
+        initService.dbInit();
+    }
 
     @Component
     @Transactional
@@ -806,6 +808,9 @@ public class InitDb {
                 .build();
 
             em.persist(book);
+
+            Csat csat = new Csat(null, 2024, 1, Subject.PHYSICS, 1, "평가원");
+            em.persist(csat);
 
         }
     }

@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.DTO.question_paper.TeacherLevelUpdateDto;
-import com.sciencematch.sciencematch.Enums.Level;
+import com.sciencematch.sciencematch.dto.question_paper.TeacherLevelUpdateDto;
+import com.sciencematch.sciencematch.enums.Level;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Column;

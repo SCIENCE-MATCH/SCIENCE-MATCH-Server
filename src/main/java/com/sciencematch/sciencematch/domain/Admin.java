@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.Enums.Authority;
+import com.sciencematch.sciencematch.enums.Authority;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.ArrayList;
 import java.util.List;

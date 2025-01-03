@@ -1,10 +1,10 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.DTO.chapter.ChapterOrderDto;
-import com.sciencematch.sciencematch.DTO.chapter.ChapterPatchDto;
-import com.sciencematch.sciencematch.DTO.chapter.ChapterPostDto;
-import com.sciencematch.sciencematch.DTO.chapter.ChapterRequestDto;
-import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
+import com.sciencematch.sciencematch.dto.chapter.ChapterOrderDto;
+import com.sciencematch.sciencematch.dto.chapter.ChapterPatchDto;
+import com.sciencematch.sciencematch.dto.chapter.ChapterPostDto;
+import com.sciencematch.sciencematch.dto.chapter.ChapterRequestDto;
+import com.sciencematch.sciencematch.dto.chapter.ChapterResponseDto;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.infrastructure.ChapterRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;

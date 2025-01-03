@@ -1,9 +1,9 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.DTO.book.request.CreateBookDto;
-import com.sciencematch.sciencematch.DTO.book.response.BookChapterResponseDto;
-import com.sciencematch.sciencematch.DTO.book.response.BookQuestionResponseDto;
-import com.sciencematch.sciencematch.DTO.book.response.BookResponseDto;
+import com.sciencematch.sciencematch.dto.book.request.CreateBookDto;
+import com.sciencematch.sciencematch.dto.book.response.BookChapterResponseDto;
+import com.sciencematch.sciencematch.dto.book.response.BookQuestionResponseDto;
+import com.sciencematch.sciencematch.dto.book.response.BookResponseDto;
 import com.sciencematch.sciencematch.domain.Book;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.question.Question;

@@ -1,12 +1,12 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.DTO.chapter.ChapterResponseDto;
-import com.sciencematch.sciencematch.DTO.csat.request.CsatIdsRequestDto;
-import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByNumDto;
-import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestByChapterDto;
-import com.sciencematch.sciencematch.DTO.csat.response.CsatForNumberResponseDto;
-import com.sciencematch.sciencematch.DTO.csat.response.CsatQuestionResponseDto;
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.dto.chapter.ChapterResponseDto;
+import com.sciencematch.sciencematch.dto.csat.request.CsatIdsRequestDto;
+import com.sciencematch.sciencematch.dto.csat.request.CsatRequestByNumDto;
+import com.sciencematch.sciencematch.dto.csat.request.CsatRequestByChapterDto;
+import com.sciencematch.sciencematch.dto.csat.response.CsatForNumberResponseDto;
+import com.sciencematch.sciencematch.dto.csat.response.CsatQuestionResponseDto;
+import com.sciencematch.sciencematch.enums.Subject;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.CsatService;

@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.domain.paper_test;
 
-import com.sciencematch.sciencematch.Enums.AssignStatus;
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.enums.AssignStatus;
+import com.sciencematch.sciencematch.enums.Subject;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.CascadeType;

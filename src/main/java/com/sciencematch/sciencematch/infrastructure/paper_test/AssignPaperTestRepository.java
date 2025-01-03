@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.infrastructure.paper_test;
 
-import com.sciencematch.sciencematch.Enums.AssignStatus;
+import com.sciencematch.sciencematch.enums.AssignStatus;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.exception.ErrorStatus;

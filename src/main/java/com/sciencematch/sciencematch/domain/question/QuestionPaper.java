@@ -1,12 +1,12 @@
 package com.sciencematch.sciencematch.domain.question;
 
-import com.sciencematch.sciencematch.Enums.Level;
-import com.sciencematch.sciencematch.Enums.Semester;
+import com.sciencematch.sciencematch.enums.Level;
+import com.sciencematch.sciencematch.enums.Semester;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
-import com.sciencematch.sciencematch.Enums.Category;
-import com.sciencematch.sciencematch.Enums.QuestionTag;
-import com.sciencematch.sciencematch.Enums.School;
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.enums.Category;
+import com.sciencematch.sciencematch.enums.QuestionTag;
+import com.sciencematch.sciencematch.enums.School;
+import com.sciencematch.sciencematch.enums.Subject;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;

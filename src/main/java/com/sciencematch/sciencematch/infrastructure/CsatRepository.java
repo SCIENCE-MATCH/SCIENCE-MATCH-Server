@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.infrastructure;
 
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.enums.Subject;
 import com.sciencematch.sciencematch.domain.Csat;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

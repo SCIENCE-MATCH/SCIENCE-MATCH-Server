@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.infrastructure;
 
 import com.sciencematch.sciencematch.domain.Teacher;
-import com.sciencematch.sciencematch.Enums.Authority;
+import com.sciencematch.sciencematch.enums.Authority;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;
 import java.util.List;

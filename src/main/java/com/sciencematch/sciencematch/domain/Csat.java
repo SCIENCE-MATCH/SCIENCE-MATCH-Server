@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.DTO.csat.request.CsatRequestDto;
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.dto.csat.request.CsatRequestDto;
+import com.sciencematch.sciencematch.enums.Subject;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;

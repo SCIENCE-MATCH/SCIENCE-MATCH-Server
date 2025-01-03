@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.DTO.book.request.CreateBookDto;
-import com.sciencematch.sciencematch.DTO.book.response.BookChapterResponseDto;
-import com.sciencematch.sciencematch.DTO.book.response.BookQuestionResponseDto;
+import com.sciencematch.sciencematch.dto.book.request.CreateBookDto;
+import com.sciencematch.sciencematch.dto.book.response.BookChapterResponseDto;
+import com.sciencematch.sciencematch.dto.book.response.BookQuestionResponseDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.BookService;

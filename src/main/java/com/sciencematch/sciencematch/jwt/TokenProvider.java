@@ -3,7 +3,7 @@ package com.sciencematch.sciencematch.jwt;
 import static com.sciencematch.sciencematch.jwt.JwtFilter.AUTHORIZATION_HEADER;
 import static com.sciencematch.sciencematch.jwt.JwtFilter.BEARER_PREFIX;
 
-import com.sciencematch.sciencematch.DTO.auth.response.TokenDto;
+import com.sciencematch.sciencematch.dto.auth.response.TokenDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;

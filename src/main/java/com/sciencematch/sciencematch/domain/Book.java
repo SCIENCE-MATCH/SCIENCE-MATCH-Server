@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.DTO.book.request.CreateBookDto;
-import com.sciencematch.sciencematch.Enums.School;
-import com.sciencematch.sciencematch.Enums.Semester;
+import com.sciencematch.sciencematch.dto.book.request.CreateBookDto;
+import com.sciencematch.sciencematch.enums.School;
+import com.sciencematch.sciencematch.enums.Semester;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;

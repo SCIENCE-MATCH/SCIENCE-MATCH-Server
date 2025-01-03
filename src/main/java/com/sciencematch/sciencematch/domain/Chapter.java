@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.Enums.School;
-import com.sciencematch.sciencematch.Enums.Semester;
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.enums.School;
+import com.sciencematch.sciencematch.enums.Semester;
+import com.sciencematch.sciencematch.enums.Subject;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import java.util.ArrayList;
 import java.util.List;

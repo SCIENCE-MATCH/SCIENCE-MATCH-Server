@@ -1,14 +1,14 @@
 package com.sciencematch.sciencematch.service.common;
 
-import com.sciencematch.sciencematch.DTO.auth.request.DuplCheckDto;
-import com.sciencematch.sciencematch.DTO.auth.request.StudentLoginRequestDto;
-import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
-import com.sciencematch.sciencematch.DTO.auth.request.TeacherLoginRequestDto;
-import com.sciencematch.sciencematch.DTO.auth.request.TeacherRequestDto;
-import com.sciencematch.sciencematch.DTO.auth.response.StudentResponseDto;
-import com.sciencematch.sciencematch.DTO.auth.response.TeacherResponseDto;
-import com.sciencematch.sciencematch.DTO.auth.response.TokenDto;
-import com.sciencematch.sciencematch.Enums.Level;
+import com.sciencematch.sciencematch.dto.auth.request.DuplCheckDto;
+import com.sciencematch.sciencematch.dto.auth.request.StudentLoginRequestDto;
+import com.sciencematch.sciencematch.dto.auth.request.StudentRequestDto;
+import com.sciencematch.sciencematch.dto.auth.request.TeacherLoginRequestDto;
+import com.sciencematch.sciencematch.dto.auth.request.TeacherRequestDto;
+import com.sciencematch.sciencematch.dto.auth.response.StudentResponseDto;
+import com.sciencematch.sciencematch.dto.auth.response.TeacherResponseDto;
+import com.sciencematch.sciencematch.dto.auth.response.TokenDto;
+import com.sciencematch.sciencematch.enums.Level;
 import com.sciencematch.sciencematch.domain.Admin;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.Teacher;

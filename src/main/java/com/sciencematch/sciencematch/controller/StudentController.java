@@ -1,13 +1,13 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDetailDto;
-import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
-import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
-import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
-import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
-import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
-import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
-import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
+import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperDetailDto;
+import com.sciencematch.sciencematch.dto.student.AssignPaperTestResponseDto;
+import com.sciencematch.sciencematch.dto.student.AssignPaperTestSolveDto;
+import com.sciencematch.sciencematch.dto.student.AssignQuestionPaperResponseDto;
+import com.sciencematch.sciencematch.dto.student.AssignQuestionPaperSolveDto;
+import com.sciencematch.sciencematch.dto.student.PaperTestAnswerResponseDto;
+import com.sciencematch.sciencematch.dto.student.SolvedQuestionPaperDto;
+import com.sciencematch.sciencematch.dto.student.StudentMyPageDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.StudentService;

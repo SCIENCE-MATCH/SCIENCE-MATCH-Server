@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.controller;
 
-import com.sciencematch.sciencematch.DTO.team.TeamDetailDto;
-import com.sciencematch.sciencematch.DTO.team.TeamResponseDto;
-import com.sciencematch.sciencematch.DTO.team.request.TeamRequestDto;
+import com.sciencematch.sciencematch.dto.team.TeamDetailDto;
+import com.sciencematch.sciencematch.dto.team.TeamResponseDto;
+import com.sciencematch.sciencematch.dto.team.request.TeamRequestDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.TeacherService;

@@ -1,8 +1,8 @@
 package com.sciencematch.sciencematch.infrastructure;
 
-import com.sciencematch.sciencematch.Enums.School;
-import com.sciencematch.sciencematch.Enums.Semester;
-import com.sciencematch.sciencematch.Enums.Subject;
+import com.sciencematch.sciencematch.enums.School;
+import com.sciencematch.sciencematch.enums.Semester;
+import com.sciencematch.sciencematch.enums.Subject;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.exception.ErrorStatus;
 import com.sciencematch.sciencematch.exception.model.CustomException;

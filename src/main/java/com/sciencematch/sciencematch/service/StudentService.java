@@ -1,16 +1,16 @@
 package com.sciencematch.sciencematch.service;
 
-import com.sciencematch.sciencematch.DTO.question_paper.QuestionPaperDetailDto;
-import com.sciencematch.sciencematch.DTO.student.AnswerResponseDto;
-import com.sciencematch.sciencematch.DTO.student.AssignPaperTestResponseDto;
-import com.sciencematch.sciencematch.DTO.student.AssignPaperTestSolveDto;
-import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperResponseDto;
-import com.sciencematch.sciencematch.DTO.student.AssignQuestionPaperSolveDto;
-import com.sciencematch.sciencematch.DTO.student.PaperTestAnswerResponseDto;
-import com.sciencematch.sciencematch.DTO.student.SolvedQuestionPaperDto;
-import com.sciencematch.sciencematch.DTO.student.StudentMyPageDto;
-import com.sciencematch.sciencematch.Enums.AssignStatus;
-import com.sciencematch.sciencematch.Enums.Category;
+import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperDetailDto;
+import com.sciencematch.sciencematch.dto.student.AnswerResponseDto;
+import com.sciencematch.sciencematch.dto.student.AssignPaperTestResponseDto;
+import com.sciencematch.sciencematch.dto.student.AssignPaperTestSolveDto;
+import com.sciencematch.sciencematch.dto.student.AssignQuestionPaperResponseDto;
+import com.sciencematch.sciencematch.dto.student.AssignQuestionPaperSolveDto;
+import com.sciencematch.sciencematch.dto.student.PaperTestAnswerResponseDto;
+import com.sciencematch.sciencematch.dto.student.SolvedQuestionPaperDto;
+import com.sciencematch.sciencematch.dto.student.StudentMyPageDto;
+import com.sciencematch.sciencematch.enums.AssignStatus;
+import com.sciencematch.sciencematch.enums.Category;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
@@ -104,7 +104,7 @@ public class StudentService {
             //제출한 답과 answer의 solution이 일치하면 정답처리
             if (Objects.equals(answer.getSolution(), solvingAnswer.get(i))) {
                 answer.setRightAnswer(true);
-                questions.plusScore(answer.getScore());
+                questions.setScore(true, answer.getScore());
             }
             questions.plusTotalScore(answer.getScore());
         }
@@ -140,12 +140,14 @@ public class StudentService {
         AssignQuestions assignQuestions = assignQuestionRepository.getAssignQuestionsById(
             questionId);
         long correctNum = assignQuestions.getAnswer().stream().filter(Answer::getRightAnswer).count();
+
         List<AnswerResponseDto> answerResponseDtos = new ArrayList<>();
         for (Answer answer : assignQuestions.getAnswer()) {
             Question question = questionRepository.getQuestionById(answer.getQuestionId());
             Chapter chapter = chapterRepository.getChapterById(answer.getChapterId());
             answerResponseDtos.add(AnswerResponseDto.of(answer, question, chapter));
         }
+
         return new SolvedQuestionPaperDto(assignQuestions.getScore(), assignQuestions.getTotalScore(),
             (int) correctNum, assignQuestions.getQuestionNum(),
             answerResponseDtos);

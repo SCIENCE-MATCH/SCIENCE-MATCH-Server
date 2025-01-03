@@ -1,6 +1,6 @@
 package com.sciencematch.sciencematch.infrastructure;
 
-import com.sciencematch.sciencematch.Enums.Level;
+import com.sciencematch.sciencematch.enums.Level;
 import com.sciencematch.sciencematch.domain.Teacher;
 import com.sciencematch.sciencematch.domain.TeacherLevel;
 import com.sciencematch.sciencematch.exception.ErrorStatus;

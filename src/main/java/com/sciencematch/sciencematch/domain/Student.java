@@ -1,7 +1,7 @@
 package com.sciencematch.sciencematch.domain;
 
-import com.sciencematch.sciencematch.DTO.auth.request.StudentRequestDto;
-import com.sciencematch.sciencematch.Enums.Authority;
+import com.sciencematch.sciencematch.dto.auth.request.StudentRequestDto;
+import com.sciencematch.sciencematch.enums.Authority;
 import com.sciencematch.sciencematch.domain.common.AuditingTimeEntity;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
 import com.sciencematch.sciencematch.domain.question.AssignQuestions;
