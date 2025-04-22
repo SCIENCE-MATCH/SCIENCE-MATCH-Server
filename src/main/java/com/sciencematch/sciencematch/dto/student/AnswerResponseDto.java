@@ -13,6 +13,7 @@ import lombok.Data;
 public class AnswerResponseDto {
 
     private Long id;
+    private Long questionId;
 
     private String submitAnswer;
     private String solution;
@@ -28,7 +29,7 @@ public class AnswerResponseDto {
     private String chapterDescription;
 
     public static AnswerResponseDto of(Answer answer, Question question, Chapter chapter) {
-        return new AnswerResponseDto(answer.getId(), answer.getSubmitAnswer(), answer.getSolution(),
+        return new AnswerResponseDto(answer.getId(), question.getId(), answer.getSubmitAnswer(), answer.getSolution(),
             answer.getSolutionImg(), answer.getQuestionImg(), answer.getScore(), question.getLevel(), answer.getCategory(), answer.getRightAnswer(),
             chapter.getId(), chapter.getDescription());
     }
