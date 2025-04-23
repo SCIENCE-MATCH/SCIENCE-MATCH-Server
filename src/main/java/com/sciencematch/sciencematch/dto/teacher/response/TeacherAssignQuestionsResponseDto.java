@@ -31,13 +31,12 @@ public class TeacherAssignQuestionsResponseDto {
     private QuestionTag questionTag;
     
     public static TeacherAssignQuestionsResponseDto of(AssignQuestions assignQuestions, String boundary) {
-        System.out.println("== qp.getQuestionTag(): " + assignQuestions.getQuestionPaper().getQuestionTag());
         return new TeacherAssignQuestionsResponseDto(assignQuestions.getId(),
             assignQuestions.getQuestionPaper().getSchool(), assignQuestions.getQuestionPaper()
             .getCategory(), assignQuestions.getQuestionPaper().getTitle(),
             assignQuestions.getSubject(), assignQuestions.getAssignStatus(),
             assignQuestions.getQuestionPaper().getQuestionNum(), assignQuestions.getCreateAt(), assignQuestions.getQuestionPaper().getPdf(),
-            assignQuestions.getQuestionPaper().getLevel(), boundary, assignQuestions.getQuestionPaper().getId(), assignQuestions.getQuestionPaper().getQuestionTag());
+            assignQuestions.getQuestionPaper().getLevel(), boundary, assignQuestions.getQuestionPaper().getId(), assignQuestions.getQuestionPaper().getQuestionTag() == null ? QuestionTag.NORMAL : assignQuestions.getQuestionPaper().getQuestionTag());
     }
 
 
