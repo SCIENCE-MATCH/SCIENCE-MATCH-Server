@@ -29,8 +29,9 @@ public class TeacherAssignQuestionsResponseDto {
     private String boundary;
     private Long originQuestionPaperId;
     private QuestionTag questionTag;
-
+    
     public static TeacherAssignQuestionsResponseDto of(AssignQuestions assignQuestions, String boundary) {
+        System.out.println("== qp.getQuestionTag(): " + assignQuestions.getQuestionPaper().getQuestionTag());
         return new TeacherAssignQuestionsResponseDto(assignQuestions.getId(),
             assignQuestions.getQuestionPaper().getSchool(), assignQuestions.getQuestionPaper()
             .getCategory(), assignQuestions.getQuestionPaper().getTitle(),
