@@ -29,7 +29,7 @@ public class TeacherAssignQuestionsResponseDto {
     private String boundary;
     private Long originQuestionPaperId;
     private QuestionTag questionTag;
-    private Integer testNum;
+    
     
     public static TeacherAssignQuestionsResponseDto of(AssignQuestions assignQuestions, String boundary) {
         return new TeacherAssignQuestionsResponseDto(assignQuestions.getId(),
@@ -37,7 +37,7 @@ public class TeacherAssignQuestionsResponseDto {
             .getCategory(), assignQuestions.getQuestionPaper().getTitle(),
             assignQuestions.getSubject(), assignQuestions.getAssignStatus(),
             assignQuestions.getQuestionPaper().getQuestionNum(), assignQuestions.getCreateAt(), assignQuestions.getQuestionPaper().getPdf(),
-            assignQuestions.getQuestionPaper().getLevel(), boundary, assignQuestions.getQuestionPaper().getId(), assignQuestions.getQuestionPaper().getQuestionTag() == null ? QuestionTag.NORMAL : assignQuestions.getQuestionPaper().getQuestionTag(),1);
+            assignQuestions.getQuestionPaper().getLevel(), boundary, assignQuestions.getQuestionPaper().getId(), assignQuestions.getQuestionPaper().getQuestionTag() == null ? QuestionTag.NORMAL : assignQuestions.getQuestionPaper().getQuestionTag());
     }
 
 
