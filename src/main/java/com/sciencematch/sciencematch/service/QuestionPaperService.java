@@ -156,7 +156,7 @@ public class QuestionPaperService {
     }
 
     @Transactional
-    public void createQuestionPaper(QuestionPaperCreateDto questionPaperCreateDto) {
+    public Long createQuestionPaper(QuestionPaperCreateDto questionPaperCreateDto) {
         List<Question> questions = questionRepository.findAllByIds(
             questionPaperCreateDto.getQuestionIds());
 
@@ -193,7 +193,7 @@ public class QuestionPaperService {
                 .build();
             connectQuestionRepository.save(connectQuestion);
         }
-
+        return questionPaper.getId();
     }
 
     @Transactional

@@ -88,8 +88,8 @@ public class QuestionPaperController {
     @Operation(summary = "학습지 생성")
     public ApiResponseDto<?> createQuestionPaper(
         @ModelAttribute QuestionPaperCreateDto questionPaperCreateDto) {
-        questionPaperService.createQuestionPaper(questionPaperCreateDto);
-        return ApiResponseDto.success(SuccessStatus.CREATE_QUESTION_PAPER_SUCCESS);
+        return ApiResponseDto.success(SuccessStatus.CREATE_QUESTION_PAPER_SUCCESS,
+            questionPaperService.createQuestionPaper(questionPaperCreateDto));
     }
 
     @PostMapping("/question-paper/submit")
