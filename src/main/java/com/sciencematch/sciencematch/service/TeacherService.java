@@ -161,7 +161,7 @@ public class TeacherService {
             Chapter minChapter = chapterRepository.getChapterById(qp.getMinChapterId());
             Chapter maxChapter = chapterRepository.getChapterById(qp.getMaxChapterId());
             result.add(TeacherAssignQuestionsResponseDto.of(assignQuestion,
-                minChapter.getDescription() + " ~ " + maxChapter.getDescription()));
+                minChapter.getDescription() + " ~ ! " + maxChapter.getDescription()));
         }
         return result;
     }
