@@ -1,16 +1,7 @@
 package com.sciencematch.sciencematch.service;
 
 import com.sciencematch.sciencematch.dto.concept.ConceptResponseDto;
-import com.sciencematch.sciencematch.dto.question_paper.NormalQuestionPaperRequestDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperCreateDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperDownloadDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperDownloadRequestDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperSelectDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionResponseDto;
-import com.sciencematch.sciencematch.dto.question_paper.TeacherLevelUpdateDto;
-import com.sciencematch.sciencematch.dto.question_paper.TeacherLevelResponseDto;
-import com.sciencematch.sciencematch.dto.question_paper.WrongAnswerPeriodDto;
+import com.sciencematch.sciencematch.dto.question_paper.*;
 import com.sciencematch.sciencematch.dto.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.dto.teacher.request.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.enums.AssignStatus;
@@ -34,13 +25,12 @@ import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepos
 import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionPaperRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -153,6 +143,47 @@ public class QuestionPaperService {
         }
         return result;
 
+    }
+
+    //단원 유형별 문제수 지정 문제 반환
+    public List<QuestionResponseDto> getNormalQuestionsByChapters(
+            NormalQuestionByChapterRequestDto normalQuestionByChapterRequestDto) {
+
+            int numPerChapter = normalQuestionByChapterRequestDto.getQuesNumPerChapter();
+            List<Long> chapters = normalQuestionByChapterRequestDto.getChapterIds();
+            int totalNum = numPerChapter * chapters.size();
+
+            NormalQuestionPaperRequestDto normalDto = new NormalQuestionPaperRequestDto();
+            BeanUtils.copyProperties(normalQuestionByChapterRequestDto, normalDto);
+            normalDto.setQuestionNum(totalNum);
+
+            //레벨 관계 없이 데이터 조회
+            List<QuestionResponseDto> search = questionRepository.search(normalDto);
+            Collections.shuffle(search);
+
+        return makeNormalQuestionsListByChapter(search, numPerChapter, totalNum);
+    }
+
+    private List<QuestionResponseDto> makeNormalQuestionsListByChapter(
+        List<QuestionResponseDto> questionResponseDtos, Integer quesNumPerChapter, Integer totalCount) {
+        List<QuestionResponseDto> result = new ArrayList<>();
+        Map<Long, Integer> chapterCountMap = new HashMap<>();
+
+        for (QuestionResponseDto q : questionResponseDtos) {
+            Long chapterId = q.getChapterId();
+
+            int currentCount = chapterCountMap.getOrDefault(chapterId, 0);
+
+            if (currentCount < quesNumPerChapter) {
+                result.add(q);
+                chapterCountMap.put(chapterId, currentCount + 1);
+            }
+
+            if (result.size() == totalCount) {
+                break;
+            }
+        }
+        return result;
     }
 
     @Transactional

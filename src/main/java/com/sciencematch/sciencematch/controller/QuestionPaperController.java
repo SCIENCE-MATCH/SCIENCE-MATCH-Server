@@ -1,16 +1,7 @@
 package com.sciencematch.sciencematch.controller;
 
 import com.sciencematch.sciencematch.dto.concept.ConceptResponseDto;
-import com.sciencematch.sciencematch.dto.question_paper.NormalQuestionPaperRequestDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperCreateDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperDownloadDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperDownloadRequestDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperResponseDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionPaperSelectDto;
-import com.sciencematch.sciencematch.dto.question_paper.QuestionResponseDto;
-import com.sciencematch.sciencematch.dto.question_paper.TeacherLevelUpdateDto;
-import com.sciencematch.sciencematch.dto.question_paper.TeacherLevelResponseDto;
-import com.sciencematch.sciencematch.dto.question_paper.WrongAnswerPeriodDto;
+import com.sciencematch.sciencematch.dto.question_paper.*;
 import com.sciencematch.sciencematch.dto.teacher.request.MultipleQuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.dto.teacher.request.QuestionPaperSubmitDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
@@ -82,6 +73,13 @@ public class QuestionPaperController {
         NormalQuestionPaperRequestDto normalQuestionPaperRequestDto) {
         return ApiResponseDto.success(SuccessStatus.GET_QUESTION_FOR_NORMAL_SUCCESS,
             questionPaperService.getNormalQuestions(user.getUsername(), normalQuestionPaperRequestDto));
+    }
+
+    @PostMapping("/questions/normalbychapter")
+    @Operation(summary = "단원 유형별 문제 조회(같은 수)")
+    public ApiResponseDto<List<QuestionResponseDto>> getNormalQuestionsByChapter(NormalQuestionByChapterRequestDto normalQuestionByChapterRequestDto) {
+        return ApiResponseDto.success(SuccessStatus.GET_QUESTION_FOR_NORMAL_BY_CHAPTER_SUCCESS,
+                questionPaperService.getNormalQuestionsByChapters(normalQuestionByChapterRequestDto));
     }
 
     @PostMapping(value = "/question-paper/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
