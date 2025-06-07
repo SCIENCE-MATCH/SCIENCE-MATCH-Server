@@ -11,6 +11,7 @@ import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.CsatService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/csat")
 @RequiredArgsConstructor
 @Tag(name = "모의고사", description = "모의고사 API")
+@SecurityRequirement(name = "JWT Auth")
 public class CsatController {
 
     private final CsatService csatService;
