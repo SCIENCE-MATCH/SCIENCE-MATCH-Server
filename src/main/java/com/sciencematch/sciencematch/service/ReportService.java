@@ -41,8 +41,7 @@ public class ReportService {
 
         Report report = Report.builder()
                 .title(reportCreateDto.getTitle())
-                .dateFrom(reportCreateDto.getDateFrom())
-                .dateTo(reportCreateDto.getDateTo())
+                .period(reportCreateDto.getPeriod())
                 .pdf(reportUrl)
                 .student(student)
                 .teacher(teacher)

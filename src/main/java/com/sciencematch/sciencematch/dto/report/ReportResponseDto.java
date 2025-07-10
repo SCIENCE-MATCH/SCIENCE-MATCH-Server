@@ -10,19 +10,17 @@ import java.time.LocalDateTime;
 public class ReportResponseDto {
     private Long id;
     private String title;
-    private LocalDateTime dateFrom;
-    private LocalDateTime dateTo;
+    private String period;
     private String pdf;
     private LocalDateTime createdAt;
     private String studentName;
 
     @QueryProjection
-    public ReportResponseDto(Long id, String title, LocalDateTime dateFrom, LocalDateTime dateTo,
+    public ReportResponseDto(Long id, String title, String Period,
                              String pdf, LocalDateTime createdAt, String studentName) {
         this.id = id;
         this.title = title;
-        this.dateFrom = dateFrom;
-        this.dateTo = dateTo;
+        this.period = Period;
         this.pdf = pdf;
         this.createdAt = createdAt;
         this.studentName = studentName;
@@ -32,8 +30,7 @@ public class ReportResponseDto {
         return new ReportResponseDto(
                 report.getId(),
                 report.getTitle(),
-                report.getDateFrom(),
-                report.getDateTo(),
+                report.getPeriod(),
                 report.getPdf(),
                 report.getCreateAt(),
                 report.getStudent().getName()

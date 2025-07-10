@@ -20,8 +20,7 @@ public class Report extends AuditingTimeEntity {
 
     private String title;
     //보고서 작성 대상 기간
-    private LocalDateTime dateFrom;
-    private LocalDateTime dateTo;
+    private String period;
     private String pdf;
 
     //만든이
@@ -35,11 +34,10 @@ public class Report extends AuditingTimeEntity {
     private Student student;
 
     @Builder
-    public Report(String title, LocalDateTime dateFrom, LocalDateTime dateTo, String pdf, Teacher teacher, Student student) {
+    public Report(String title, String period, String pdf, Teacher teacher, Student student) {
 
         this.title = title;
-        this.dateFrom = dateFrom;
-        this.dateTo = dateTo;
+        this.period = period;
         this.pdf = pdf;
         this.teacher = teacher;
         this.student = student;

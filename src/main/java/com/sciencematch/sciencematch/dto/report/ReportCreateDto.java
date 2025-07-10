@@ -11,12 +11,8 @@ public class ReportCreateDto {
 
     @Schema(example = "새로운 보고서")
     private String title;
-    @Schema(example = "2023-09-08T05:55:58", type = "string")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime dateFrom;
-    @Schema(example = "2023-09-08T05:55:58", type = "string")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime dateTo;
+    @Schema(example = "2025.06.11~2025.07.11")
+    private String period;
     @Schema(example = "0")
     private Long studentId;
 
