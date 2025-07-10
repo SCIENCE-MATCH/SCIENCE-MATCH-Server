@@ -30,6 +30,9 @@ public class ReportService {
     public List<ReportResponseDto> getReports(String email){
         return reportRepository.findAllByTeacherEmail(email);
     }
+    public List<ReportResponseDto> getAllReports(){
+        return reportRepository.findAllReports();
+    }
 
     @Transactional
     public void createReport(ReportCreateDto reportCreateDto, String email) {

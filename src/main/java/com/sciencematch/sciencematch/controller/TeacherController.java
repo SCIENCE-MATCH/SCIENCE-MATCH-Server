@@ -221,6 +221,12 @@ public class TeacherController {
                 reportService.getReports(user.getUsername()));
     }
 
+    @GetMapping("/reports/all")
+    @Operation(summary = "보고서 몽땅 조회")
+    public ApiResponseDto<List<ReportResponseDto>> getAllReports( ){
+        return ApiResponseDto.success(SuccessStatus.GET_REPORTS_SUCCESS,reportService.getAllReports());
+    }
+
     @DeleteMapping("/report/delete")
     @Operation(summary = "보고서 삭제")
     public ApiResponseDto<?> deleteReports(
