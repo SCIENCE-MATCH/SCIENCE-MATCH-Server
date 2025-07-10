@@ -41,7 +41,7 @@ public enum ErrorStatus {
     NOT_FOUND_IMAGE_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 이미지입니다."),
     NOT_FOUND_CHAPTER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 단원입니다."),
     NOT_FOUND_SAVE_IMAGE_EXCEPTION(HttpStatus.NOT_FOUND, "이미지 저장에 실패했습니다"),
-
+    NOT_FOUND_REPORT_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 보고서입니다"),
     /**
      * 409 CONFLICT
      */

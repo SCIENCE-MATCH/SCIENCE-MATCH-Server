@@ -4,6 +4,8 @@ import com.sciencematch.sciencematch.dto.auth.request.StudentRequestDto;
 import com.sciencematch.sciencematch.dto.auth.response.MyPageDto;
 import com.sciencematch.sciencematch.dto.auth.response.StudentResponseDto;
 import com.sciencematch.sciencematch.dto.paper_test.PaperTestRequestDto;
+import com.sciencematch.sciencematch.dto.report.ReportCreateDto;
+import com.sciencematch.sciencematch.dto.report.ReportResponseDto;
 import com.sciencematch.sciencematch.dto.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.dto.student.SolvedQuestionPaperDto;
 import com.sciencematch.sciencematch.dto.teacher.request.GradingRequestDto;
@@ -15,6 +17,7 @@ import com.sciencematch.sciencematch.dto.teacher.response.TeacherAssignPaperTest
 import com.sciencematch.sciencematch.dto.teacher.response.TeacherAssignQuestionsResponseDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
+import com.sciencematch.sciencematch.service.ReportService;
 import com.sciencematch.sciencematch.service.StudentService;
 import com.sciencematch.sciencematch.service.TeacherService;
 import com.sciencematch.sciencematch.service.common.AuthService;
@@ -53,6 +56,7 @@ public class TeacherController {
     private final TeacherService teacherService;
     private final AuthService authService;
     private final StudentService studentService;
+    private final ReportService reportService;
 
     @PatchMapping(value = "/logo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "로고 변경")
@@ -198,5 +202,31 @@ public class TeacherController {
     public ApiResponseDto<?> createPaperTest(@ModelAttribute PaperTestRequestDto paperTestRequestDto) {
         teacherService.createPaperTest(paperTestRequestDto);
         return ApiResponseDto.success(SuccessStatus.CREATE_PAPER_TEST_SUCCESS);
+    }
+
+    @PostMapping(value = "/report/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "보고서 생성")
+    public ApiResponseDto<?> createReport(
+            @Parameter(hidden = true) @AuthenticationPrincipal User user,
+            @ModelAttribute ReportCreateDto reportCreateDto) {
+        reportService.createReport(reportCreateDto, user.getUsername());
+        return ApiResponseDto.success(SuccessStatus.CREATE_REPORT_SUCCESS);
+    }
+
+    @GetMapping("/reports")
+    @Operation(summary = "나의 보고서 목록 조회")
+    public ApiResponseDto<List<ReportResponseDto>> getReports(
+            @Parameter(hidden = true) @AuthenticationPrincipal User user) {
+        return ApiResponseDto.success(SuccessStatus.GET_REPORTS_SUCCESS,
+                reportService.getReports(user.getUsername()));
+    }
+
+    @DeleteMapping("/report/delete")
+    @Operation(summary = "보고서 삭제")
+    public ApiResponseDto<?> deleteReports(
+            @Parameter(hidden = true) @AuthenticationPrincipal User user,
+            @RequestBody List<Long> reportIds) {
+        reportService.deleteReports(reportIds, user.getUsername());
+        return ApiResponseDto.success(SuccessStatus.DELETE_REPORT_SUCCESS);
     }
 }

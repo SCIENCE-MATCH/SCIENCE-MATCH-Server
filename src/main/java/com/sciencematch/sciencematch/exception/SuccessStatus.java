@@ -62,7 +62,7 @@ public enum SuccessStatus {
     GET_CSAT_IDS_SUCCESS(HttpStatus.OK, "모의고사 ID들을 성공적으로 조회하였습니다."),
     GET_CSAT_QUESTION_SUCCESS(HttpStatus.OK, "모의고사 문제를 성공적으로 조회하였습니다."),
     GET_CSAT_CHAPTER_SUCCESS(HttpStatus.OK, "모의고사 단원을 성공적으로 조회하였습니다."),
-
+    GET_REPORTS_SUCCESS(HttpStatus.OK, "보고서를 성종적으로 조회하였습니다."),
     /*
      * 201 created
      */
@@ -74,7 +74,7 @@ public enum SuccessStatus {
     CREATE_CONCEPT_SUCCESS(HttpStatus.CREATED, "개념을 성공적으로 생성하였습니다."),
     CREATE_BOOK_SUCCESS(HttpStatus.CREATED, "교재를 성공적으로 생성하였습니다."),
     CREATE_CSAT_SUCCESS(HttpStatus.CREATED, "모의고사를 성공적으로 생성하였습니다."),
-
+    CREATE_REPORT_SUCCESS(HttpStatus.CREATED, "보고서를 성공적으로 생성하였습니다."),
 
     /**
      *  204 no content
@@ -90,6 +90,7 @@ public enum SuccessStatus {
     DELETE_STUDENT_SUCCESS(HttpStatus.NO_CONTENT, "학생을 성공적으로 삭제하였습니다."),
     DELETE_CHAPTER_SUCCESS(HttpStatus.NO_CONTENT, "단원 목록을 성공적으로 삭제하였습니다."),
     DELETE_QUESTION_SUCCESS(HttpStatus.NO_CONTENT, "문제를 성공적으로 삭제하였습니다."),
+    DELETE_REPORT_SUCCESS(HttpStatus.NO_CONTENT, "보고서를 성공적으로 삭제하였습니다."),
     ;
 
     private final HttpStatus httpStatus;
