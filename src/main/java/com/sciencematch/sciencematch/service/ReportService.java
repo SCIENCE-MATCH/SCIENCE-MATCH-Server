@@ -54,7 +54,7 @@ public class ReportService {
         List<Report> reports = reportRepository.findAllById(reportIds);
 
         for (Report report : reports) {
-            if (!report.getTeacher().getName().equals(email)) {
+            if (!report.getTeacher().getEmail().equals(email)) {
                 throw new NotFoundException(ErrorStatus.FORBIDDEN_USER_EXCEPTION, "삭제 권한이 없는 보고서가 포함되어 있습니다.");
             }
         }
