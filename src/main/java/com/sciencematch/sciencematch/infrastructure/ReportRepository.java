@@ -13,6 +13,4 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     @Query("select rp from Report rp where rp.teacher.email = :teacherName")
     List<ReportResponseDto> findAllByTeacherEmail(@Param("teacherName") String teacherName);
 
-    @Query("select rp from Report rp")
-    List<ReportResponseDto> findAllReports();
 }

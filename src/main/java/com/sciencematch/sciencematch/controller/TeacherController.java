@@ -204,7 +204,7 @@ public class TeacherController {
         return ApiResponseDto.success(SuccessStatus.CREATE_PAPER_TEST_SUCCESS);
     }
 
-    @PostMapping(value = "/report/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/report", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "보고서 생성")
     public ApiResponseDto<?> createReport(
             @Parameter(hidden = true) @AuthenticationPrincipal User user,
@@ -213,7 +213,7 @@ public class TeacherController {
         return ApiResponseDto.success(SuccessStatus.CREATE_REPORT_SUCCESS);
     }
 
-    @GetMapping("/reports")
+    @GetMapping("/report")
     @Operation(summary = "나의 보고서 목록 조회")
     public ApiResponseDto<List<ReportResponseDto>> getReports(
             @Parameter(hidden = true) @AuthenticationPrincipal User user) {
@@ -221,13 +221,7 @@ public class TeacherController {
                 reportService.getReports(user.getUsername()));
     }
 
-    @GetMapping("/reports/all")
-    @Operation(summary = "보고서 몽땅 조회")
-    public ApiResponseDto<List<ReportResponseDto>> getAllReports( ){
-        return ApiResponseDto.success(SuccessStatus.GET_REPORTS_SUCCESS,reportService.getAllReports());
-    }
-
-    @DeleteMapping("/report/delete")
+    @DeleteMapping("/report")
     @Operation(summary = "보고서 삭제")
     public ApiResponseDto<?> deleteReports(
             @Parameter(hidden = true) @AuthenticationPrincipal User user,
