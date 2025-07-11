@@ -14,16 +14,18 @@ public class ReportResponseDto {
     private String pdf;
     private LocalDateTime createdAt;
     private String studentName;
+    private Long studentId;
 
     @QueryProjection
     public ReportResponseDto(Long id, String title, String Period,
-                             String pdf, LocalDateTime createdAt, String studentName) {
+                             String pdf, LocalDateTime createdAt, String studentName, Long studentId) {
         this.id = id;
         this.title = title;
         this.period = Period;
         this.pdf = pdf;
         this.createdAt = createdAt;
         this.studentName = studentName;
+        this.studentId = studentId;
     }
 
     public static ReportResponseDto from(Report report) {
@@ -33,7 +35,8 @@ public class ReportResponseDto {
                 report.getPeriod(),
                 report.getPdf(),
                 report.getCreateAt(),
-                report.getStudent().getName()
+                report.getStudent().getName(),
+                report.getStudent().getId()
         );
     }
 }
