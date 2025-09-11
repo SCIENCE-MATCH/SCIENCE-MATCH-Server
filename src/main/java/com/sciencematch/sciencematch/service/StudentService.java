@@ -9,8 +9,10 @@ import com.sciencematch.sciencematch.dto.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.dto.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.dto.student.SolvedQuestionPaperDto;
 import com.sciencematch.sciencematch.dto.student.StudentMyPageDto;
+import com.sciencematch.sciencematch.dto.student.StudentSummaryDto;
 import com.sciencematch.sciencematch.enums.AssignStatus;
 import com.sciencematch.sciencematch.enums.Category;
+import com.sciencematch.sciencematch.enums.Level;
 import com.sciencematch.sciencematch.domain.Chapter;
 import com.sciencematch.sciencematch.domain.Student;
 import com.sciencematch.sciencematch.domain.paper_test.AssignPaperTest;
@@ -29,6 +31,8 @@ import com.sciencematch.sciencematch.infrastructure.question.AnswerRepository;
 import com.sciencematch.sciencematch.infrastructure.question.AssignQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.ConnectQuestionRepository;
 import com.sciencematch.sciencematch.infrastructure.question.QuestionRepository;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -160,5 +164,106 @@ public class StudentService {
     public StudentMyPageDto getMypage(String phoneNum) {
         return StudentMyPageDto.of(studentRepository.getStudentByPhoneNum(phoneNum));
     }
+
+    public StudentSummaryDto getSummary(String phoneNum) {
+    Student student = studentRepository.getStudentByPhoneNum(phoneNum);
+
+    List<AssignQuestions> assignQuestions = assignQuestionRepository.findAllByStudentId(student.getId());
+
+    int totalQuestions = 0;
+    int correctAnswers = 0;
+    int ungradedAnswers = 0;
+
+    List<Integer> quesNumPerWeek = new ArrayList<>();
+    List<Integer> correctNumPerWeek = new ArrayList<>();
+    List<Integer> ungradedNumPerWeek = new ArrayList<>();
+
+    List<Double> accuracyPerLevel = new ArrayList<>();
+
+    LocalDateTime now = LocalDateTime.now();
+
+    // ✅ 최근 4주간 주간 통계
+    for (int week = 0; week < 4; week++) {
+        int weeklyQuesNum = 0;
+        int weeklyCorrectNum = 0;
+        int weeklyUngradedNum = 0;
+
+        for (AssignQuestions aq : assignQuestions) {
+            if (aq.getAssignStatus() == AssignStatus.WAITING || aq.getAssignStatus() == AssignStatus.SOLVING) {
+                continue; // 제외
+            }
+
+            if (aq.getUpdatedAt().isAfter(now.minusWeeks(week + 1)) &&
+                aq.getUpdatedAt().isBefore(now.minusWeeks(week))) {
+
+                weeklyQuesNum += aq.getQuestionNum();
+
+                if (aq.getAssignStatus() == AssignStatus.COMPLETE) {
+                    weeklyUngradedNum += aq.getQuestionNum();
+                }
+
+                if (aq.getAssignStatus() == AssignStatus.GRADED) {
+                    weeklyCorrectNum += (int) aq.getAnswer().stream().filter(Answer::getRightAnswer).count();
+                }
+            }
+        }
+
+        quesNumPerWeek.add(weeklyQuesNum);
+        correctNumPerWeek.add(weeklyCorrectNum);
+        ungradedNumPerWeek.add(weeklyUngradedNum);
+    }
+
+    // ✅ 난이도별 정확도 (채점 완료된 문제만)
+    Level[] levels = {Level.HARD, Level.MEDIUM_HARD, Level.MEDIUM, Level.MEDIUM_LOW, Level.LOW};
+    for (Level level : levels) {
+        int levelTotalQues = 0;
+        int levelCorrectQues = 0;
+
+        for (AssignQuestions aq : assignQuestions) {
+            if (aq.getAssignStatus() != AssignStatus.GRADED) continue;
+
+            for (Answer answer : aq.getAnswer()) {
+                Question question = questionRepository.getQuestionById(answer.getQuestionId());
+                if (question.getLevel() == level) {
+                    levelTotalQues++;
+                    if (answer.getRightAnswer()) {
+                        levelCorrectQues++;
+                    }
+                }
+            }
+        }
+
+        double accuracy = levelTotalQues == 0 ? 0.0 :
+            (double) levelCorrectQues / levelTotalQues * 100;
+        accuracyPerLevel.add(Math.round(accuracy * 100.0) / 100.0);
+    }
+
+    // ✅ 전체 통계
+    for (AssignQuestions aq : assignQuestions) {
+        if (aq.getAssignStatus() == AssignStatus.WAITING || aq.getAssignStatus() == AssignStatus.SOLVING) {
+            continue;
+        }
+
+        totalQuestions += aq.getQuestionNum();
+
+        if (aq.getAssignStatus() == AssignStatus.COMPLETE) {
+            ungradedAnswers += aq.getQuestionNum();
+        }
+
+        if (aq.getAssignStatus() == AssignStatus.GRADED) {
+            correctAnswers += (int) aq.getAnswer().stream().filter(Answer::getRightAnswer).count();
+        }
+    }
+
+    return new StudentSummaryDto(
+        totalQuestions,
+        correctAnswers,
+        ungradedAnswers,
+        quesNumPerWeek,
+        correctNumPerWeek,
+        ungradedNumPerWeek,
+        accuracyPerLevel
+    );
+}
 
 }

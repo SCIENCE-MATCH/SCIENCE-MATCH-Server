@@ -8,6 +8,7 @@ import com.sciencematch.sciencematch.dto.student.AssignQuestionPaperSolveDto;
 import com.sciencematch.sciencematch.dto.student.PaperTestAnswerResponseDto;
 import com.sciencematch.sciencematch.dto.student.SolvedQuestionPaperDto;
 import com.sciencematch.sciencematch.dto.student.StudentMyPageDto;
+import com.sciencematch.sciencematch.dto.student.StudentSummaryDto;
 import com.sciencematch.sciencematch.common.dto.ApiResponseDto;
 import com.sciencematch.sciencematch.exception.SuccessStatus;
 import com.sciencematch.sciencematch.service.StudentService;
@@ -39,6 +40,14 @@ public class StudentController {
     //학생 페이지 관련 컨트롤러
     //학습 현황 service 와 문제 풀기 service를 injection해서 이 컨트롤러에서 mapping되게 구현하자
     private final StudentService studentService;
+
+    @GetMapping("/summary")
+    @Operation(summary = "한달간의 학습 현황 요약")
+    public ApiResponseDto<StudentSummaryDto> getStudentSummary(
+        @Parameter(hidden = true) @AuthenticationPrincipal User user) {
+        return ApiResponseDto.success(SuccessStatus.GET_STUDENT_SUMMARY_SUCCESS,
+            studentService.getSummary(user.getUsername()));
+    }
 
     @GetMapping("/mypage")
     @Operation(summary = "마이페이지 조회")

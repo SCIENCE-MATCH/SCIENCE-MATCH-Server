@@ -18,6 +18,7 @@ public enum SuccessStatus {
     CHECK_DUPL_EMAIL_SUCCESS(HttpStatus.OK, "사용 가능한 이메일 주소입니다."),
     CHANGE_LOGO_SUCCESS(HttpStatus.OK, "로고 이미지를 성공적으로 교체하였습니다."),
     GET_MYPAGE_SUCCESS(HttpStatus.OK, "마이 페이지를 성공적으로 불러왔습니다."),
+    GET_STUDENT_SUMMARY_SUCCESS(HttpStatus.OK, "학생(나)의 한달간의 학습 현황 요약을 성공적으로 불러왔습니다."), 
     STUDENT_INFO_UPDATE_SUCCESS(HttpStatus.OK, "학생 정보를 성공적으로 교체하였습니다."),
     GET_MY_GROUPS_SUCCESS(HttpStatus.OK, "반 목록을 성공적으로 조회했습니다."),
     GET_GROUP_DETAIL_SUCCESS(HttpStatus.OK, "반 상세정보를 성공적으로 조회했습니다."),
