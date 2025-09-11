@@ -213,14 +213,17 @@ public class StudentService {
         ungradedNumPerWeek.add(weeklyUngradedNum);
     }
 
-    // ✅ 난이도별 정확도 (채점 완료된 문제만)
+    // ✅ 난이도별 정확도 (최근 한 달 + 채점 완료된 문제만)
     Level[] levels = {Level.HARD, Level.MEDIUM_HARD, Level.MEDIUM, Level.MEDIUM_LOW, Level.LOW};
+    LocalDateTime oneMonthAgo = now.minusMonths(1);
+
     for (Level level : levels) {
         int levelTotalQues = 0;
         int levelCorrectQues = 0;
 
         for (AssignQuestions aq : assignQuestions) {
             if (aq.getAssignStatus() != AssignStatus.GRADED) continue;
+            if (aq.getUpdatedAt().isBefore(oneMonthAgo)) continue; // 한 달 이전 데이터 제외
 
             for (Answer answer : aq.getAnswer()) {
                 Question question = questionRepository.getQuestionById(answer.getQuestionId());
@@ -237,6 +240,7 @@ public class StudentService {
             (double) levelCorrectQues / levelTotalQues * 100;
         accuracyPerLevel.add(Math.round(accuracy * 100.0) / 100.0);
     }
+
 
     // ✅ 전체 통계
     for (AssignQuestions aq : assignQuestions) {
