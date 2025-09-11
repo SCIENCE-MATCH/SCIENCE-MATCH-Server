@@ -149,7 +149,7 @@ public class StudentService {
         }
 
         return new SolvedQuestionPaperDto(assignQuestions.getScore(), assignQuestions.getTotalScore(),
-            (int) correctNum, assignQuestions.getQuestionNum(),
+            (int) correctNum, assignQuestions.getQuestionNum(), assignQuestions.getCreateAt(),
             answerResponseDtos);
     }
 
