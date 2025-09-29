@@ -216,7 +216,6 @@ public class StudentService {
     // ✅ 난이도별 정확도 (최근 한 달 + 채점 완료된 문제만)
     Level[] levels = {Level.HARD, Level.MEDIUM_HARD, Level.MEDIUM, Level.MEDIUM_LOW, Level.LOW};
     LocalDateTime oneMonthAgo = now.minusMonths(1);
-
     for (Level level : levels) {
         int levelTotalQues = 0;
         int levelCorrectQues = 0;
@@ -243,8 +242,9 @@ public class StudentService {
 
 
     // ✅ 전체 통계
+    LocalDateTime oneWeekAgo = now.minusWeeks(1);
     for (AssignQuestions aq : assignQuestions) {
-        if (aq.getAssignStatus() == AssignStatus.WAITING || aq.getAssignStatus() == AssignStatus.SOLVING) {
+        if (aq.getAssignStatus() == AssignStatus.WAITING || aq.getAssignStatus() == AssignStatus.SOLVING || aq.getUpdatedAt().isBefore(oneWeekAgo)) {
             continue;
         }
 
